@@ -4,6 +4,36 @@
 @tailwind utilities;
 
 /* global css */
-body {
-  direction: rtl;
+@layer base {
+	body {
+		direction: rtl;
+		background: linear-gradient(176deg, rgb(18, 24, 27) 50%, rgb(32, 39, 55) 100%);
+		min-height: 100vh;
+		background-attachment: fixed;
+		background-color: rgb(18 24 27);
+		color: #cbd5e1;
+	}
+
+	@font-face {
+		font-family: 'Vazir';
+		src: url('./Fonts/Vazir/Vazirmatn-Regular.ttf') format('ttf');
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Vazir Bold';
+		src: url('./Fonts/Vazir/Vazirmatn-Bold.ttf') format('ttf');
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Vazir Light';
+		src: url('./Fonts/Vazir/Vazirmatn-Light.ttf') format('ttf');
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Lalezar';
+		src: url(./Fonts/Lalezar-Font/OTF/Lalezar-Regular.otf) format('otf');
+	}
 }

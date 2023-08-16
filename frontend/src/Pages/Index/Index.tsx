@@ -1,12 +1,14 @@
 // components
-import Header from "../../Components/Header/Header";
+import Header from '../../Components/Header/Header';
 
 // index
 const Index: React.FC = () => {
-  // tsx
-	return <>
-  <Header/>
-  </>;
+	// tsx
+	return (
+		<>
+			<Header />
+		</>
+	);
 };
 
 // exports
