@@ -28,8 +28,7 @@ const GlobalSearch = () => {
 				type="search"
 				className={`${
 					isShowSearchModal ? '' : 'hidden'
-				} absolute right-1/2 top-1/2 z-50 h-10 w-48 rounded-xl bg-gray-950 p-4 text-yellow-500 shadow-md shadow-slate-200/10 outline-none backdrop-blur md:h-14 md:w-2/6`}
-				style={{ transform: 'translate(50%, -50%)' }}
+				} absolute right-1/2 top-1/2 z-50 h-10 w-48 rounded-xl bg-gray-950 p-4 text-yellow-500 shadow-md shadow-slate-200/10 outline-none backdrop-blur md:h-14 md:w-2/6 translate-x-1/2 -translate-y-1/2`}
 			/>
 		</>
 	);

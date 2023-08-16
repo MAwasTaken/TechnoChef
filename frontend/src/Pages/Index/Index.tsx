@@ -1,5 +1,6 @@
 // components
 import Header from '../../Components/Header/Header';
+import AboutBrand from '../../Components/AboutBrand/AboutBrand';
 
 // index
 const Index: React.FC = () => {
@@ -7,6 +8,9 @@ const Index: React.FC = () => {
 	return (
 		<>
 			<Header />
+			<main>
+				<AboutBrand />
+			</main>
 		</>
 	);
 };
