@@ -1,7 +1,7 @@
 const mongoose =require('mongoose')
 const ObjectId = mongoose.Schema.ObjectId;
 
-const tranactionScheam = mongoose.Schema(
+const transactionScheam = mongoose.Schema(
     {
         order_id : {type: ObjectId , required : true , unique : true},
         trans_id : {type: String , required : true , unique : true },
@@ -9,7 +9,7 @@ const tranactionScheam = mongoose.Schema(
         
     },
 	{ timestamps: true }
-)
+);
 
 
-module.exports = mongoose.model('Transaction' ,tranactionScheam);
+module.exports = mongoose.model('Transaction' ,transactionScheam);

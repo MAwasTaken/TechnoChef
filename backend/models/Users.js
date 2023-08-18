@@ -10,7 +10,8 @@ const userSchema = mongoose.Schema(
         email : { type : String , unique : true},
         postalCode : {type : String},
         nationalCode : {type: String , unique : true},
-        address : {type : String }
+        address : {type : String },
+        isAdmin : {type : Boolean , default : false}
     },
 	{ timestamps: true }
 );

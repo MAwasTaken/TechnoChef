@@ -9,7 +9,7 @@ const commentSchema = mongoose.Schema(
         valid : {type : Boolean , default : false},
     },
 	{ timestamps: true }
-)
+);
 
 
 module.exports = mongoose.model("comment" , commentSchema);
