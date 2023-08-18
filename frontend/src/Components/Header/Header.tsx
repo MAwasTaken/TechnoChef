@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import GlobalSearch from '../GlobalSearch/GlobalSearch';
 
 // header
-const Header = () => {
+const Header: React.FC = () => {
 	// tsx
 	return (
 		// container
@@ -20,15 +20,15 @@ const Header = () => {
 				{/* navigation */}
 				<ul className="flex items-center justify-between gap-x-4 text-[10px] md:gap-x-12 md:text-lg">
 					{/* home */}
-					<li className="decoration-yellow-500 decoration-[2.5px] underline-offset-8 transition-all hover:text-blue-500 hover:underline">
+					<li className="decoration-red-500 decoration-[2.5px] underline-offset-8 transition-all hover:text-blue-500 hover:underline">
 						<Link to="/">خانه</Link>
 					</li>
 					{/* products */}
-					<li className="decoration-yellow-500 decoration-[2.5px] underline-offset-8 transition-all hover:text-blue-500 hover:underline">
+					<li className="decoration-red-500 decoration-[2.5px] underline-offset-8 transition-all hover:text-blue-500 hover:underline">
 						<Link to="/">محصولات</Link>
 					</li>
 					{/* about us */}
-					<li className="decoration-yellow-500 decoration-[2.5px] underline-offset-8 transition-all hover:text-blue-500 hover:underline">
+					<li className="decoration-red-500 decoration-[2.5px] underline-offset-8 transition-all hover:text-blue-500 hover:underline">
 						<Link to="/">درباه‌ما</Link>
 					</li>
 				</ul>
@@ -42,7 +42,7 @@ const Header = () => {
 					{/* login */}
 					<span className="">ورود</span>
 					{/* divider */}
-					<span className="absolute right-[27px] top-1 mx-1 h-3/4 w-px rounded-full bg-yellow-500 md:right-11 md:top-1.5 md:w-[2px]">
+					<span className="absolute right-[27px] top-1 mx-1 h-3/4 w-px rounded-full bg-red-500 md:right-11 md:top-1.5 md:w-[2px]">
 						{' '}
 					</span>
 					{/* register */}

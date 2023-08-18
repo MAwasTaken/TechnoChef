@@ -1,6 +1,7 @@
 // components
 import Header from '../../Components/Header/Header';
 import AboutBrand from '../../Components/AboutBrand/AboutBrand';
+import Footer from '../../Components/Footer/Footer';
 
 // index
 const Index: React.FC = () => {
@@ -11,6 +12,7 @@ const Index: React.FC = () => {
 			<main>
 				<AboutBrand />
 			</main>
+			<Footer />
 		</>
 	);
 };
