@@ -1,5 +1,7 @@
 // react
 import { Link } from 'react-router-dom';
+
+// components
 import GlobalSearch from '../GlobalSearch/GlobalSearch';
 
 // header

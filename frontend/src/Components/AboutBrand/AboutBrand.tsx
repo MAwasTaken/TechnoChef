@@ -1,5 +1,7 @@
-// packages
+// react
 import { useState } from 'react';
+
+// packages
 import { BsBuilding } from 'react-icons/bs';
 
 // about brand

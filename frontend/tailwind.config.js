@@ -15,7 +15,7 @@ export default {
 			},
 			boxShadow: {
 				box: '0 0 20px rgba(234, 179, 8, 0.5)',
-				product: '0 0 15px rgba(234, 179, 8, 0.5)'
+				product: '0 0 10px rgba(234, 179, 8, 0.5)'
 			}
 		}
 	},

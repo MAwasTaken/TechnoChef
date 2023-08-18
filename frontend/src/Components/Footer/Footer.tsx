@@ -9,7 +9,7 @@ import { PiTelegramLogoDuotone } from 'react-icons/pi';
 import { TbDeviceLandlinePhone } from 'react-icons/tb';
 
 // footer
-const Footer = () => {
+const Footer: React.FC = () => {
 	// tsx
 	return (
 		<div className="relative">
@@ -18,7 +18,7 @@ const Footer = () => {
 					<div>
 						<h4 className="font-Lalezar flex items-center gap-x-1 text-sm text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:text-3xl">
 							<HiOutlineDocumentDuplicate className="text-pink-500" />
-							صفحات
+							بخش های سایت
 						</h4>
 						<ul className="mr-4 mt-2 flex list-disc flex-col items-start justify-between gap-y-2 text-[10px] md:mr-10 md:mt-4 md:gap-y-4 md:text-lg">
 							<li className="transition-all hover:text-blue-500">
@@ -121,14 +121,13 @@ const Footer = () => {
 						</ul>
 					</div>
 				</div>
-				<span className="w-full text-center text-gray-400">
+				<span className="mt-2 w-full text-center text-gray-400 md:mt-0">
 					تمامی حقوق این سایت متعلق به
 					<Link to="/" className="text-red-500">
 						{' '}
 						تکنوشف{' '}
 					</Link>
 					بوده و هرگونه کپی برداری غیرمجاز خواهد بود.
-					<span> {new Date().getFullYear()} </span>
 				</span>
 			</footer>
 			<p className="mt-1 block w-full text-center font-bold text-gray-400 md:mt-2 md:text-xs">
@@ -140,7 +139,7 @@ const Footer = () => {
 				>
 					مهدی عبداللهی
 				</Link>{' '}
-				و{' '}
+				٫{' '}
 				<Link
 					to="https://github.com/hoja1381"
 					target="_blank"
@@ -148,7 +147,7 @@ const Footer = () => {
 				>
 					حسین جهان‌دیده
 				</Link>{' '}
-				و{' '}
+				٫{' '}
 				<Link
 					to="https://github.com/milad-taghizadeh"
 					target="_blank"
