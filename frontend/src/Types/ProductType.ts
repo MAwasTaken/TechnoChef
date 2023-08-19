@@ -1,3 +1,4 @@
 export type ProductType = {
-	color: string;
+	gradientColor: string;
+	colors: string[];
 };
