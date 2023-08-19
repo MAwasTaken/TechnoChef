@@ -2,13 +2,13 @@ const joi = require('joi');
 
 // USER JOI MODEL  (A model for validation)
 const model = joi.object({
-	username: joi.string().alphanum().min(3).max(30).required(),
+	username: joi.string().alphanum().min(3).max(30),
 
 	firstName: joi.string(),
 
 	lastName: joi.string(),
 
-	password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{8,30}$')),
+	password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{8,30}$')).min(8),
 
 	email: joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'ir', 'net', 'org'] } }),
 
