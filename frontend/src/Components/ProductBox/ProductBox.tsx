@@ -15,7 +15,7 @@ const ProductBox: React.FC<ProductType> = ({ gradientColor, colors }) => {
 	// tsx
 	return (
 		<>
-			<div className="group relative h-[220px] w-[150px] rounded-xl md:h-[265px] md:w-[215px]">
+			<div className="group relative h-[245px] w-[150px] rounded-xl md:h-[295px] md:w-[215px]">
 				<div
 					className="absolute -z-10 h-full w-full rounded-xl bg-gradient-to-tl transition-opacity duration-1000 group-hover:opacity-0"
 					style={{
@@ -40,18 +40,18 @@ const ProductBox: React.FC<ProductType> = ({ gradientColor, colors }) => {
 					</div>
 					<Link to="/">
 						<img
-							className="select-none mx-auto h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
+							className="mx-auto h-[134px] w-[134px] select-none md:h-[150px] md:w-[150px]"
 							src="Images/Products/p3.png"
 							alt="تصویر محصول"
 							loading="lazy"
 						/>
-						<span className="select-text font-Lalezar mt-1 line-clamp-2 text-center text-sm tracking-tighter text-white/90 md:text-lg">
+						<span className="font-Lalezar mt-1 line-clamp-2 select-text text-center text-sm tracking-tighter text-white/90 md:text-lg">
 							عنوان محصول اول ادامه عنوان محصول اول عنوان محصول اول ادامه عنوان محصول اول عنوان
 							محصول اول ادامه عنوان محصول اول
 						</span>
 					</Link>
-					<div className="mt-1 flex items-center justify-between">
-						<span className="h-4 w-7 rounded-lg bg-gradient-to-l from-red-500 to-red-600 pt-px text-center text-[10px] font-bold text-white/70 md:h-5 md:w-9 md:pt-[3px] md:text-xs">
+					<div className="mt-3 flex items-center justify-between">
+						<span className="h-5 w-7 rounded-lg bg-gradient-to-l from-red-500 to-red-600 pt-px text-center text-[10px] font-bold text-white/70 md:h-6 md:w-9 md:pt-[3px] md:text-xs">
 							۱۰۰٪
 						</span>
 						<span className="line font-Lalezar mt-1 text-left font-bold tracking-tight text-red-500/75 line-through md:text-lg">
@@ -61,7 +61,7 @@ const ProductBox: React.FC<ProductType> = ({ gradientColor, colors }) => {
 				</div>
 				<Link
 					to="/"
-					className="hover:shadow-product absolute -bottom-5 right-7 z-10 flex h-[20px] w-[100px] cursor-pointer items-center justify-center rounded-b-xl bg-gradient-to-r from-yellow-500 to-orange-600 shadow-yellow-500/50 transition-shadow md:-bottom-[30px] md:right-12 md:h-[30px] md:w-[130px]"
+					className="hover:shadow-product absolute -bottom-3 right-5 z-10 flex h-[25px] w-[110px] cursor-pointer items-center justify-center rounded-xl bg-gradient-to-r from-yellow-500 to-orange-600 shadow-yellow-500/50 transition-shadow md:-bottom-[15px] md:right-9 md:h-[30px] md:w-[140px]"
 					onMouseEnter={() => setIsProductHover(true)}
 					onMouseLeave={() => setIsProductHover(false)}
 				>

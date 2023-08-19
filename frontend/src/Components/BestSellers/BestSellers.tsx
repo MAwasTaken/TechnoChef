@@ -34,9 +34,9 @@ const BestSellers = () => {
 					}
 				}}
 				modules={[FreeMode]}
-				className="h-[245px] cursor-grab md:h-[300px]"
+				className="h-[270px] cursor-grab md:h-[320px]"
 			>
-				<SwiperSlide className="mr-5 px-2 relative">
+				<SwiperSlide className="md:mr-5 px-2 relative">
 					<div className="flex h-full flex-col items-center justify-center gap-y-2">
 						<h2 className="font-Lalezar flex items-center gap-x-1 pt-4 text-base text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:pt-8 md:text-3xl">
 							<AiOutlineStar className="text-pink-500" />
