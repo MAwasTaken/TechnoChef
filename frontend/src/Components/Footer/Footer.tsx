@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
 			<footer className="container relative mt-4 flex flex-col rounded-lg bg-black/70 py-4 md:mt-8 md:py-4">
 				<div className="flex items-start justify-between">
 					<div>
-						<h4 className="font-Lalezar flex items-center gap-x-1 text-sm text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:text-3xl">
+						<h4 className="font-Lalezar flex items-center gap-x-1 text-sm text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:text-3xl select-none">
 							<HiOutlineDocumentDuplicate className="text-pink-500" />
 							بخش های سایت
 						</h4>
@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
 						</ul>
 					</div>
 					<div>
-						<h4 className="font-Lalezar mr-4 flex items-center gap-x-1 text-sm text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:text-3xl">
+						<h4 className="font-Lalezar mr-4 flex items-center gap-x-1 text-sm text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:text-3xl select-none">
 							<MdAlternateEmail className="text-pink-500" />
 							صفحات مجازی
 						</h4>
@@ -76,7 +76,7 @@ const Footer: React.FC = () => {
 						</ul>
 					</div>
 					<div>
-						<h4 className="font-Lalezar mr-4 flex items-center gap-x-1 text-sm text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:text-3xl">
+						<h4 className="font-Lalezar mr-4 flex items-center gap-x-1 text-sm text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:text-3xl select-none">
 							<BsTelephone className="text-pink-500" />
 							ارتباط با ما
 						</h4>

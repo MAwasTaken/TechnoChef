@@ -5,21 +5,21 @@ import { Link } from 'react-router-dom';
 import { ProductType } from '../../Types/ProductType';
 
 // product box
-const ProductBox: React.FC<ProductType> = ({ fromColor, toColor, titleColor }) => {
+const ProductBox: React.FC<ProductType> = ({ color }) => {
 	// tsx
 	return (
 		<>
-			<div className="group relative h-[215px] w-[150px] rounded-xl md:h-[265px] md:w-[215px]">
+			<div className="group relative h-[220px] w-[150px] rounded-xl md:h-[265px] md:w-[215px]">
 				<div
 					className="absolute -z-10 h-full w-full rounded-xl bg-gradient-to-tl transition-opacity duration-1000 group-hover:opacity-0"
 					style={{
-						background: `linear-gradient(to right bottom, ${fromColor}, ${toColor})`
+						background: `linear-gradient(to right bottom, ${color}, #18181b)`
 					}}
 				></div>
 				<div
 					className="absolute -z-10 h-full w-full rounded-xl bg-gradient-to-br opacity-0 transition-opacity duration-1000 group-hover:opacity-100"
 					style={{
-						background: `linear-gradient(to right bottom, ${toColor}, ${fromColor})`
+						background: `linear-gradient(to right bottom, #18181b, ${color})`
 					}}
 				></div>
 				<div className="flex h-auto w-fit flex-col p-2 md:p-4">
@@ -44,20 +44,19 @@ const ProductBox: React.FC<ProductType> = ({ fromColor, toColor, titleColor }) =
 							alt="تصویر محصول"
 							loading="lazy"
 						/>
-						<span
-							className={`font-Lalezar mt-1 line-clamp-2 text-center text-sm tracking-tighter md:text-lg text-${titleColor}/90`}
-						>
+						<span className="font-Lalezar mt-1 line-clamp-2 text-center text-sm tracking-tighter text-white/90 md:text-lg">
 							عنوان محصول اول ادامه عنوان محصول اول عنوان محصول اول ادامه عنوان محصول اول عنوان
 							محصول اول ادامه عنوان محصول اول
 						</span>
 					</Link>
-					<span
-						className={`line font-Lalezar mt-1 text-left font-bold tracking-tight line-through md:text-lg ${
-							titleColor === 'black' ? 'text-white/70' : 'text-black/70'
-						}`}
-					>
-						۹۹۹٫۹۹۹٫۹۹۹
-					</span>
+					<div className="flex items-center justify-between mt-1">
+						<span className="md:h-5 h-4 md:w-9 w-7 rounded-lg bg-gradient-to-l from-red-500 to-red-600 pt-px md:pt-[3px] text-center text-[10px] font-bold text-white/70 md:text-xs">
+							۱۰۰٪
+						</span>
+						<span className="line font-Lalezar mt-1 text-left font-bold tracking-tight text-red-500/75 line-through md:text-lg">
+							۹۹۹٫۹۹۹٫۹۹۹
+						</span>
+					</div>
 				</div>
 				<Link
 					to="/"

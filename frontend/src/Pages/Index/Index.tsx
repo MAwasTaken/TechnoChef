@@ -11,10 +11,10 @@ const Index: React.FC = () => {
 		<>
 			<Header />
 			<main>
-				<div className="container my-4 flex flex-wrap gap-y-10 items-center justify-between md:mt-8">
-					<ProductBox fromColor="#3b82f6" toColor="#f43f5e" titleColor='white' />
-					<ProductBox fromColor="#eab308" toColor="#84cc16" titleColor='black' />
-					<ProductBox fromColor="#64748b" toColor="#0c4a6e" titleColor='white' />
+				<div className="container my-4 flex flex-wrap items-center justify-between gap-y-10 md:mt-8">
+					<ProductBox color="#f43f5e" />
+					<ProductBox color="#eab308" />
+					<ProductBox color="#64748b" />
 				</div>
 				<AboutBrand />
 			</main>
