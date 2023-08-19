@@ -10,14 +10,14 @@ const AboutBrand: React.FC = () => {
 
 	// tsx
 	return (
-		<section className="container">
-			<h2 className="font-Lalezar flex items-center gap-x-1 pt-4 text-sm text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:pt-8 md:text-3xl">
+		<section className="container pt-8 md:pt-12">
+			<h2 className="font-Lalezar flex items-center gap-x-1 text-sm text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:text-3xl">
 				<BsBuilding className="text-pink-500" />
 				درباره تکنوشف
 			</h2>
 			<div className="flex items-start justify-between gap-x-10 md:gap-x-40">
 				<p
-					className={`mt-2 indent-5 text-[10px] text-gray-400 md:mt-4 md:indent-10 md:text-lg select-none ${
+					className={`mt-2 select-none indent-5 text-[10px] text-gray-400 md:mt-4 md:indent-10 md:text-lg ${
 						isInterest ? 'line-clamp-none' : 'line-clamp-5 '
 					}`}
 				>

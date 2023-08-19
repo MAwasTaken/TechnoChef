@@ -9,7 +9,7 @@ const Header: React.FC = () => {
 	// tsx
 	return (
 		// container
-		<header className="container flex items-center justify-between pt-4 text-xs md:pt-8 md:text-lg">
+		<header className="container flex items-center justify-between py-4 text-xs md:py-8 md:text-lg">
 			{/* right section */}
 			<div className="font-Lalezar text-sm font-bold tracking-tight text-yellow-500 drop-shadow-[0_0_8px_#f97316] transition-all hover:text-orange-500 md:text-3xl">
 				{/* logo */}

@@ -13,14 +13,14 @@ import ProductBox from '../ProductBox/ProductBox';
 const BestSellers = () => {
 	// tsx
 	return (
-		<section className="relative mx-5 h-72 rounded-2xl bg-black/70 py-5 md:mx-10 md:h-96 md:py-10">
+		<section className="container relative h-72 rounded-2xl bg-black/70 py-5 md:h-96 md:py-10">
 			<Swiper
 				slidesPerView={2}
 				spaceBetween={20}
 				freeMode={true}
 				dir="rtl"
 				breakpoints={{
-					570: {
+					540: {
 						slidesPerView: 3,
 						spaceBetween: 20
 					},
@@ -28,7 +28,7 @@ const BestSellers = () => {
 						slidesPerView: 3,
 						spaceBetween: 20
 					},
-					1200: {
+					1280: {
 						slidesPerView: 5,
 						spaceBetween: 50
 					}
@@ -36,7 +36,7 @@ const BestSellers = () => {
 				modules={[FreeMode]}
 				className="h-[270px] cursor-grab md:h-[320px]"
 			>
-				<SwiperSlide className="md:mr-5 px-2 relative">
+				<SwiperSlide className="relative px-2">
 					<div className="flex h-full flex-col items-center justify-center gap-y-2">
 						<h2 className="font-Lalezar flex items-center gap-x-1 pt-4 text-base text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:pt-8 md:text-3xl">
 							<AiOutlineStar className="text-pink-500" />
@@ -47,7 +47,7 @@ const BestSellers = () => {
 							<BiChevronLeft className="h-5 w-5" />
 						</button>
 					</div>
-          <div className="absolute w-20 md:w-20 md:h-20 h-20 md:top-28 top-16 md:blur-3xl blur-2xl md:right-24 right-12 md:bg-yellow-500 bg-yellow-500/30 -z-30  rounded-full"></div>
+					<div className="absolute right-12 top-24 -z-30 h-20 w-20 animate-pulse rounded-full bg-green-500/30 blur-2xl md:right-24 md:top-28 md:h-20 md:w-20  md:bg-green-500 md:blur-3xl"></div>
 				</SwiperSlide>
 				<SwiperSlide>
 					<ProductBox gradientColor="#b91c1c" colors={['#334155', '#ffffff', '#000000']} />

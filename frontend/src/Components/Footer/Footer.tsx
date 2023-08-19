@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
 	// tsx
 	return (
 		<div className="relative">
-			<footer className="container relative mt-4 flex flex-col rounded-lg bg-black/70 py-4 md:mt-8 md:py-4">
+			<footer className="container relative mt-4 flex flex-col rounded-lg bg-black/70 p-4 md:p-8 md:mt-8">
 				<div className="flex items-start justify-between">
 					<div>
 						<h4 className="font-Lalezar flex items-center gap-x-1 text-sm text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:text-3xl select-none">
