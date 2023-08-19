@@ -5,7 +5,7 @@ const cors = require('cors');
 // routers imports
 const authRouter = require('../routes/auth');
 
-//use the routers and midlewares , Export the function
+//use the routers and middleware , Export the function
 module.exports = function (app) {
 	// CORS for browsers
 	app.use(cors());

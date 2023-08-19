@@ -10,11 +10,12 @@ const PORT = 3000;
 require('./server/serverConfig')(app);
 
 mongoose
-.connect(process.env.MONGODB_URL)
-.then(() =>{
-    console.log("DB conected successfully !!");
-    app.listen(process.env.PORT || PORT);
-    console.log("backend server is running !!");
-}).catch((err) => {
-    console.log(err);
-})
+	.connect(process.env.MONGODB_URL)
+	.then(() => {
+		console.log('DB connected successfully !!');
+		app.listen(process.env.PORT || PORT);
+		console.log('backend server is running !!');
+	})
+	.catch((err) => {
+		console.log(err);
+	});

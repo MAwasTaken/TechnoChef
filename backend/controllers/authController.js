@@ -8,13 +8,10 @@ const registerController = async (req, res) => {
 		// validate by Joi
 		await userValidation.validateAsync(req.body);
 
-        // create the user object
-	const password = CryptoJS
-                            .AES
-                            .encrypt(req.body.password, process.env.PASS_SEC_KEY)
-                            .toString()
-        const newUser = new User(req.body);
-        newUser.password = password;
+		// create the user object
+		const password = CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC_KEY).toString();
+		const newUser = new User(req.body);
+		newUser.password = password;
 
 		// save the user in DB
 		const savedUser = await newUser.save();
@@ -24,7 +21,7 @@ const registerController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(500).json(err);
-        console.log(err);
+		console.log(err);
 	}
 };
 
@@ -45,10 +42,10 @@ const logInController = async (req, res) => {
 			const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC_KEY);
 			const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 
-			// get the Inputed PASSWORd
+			// get the Inputted PASSWORd
 			const inputPassword = req.body.password;
 
-			// create the acsess token
+			// create the access token
 			const accessToken = jwt.sign(
 				{
 					id: user._id,
@@ -61,23 +58,19 @@ const logInController = async (req, res) => {
 			// split the PASSWORD from the object
 			const { password, ...others } = user._doc;
 
-			// if the password doesnt matche
+			// if the password doesn't match
 			if (inputPassword !== originalPassword) {
 				res.status(401).json('Wrong UserName or password !!');
 			} else {
-				// if it maches we return the object without thw PASSWORD and the acsess token
+				// if it maches we return the object without thw PASSWORD and the access token
 				res.status(201).json({ ...others, accessToken });
 			}
 		}
 	} catch (err) {
 		// return the err if there is one
-        console.log(err);
+		console.log(err);
 		res.status(500).json(err);
 	}
 };
 
-
-
-
-
-module.exports = {registerController , logInController};
+module.exports = { registerController, logInController };

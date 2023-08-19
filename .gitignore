@@ -3062,3 +3062,10 @@ backend/node_modules/lodash/fp/zipObj.js
 backend/node_modules/lodash/fp/zipObject.js
 backend/node_modules/lodash/fp/zipObjectDeep.js
 backend/node_modules/lodash/fp/zipWith.js
+target/npmlist.json
+.prettierrc.json
+package-lock.json
+package.json
+prettier.config.js
+
+
