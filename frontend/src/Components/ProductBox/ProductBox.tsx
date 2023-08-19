@@ -9,7 +9,7 @@ const ProductBox: React.FC<ProductType> = ({ color }) => {
 	// tsx
 	return (
 		<>
-			<div className="group relative h-[220px] w-[150px] rounded-xl md:h-[265px] md:w-[215px]">
+			<div className="group relative h-[245px] w-[150px] rounded-xl md:h-[295px] md:w-[215px]">
 				<div
 					className="absolute -z-10 h-full w-full rounded-xl bg-gradient-to-tl transition-opacity duration-1000 group-hover:opacity-0"
 					style={{
@@ -49,8 +49,8 @@ const ProductBox: React.FC<ProductType> = ({ color }) => {
 							محصول اول ادامه عنوان محصول اول
 						</span>
 					</Link>
-					<div className="flex items-center justify-between mt-1">
-						<span className="md:h-5 h-4 md:w-9 w-7 rounded-lg bg-gradient-to-l from-red-500 to-red-600 pt-px md:pt-[3px] text-center text-[10px] font-bold text-white/70 md:text-xs">
+					<div className="flex items-center justify-between mt-3">
+						<span className="md:h-6 h-5 md:w-9 w-7 rounded-lg bg-gradient-to-l from-red-500 to-red-600 pt-px md:pt-[3px] text-center text-[10px] font-bold text-white/70 md:text-xs">
 							۱۰۰٪
 						</span>
 						<span className="line font-Lalezar mt-1 text-left font-bold tracking-tight text-red-500/75 line-through md:text-lg">
@@ -60,7 +60,7 @@ const ProductBox: React.FC<ProductType> = ({ color }) => {
 				</div>
 				<Link
 					to="/"
-					className="hover:shadow-product absolute -bottom-5 right-7 z-10 flex h-[20px] w-[100px] cursor-pointer items-center justify-center rounded-b-xl bg-gradient-to-r from-yellow-500 to-orange-600 shadow-yellow-500/50 transition-shadow md:-bottom-[30px] md:right-12 md:h-[30px] md:w-[130px]"
+					className="hover:shadow-product absolute -bottom-3 right-5 z-10 flex h-[25px] w-[110px] cursor-pointer items-center justify-center rounded-xl bg-gradient-to-r from-yellow-500 to-orange-600 shadow-yellow-500/50 transition-shadow md:-bottom-[15px] md:right-9 md:h-[30px] md:w-[140px]"
 				>
 					<span className="font-Lalezar text-sm text-black/70 md:text-lg">۹۹۹٫۹۹۹٫۹۹۹</span>
 					<div className="h-4 w-4 text-red-600">
