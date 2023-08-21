@@ -15,7 +15,7 @@ const ProductBox: React.FC<ProductType> = ({ gradientColor, colors }) => {
 	// tsx
 	return (
 		<>
-			<div className="group relative h-[245px] w-[150px] rounded-xl md:h-[295px] md:w-[215px]">
+			<div className="group relative h-[245px] w-[150px] select-none rounded-xl md:h-[295px] md:w-[215px]">
 				<div
 					className="absolute -z-10 h-full w-full rounded-xl bg-gradient-to-tl transition-opacity duration-1000 group-hover:opacity-0"
 					style={{
@@ -40,18 +40,18 @@ const ProductBox: React.FC<ProductType> = ({ gradientColor, colors }) => {
 					</div>
 					<Link to="/">
 						<img
-							className="mx-auto h-[134px] w-[134px] select-none md:h-[150px] md:w-[150px]"
+							className="mx-auto h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
 							src="Images/Products/p3.png"
 							alt="تصویر محصول"
 							loading="lazy"
 						/>
-						<span className="font-Lalezar mt-1 line-clamp-2 select-text text-center text-sm tracking-tighter text-white/90 md:text-lg">
+						<span className="font-Lalezar mt-1 line-clamp-2 text-center text-sm tracking-tighter text-white/90 md:text-lg">
 							عنوان محصول اول ادامه عنوان محصول اول عنوان محصول اول ادامه عنوان محصول اول عنوان
 							محصول اول ادامه عنوان محصول اول
 						</span>
 					</Link>
 					<div className="mt-3 flex items-center justify-between">
-						<span className="h-5 w-7 rounded-lg bg-gradient-to-l from-red-500 to-red-600 pt-px text-center text-[10px] font-bold text-white/70 md:h-6 md:w-9 md:pt-[3px] md:text-xs">
+						<span className="h-5 w-7 rounded-lg bg-gradient-to-l from-red-500 to-red-600 md:pt-1 pt-[3px] text-center text-[10px] font-bold text-white/70 md:h-6 md:w-9 md:pt-[3px] md:text-xs">
 							۱۰۰٪
 						</span>
 						<span className="line font-Lalezar mt-1 text-left font-bold tracking-tight text-red-500/75 line-through md:text-lg">
