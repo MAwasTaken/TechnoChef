@@ -52,6 +52,7 @@ const ProductBox: React.FC<ProductType> = ({ gradientColor, colors }) => {
 					</Link>
 					<div className="mt-3 flex items-center justify-between">
 						<span className="h-5 w-7 rounded-lg bg-gradient-to-l from-red-500 to-red-600 md:pt-1 pt-[3px] text-center text-[10px] font-bold text-white/70 md:h-6 md:w-9 md:text-xs">
+						<span className="h-5 w-7 rounded-lg bg-gradient-to-l from-red-500 to-red-600 md:pt-1 pt-[3px] text-center text-[10px] font-bold text-white/70 md:h-6 md:w-9 md:pt-[3px] md:text-xs">
 							۱۰۰٪
 						</span>
 						<span className="line font-Lalezar mt-1 text-left font-bold tracking-tight text-red-500/75 line-through md:text-lg">
