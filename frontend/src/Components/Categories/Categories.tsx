@@ -15,7 +15,7 @@ const Categories = () => {
 			</h2>
 			<section className="container md:mt-4 flex flex-wrap items-center justify-center gap-x-12 gap-y-5 md:py-8 py-4 md:gap-x-20 md:gap-y-20 lg:gap-x-32 xl:gap-x-48">
 				<CategoryItem title='یخچال' gradientColor="#fb7185" imageSrc="/Images/Categories/fridge.png" />
-				<CategoryItem title='ماشین ظرف‌شویی' gradientColor="#f472b6" imageSrc="/Images/Categories/washing-machine.png" />
+				<CategoryItem title='ماشین لباس‌شویی' gradientColor="#f472b6" imageSrc="/Images/Categories/washing-machine.png" />
 				<CategoryItem title='مایکرو ویو' gradientColor="#e879f9" imageSrc="/Images/Categories/microwave.png" />
 				<CategoryItem title='اجاق گاز' gradientColor="#c084fc" imageSrc="/Images/Categories/oven.png" />
 				<CategoryItem title='هود' gradientColor="#a78bfa" imageSrc="/Images/Categories/hood.png" />
