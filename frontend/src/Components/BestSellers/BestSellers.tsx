@@ -50,31 +50,60 @@ const BestSellers = () => {
 					<div className="absolute right-12 top-24 -z-30 h-20 w-20 animate-pulse rounded-full bg-green-500/30 blur-2xl md:right-24 md:top-28 md:h-20 md:w-20  md:bg-green-500 md:blur-3xl"></div>
 				</SwiperSlide>
 				<SwiperSlide>
-					<ProductBox gradientColor="#b91c1c" colors={['#334155', '#ffffff', '#000000']} />
+					<ProductBox
+						gradientColor="#b91c1c"
+						colors={['#334155', '#ffffff', '#000000']}
+						imageSrc="Images/Products/p1.png"
+					/>
 				</SwiperSlide>
 				<SwiperSlide>
-					<ProductBox gradientColor="#c2410c" colors={['#334155', '#ffffff', '#000000']} />
+					<ProductBox
+						gradientColor="#c2410c"
+						colors={['#334155', '#ffffff', '#000000']}
+						imageSrc="Images/Products/p2.png"
+					/>
 				</SwiperSlide>
 				<SwiperSlide>
-					<ProductBox gradientColor="#b45309" colors={['#334155', '#ffffff', '#000000']} />
+					<ProductBox
+						gradientColor="#b45309"
+						colors={['#334155', '#ffffff', '#000000']}
+						imageSrc="Images/Products/p3.png"
+					/>
 				</SwiperSlide>
 				<SwiperSlide>
-					<ProductBox gradientColor="#a16207" colors={['#334155', '#ffffff', '#000000']} />
+					<ProductBox
+						gradientColor="#a16207"
+						colors={['#334155', '#ffffff', '#000000']}
+						imageSrc="Images/Products/p4.png"
+					/>
 				</SwiperSlide>
 				<SwiperSlide>
-					<ProductBox gradientColor="#4d7c0f" colors={['#334155', '#ffffff', '#000000']} />
+					<ProductBox
+						gradientColor="#4d7c0f"
+						colors={['#334155', '#ffffff', '#000000']}
+						imageSrc="Images/Products/p5.png"
+					/>
 				</SwiperSlide>
 				<SwiperSlide>
-					<ProductBox gradientColor="#15803d" colors={['#334155', '#ffffff', '#000000']} />
+					<ProductBox
+						gradientColor="#15803d"
+						colors={['#334155', '#ffffff', '#000000']}
+						imageSrc="Images/Products/p6.png"
+					/>
 				</SwiperSlide>
 				<SwiperSlide>
-					<ProductBox gradientColor="#15803d" colors={['#334155', '#ffffff', '#000000']} />
+					<ProductBox
+						gradientColor="#15803d"
+						colors={['#334155', '#ffffff', '#000000']}
+						imageSrc="Images/Products/p7.png"
+					/>
 				</SwiperSlide>
 				<SwiperSlide>
-					<ProductBox gradientColor="#047857" colors={['#334155', '#ffffff', '#000000']} />
-				</SwiperSlide>
-				<SwiperSlide>
-					<ProductBox gradientColor="#0f766e" colors={['#334155', '#ffffff', '#000000']} />
+					<ProductBox
+						gradientColor="#047857"
+						colors={['#334155', '#ffffff', '#000000']}
+						imageSrc="Images/Products/p8.png"
+					/>
 				</SwiperSlide>
 			</Swiper>
 		</section>

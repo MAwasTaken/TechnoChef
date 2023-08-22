@@ -9,7 +9,7 @@ import { BiChevronLeft } from 'react-icons/bi';
 import { ProductType } from '../../Types/ProductType';
 
 // product box
-const ProductBox: React.FC<ProductType> = ({ gradientColor, colors }) => {
+const ProductBox: React.FC<ProductType> = ({ gradientColor, colors, imageSrc }) => {
 	const [isProductHover, setIsProductHover] = useState<boolean>(false);
 
 	// tsx
@@ -17,13 +17,13 @@ const ProductBox: React.FC<ProductType> = ({ gradientColor, colors }) => {
 		<>
 			<div className="group relative h-[245px] w-[150px] select-none rounded-xl md:h-[295px] md:w-[215px]">
 				<div
-					className="absolute -z-10 h-full w-full rounded-xl bg-gradient-to-tl transition-opacity duration-1000 group-hover:opacity-0"
+					className="absolute -z-10 h-full w-full rounded-xl transition-opacity duration-1000 group-hover:opacity-0"
 					style={{
 						background: `linear-gradient(to right bottom, ${gradientColor}, #18181b)`
 					}}
 				></div>
 				<div
-					className="absolute -z-10 h-full w-full rounded-xl bg-gradient-to-br opacity-0 transition-opacity duration-1000 group-hover:opacity-100"
+					className="absolute -z-10 h-full w-full rounded-xl opacity-0 transition-opacity duration-1000 group-hover:opacity-100"
 					style={{
 						background: `linear-gradient(to right bottom, #18181b, ${gradientColor})`
 					}}
@@ -41,7 +41,7 @@ const ProductBox: React.FC<ProductType> = ({ gradientColor, colors }) => {
 					<Link to="/">
 						<img
 							className="mx-auto h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
-							src="Images/Products/p3.png"
+							src={imageSrc}
 							alt="تصویر محصول"
 							loading="lazy"
 						/>
