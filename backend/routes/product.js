@@ -10,16 +10,16 @@ router.post('/', uploader.array('images', 5), controller.createProductController
 router.put('/:id', uploader.array('images', 5), controller.updateProductController);
 
 //DELETE by ID router
-router.delete('/:id', controller.deleteProductByIdController);
+router.delete('/deleteById/:id', controller.deleteProductByIdController);
 
 //DELETE by shortName router
-router.delete('/:shortname', controller.deleteProductByIdController);
+router.delete('/deleteByShortName/:shortname', controller.deleteProductByShortNameController);
 
 //GET PRODUCT BY ID router
-router.get('/find/:id', controller.getProductByIdController);
+router.get('/findById/:id', controller.getProductByIdController);
 
 //GET product by shortName
-router.get('find/:shortname', controller.getProductByShortName);
+router.get('/findByShortName/:shortname', controller.getProductByShortName);
 
 //GET ALL PRODUCTS router
 router.get('/', controller.getAllProductsController);

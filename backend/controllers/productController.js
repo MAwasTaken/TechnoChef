@@ -11,8 +11,6 @@ const createProductController = async (req, res) => {
 		let images = req.files.map((element) => element.path);
 		newProduct.images = images;
 
-		console.log(newProduct);
-
 		// validate the input
 		await productValidate.validateAsync(newProduct._doc);
 
@@ -80,6 +78,7 @@ const deleteProductByIdController = async (req, res) => {
 		res.status(200).json('Product has been deleted...');
 	} catch (err) {
 		// return the err if there is one
+		console.log(err);
 		res.status(500).json(err);
 	}
 };
@@ -98,6 +97,7 @@ const deleteProductByShortNameController = async (req, res) => {
 		res.status(200).json('Product has been deleted...');
 	} catch (err) {
 		// return the err if there is one
+		console.log(err);
 		res.status(500).json(err);
 	}
 };
@@ -187,9 +187,9 @@ const getAllProductsController = async (req, res) => {
 		res.status(200).json({ products, pages });
 	} catch (err) {
 		res.status(500).json(err);
-		console.log(err);
 	}
 };
+
 const getAllCategoriesController = async (req, res) => {
 	try {
 		let categories = [];

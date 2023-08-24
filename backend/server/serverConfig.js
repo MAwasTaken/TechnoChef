@@ -15,6 +15,8 @@ module.exports = function (app) {
 	// JSON converter
 	app.use(express.json());
 
+	app.use('/public', express.static('public'));
+
 	// set the routers
 	app.use('/api/auth', authRouter);
 	app.use('/api/users', userRouter);
