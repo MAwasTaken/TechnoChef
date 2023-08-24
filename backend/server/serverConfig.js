@@ -7,6 +7,7 @@ const cors = require('cors');
 const authRouter = require('../routes/auth');
 const userRouter = require('../routes/user');
 const productRouter = require('../routes/product');
+const commentRouter = require('../routes/comment');
 
 //use the routers and middleware , Export the function
 module.exports = function (app) {
@@ -25,4 +26,5 @@ module.exports = function (app) {
 	app.use('/api/auth', authRouter);
 	app.use('/api/users', userRouter);
 	app.use('/api/products', productRouter);
+	app.use('/api/comments', commentRouter);
 };
