@@ -1,5 +1,6 @@
 // dependency imports
 const express = require('express');
+var cookieParser = require('cookie-parser');
 const cors = require('cors');
 
 // routers imports
@@ -14,6 +15,9 @@ module.exports = function (app) {
 
 	// JSON converter
 	app.use(express.json());
+
+	// Cookie parser
+	app.use(cookieParser());
 
 	app.use('/public', express.static('public'));
 

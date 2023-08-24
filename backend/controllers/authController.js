@@ -63,7 +63,10 @@ const logInController = async (req, res) => {
 				res.status(401).json('Wrong UserName or password !!');
 			} else {
 				// if it maches we return the object without thw PASSWORD and the access token
-				res.status(201).json({ ...others, accessToken });
+				res
+					.status(201)
+					.cookie('accessToken', accessToken, { httpOnly: true })
+					.json({ ...others });
 			}
 		}
 	} catch (err) {
