@@ -1,4 +1,4 @@
-export type ServiceItemType = {
+export type ServiceItemProps = {
 	icon: React.ReactNode;
 	title: string;
 };

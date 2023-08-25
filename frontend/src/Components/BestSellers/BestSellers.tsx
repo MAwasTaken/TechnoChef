@@ -38,7 +38,7 @@ const BestSellers = () => {
 			>
 				<SwiperSlide className="relative px-2">
 					<div className="flex h-full flex-col items-center justify-center gap-y-2">
-						<h2 className="font-Lalezar flex items-center gap-x-1 pt-4 text-base text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:pt-8 md:text-3xl">
+						<h2 className="font-Lalezar flex select-none items-center gap-x-1 pt-4 text-base text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:pt-8 md:text-3xl">
 							<AiOutlineStar className="text-pink-500" />
 							محصولات پرفروش
 						</h2>

@@ -1,8 +1,11 @@
+// react
 import { Link } from 'react-router-dom';
-import { CategoryItemType } from '../../../Types/CategoryItemType';
+
+// types
+import { CategoryItemProps } from '../../../Types/CategoryItemProps';
 
 // category items
-const CategoryItem: React.FC<CategoryItemType> = ({ gradientColor, imageSrc, title }) => {
+const CategoryItem: React.FC<CategoryItemProps> = ({ gradientColor, imageSrc, title }) => {
 	// tsx
 	return (
 		<div className="group flex flex-col items-center justify-center gap-y-1 md:gap-y-1.5">
@@ -22,7 +25,7 @@ const CategoryItem: React.FC<CategoryItemType> = ({ gradientColor, imageSrc, tit
 					}}
 				></div>
 				<div className="absolute -right-2 bottom-0 h-[65px] w-[65px] md:-right-3 md:h-[120px] md:w-[120px]">
-					<img className='w-full h-full object-scale-down' src={imageSrc} alt="category image" />
+					<img className="h-full w-full object-scale-down" src={imageSrc} alt="category image" />
 				</div>
 			</Link>
 			<Link

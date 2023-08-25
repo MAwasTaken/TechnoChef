@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 import { BiChevronLeft } from 'react-icons/bi';
 
 // types
-import { ProductType } from '../../Types/ProductType';
+import { ProductProps } from '../../Types/ProductProps';
 
 // product box
-const ProductBox: React.FC<ProductType> = ({ gradientColor, colors, imageSrc }) => {
+const ProductBox: React.FC<ProductProps> = ({ gradientColor, colors, imageSrc }) => {
 	const [isProductHover, setIsProductHover] = useState<boolean>(false);
 
 	// tsx

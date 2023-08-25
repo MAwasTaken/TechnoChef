@@ -6,6 +6,8 @@ import BestSellers from '../../Components/BestSellers/BestSellers';
 import MainSlider from '../../Components/MainSlider/MainSlider';
 import Categories from '../../Components/Categories/Categories';
 import Services from '../../Components/Services/Services';
+import ProductBox from '../../Components/ProductBox/ProductBox';
+import LatestProducts from '../../Components/LatestProducts/LatestProducts';
 
 // index
 const Index: React.FC = () => {
@@ -17,6 +19,7 @@ const Index: React.FC = () => {
 				<MainSlider />
 				<BestSellers />
 				<Categories />
+				<LatestProducts />
 				<Services />
 				<AboutBrand />
 			</main>
