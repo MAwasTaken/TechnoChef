@@ -61,18 +61,18 @@ const ProductBox: React.FC<ProductProps> = ({ gradientColor, colors, imageSrc })
 				</div>
 				<Link
 					to="/"
-					className="hover:shadow-product absolute -bottom-3 right-5 z-10 flex h-[25px] w-[110px] cursor-pointer items-center justify-center rounded-xl bg-gradient-to-r from-yellow-500 to-orange-600 shadow-yellow-500/50 transition-shadow md:-bottom-[15px] md:right-9 md:h-[30px] md:w-[140px]"
+					className="hover:shadow-product absolute -bottom-3 right-5 z-10 flex h-[25px] w-[110px] cursor-pointer items-center justify-center rounded-xl bg-gradient-to-r from-yellow-500 to-orange-600 shadow-yellow-500/50 transition-shadow md:-bottom-[15px] md:right-9 md:h-[34px] md:w-[140px]"
 					onMouseEnter={() => setIsProductHover(true)}
 					onMouseLeave={() => setIsProductHover(false)}
 				>
 					{isProductHover ? (
 						<>
-							<span className="font-Lalezar text-sm text-black/70 md:text-lg">مشاهده جزئیات</span>
+							<span className="font-Lalezar text-sm text-black/70 md:text-lg md:mt-1">مشاهده جزئیات</span>
 							<BiChevronLeft className="h-5 w-5 text-red-600" />
 						</>
 					) : (
 						<>
-							<span className="font-Lalezar text-sm text-black/70 md:text-lg">۹۹۹٫۹۹۹٫۹۹۹</span>
+							<span className="font-Lalezar text-sm text-black/70 md:text-xl md:mt-1">۹۹۹٫۹۹۹٫۹۹۹</span>
 							<div className="h-4 w-4 text-red-600">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" fill="currentColor">
 									<path
