@@ -1,18 +1,19 @@
 // dependency imports
 const router = require('express').Router();
+const { verifyTokenAndAdmin, verifyTokenAndAuth } = require('../middlewares/verifyTokens');
 const controller = require('../controllers/usersController');
 
 //UPDATE router
-router.put('/:id', controller.updateUserController);
+router.put('/:id', verifyTokenAndAuth, controller.updateUserController);
 
 //DELETE router
-router.delete('/:id', controller.deleteUserController);
+router.delete('/:id', verifyTokenAndAuth, controller.deleteUserController);
 
 //GET USER router
-router.get('/find/:id', controller.getUserByIdController);
+router.get('/find/:id', verifyTokenAndAuth, controller.getUserByIdController);
 
 //GET ALL USER router
-router.get('/', controller.getAllUsersController);
+router.get('/', verifyTokenAndAdmin, controller.getAllUsersController);
 
 //export the Router
 module.exports = router;

@@ -1,19 +1,34 @@
 // dependency imports
 const uploader = require('../middlewares/uploader');
+const { verifyTokenAndAdmin, verifyTokenAndAuth } = require('../middlewares/verifyTokens');
 const controller = require('../controllers/productController');
 const router = require('express').Router();
 
 //CREATE router
-router.post('/', uploader.array('images', 5), controller.createProductController);
+router.post(
+	'/',
+	verifyTokenAndAdmin,
+	uploader.array('images', 5),
+	controller.createProductController
+);
 
 //UPDATE router
-router.put('/:id', uploader.array('images', 5), controller.updateProductController);
+router.put(
+	'/:id',
+	verifyTokenAndAdmin,
+	uploader.array('images', 5),
+	controller.updateProductController
+);
 
 //DELETE by ID router
-router.delete('/deleteById/:id', controller.deleteProductByIdController);
+router.delete('/deleteById/:id', verifyTokenAndAdmin, controller.deleteProductByIdController);
 
 //DELETE by shortName router
-router.delete('/deleteByShortName/:shortname', controller.deleteProductByShortNameController);
+router.delete(
+	'/deleteByShortName/:shortname',
+	verifyTokenAndAdmin,
+	controller.deleteProductByShortNameController
+);
 
 //GET PRODUCT BY ID router
 router.get('/findById/:id', controller.getProductByIdController);
