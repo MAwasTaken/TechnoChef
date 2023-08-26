@@ -11,7 +11,7 @@ const Header: React.FC = () => {
 		// container
 		<header className="container flex items-center justify-between py-4 text-xs md:py-8 md:text-lg">
 			{/* right section */}
-			<div className="font-Lalezar text-sm font-bold tracking-tight text-yellow-500 drop-shadow-[0_0_8px_#f97316] transition-all hover:text-orange-500 md:text-3xl">
+			<div className="font-Lalezar text-sm font-bold tracking-tight text-yellow-500 drop-shadow-[0_0_23px_#f97316] transition-all hover:text-orange-500 md:text-3xl">
 				{/* logo */}
 				<Link to="/" className="flex flex-col items-center">
 					TechnoShef
@@ -20,7 +20,7 @@ const Header: React.FC = () => {
 			{/* center section */}
 			<div>
 				{/* navigation */}
-				<ul className="flex items-center justify-between gap-x-4 text-[10px] md:gap-x-12 md:text-lg">
+				<ul className="flex items-center justify-between gap-x-4 text-sm text-black md:gap-x-12 md:text-xl">
 					{/* home */}
 					<li className="decoration-red-500 decoration-[2.5px] underline-offset-8 transition-all hover:text-blue-500 hover:underline">
 						<Link to="/">خانه</Link>
@@ -31,24 +31,24 @@ const Header: React.FC = () => {
 					</li>
 					{/* about us */}
 					<li className="decoration-red-500 decoration-[2.5px] underline-offset-8 transition-all hover:text-blue-500 hover:underline">
-						<Link to="/">درباه‌ما</Link>
+						<Link to="/">درباره‌ما</Link>
 					</li>
 				</ul>
 			</div>
 			{/* left section */}
-			<div className="flex items-center justify-between gap-x-3 md:gap-x-6">
+			<div className="flex items-center text-black justify-between gap-x-3 md:gap-x-6">
 				{/* search button */}
 				<GlobalSearch />
 				{/* login / register / panel button */}
-				<button className="relative flex justify-between gap-x-2 rounded-lg border border-orange-500 p-1.5 hover:text-slate-100 hover:drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:border-2 md:p-2">
+				<button className="relative flex justify-between gap-x-2 rounded-lg border border-orange-500 p-2.5 hover:text-black-100 hover:drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:border-2 md:p-2 md:px-5">
 					{/* login */}
 					<span className="">ورود</span>
 					{/* divider */}
-					<span className="absolute right-[27px] top-1 mx-1 h-3/4 w-px rounded-full bg-red-500 md:right-11 md:top-1.5 md:w-[2px]">
+					<span className="absolute right-[27px] top-1 md:mx-3 h-3/4 w-px rounded-full bg-red-500 md:right-12 mr-3.5 md:top-1.5 md:w-[2px]">
 						{' '}
 					</span>
 					{/* register */}
-					<span>ثبت‌نام</span>
+					<span className="md:mr-2 mr-3">ثبت‌نام</span>
 				</button>
 			</div>
 		</header>
