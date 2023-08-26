@@ -62,9 +62,10 @@ const confirmCommentController = async (req, res) => {
 const deleteCommentController = async (req, res) => {
 	try {
 		// find the comment by id and delete.
-		await Comment.findByIdAndDelete(req.params.id);
+		const deletedComment = await Comment.findByIdAndDelete(req.params.id);
 
-		// set the response.
+		// set the response
+		if (deletedComment == null) return res.status(200).json('there is no comment with that Id');
 		res.status(200).json('comment deleted successfully !');
 	} catch (err) {
 		// return the err if there is one.

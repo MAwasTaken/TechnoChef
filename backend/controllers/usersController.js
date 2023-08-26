@@ -38,10 +38,12 @@ const updateUserController = async (req, res) => {
 const deleteUserController = async (req, res) => {
 	try {
 		// find By Id And Delete the User
-		await User.findByIdAndDelete(req.params.id);
+		const deletedUser = await User.findByIdAndDelete(req.params.id);
 
 		// set the response
-		res.status(200).json('User has been deleted...');
+		if (deletedUser == null)
+			return res.status(200).json({ massage: 'there is No User with that Id' });
+		res.status(200).json({ massage: 'User has been deleted...', deletedUser });
 	} catch (err) {
 		// return the err if there is one
 		res.status(500).json(err);

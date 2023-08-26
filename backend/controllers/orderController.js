@@ -49,9 +49,10 @@ const updateOrderController = async (req, res) => {
 const deleteOrderController = async (req, res) => {
 	try {
 		// find By Id And Delete the Order
-		await Order.findByIdAndDelete(req.params.id);
+		const deletedOrder = await Order.findByIdAndDelete(req.params.id);
 
 		// set the response
+		if (deletedOrder == null) return res.status(200).json('There is No Order with that Id');
 		res.status(200).json('Order has been deleted...');
 	} catch (err) {
 		// return the err if there is one

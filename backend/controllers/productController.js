@@ -73,6 +73,8 @@ const deleteProductByIdController = async (req, res) => {
 		// find By Id And Delete the Product
 		const deletedProduct = await Product.findByIdAndDelete(req.params.id);
 
+		if (deletedProduct == null) return res.status(200).json('there is No Product with that Id.');
+
 		// delete the related images from the server
 		deletedProduct.images.forEach((Image) => {
 			fs.unlinkSync(Image);
@@ -92,6 +94,8 @@ const deleteProductByShortNameController = async (req, res) => {
 	try {
 		// find By shortname And Delete the Product
 		const deletedProduct = await Product.findOneAndRemove({ shortName: req.params.shortname });
+
+		if (deletedProduct == null) return res.status(200).json('there is No Product with that Name.');
 
 		// delete the related images from the server
 		deletedProduct.images.forEach((Image) => {
