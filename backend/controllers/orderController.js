@@ -1,6 +1,8 @@
+// dependency imports
 const Order = require('../models/Order');
 const validator = require('../validator/orderVAlidation');
 
+// create Order
 const createOrderController = async (req, res) => {
 	// create the Order object
 	const newOrder = new Order(req.body);
@@ -16,11 +18,11 @@ const createOrderController = async (req, res) => {
 		res.status(200).json(savedOrder);
 	} catch (err) {
 		// return the err if there is one
-		console.log(err);
 		res.status(500).json(err);
 	}
 };
 
+// update Order
 const updateOrderController = async (req, res) => {
 	try {
 		// validate the input
@@ -43,6 +45,7 @@ const updateOrderController = async (req, res) => {
 	}
 };
 
+// delete Order
 const deleteOrderController = async (req, res) => {
 	try {
 		// find By Id And Delete the Order
@@ -56,6 +59,7 @@ const deleteOrderController = async (req, res) => {
 	}
 };
 
+// get Order By User Id
 const getOrderByUserIdController = async (req, res) => {
 	try {
 		// find the card By the userID
@@ -69,6 +73,7 @@ const getOrderByUserIdController = async (req, res) => {
 	}
 };
 
+// get Order By Id
 const getOrderByIdController = async (req, res) => {
 	try {
 		// find the card By the userID
@@ -82,6 +87,7 @@ const getOrderByIdController = async (req, res) => {
 	}
 };
 
+// get all Orders
 const getAllOrdersController = async (req, res) => {
 	try {
 		// find all the orders saved in DB
@@ -95,6 +101,7 @@ const getAllOrdersController = async (req, res) => {
 	}
 };
 
+// export functions
 module.exports = {
 	createOrderController,
 	updateOrderController,

@@ -1,8 +1,10 @@
+// dependency imports
 const User = require('../models/Users');
 const CryptoJS = require('crypto-js');
 const jwt = require('jsonwebtoken');
 const userValidation = require('../validator/userValidation');
 
+// User register Controller (sign up)
 const registerController = async (req, res) => {
 	try {
 		// validate by Joi
@@ -25,6 +27,7 @@ const registerController = async (req, res) => {
 	}
 };
 
+// user Login Controller
 const logInController = async (req, res) => {
 	try {
 		// find the user By username
@@ -76,4 +79,5 @@ const logInController = async (req, res) => {
 	}
 };
 
+// export the functions.
 module.exports = { registerController, logInController };

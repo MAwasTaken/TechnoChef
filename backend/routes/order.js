@@ -1,3 +1,4 @@
+// dependency imports
 const router = require('express').Router();
 const controller = require('../controllers/orderController');
 
@@ -19,4 +20,5 @@ router.get('/getById/:id', controller.getOrderByIdController);
 // get All of Orders
 router.get('/', controller.getAllOrdersController);
 
+//export the Router
 module.exports = router;

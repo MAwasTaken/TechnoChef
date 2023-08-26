@@ -1,6 +1,8 @@
+// mongoose set up
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.ObjectId;
 
+// create the mongoose schema
 const orderSchema = mongoose.Schema(
 	{
 		userId: { type: ObjectId },
@@ -23,4 +25,5 @@ const orderSchema = mongoose.Schema(
 	{ timestamps: true }
 );
 
+// export
 module.exports = mongoose.model('Order', orderSchema);

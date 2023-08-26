@@ -1,7 +1,9 @@
+// dependency imports
 const User = require('../models/Users');
 const CryptoJS = require('crypto-js');
 const validate = require('../validator/userValidation');
 
+// update User
 const updateUserController = async (req, res) => {
 	try {
 		// validate JOI
@@ -32,6 +34,7 @@ const updateUserController = async (req, res) => {
 	}
 };
 
+// delete User
 const deleteUserController = async (req, res) => {
 	try {
 		// find By Id And Delete the User
@@ -45,6 +48,7 @@ const deleteUserController = async (req, res) => {
 	}
 };
 
+// get User By Id
 const getUserByIdController = async (req, res) => {
 	try {
 		// find the User By the ID
@@ -61,6 +65,7 @@ const getUserByIdController = async (req, res) => {
 	}
 };
 
+// get All Users
 const getAllUsersController = async (req, res) => {
 	// Define queries
 	const query = req.query.new;
@@ -86,6 +91,7 @@ const getAllUsersController = async (req, res) => {
 	}
 };
 
+// export functions
 module.exports = {
 	updateUserController,
 	deleteUserController,

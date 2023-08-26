@@ -1,6 +1,8 @@
+// mongoose set up
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.ObjectId;
 
+// create the mongoose schema
 const transactionSchema = mongoose.Schema(
 	{
 		order_id: { type: ObjectId, required: true, unique: true },
@@ -10,4 +12,5 @@ const transactionSchema = mongoose.Schema(
 	{ timestamps: true }
 );
 
+// export
 module.exports = mongoose.model('Transaction', transactionSchema);

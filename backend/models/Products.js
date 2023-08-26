@@ -1,5 +1,7 @@
+// mongoose set up
 const mongoose = require('mongoose');
 
+// create the mongoose schema
 const productsSchema = new mongoose.Schema(
 	{
 		shortName: { type: String, required: true, unique: true },

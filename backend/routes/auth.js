@@ -1,3 +1,4 @@
+// dependency imports
 const router = require('express').Router();
 const Controller = require('../controllers/authController');
 

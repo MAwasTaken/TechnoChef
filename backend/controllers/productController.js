@@ -1,7 +1,9 @@
+// dependency imports
 const Product = require('../models/Products');
 const productValidate = require('../validator/productValidation');
 const fs = require('fs');
 
+// create Product
 const createProductController = async (req, res) => {
 	// create the Product object
 	let newProduct = new Product(req.body);
@@ -29,6 +31,7 @@ const createProductController = async (req, res) => {
 	}
 };
 
+// update Product
 const updateProductController = async (req, res) => {
 	try {
 		const oldProduct = await Product.findById(req.params.id);
@@ -64,6 +67,7 @@ const updateProductController = async (req, res) => {
 	}
 };
 
+// delete product by Id
 const deleteProductByIdController = async (req, res) => {
 	try {
 		// find By Id And Delete the Product
@@ -83,6 +87,7 @@ const deleteProductByIdController = async (req, res) => {
 	}
 };
 
+// delete product by shortName
 const deleteProductByShortNameController = async (req, res) => {
 	try {
 		// find By shortname And Delete the Product
@@ -102,6 +107,7 @@ const deleteProductByShortNameController = async (req, res) => {
 	}
 };
 
+// get product By Id
 const getProductByIdController = async (req, res) => {
 	try {
 		// find the card By the ID
@@ -113,6 +119,8 @@ const getProductByIdController = async (req, res) => {
 		res.status(500).json(err);
 	}
 };
+
+// get Product by shortName
 const getProductByShortName = async (req, res) => {
 	try {
 		// find the card By the shortName.
@@ -125,6 +133,8 @@ const getProductByShortName = async (req, res) => {
 		res.status(500).json(err);
 	}
 };
+
+// get all product
 const getAllProductsController = async (req, res) => {
 	// Define queries
 	const qNew = req.query.new;
@@ -190,6 +200,7 @@ const getAllProductsController = async (req, res) => {
 	}
 };
 
+// get all categories
 const getAllCategoriesController = async (req, res) => {
 	try {
 		let categories = [];
@@ -205,6 +216,7 @@ const getAllCategoriesController = async (req, res) => {
 	}
 };
 
+// export functions
 module.exports = {
 	createProductController,
 	updateProductController,

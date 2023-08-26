@@ -47,7 +47,7 @@ const verifyTokenAndAdmin = (req, res, next) => {
 	});
 };
 
-// export the middlewares
+// export the middleware
 module.exports = {
 	verifyToken,
 	verifyTokenAndAuth,
