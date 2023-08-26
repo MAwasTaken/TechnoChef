@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { BiChevronLeft } from 'react-icons/bi';
 
 // types
-import { ProductProps } from '../../Types/ProductProps';
+import { ProductProps } from '../../Types/Products.types';
 
 // product box
 const ProductBox: React.FC<ProductProps> = ({ gradientColor, colors, imageSrc }) => {

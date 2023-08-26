@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 
 // types
-import { CategoryItemProps } from '../../../Types/CategoryItemProps';
+import { CategoryItemProps } from '../../../Types/CategoryItems.types';
 
 // category items
 const CategoryItem: React.FC<CategoryItemProps> = ({ gradientColor, imageSrc, title }) => {
