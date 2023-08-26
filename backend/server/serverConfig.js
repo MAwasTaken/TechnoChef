@@ -8,6 +8,7 @@ const authRouter = require('../routes/auth');
 const userRouter = require('../routes/user');
 const productRouter = require('../routes/product');
 const commentRouter = require('../routes/comment');
+const orderRouter = require('../routes/order');
 
 //use the routers and middleware , Export the function
 module.exports = function (app) {
@@ -20,6 +21,7 @@ module.exports = function (app) {
 	// Cookie parser
 	app.use(cookieParser());
 
+	// Set the public folder static
 	app.use('/public', express.static('public'));
 
 	// set the routers
@@ -27,4 +29,5 @@ module.exports = function (app) {
 	app.use('/api/users', userRouter);
 	app.use('/api/products', productRouter);
 	app.use('/api/comments', commentRouter);
+	app.use('/api/orders', orderRouter);
 };
