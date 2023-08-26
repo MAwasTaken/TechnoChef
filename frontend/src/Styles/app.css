@@ -7,10 +7,9 @@
 @layer base {
 	body {
 		direction: rtl;
-		/* background: linear-gradient(176deg, rgb(18, 24, 27) 50%, rgb(32, 39, 55) 100%); */
-		background-color: #f1f1f1;
+		background: linear-gradient(176deg, rgb(18, 24, 27) 50%, rgb(32, 39, 55) 100%);
+		background-color: rgb(18 24 27);
 		color: #cbd5e1;
-		/* background-color: #e0e0e0; */
 		background-attachment: fixed;
 		font-size: 14px;
 		min-height: 100vh;
