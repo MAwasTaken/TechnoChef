@@ -7,7 +7,7 @@
 @layer base {
 	body {
 		direction: rtl;
-		background: linear-gradient(176deg, #f3f4f6 50%, #e4e4e7 100%);
+		background: linear-gradient(176deg, rgba(254, 252, 232, 0.1) 50%, rgba(254, 249, 195, 0.2) 100%);
 		background-color: #f3f4f6;
 		color: #111827;
 		background-attachment: fixed;

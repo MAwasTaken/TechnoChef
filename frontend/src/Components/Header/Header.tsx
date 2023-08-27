@@ -40,11 +40,11 @@ const Header: React.FC = () => {
 				{/* search button */}
 				<GlobalSearch />
 				{/* login / register / panel button */}
-				<button className="relative flex justify-between gap-x-2 rounded-lg border border-orange-500 p-2.5 md:gap-x-4 md:border-2 md:p-2 md:px-5">
+				<button className="relative flex justify-between gap-x-2 rounded-lg border border-gray-500 p-2.5 md:gap-x-4 md:border-2 md:p-2 md:px-5 hover:border-gray-800 hover:shadow-md">
 					{/* login */}
 					<span className="text-gray-800">ورود</span>
 					{/* divider */}
-					<span className="absolute right-[27px] top-1 mr-3.5 h-3/4 w-px rounded-full bg-red-500 md:right-12 md:top-1.5 md:mx-3 md:w-[2px]">
+					<span className="absolute right-[27px] top-1 mr-3.5 h-3/4 w-px rounded-full bg-yellow-500 md:right-12 md:top-1.5 md:mx-3 md:w-[2px]">
 						{' '}
 					</span>
 					{/* register */}

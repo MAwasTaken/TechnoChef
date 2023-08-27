@@ -31,7 +31,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ gradientColor, imageSrc, ti
 			<Link
 				to=""
 				style={{ color: `${gradientColor}` }}
-				className="font-Lalezar text-xs transition-all duration-500 group-hover:drop-shadow-[0_0_2px_#71717a] md:text-lg"
+				className="font-Lalezar text-xs transition-all duration-500 md:text-lg"
 			>
 				{title}
 			</Link>

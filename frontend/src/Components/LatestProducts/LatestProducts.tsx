@@ -7,8 +7,8 @@ import ProductBox from '../ProductBox/ProductBox';
 const LatestProducts = () => {
 	return (
 		<>
-			<h2 className="font-Lalezar container flex select-none items-center gap-x-1 pt-4 text-sm text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:mt-10 md:gap-x-4 md:text-3xl mb-4 md:mb-8">
-				<MdOutlineWatchLater className="text-pink-500" />
+			<h2 className="font-Lalezar container flex select-none items-center gap-x-1 pt-4 text-sm md:mt-10 md:gap-x-4 md:text-3xl mb-4 md:mb-8">
+				<MdOutlineWatchLater className="text-yellow-500" />
 				جدیدترین محصولات
 			</h2>
 			<section className="container mb-5 flex flex-wrap items-center justify-center gap-8 pb-4 md:gap-10 md:pb-8">

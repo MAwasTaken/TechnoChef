@@ -1,5 +1,5 @@
 // react
-import { useState } from 'react';
+import { LegacyRef, MutableRefObject, RefObject, useEffect, useRef, useState } from 'react';
 
 // react icons
 import { BiSearch } from 'react-icons/bi';
@@ -8,6 +8,16 @@ import { BiSearch } from 'react-icons/bi';
 const GlobalSearch: React.FC = () => {
 	// search modal active state
 	const [isShowSearchModal, setIsShowSearchModal] = useState<boolean>(false);
+
+	// input reference
+	const ref = useRef<HTMLInputElement>(null);
+
+  // clear input and focus
+	useEffect(() => {
+		if (ref.current !== null) ref.current.value = '';
+
+		ref.current?.focus();
+	});
 
 	// search button handler
 	const closeModalHandler = () => setIsShowSearchModal(false);
@@ -25,6 +35,7 @@ const GlobalSearch: React.FC = () => {
 				onClick={closeModalHandler}
 			></div>
 			<input
+				ref={ref}
 				placeholder="جستجو ..."
 				type="search"
 				className={`${

@@ -11,13 +11,13 @@ const AboutBrand: React.FC = () => {
 	// tsx
 	return (
 		<section className="container pt-8 md:pt-12">
-			<h3 className="font-Lalezar flex items-center gap-x-1 text-sm text-yellow-500 drop-shadow-[0_0_8px_#f97316] md:gap-x-4 md:text-3xl">
-				<BsBuilding className="text-pink-500" />
+			<h3 className="font-Lalezar flex items-center gap-x-1 text-sm md:gap-x-4 md:text-3xl">
+				<BsBuilding className="text-yellow-500" />
 				درباره تکنوشف
 			</h3>
 			<div className="flex items-start justify-between gap-x-10 md:gap-x-40">
 				<p
-					className={`mt-2 select-none indent-5 text-[10px] text-gray-400 md:mt-4 md:indent-10 md:text-lg ${
+					className={`mt-2 select-none indent-5 text-[10px] text-gray-600 md:mt-4 md:indent-10 md:text-lg ${
 						isInterest ? 'line-clamp-none' : 'line-clamp-5 '
 					}`}
 				>
@@ -1130,7 +1130,7 @@ const AboutBrand: React.FC = () => {
 			</div>
 			<div className="flex items-center justify-center">
 				<button
-					className="font-Lalezar mt-2 w-16 rounded-lg bg-gradient-to-r from-emerald-600 to-green-700 p-1.5 text-[10px] transition-all hover:bg-gradient-to-t md:mt-4 md:w-[100px] md:p-2 md:text-lg"
+					className="font-Lalezar text-gray-200 mt-2 w-16 rounded-lg bg-gradient-to-r from-emerald-600 to-green-700 p-1.5 text-[10px] transition-all hover:bg-gradient-to-t md:mt-4 md:w-[100px] md:p-2 md:text-lg"
 					onClick={() => setIsInterest(!isInterest)}
 				>
 					{isInterest ? 'بستن' : 'بیشتر بدانید'}
