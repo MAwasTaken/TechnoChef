@@ -9,31 +9,19 @@ import { BiChevronLeft } from 'react-icons/bi';
 import { ProductProps } from '../../Types/Products.types';
 
 // product box
-const ProductBox: React.FC<ProductProps> = ({ gradientColor, colors, imageSrc }) => {
+const ProductBox: React.FC<ProductProps> = ({ colors, imageSrc }) => {
 	const [isProductHover, setIsProductHover] = useState<boolean>(false);
 
 	// tsx
 	return (
 		<>
-			<div className="group relative h-[245px] w-[150px] select-none rounded-xl md:h-[295px] md:w-[215px]">
-				<div
-					className="absolute -z-10 h-full w-full rounded-xl transition-opacity duration-1000 group-hover:opacity-0"
-					style={{
-						background: `linear-gradient(to right bottom, ${gradientColor}, #18181b)`
-					}}
-				></div>
-				<div
-					className="absolute -z-10 h-full w-full rounded-xl opacity-0 transition-opacity duration-1000 group-hover:opacity-100"
-					style={{
-						background: `linear-gradient(to right bottom, #18181b, ${gradientColor})`
-					}}
-				></div>
+			<div className="bg-Light hover:shadow-Info/70 relative h-[245px] w-[150px] select-none rounded-xl shadow-md duration-500 hover:-translate-y-[2px] hover:shadow-lg md:h-[295px] md:w-[215px]">
 				<div className="flex h-auto w-fit flex-col p-2 md:p-4">
 					<div className="absolute left-2 flex flex-col gap-y-1">
 						{colors.map((color, index) => (
 							<span
 								key={index}
-								className="block h-3 w-3 rounded-full"
+								className="border-Info block h-3 w-3 rounded-full border"
 								style={{ backgroundColor: color }}
 							></span>
 						))}
@@ -45,7 +33,7 @@ const ProductBox: React.FC<ProductProps> = ({ gradientColor, colors, imageSrc })
 							alt="تصویر محصول"
 							loading="lazy"
 						/>
-						<span className="font-Lalezar mt-1 line-clamp-2 text-center text-sm tracking-tighter text-white/90 md:text-lg">
+						<span className="font-Lalezar text-Dark/80 mt-1 line-clamp-2 text-center text-sm tracking-tighter md:text-lg">
 							عنوان محصول اول ادامه عنوان محصول اول عنوان محصول اول ادامه عنوان محصول اول عنوان
 							محصول اول ادامه عنوان محصول اول
 						</span>
@@ -54,25 +42,29 @@ const ProductBox: React.FC<ProductProps> = ({ gradientColor, colors, imageSrc })
 						<span className="h-5 w-7 rounded-lg bg-gradient-to-l from-red-500 to-red-600 pt-[3px] text-center text-[10px] font-bold text-white/70 md:h-6 md:w-9 md:pt-1 md:text-xs">
 							۱۰۰٪
 						</span>
-						<span className="line font-Lalezar mt-1 text-left font-bold tracking-tight text-red-500/75 line-through md:text-lg">
+						<span className="line font-Lalezar mt-1 text-left font-bold tracking-tight text-red-500/80 line-through md:text-lg">
 							۹۹۹٫۹۹۹٫۹۹۹
 						</span>
 					</div>
 				</div>
 				<Link
 					to="/"
-					className="hover:shadow-product absolute -bottom-3 right-5 z-10 flex h-[25px] w-[110px] cursor-pointer items-center justify-center rounded-xl bg-gradient-to-r from-yellow-500 to-orange-600 shadow-yellow-500/50 transition-shadow md:-bottom-[15px] md:right-9 md:h-[34px] md:w-[140px]"
+					className="hover:shadow-product from-LightYellow to-DarkYellow shadow-LightYellow/50 absolute -bottom-3 right-5 z-10 flex h-[25px] w-[110px] cursor-pointer items-center justify-center rounded-xl bg-gradient-to-r transition-shadow md:-bottom-[15px] md:right-9 md:h-[34px] md:w-[140px]"
 					onMouseEnter={() => setIsProductHover(true)}
 					onMouseLeave={() => setIsProductHover(false)}
 				>
 					{isProductHover ? (
 						<>
-							<span className="font-Lalezar text-sm text-black/70 md:text-lg md:mt-1">مشاهده جزئیات</span>
+							<span className="font-Lalezar text-sm text-black/70 md:mt-1 md:text-lg">
+								مشاهده جزئیات
+							</span>
 							<BiChevronLeft className="h-5 w-5 text-red-600" />
 						</>
 					) : (
 						<>
-							<span className="font-Lalezar text-sm text-black/70 md:text-xl md:mt-1">۹۹۹٫۹۹۹٫۹۹۹</span>
+							<span className="font-Lalezar text-sm text-black/70 md:mt-1 md:text-xl">
+								۹۹۹٫۹۹۹٫۹۹۹
+							</span>
 							<div className="h-4 w-4 text-red-600">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" fill="currentColor">
 									<path

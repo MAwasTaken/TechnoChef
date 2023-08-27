@@ -1,5 +1,5 @@
 .swiper-pagination-bullet {
-	@apply h-1 w-1 rounded-full bg-yellow-500 opacity-50 md:h-1.5 md:w-1.5;
+	@apply h-1 w-1 rounded-full bg-LightYellow opacity-50 md:h-1.5 md:w-1.5;
 }
 
 .swiper-pagination-bullet:hover {
@@ -7,5 +7,5 @@
 }
 
 .swiper-pagination-bullet-active {
-	@apply h-1.5 w-4 rounded-lg bg-orange-500 opacity-100 md:h-2 md:w-6;
+	@apply h-1.5 w-4 rounded-lg bg-DarkYellow opacity-100 md:h-2 md:w-6;
 }

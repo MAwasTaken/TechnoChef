@@ -1,5 +1,5 @@
 // react
-import { LegacyRef, MutableRefObject, RefObject, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // react icons
 import { BiSearch } from 'react-icons/bi';
@@ -12,7 +12,7 @@ const GlobalSearch: React.FC = () => {
 	// input reference
 	const ref = useRef<HTMLInputElement>(null);
 
-  // clear input and focus
+	// clear input and focus
 	useEffect(() => {
 		if (ref.current !== null) ref.current.value = '';
 
@@ -26,7 +26,7 @@ const GlobalSearch: React.FC = () => {
 	return (
 		<>
 			<button onClick={() => setIsShowSearchModal(true)}>
-				<BiSearch className="h-5 w-5 text-gray-500 transition-all hover:text-gray-900 md:h-8 md:w-8" />
+				<BiSearch className="h-5 w-5 text-Dark/50 transition-all hover:text-Dark md:h-8 md:w-8" />
 			</button>
 			<div
 				className={`absolute right-0 top-0 z-40 flex h-full w-screen items-center justify-center backdrop-blur-[3px] ${
@@ -40,7 +40,7 @@ const GlobalSearch: React.FC = () => {
 				type="search"
 				className={`${
 					isShowSearchModal ? '' : 'hidden'
-				} absolute right-1/2 top-1/2 z-50 h-10 w-48 -translate-y-1/2 translate-x-1/2 rounded-xl bg-gray-100 p-4 shadow-md shadow-slate-200/10 outline-none backdrop-blur md:h-14 md:w-2/6`}
+				} absolute right-1/2 top-1/2 z-50 h-10 w-48 -translate-y-1/2 translate-x-1/2 rounded-xl bg-Light p-4 shadow-md outline-none backdrop-blur md:h-14 md:w-2/6`}
 			/>
 		</>
 	);

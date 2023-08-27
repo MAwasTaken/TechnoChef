@@ -6,6 +6,9 @@ import 'swiper/css/pagination';
 import { AiOutlineStar } from 'react-icons/ai';
 import { BiChevronLeft } from 'react-icons/bi';
 
+// styles
+import './BestSellers.css';
+
 // components
 import ProductBox from '../ProductBox/ProductBox';
 
@@ -13,7 +16,7 @@ import ProductBox from '../ProductBox/ProductBox';
 const BestSellers = () => {
 	// tsx
 	return (
-		<section className="container relative h-72 rounded-2xl bg-gray-300/60 py-5 backdrop-blur-[2px] md:h-96 md:py-10">
+		<section className="bg-Info/50 container relative h-[320px] rounded-2xl py-5 backdrop-blur-[2px] md:h-[400px] md:py-10">
 			<Swiper
 				slidesPerView={2}
 				spaceBetween={20}
@@ -34,7 +37,7 @@ const BestSellers = () => {
 					}
 				}}
 				modules={[FreeMode]}
-				className="h-[270px] cursor-grab md:h-[320px]"
+				className="h-[300px] cursor-grab md:h-[350px]"
 			>
 				<SwiperSlide className="relative px-2">
 					<div className="flex h-full flex-col items-center justify-center gap-y-2">
@@ -42,7 +45,7 @@ const BestSellers = () => {
 							<AiOutlineStar className="text-orange-500" />
 							محصولات پرفروش
 						</h2>
-						<button className="font-Lalezar mt-2 flex w-24 items-center justify-center rounded-lg bg-gradient-to-r from-emerald-600 to-green-700 p-1.5 text-[10px] text-gray-200 transition-all hover:bg-gradient-to-t md:mt-4 md:w-[130px] md:p-2 md:text-lg">
+						<button className="font-Lalezar from-LightYellow to-DarkYellow mt-2 flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-[10px] shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[130px] md:p-2 md:text-lg">
 							همه محصولات
 							<BiChevronLeft className="h-5 w-5" />
 						</button>

@@ -16,6 +16,13 @@ export default {
 			boxShadow: {
 				box: '0 0 20px rgba(234, 179, 8, 0.5)',
 				product: '0 0 10px rgba(234, 179, 8, 0.5)'
+			},
+			colors: {
+				LightYellow: '#FFC01E',
+				DarkYellow: '#FCA921',
+				Dark: '#0A0706',
+				Light: '#FCFCFC',
+				Info: '#82A0B2'
 			}
 		}
 	},

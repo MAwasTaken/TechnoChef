@@ -8,7 +8,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ icon, title }) => {
 		<>
 			<div className="flex flex-col items-center justify-center gap-y-1">
 				{icon}
-				<span className="font-Lalezar select-none text-xs text-gray-600 md:text-lg">
+				<span className="font-Lalezar select-none text-xs md:text-lg">
 					{title}
 				</span>
 			</div>

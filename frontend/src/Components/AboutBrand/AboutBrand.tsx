@@ -12,7 +12,7 @@ const AboutBrand: React.FC = () => {
 	return (
 		<section className="container pt-8 md:pt-12">
 			<h3 className="font-Lalezar flex items-center gap-x-1 text-sm md:gap-x-4 md:text-3xl">
-				<BsBuilding className="text-yellow-500" />
+				<BsBuilding className="text-DarkYellow" />
 				درباره تکنوشف
 			</h3>
 			<div className="flex items-start justify-between gap-x-10 md:gap-x-40">
@@ -38,7 +38,7 @@ const AboutBrand: React.FC = () => {
 					تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته
 					اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
 				</p>
-				<div className="drop-shadow-[0_0_3px_#999] md:drop-shadow-[0_0_8px_#999]">
+				<div className="drop-shadow-[0_0_3px_#0A0706] md:drop-shadow-[0_0_8px_#0A0706]">
 					<svg
 						className="h-full w-20 rounded-lg md:w-40"
 						xmlns="http://www.w3.org/2000/svg"
@@ -1130,7 +1130,7 @@ const AboutBrand: React.FC = () => {
 			</div>
 			<div className="flex items-center justify-center">
 				<button
-					className="font-Lalezar text-gray-200 mt-2 w-16 rounded-lg bg-gradient-to-r from-emerald-600 to-green-700 p-1.5 text-[10px] transition-all hover:bg-gradient-to-t md:mt-4 md:w-[100px] md:p-2 md:text-lg"
+					className="font-Lalezar mt-2 w-16 rounded-lg bg-gradient-to-r from-LightYellow to-DarkYellow p-1.5 text-[10px] transition-all hover:bg-gradient-to-t md:mt-4 md:w-[100px] md:p-2 md:text-lg shadow-md"
 					onClick={() => setIsInterest(!isInterest)}
 				>
 					{isInterest ? 'بستن' : 'بیشتر بدانید'}
