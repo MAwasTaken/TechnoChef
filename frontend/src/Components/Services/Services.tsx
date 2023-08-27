@@ -16,23 +16,23 @@ const Services = () => {
 	return (
 		<section className="container py-8 flex items-center gap-x-20 gap-y-5 justify-evenly flex-wrap">
 			<ServiceItem
-				icon={<PiMedalDuotone className="h-10 w-10 text-pink-500 sm:h-14 sm:w-14 md:w-20 md:h-20" />}
+				icon={<PiMedalDuotone className="h-10 w-10 text-gray-500 sm:h-14 sm:w-14 md:w-20 md:h-20" />}
 				title="ضمانت اصالت کالا"
 			/>
 			<ServiceItem
-				icon={<PiRocketLaunchDuotone className="h-10 w-10 text-pink-500 sm:h-14 sm:w-14 md:w-20 md:h-20" />}
+				icon={<PiRocketLaunchDuotone className="h-10 w-10 text-gray-500 sm:h-14 sm:w-14 md:w-20 md:h-20" />}
 				title="تحویل سریع"
 			/>
 			<ServiceItem
-				icon={<PiHeadsetDuotone className="h-10 w-10 text-pink-500 sm:h-14 sm:w-14 md:w-20 md:h-20" />}
+				icon={<PiHeadsetDuotone className="h-10 w-10 text-gray-500 sm:h-14 sm:w-14 md:w-20 md:h-20" />}
 				title="پشتیبانی دائمی"
 			/>
 			<ServiceItem
-				icon={<PiAtomDuotone className="h-10 w-10 text-pink-500 sm:h-14 sm:w-14 md:w-20 md:h-20" />}
+				icon={<PiAtomDuotone className="h-10 w-10 text-gray-500 sm:h-14 sm:w-14 md:w-20 md:h-20" />}
 				title="تجربه خرید فوق العاده"
 			/>
 			<ServiceItem
-				icon={<PiVaultDuotone className="h-10 w-10 text-pink-500 sm:h-14 sm:w-14 md:w-20 md:h-20" />}
+				icon={<PiVaultDuotone className="h-10 w-10 text-gray-500 sm:h-14 sm:w-14 md:w-20 md:h-20" />}
 				title="قیمت منصفانه"
 			/>
 		</section>

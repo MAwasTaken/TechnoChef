@@ -27,10 +27,10 @@ const MainSlider = () => {
 				className="h-auto cursor-grab rounded-2xl md:h-[300px] lg:h-[400px]"
 			>
 				<SwiperSlide className="inline-block h-full w-full object-cover">
-					<img src="/Images/MainSlider/slide1.jpg" alt="slider image" />
+					<img src="/Images/MainSlider/slide2.jpg" alt="slider image" />
 				</SwiperSlide>
 				<SwiperSlide>
-					<img src="/Images/MainSlider/slide1.jpg" alt="" />
+					<img src="/Images/MainSlider/slide2.jpg" alt="" />
 				</SwiperSlide>
 				<SwiperSlide>
 					<img src="/Images/MainSlider/slide1.jpg" alt="" />
