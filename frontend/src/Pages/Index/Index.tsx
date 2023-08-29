@@ -9,7 +9,7 @@ import Services from '../../Components/Services/Services';
 import ProductBox from '../../Components/ProductBox/ProductBox';
 import LatestProducts from '../../Components/LatestProducts/LatestProducts';
 
-// index
+// index page
 const Index: React.FC = () => {
 	// tsx
 	return (

@@ -33,9 +33,8 @@ const ProductBox: React.FC<ProductProps> = ({ colors, imageSrc }) => {
 							alt="تصویر محصول"
 							loading="lazy"
 						/>
-						<span className="font-Lalezar text-Dark/80 mt-1 line-clamp-2 text-center text-sm tracking-tighter md:text-lg">
-							عنوان محصول اول ادامه عنوان محصول اول عنوان محصول اول ادامه عنوان محصول اول عنوان
-							محصول اول ادامه عنوان محصول اول
+						<span className="font-bold text-Dark/80 mt-1 line-clamp-2 text-center text-sm tracking-tighter md:text-lg">
+              یخچال فریز امرسان مدل xd-wtf8569
 						</span>
 					</Link>
 					<div className="mt-3 flex items-center justify-between">

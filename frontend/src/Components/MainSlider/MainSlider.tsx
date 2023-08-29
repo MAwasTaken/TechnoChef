@@ -10,8 +10,10 @@ import './MainSlider.css';
 const MainSlider = () => {
 	// tsx
 	return (
-		<section className="container md:mb-10 mb-4 rounded-2xl p-4">
+		<section className="container mb-4 pb-4 md:mb-10">
 			<Swiper
+				dir="ltr"
+				loop={true}
 				pagination={{
 					clickable: true
 				}}
@@ -24,25 +26,13 @@ const MainSlider = () => {
 					enabled: true
 				}}
 				modules={[Pagination, Keyboard, Autoplay]}
-				className="h-auto cursor-grab rounded-2xl md:h-[300px] lg:h-[400px]"
+				className="h-auto cursor-grab"
 			>
-				<SwiperSlide className="inline-block h-full w-full object-cover">
-					<img src="/Images/MainSlider/slide2.jpg" alt="slider image" />
+				<SwiperSlide>
+					<img className="rounded-2xl" src="/Images/MainSlider/slide1.jpg" alt="slider image" />
 				</SwiperSlide>
 				<SwiperSlide>
-					<img src="/Images/MainSlider/slide2.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img src="/Images/MainSlider/slide1.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img src="/Images/MainSlider/slide1.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img src="/Images/MainSlider/slide1.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img src="/Images/MainSlider/slide1.jpg" alt="" />
+					<img className="rounded-2xl" src="/Images/MainSlider/slide2.jpg" alt="" />
 				</SwiperSlide>
 			</Swiper>
 		</section>
