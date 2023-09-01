@@ -36,11 +36,11 @@ const Header: React.FC = () => {
 				</ul>
 			</div>
 			{/* left section */}
-			<div className="flex items-center justify-between gap-x-3 md:gap-x-6">
+			<div className="flex items-center justify-between gap-x-[2px] sm:gap-x-1 md:gap-x-6">
 				{/* search button */}
 				<GlobalSearch />
 				{/* login / register / panel button */}
-				<button className="relative flex justify-between gap-x-2 rounded-lg border border-Dark/50 p-2.5 md:gap-x-4 md:border-2 md:p-2 md:px-5 hover:border-Dark hover:shadow-md">
+				<button className="relative flex justify-between gap-x-2 rounded-lg border border-Dark/50 p-2 md:gap-x-4 md:border-2 md:p-2 md:px-5 hover:border-Dark hover:shadow-md">
 					{/* login */}
 					<span className="text-Dark">ورود</span>
 					{/* divider */}

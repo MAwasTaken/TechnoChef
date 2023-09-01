@@ -15,13 +15,13 @@ const ProductBox: React.FC<ProductProps> = ({ colors, imageSrc }) => {
 	// tsx
 	return (
 		<>
-			<div className="bg-Light hover:shadow-Info/70 relative h-[245px] w-[150px] select-none rounded-xl shadow-md duration-500 hover:-translate-y-[2px] hover:shadow-lg md:h-[295px] md:w-[215px]">
+			<div className="bg-Dark/70 hover:shadow-Dark/30 relative h-[245px] w-[150px] select-none rounded-xl shadow-md duration-500 hover:-translate-y-[2px] hover:shadow-lg md:h-[295px] md:w-[215px]">
 				<div className="flex h-auto w-fit flex-col p-2 md:p-4">
 					<div className="absolute left-2 flex flex-col gap-y-1">
 						{colors.map((color, index) => (
 							<span
 								key={index}
-								className="border-Info block h-3 w-3 rounded-full border"
+								className="border-Dark/70 block h-3 w-3 rounded-full border"
 								style={{ backgroundColor: color }}
 							></span>
 						))}
@@ -33,8 +33,8 @@ const ProductBox: React.FC<ProductProps> = ({ colors, imageSrc }) => {
 							alt="تصویر محصول"
 							loading="lazy"
 						/>
-						<span className="font-bold text-Dark/80 mt-1 line-clamp-2 text-center text-sm tracking-tighter md:text-lg">
-              یخچال فریز امرسان مدل xd-wtf8569
+						<span className="text-Light/80 mt-1 line-clamp-2 text-center text-sm font-bold tracking-tighter md:text-lg">
+							یخچال فریز امرسان مدل xd-wtf8569
 						</span>
 					</Link>
 					<div className="mt-3 flex items-center justify-between">

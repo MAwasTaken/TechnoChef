@@ -1,13 +1,10 @@
 // packages
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode } from 'swiper/modules';
+import { FreeMode, Keyboard } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { AiOutlineStar } from 'react-icons/ai';
 import { BiChevronLeft } from 'react-icons/bi';
-
-// styles
-import './BestSellers.css';
 
 // components
 import ProductBox from '../ProductBox/ProductBox';
@@ -33,10 +30,13 @@ const BestSellers = () => {
 					},
 					1280: {
 						slidesPerView: 5,
-						spaceBetween: 50
+						spaceBetween: 10
 					}
 				}}
-				modules={[FreeMode]}
+				keyboard={{
+					enabled: true
+				}}
+				modules={[FreeMode, Keyboard]}
 				className="h-[300px] cursor-grab md:h-[350px]"
 			>
 				<SwiperSlide className="relative px-2">

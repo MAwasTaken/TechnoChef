@@ -26,10 +26,11 @@ const GlobalSearch: React.FC = () => {
 	return (
 		<>
 			<button onClick={() => setIsShowSearchModal(true)}>
-				<BiSearch className="h-5 w-5 text-Dark/50 transition-all hover:text-Dark md:h-8 md:w-8" />
+				<BiSearch className="text-Dark/50 hover:text-Dark h-6 w-6 transition-all md:h-8 md:w-8" />
 			</button>
 			<div
-				className={`absolute right-0 top-0 z-40 flex h-full w-screen items-center justify-center backdrop-blur-[3px] ${
+				style={{ height: `${document.body.scrollHeight}px` }}
+				className={`absolute right-0 top-0 z-40 flex w-screen items-center justify-center backdrop-blur ${
 					isShowSearchModal ? '' : 'hidden'
 				}`}
 				onClick={closeModalHandler}
@@ -40,7 +41,7 @@ const GlobalSearch: React.FC = () => {
 				type="search"
 				className={`${
 					isShowSearchModal ? '' : 'hidden'
-				} absolute right-1/2 top-1/2 z-50 h-10 w-48 -translate-y-1/2 translate-x-1/2 rounded-xl bg-Light p-4 shadow-md outline-none backdrop-blur md:h-14 md:w-2/6`}
+				} bg-Light absolute right-1/2 top-1/2 z-50 h-10 w-48 -translate-y-1/2 translate-x-1/2 rounded-xl p-4 shadow-2xl shadow-Dark outline-none backdrop-blur md:h-14 md:w-2/6`}
 			/>
 		</>
 	);

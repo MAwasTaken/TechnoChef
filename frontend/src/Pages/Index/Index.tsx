@@ -3,11 +3,10 @@ import Header from '../../Components/Header/Header';
 import AboutBrand from '../../Components/AboutBrand/AboutBrand';
 import Footer from '../../Components/Footer/Footer';
 import BestSellers from '../../Components/BestSellers/BestSellers';
-import MainSlider from '../../Components/MainSlider/MainSlider';
 import Categories from '../../Components/Categories/Categories';
 import Services from '../../Components/Services/Services';
-import ProductBox from '../../Components/ProductBox/ProductBox';
 import LatestProducts from '../../Components/LatestProducts/LatestProducts';
+import HeroSection from '../../Components/HeroSection/HeroSection';
 
 // index page
 const Index: React.FC = () => {
@@ -16,7 +15,7 @@ const Index: React.FC = () => {
 		<>
 			<Header />
 			<main>
-				<MainSlider />
+				<HeroSection />
 				<BestSellers />
 				<Categories />
 				<LatestProducts />

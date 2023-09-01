@@ -1,17 +1,20 @@
+// styles
+import './MainSlider.css';
+
 // swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Keyboard, Autoplay } from 'swiper/modules';
+import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import './MainSlider.css';
 
 // main slider
 const MainSlider = () => {
 	// tsx
 	return (
-		<section className="container mb-4 pb-4 md:mb-10">
+		<section>
 			<Swiper
+				className="cursor-grab"
 				dir="ltr"
 				loop={true}
 				pagination={{
@@ -22,14 +25,15 @@ const MainSlider = () => {
 					delay: 3500,
 					disableOnInteraction: true
 				}}
-				keyboard={{
-					enabled: true
-				}}
-				modules={[Pagination, Keyboard, Autoplay]}
-				className="h-auto cursor-grab"
+				modules={[Pagination, Autoplay]}
 			>
 				<SwiperSlide>
-					<img className="rounded-2xl" src="/Images/MainSlider/slide1.jpg" alt="slider image" />
+					<img
+						loading="lazy"
+						className="rounded-2xl"
+						src="/Images/MainSlider/slide1.jpg"
+						alt="slider image"
+					/>
 				</SwiperSlide>
 				<SwiperSlide>
 					<img className="rounded-2xl" src="/Images/MainSlider/slide2.jpg" alt="" />

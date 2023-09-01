@@ -1,0 +1,15 @@
+.swiper-wrapper {
+	@apply rounded-3xl pt-0;
+}
+
+.swiper-pagination-bullet {
+	@apply bg-LightYellow h-1 w-1 rounded-full opacity-50 md:h-1.5 md:w-1.5;
+}
+
+.swiper-pagination-bullet:hover {
+	@apply h-1.5 w-1.5 opacity-75 md:h-2 md:w-2;
+}
+
+.swiper-pagination-bullet-active {
+	@apply bg-DarkYellow h-1.5 w-4 rounded-lg opacity-100 md:h-2 md:w-6;
+}
