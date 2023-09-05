@@ -13,7 +13,7 @@ import ProductBox from '../ProductBox/ProductBox';
 const BestSellers = () => {
 	// tsx
 	return (
-		<section className="bg-Info/50 container relative h-[320px] rounded-2xl py-5 backdrop-blur-[2px] md:h-[400px] md:py-10">
+		<section className="bg-Info/50 container relative h-[320px] py-5 backdrop-blur-[2px] sm:rounded-2xl md:h-[400px] md:py-10">
 			<Swiper
 				slidesPerView={2}
 				spaceBetween={20}
@@ -41,11 +41,11 @@ const BestSellers = () => {
 			>
 				<SwiperSlide className="relative px-2">
 					<div className="flex h-full flex-col items-center justify-center gap-y-2">
-						<h2 className="font-Lalezar flex select-none items-center gap-x-1 pt-4 text-base md:gap-x-4 md:pt-8 md:text-3xl">
+						<h2 className="font-Lalezar flex select-none items-center gap-x-1 pt-4 text-base tracking-tighter md:gap-x-4 md:pt-8 md:text-2xl lg:text-3xl">
 							<AiOutlineStar className="text-orange-500" />
 							محصولات پرفروش
 						</h2>
-						<button className="font-Lalezar from-LightYellow to-DarkYellow mt-2 flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-[10px] shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[130px] md:p-2 md:text-lg">
+						<button className="font-Lalezar from-LightYellow to-DarkYellow mt-2 flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-[10px] tracking-tighter shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg">
 							همه محصولات
 							<BiChevronLeft className="h-5 w-5" />
 						</button>

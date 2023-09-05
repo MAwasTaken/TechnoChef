@@ -13,11 +13,11 @@ const Footer: React.FC = () => {
 	// tsx
 	return (
 		<div className="relative">
-			<footer className="bg-Info/50 container relative mt-4 flex flex-col rounded-lg p-4 backdrop-blur-[2px] md:mt-8 md:p-8">
+			<footer className="bg-Info/50 container relative mt-4 flex flex-col p-4 backdrop-blur-[2px] sm:rounded-lg md:mt-8 md:p-8">
 				<div className="flex items-start justify-between">
 					<div>
 						<h4 className="font-Lalezar flex select-none items-center gap-x-1 text-sm md:gap-x-4 md:text-3xl">
-							<HiOutlineDocumentDuplicate className="text-DarkYellow" />
+							<HiOutlineDocumentDuplicate className="text-orange-500" />
 							بخش های سایت
 						</h4>
 						<ul className="mr-4 mt-2 flex list-disc flex-col items-start justify-between gap-y-2 text-[10px] md:mr-10 md:mt-4 md:gap-y-4 md:text-lg">
@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
 					</div>
 					<div>
 						<h4 className="font-Lalezar mr-4 flex select-none items-center gap-x-1 text-sm md:gap-x-4 md:text-3xl">
-							<MdAlternateEmail className="text-DarkYellow" />
+							<MdAlternateEmail className="text-orange-500" />
 							صفحات مجازی
 						</h4>
 						<ul className="mr-5 mt-2 flex flex-col items-start justify-between gap-y-2 text-[10px] md:mr-10 md:mt-4 md:gap-y-4 md:text-lg">
@@ -77,7 +77,7 @@ const Footer: React.FC = () => {
 					</div>
 					<div>
 						<h4 className="font-Lalezar mr-4 flex select-none items-center gap-x-1 text-sm md:gap-x-4 md:text-3xl">
-							<BsTelephone className="text-DarkYellow" />
+							<BsTelephone className="text-orange-500" />
 							ارتباط با ما
 						</h4>
 						<ul className="mr-5 mt-2 flex flex-col items-start justify-between gap-y-2 text-[10px] md:mr-10 md:mt-4 md:gap-y-4 md:text-lg">
@@ -108,7 +108,7 @@ const Footer: React.FC = () => {
 									<span>تهران٫ شهرک‌غرب٫ بلوار دریا٫ خیابان رامشه</span>
 								</p>
 							</li>
-							<li className="bg-Dark/60 h-10 w-10 cursor-pointer self-end rounded-lg p-2 transition-colors hover:bg-Dark/70 md:h-20 md:w-20">
+							<li className="bg-Dark/60 hover:bg-Dark/70 h-10 w-10 cursor-pointer self-end rounded-lg p-2 transition-colors md:h-20 md:w-20">
 								<Link
 									referrerPolicy="origin"
 									target="_blank"
@@ -121,9 +121,9 @@ const Footer: React.FC = () => {
 						</ul>
 					</div>
 				</div>
-				<span className="mt-2 w-full text-center text-Dark/75 md:mt-0">
+				<span className="text-Dark/75 mt-2 w-full text-center md:mt-0">
 					تمامی حقوق این سایت متعلق به
-					<Link to="/" className="text-DarkYellow">
+					<Link to="/" className="text-orange-500">
 						{' '}
 						تکنوشف{' '}
 					</Link>
