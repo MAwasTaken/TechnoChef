@@ -14,7 +14,7 @@ import ServiceItem from './ServiceItem/ServiceItem';
 const Services = () => {
 	// tsx
 	return (
-		<section className="container flex flex-wrap items-center justify-evenly gap-x-20 gap-y-5 py-8">
+		<section className="container flex flex-wrap items-center justify-evenly gap-x-20 gap-y-5 md:py-4 py-3">
 			<ServiceItem
 				icon={
 					<PiMedalDuotone className="h-10 w-10 text-Dark/60 sm:h-14 sm:w-14 md:h-20 md:w-20" />

@@ -21,42 +21,71 @@
 
 	@font-face {
 		font-family: 'Vazir';
-		src: url('./Fonts/Vazir/Vazirmatn-Regular.ttf') format('ttf');
-		font-display: swap;
+		src: url('../Fonts/Vazir/Vazirmatn-Thin.ttf') format('truetype');
+		font-style: normal;
+		font-weight: 100;
 	}
 
 	@font-face {
-		font-family: 'Vazir Bold';
-		src: url('./Fonts/Vazir/Vazirmatn-Bold.ttf') format('ttf');
-		font-display: swap;
+		font-family: 'Vazir';
+		src: url('../Fonts/Vazir/Vazirmatn-ExtraLight.ttf') format('truetype');
+		font-style: normal;
+		font-weight: 200;
 	}
 
 	@font-face {
-		font-family: 'Vazir Light';
-		src: url('./Fonts/Vazir/Vazirmatn-Light.ttf') format('ttf');
-		font-display: swap;
+		font-family: 'Vazir';
+		src: url('../Fonts/Vazir/Vazirmatn-Light.ttf') format('truetype');
+		font-style: normal;
+		font-weight: 300;
+	}
+
+	@font-face {
+		font-family: 'Vazir';
+		src: url('../Fonts/Vazir/Vazirmatn-Regular.ttf') format('truetype');
+		font-style: normal;
+		font-weight: 400;
+	}
+
+	@font-face {
+		font-family: 'Vazir';
+		src: url('../Fonts/Vazir/Vazirmatn-Medium.ttf') format('truetype');
+		font-style: normal;
+		font-weight: 500;
+	}
+
+	@font-face {
+		font-family: 'Vazir';
+		src: url('../Fonts/Vazir/Vazirmatn-SemiBold.ttf') format('truetype');
+		font-style: normal;
+		font-weight: 600;
+	}
+
+	@font-face {
+		font-family: 'Vazir';
+		src: url('../Fonts/Vazir/Vazirmatn-Bold.ttf') format('truetype');
+		font-style: normal;
+		font-weight: 700;
+	}
+
+	@font-face {
+		font-family: 'Vazir';
+		src: url('../Fonts/Vazir/Vazirmatn-ExtraBold.ttf') format('truetype');
+		font-style: normal;
+		font-weight: 800;
+	}
+
+	@font-face {
+		font-family: 'Vazir';
+		src: url('../Fonts/Vazir/Vazirmatn-Black.ttf') format('truetype');
+		font-style: normal;
+		font-weight: 900;
 	}
 
 	@font-face {
 		font-family: 'Lalezar';
-		src: url(./Fonts/Lalezar-Font/OTF/Lalezar-Regular.otf) format('otf');
-	}
-
-	@font-face {
-		font-family: 'Dana'; /* 400 */
-		src: url('../Fonts/Dana/woff2/DanaFaNum-Regular.woff2') format('woff2');
-		font-display: swap;
-	}
-
-	@font-face {
-		font-family: 'Dana Medium'; /* 500 */
-		src: url('./Fonts/Dana/woff2/DanaFaNum-Medium.woff2') format('woff2');
-		font-display: swap;
-	}
-
-	@font-face {
-		font-family: 'Dana DemiBold'; /* 600 */
-		src: url('./Fonts/Dana/woff2/DanaFaNum-DemiBold.woff2') format('woff2');
-		font-display: swap;
+		src: url(../Fonts/Lalezar/Lalezar-Regular.ttf) format('truetype');
+		font-style: normal;
+		font-weight: 400;
 	}
 }

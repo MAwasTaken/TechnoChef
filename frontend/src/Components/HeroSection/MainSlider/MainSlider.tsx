@@ -30,13 +30,13 @@ const MainSlider = () => {
 				<SwiperSlide>
 					<img
 						loading="lazy"
-						className="rounded-2xl"
+						className="sm:rounded-2xl"
 						src="/Images/MainSlider/slide1.jpg"
 						alt="slider image"
 					/>
 				</SwiperSlide>
 				<SwiperSlide>
-					<img className="rounded-2xl" src="/Images/MainSlider/slide2.jpg" alt="" />
+					<img className="sm:rounded-2xl" src="/Images/MainSlider/slide2.jpg" alt="" />
 				</SwiperSlide>
 			</Swiper>
 		</section>
