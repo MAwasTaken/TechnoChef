@@ -156,7 +156,7 @@ const Footer: React.FC = () => {
 					میلاد تقی‌زاده
 				</Link>
 			</p>
-			<div className="absolute -bottom-4 -z-10 mx-auto h-full w-screen bg-[url('/Images/SVGs/topSectionBackground.svg')] bg-bottom"></div>
+			<div className="absolute -bottom-4 -z-10 mx-auto h-full w-screen bg-[url('/Images/SVGs/topSectionBackground.svg')] bg-no-repeat bg-bottom"></div>
 		</div>
 	);
 };

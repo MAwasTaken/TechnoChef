@@ -41,7 +41,7 @@ const GlobalSearch: React.FC = () => {
 				type="search"
 				className={`${
 					isShowSearchModal ? '' : 'hidden'
-				} bg-Light absolute right-1/2 top-1/2 z-50 h-10 w-48 -translate-y-1/2 translate-x-1/2 rounded-xl p-4 shadow-2xl shadow-Dark outline-none backdrop-blur md:h-14 md:w-2/6`}
+				} bg-Light absolute right-1/2 top-1/2 z-50 h-10 w-60 -translate-y-1/2 translate-x-1/2 rounded-xl p-4 shadow-2xl shadow-Dark outline-none backdrop-blur md:h-14 md:w-2/6`}
 			/>
 		</>
 	);
