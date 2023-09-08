@@ -55,13 +55,9 @@ const Header: React.FC = () => {
 				{/* search button */}
 				<GlobalSearch />
 				{/* login / register / panel button */}
-				<NavLink
+				<Link
 					to="/login"
-					className={({ isActive }) =>
-						isActive
-							? 'hidden'
-							: 'border-Dark/50 hover:border-Dark relative flex justify-between rounded-lg border p-1.5 transition-all hover:shadow-md md:gap-x-4 md:border-2 md:p-2 md:px-5'
-					}
+					className="border-Dark/50 hover:border-Dark relative flex justify-between rounded-lg border p-1.5 transition-all hover:shadow-md md:gap-x-4 md:border-2 md:p-2 md:px-5"
 				>
 					{/* login */}
 					<span className="text-Dark">ورود</span>
@@ -71,7 +67,7 @@ const Header: React.FC = () => {
 					</span>
 					{/* register */}
 					<span className="text-Dark mr-2 md:mr-2">ثبت‌نام</span>
-				</NavLink>
+				</Link>
 			</div>
 		</header>
 	);

@@ -43,9 +43,9 @@ const Login: React.FC = () => {
 							<BiLogIn className="text-red-500" />
 							<span>ورود به حساب‌کاربری</span>
 						</h2>
-						<p className="flex items-center gap-x-[2px] text-[10px] md:gap-x-1 md:text-sm">
-							<span className="hidden md:inline-block md:text-xs">حساب‌کاربری ندارید؟</span>
-							<Link className="text-blue-600 hover:text-blue-700" to="/signup">
+						<p className="flex items-center gap-x-[2px] text-[10px] tracking-tighter md:gap-x-1 md:text-sm">
+							<span className="hidden md:inline-block">حساب‌کاربری ندارید؟</span>
+							<Link className="font-bold text-blue-600 hover:text-blue-700" to="/signup">
 								ساخت حساب‌کاربری
 							</Link>
 						</p>
@@ -55,13 +55,14 @@ const Login: React.FC = () => {
 						{/* username */}
 						<label className="flex items-center justify-center" htmlFor="username">
 							{/* label */}
-							<div className="xl:right-26 absolute right-16 flex items-center gap-x-[2px] text-[10px] md:gap-x-1 md:text-lg lg:right-10">
+							<div className="xl:right-26 absolute right-[50px] flex items-center gap-x-[2px] text-[10px] tracking-tighter md:gap-x-1 md:text-lg lg:right-4 xl:right-16">
 								<BiUser className="text-red-500" />
-								<span>نام‌کاربری</span>
+								<span>نام‌کاربری:</span>
 							</div>
 							{/* input */}
 							<input
-								className="focus:border-DarkYellow h-6 w-6/12 rounded-md bg-white/80 p-2 text-[10px] outline-none focus:border sm:w-8/12 md:h-10 md:w-10/12 md:text-lg focus:md:border-2 lg:w-11/12"
+								className="focus:border-DarkYellow h-6 w-6/12 rounded-md bg-white/80 p-2 text-[10px] outline-none transition-all focus:border focus:shadow-md sm:w-8/12 md:h-10 md:w-10/12 md:text-lg focus:md:border-2 lg:w-11/12"
+								placeholder="مثلا: technoshef"
 								type="text"
 								id="username"
 							/>
@@ -69,21 +70,22 @@ const Login: React.FC = () => {
 						{/* password */}
 						<label className="flex items-center justify-center" htmlFor="password">
 							{/* label */}
-							<div className="xl:right-26 absolute right-16 flex items-center gap-x-[2px] text-[10px] md:gap-x-1 md:text-lg lg:right-10">
+							<div className="xl:right-26 absolute right-[50px] flex items-center gap-x-[2px] text-[10px] tracking-tighter md:gap-x-1 md:text-lg lg:right-4 xl:right-16">
 								<FiLock className="text-red-500" />
-								<span>رمزعبور</span>
+								<span>رمزعبور:</span>
 							</div>
 							{/* input */}
 							<input
-								className="focus:border-DarkYellow h-6 w-6/12 rounded-md bg-white/80 p-2 text-[10px] outline-none focus:border sm:w-8/12 md:h-10 md:w-10/12 md:text-lg focus:md:border-2 lg:w-11/12"
+								className="focus:border-DarkYellow h-6 w-6/12 rounded-md bg-white/80 p-2 text-[10px] outline-none transition-all focus:border focus:shadow-md sm:w-8/12 md:h-10 md:w-10/12 md:text-lg focus:md:border-2 lg:w-11/12"
+								placeholder="مثلا: @techn0$hef"
 								type="password"
 								id="password"
 							/>
 						</label>
 						{/* forgot password */}
-						<p className="flex w-full items-center justify-center gap-x-[2px] text-[10px] md:gap-x-1 md:text-sm">
+						<p className="flex w-full items-center justify-center gap-x-[2px] text-[10px] tracking-tight md:gap-x-1 md:text-sm">
 							<span className="md:text-xs">رمزعبور خود را فراموش کرده‌اید؟</span>
-							<Link className="text-blue-600 hover:text-blue-700" to="/signup">
+							<Link className="font-bold text-blue-600 hover:text-blue-700" to="/signup">
 								بازیابی رمزعبور
 							</Link>
 						</p>
