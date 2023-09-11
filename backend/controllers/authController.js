@@ -3,6 +3,7 @@ const User = require('../models/Users');
 const CryptoJS = require('crypto-js');
 const jwt = require('jsonwebtoken');
 const userValidation = require('../validator/userValidation');
+const nodemailer = require('nodemailer');
 
 // User register Controller (sign up)
 const registerController = async (req, res) => {
@@ -85,5 +86,35 @@ const logInController = async (req, res) => {
 	}
 };
 
+const validateUserEmail = async (req, res) => {
+	try {
+		// Create a transporter object
+		const transporter = nodemailer.createTransport({
+			host: 'mail.technoshef.com',
+			port: 25,
+			secure: false,
+			auth: {
+				user: 'info',
+				pass: '!qaz2wsx'
+			}
+		});
+
+		const verifyCode = Math.random();
+
+		const info = transporter.sendMail({
+			from: 'info@technoshef.com', // sender address
+			to: 'h.jahandideh2@gmail.com', // list of receivers
+			subject: 'Verify Code ✔', // Subject line
+			text: `Verify Code : ${verifyCode}`, // plain text body
+			html: `<b>verify Code  ${verifyCode} </b> ` // html body
+		});
+
+		return res.status(200);
+	} catch (err) {
+		console.log(err);
+		res.status(502).json(err);
+	}
+};
+
 // export the functions.
-module.exports = { registerController, logInController };
+module.exports = { registerController, logInController, validateUserEmail };
