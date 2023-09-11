@@ -30,10 +30,16 @@ const registerController = async (req, res) => {
 // user Login Controller
 const logInController = async (req, res) => {
 	try {
-		// find the user By username
-		const user = await User.findOne({
-			username: req.body.username
-		});
+		// find the user By username or email
+		if (req.body.username) {
+			const user = await User.findOne({
+				username: req.body.username
+			});
+		} else if (req.body.email) {
+			const user = await User.findOne({
+				email: req.body.email
+			});
+		}
 
 		// if there is not a user with that info
 		if (user == null) {
