@@ -91,7 +91,7 @@ const validateUserEmail = async (req, res) => {
 		// Create a transporter object
 		const transporter = nodemailer.createTransport({
 			host: 'mail.technoshef.com',
-			port: 25,
+			port: 587,
 			secure: false,
 			auth: {
 				user: 'info',
@@ -99,17 +99,37 @@ const validateUserEmail = async (req, res) => {
 			}
 		});
 
-		const verifyCode = Math.random();
-
-		const info = transporter.sendMail({
-			from: 'info@technoshef.com', // sender address
-			to: 'h.jahandideh2@gmail.com', // list of receivers
-			subject: 'Verify Code ✔', // Subject line
-			text: `Verify Code : ${verifyCode}`, // plain text body
-			html: `<b>verify Code  ${verifyCode} </b> ` // html body
+		transporter.verify(function (error, success) {
+			if (error) {
+				console.error('Transporter verification failed:', error);
+				return res.status(200).json(error);
+			} else {
+				console.log('Transporter is ready to send emails');
+			}
 		});
 
-		return res.status(200);
+		const verifyCode = Math.round(Math.random() * 10000);
+
+		transporter
+			.sendMail({
+				from: 'info@technoshef.com',
+				to: 'test@technoshef.com',
+				subject: 'Hello', // Subject line
+				text: 'Hello world?', // plain text body
+				html: '<b>Hello world?</b>' // html body
+			})
+			.then((info, err) => {
+				if (err) {
+					console.error('Error sending email:', err);
+					return res.status(200);
+				} else {
+					console.log('Email sent:', info.response);
+					return res.status(200).json({ emailSent: info.response });
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	} catch (err) {
 		console.log(err);
 		res.status(502).json(err);
