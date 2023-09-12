@@ -29,7 +29,7 @@ const Login: React.FC = () => {
 		<div className="flex h-screen flex-col justify-between">
 			<Header />
 			<div className="flex items-center justify-center">
-				<main className="bg-Info/50 flex h-auto w-full flex-col items-center gap-y-2 px-8 py-8 backdrop-blur-[2px] sm:w-3/4 sm:rounded-3xl md:gap-y-4 md:w-3/5 lg:w-1/3 ">
+				<main className="bg-Info/50 flex h-auto w-full flex-col items-center gap-y-2 px-8 py-8 backdrop-blur-[2px] sm:w-4/4 md:rounded-3xl md:gap-y-4 md:w-[590px]">
 					{/* logo */}
 					<Link
 						className="font-Lalezar mt-2 text-3xl font-bold tracking-tight text-orange-500 transition-all hover:text-orange-600 md:text-3xl"
