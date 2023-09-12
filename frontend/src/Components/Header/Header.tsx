@@ -1,5 +1,5 @@
 // react
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 // components
 import GlobalSearch from '../GlobalSearch/GlobalSearch';
@@ -23,15 +23,30 @@ const Header: React.FC = () => {
 				<ul className="flex items-center justify-between gap-x-4 text-sm text-black md:gap-x-12 md:text-xl">
 					{/* home */}
 					<li className="text-Dark decoration-red-500 decoration-[2.5px] underline-offset-8 transition-all hover:text-blue-600 hover:underline">
-						<Link to="/">خانه</Link>
+						<NavLink
+							to="/"
+							className={({ isActive }) => (isActive ? 'decoration-DarkYellow underline' : '')}
+						>
+							خانه
+						</NavLink>
 					</li>
 					{/* products */}
 					<li className="text-Dark decoration-red-500 decoration-[2.5px] underline-offset-8 transition-all hover:text-blue-600 hover:underline">
-						<Link to="/">محصولات</Link>
+						<NavLink
+							className={({ isActive }) => (isActive ? 'decoration-DarkYellow underline' : '')}
+							to="/products"
+						>
+							محصولات
+						</NavLink>
 					</li>
 					{/* about us */}
 					<li className="text-Dark decoration-red-500 decoration-[2.5px] underline-offset-8 transition-all hover:text-blue-600 hover:underline">
-						<Link to="/">درباره‌ما</Link>
+						<NavLink
+							className={({ isActive }) => (isActive ? 'decoration-DarkYellow underline' : '')}
+							to="/about-us"
+						>
+							درباره‌ما
+						</NavLink>
 					</li>
 				</ul>
 			</div>
@@ -40,7 +55,10 @@ const Header: React.FC = () => {
 				{/* search button */}
 				<GlobalSearch />
 				{/* login / register / panel button */}
-				<button className="border-Dark/50 hover:border-Dark relative flex justify-between rounded-lg border p-1.5 transition-all hover:shadow-md md:gap-x-4 md:border-2 md:p-2 md:px-5">
+				<Link
+					to="/login"
+					className="border-Dark/50 hover:border-Dark relative flex justify-between rounded-lg border p-1.5 transition-all hover:shadow-md md:gap-x-4 md:border-2 md:p-2 md:px-5"
+				>
 					{/* login */}
 					<span className="text-Dark">ورود</span>
 					{/* divider */}
@@ -49,7 +67,7 @@ const Header: React.FC = () => {
 					</span>
 					{/* register */}
 					<span className="text-Dark mr-2 md:mr-2">ثبت‌نام</span>
-				</button>
+				</Link>
 			</div>
 		</header>
 	);
