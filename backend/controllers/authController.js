@@ -8,6 +8,9 @@ const nodemailer = require('nodemailer');
 // User register Controller (sign up)
 const registerController = async (req, res) => {
 	try {
+		if (!req.body) {
+			return res.status(400).json({ massage: 'the request needs a body.' });
+		}
 		// validate by Joi
 		await userValidation.validateAsync(req.body);
 
@@ -20,7 +23,7 @@ const registerController = async (req, res) => {
 		const savedUser = await newUser.save();
 
 		// set the response
-		res.status(200).json(savedUser);
+		res.status(201).json(savedUser);
 	} catch (err) {
 		// return the err if there is one
 		res.status(500).json(err);
@@ -72,9 +75,9 @@ const logInController = async (req, res) => {
 			if (inputPassword !== originalPassword) {
 				res.status(401).json('Wrong UserName or password !!');
 			} else {
-				// if it maches we return the object without thw PASSWORD and the access token
+				// if it matches we return the object without thw PASSWORD and the access token
 				res
-					.status(201)
+					.status(200)
 					.cookie('accessToken', accessToken, { httpOnly: true })
 					.json({ ...others });
 			}
@@ -132,7 +135,7 @@ const validateUserEmail = async (req, res) => {
 			});
 	} catch (err) {
 		console.log(err);
-		res.status(502).json(err);
+		res.status(500).json(err);
 	}
 };
 

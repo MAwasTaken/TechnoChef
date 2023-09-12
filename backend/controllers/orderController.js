@@ -4,6 +4,8 @@ const validator = require('../validator/orderVAlidation');
 
 // create Order
 const createOrderController = async (req, res) => {
+	if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
+
 	// create the Order object
 	const newOrder = new Order(req.body);
 
@@ -15,7 +17,7 @@ const createOrderController = async (req, res) => {
 		const savedOrder = await newOrder.save();
 
 		// set the response
-		res.status(200).json(savedOrder);
+		res.status(201).json(savedOrder);
 	} catch (err) {
 		// return the err if there is one
 		res.status(500).json(err);
@@ -25,6 +27,9 @@ const createOrderController = async (req, res) => {
 // update Order
 const updateOrderController = async (req, res) => {
 	try {
+		if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
+		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+
 		// validate the input
 		await validator.validateAsync(req.body);
 
@@ -48,6 +53,8 @@ const updateOrderController = async (req, res) => {
 // delete Order
 const deleteOrderController = async (req, res) => {
 	try {
+		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+
 		// find By Id And Delete the Order
 		const deletedOrder = await Order.findByIdAndDelete(req.params.id);
 
@@ -63,6 +70,9 @@ const deleteOrderController = async (req, res) => {
 // get Order By User Id
 const getOrderByUserIdController = async (req, res) => {
 	try {
+		if (!req.params.id)
+			return res.status(400).json({ massage: 'the request needs an userId params.' });
+
 		// find the card By the userID
 		const orders = await Order.find({ userId: req.params.userId });
 
@@ -77,6 +87,8 @@ const getOrderByUserIdController = async (req, res) => {
 // get Order By Id
 const getOrderByIdController = async (req, res) => {
 	try {
+		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+
 		// find the card By the userID
 		const orders = await Order.findById(req.params.id);
 

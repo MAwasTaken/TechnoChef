@@ -6,6 +6,9 @@ const validate = require('../validator/userValidation');
 // update User
 const updateUserController = async (req, res) => {
 	try {
+		if (!req.body) return res.status(400).json({ massage: 'the request needs a.' });
+		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+
 		// validate JOI
 		await validate.validateAsync(req.body);
 
@@ -37,6 +40,8 @@ const updateUserController = async (req, res) => {
 // delete User
 const deleteUserController = async (req, res) => {
 	try {
+		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+
 		// find By Id And Delete the User
 		const deletedUser = await User.findByIdAndDelete(req.params.id);
 
@@ -53,6 +58,8 @@ const deleteUserController = async (req, res) => {
 // get User By Id
 const getUserByIdController = async (req, res) => {
 	try {
+		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+
 		// find the User By the ID
 		const user = await User.findById(req.params.id);
 

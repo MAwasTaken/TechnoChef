@@ -5,6 +5,8 @@ const fs = require('fs');
 
 // create Product
 const createProductController = async (req, res) => {
+	if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
+
 	// create the Product object
 	let newProduct = new Product(req.body);
 
@@ -20,7 +22,7 @@ const createProductController = async (req, res) => {
 		const savedProduct = await newProduct.save();
 
 		// set the response
-		res.status(200).json(savedProduct);
+		res.status(201).json(savedProduct);
 	} catch (err) {
 		// return the err if there is one
 		res.status(500).json(err);
@@ -34,6 +36,9 @@ const createProductController = async (req, res) => {
 // update Product
 const updateProductController = async (req, res) => {
 	try {
+		if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
+		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+
 		const oldProduct = await Product.findById(req.params.id);
 
 		// validate the input
@@ -49,7 +54,7 @@ const updateProductController = async (req, res) => {
 			{ new: true }
 		);
 
-		oldProduct.images.forEach((Image) => {
+		oldProduct.images?.forEach((Image) => {
 			fs.unlinkSync(Image);
 		});
 
@@ -70,6 +75,8 @@ const updateProductController = async (req, res) => {
 // delete product by Id
 const deleteProductByIdController = async (req, res) => {
 	try {
+		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+
 		// find By Id And Delete the Product
 		const deletedProduct = await Product.findByIdAndDelete(req.params.id);
 
@@ -92,6 +99,9 @@ const deleteProductByIdController = async (req, res) => {
 // delete product by shortName
 const deleteProductByShortNameController = async (req, res) => {
 	try {
+		if (!req.params.id)
+			return res.status(400).json({ massage: 'the request needs an shortname params.' });
+
 		// find By shortname And Delete the Product
 		const deletedProduct = await Product.findOneAndRemove({ shortName: req.params.shortname });
 
@@ -114,6 +124,8 @@ const deleteProductByShortNameController = async (req, res) => {
 // get product By Id
 const getProductByIdController = async (req, res) => {
 	try {
+		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+
 		// find the card By the ID
 		const product = await Product.findById(req.params.id);
 		//set the response
@@ -127,6 +139,9 @@ const getProductByIdController = async (req, res) => {
 // get Product by shortName
 const getProductByShortName = async (req, res) => {
 	try {
+		if (!req.params.id)
+			return res.status(400).json({ massage: 'the request needs an shortName params.' });
+
 		// find the card By the shortName.
 		const product = await Product.findOne({ shortName: req.params.shortname });
 
