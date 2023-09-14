@@ -14,8 +14,8 @@ const sendValidateUserEmail = async (req, res) => {
 				from: 'info@technoshef.com',
 				to: req.user.email,
 				subject: 'Technoshef Verification Code', // Subject line
-				text: `your verification code is : ${verificationCode}`, // plain text body
-				html: `<b>your verification code is : ${verificationCode}<b>` // html body
+				text: `your verification code is : ${verificationCode.verificationCode}`, // plain text body
+				html: `<b>your verification code is : ${verificationCode.verificationCode}<b>` // html body
 			})
 			.then(async (info, err) => {
 				if (err) {
@@ -39,8 +39,9 @@ const sendValidateUserEmail = async (req, res) => {
 const validateUserByCode = async (req, res) => {
 	try {
 		const inputCode = req.body.code;
-		const verifyCode = await VerificationCodeDB.findOne({ user_id: req.user.id }).verificationCode;
-		if (inputCode == verifyCode) {
+		const verifyCode = await VerificationCodeDB.findOne({ user_id: req.user.id });
+
+		if (inputCode == verifyCode.verificationCode) {
 			await User.findByIdAndUpdate(req.body.id, { $set: { emailVerified: true } }, { new: true });
 			return res.status(200).json({ massage: 'the user has been verified ' });
 		} else {

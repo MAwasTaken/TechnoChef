@@ -8,8 +8,11 @@ const verificationCodeSchema = mongoose.Schema(
 		user_id: { type: ObjectId, required: true, unique: true },
 		verificationCode: { type: Number, required: true }
 	},
-	{ timestamps: true }
+	{ timestamps: true },
+	{}
 );
+
+verificationCodeSchema.index({ createdAt: 1 }, { expireAfterSeconds: 180 });
 
 // export
 module.exports = mongoose.model('verificationCode', verificationCodeSchema);
