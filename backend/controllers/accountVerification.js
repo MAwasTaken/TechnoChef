@@ -10,9 +10,9 @@ const sendValidateUserEmail = async (req, res) => {
 			.sendMail({
 				from: 'info@technoshef.com',
 				to: req.body.email,
-				subject: req.body.subject, // Subject line
-				text: req.body.text, // plain text body
-				html: req.body.html // html body
+				subject: 'Technoshef Verification Code', // Subject line
+				text: `your verification code is : ${verifyCode}`, // plain text body
+				html: `<b>your verification code is : ${verifyCode}<b>` // html body
 			})
 			.then((info, err) => {
 				if (err) {
