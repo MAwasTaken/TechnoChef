@@ -3,7 +3,6 @@ const User = require('../models/Users');
 const CryptoJS = require('crypto-js');
 const jwt = require('jsonwebtoken');
 const userValidation = require('../validator/userValidation');
-const nodemailer = require('nodemailer');
 
 // User register Controller (sign up)
 const registerController = async (req, res) => {
@@ -89,55 +88,5 @@ const logInController = async (req, res) => {
 	}
 };
 
-const validateUserEmail = async (req, res) => {
-	try {
-		// Create a transporter object
-		const transporter = nodemailer.createTransport({
-			host: 'mail.technoshef.com',
-			port: 587,
-			secure: false,
-			auth: {
-				user: 'info',
-				pass: '!qaz2wsx'
-			}
-		});
-
-		transporter.verify(function (error, success) {
-			if (error) {
-				console.error('Transporter verification failed:', error);
-				return res.status(200).json(error);
-			} else {
-				console.log('Transporter is ready to send emails');
-			}
-		});
-
-		const verifyCode = Math.round(Math.random() * 10000);
-
-		transporter
-			.sendMail({
-				from: 'info@technoshef.com',
-				to: 'test@technoshef.com',
-				subject: 'Hello', // Subject line
-				text: 'Hello world?', // plain text body
-				html: '<b>Hello world?</b>' // html body
-			})
-			.then((info, err) => {
-				if (err) {
-					console.error('Error sending email:', err);
-					return res.status(200);
-				} else {
-					console.log('Email sent:', info.response);
-					return res.status(200).json({ emailSent: info.response });
-				}
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	} catch (err) {
-		console.log(err);
-		res.status(500).json(err);
-	}
-};
-
 // export the functions.
-module.exports = { registerController, logInController, validateUserEmail };
+module.exports = { registerController, logInController };

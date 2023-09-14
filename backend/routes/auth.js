@@ -1,14 +1,19 @@
 // dependency imports
 const router = require('express').Router();
-const Controller = require('../controllers/authController');
+const authController = require('../controllers/authController');
+const emailController = require('../controllers/accountVerification');
 
 //REGISTER router
-router.post('/register', Controller.registerController);
+router.post('/register', authController.registerController);
 
 // LOGIN router
-router.post('/login', Controller.logInController);
+router.post('/login', authController.logInController);
 
-router.get('/verifyEmail', Controller.validateUserEmail);
+// send a verification email
+router.post('/sendVerificationEmail', emailController.sendValidateUserEmail);
+
+//  verify email By sended code
+router.post('/VerifyEmail', emailController.validateUserByCode);
 
 //export the Router
 module.exports = router;

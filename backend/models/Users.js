@@ -13,7 +13,8 @@ const userSchema = mongoose.Schema(
 		postalCode: { type: String },
 		nationalCode: { type: String, unique: true },
 		address: { type: String },
-		isAdmin: { type: Boolean, default: false }
+		isAdmin: { type: Boolean, default: false },
+		emailVerified: { type: Boolean, default: false }
 	},
 	{ timestamps: true }
 );
