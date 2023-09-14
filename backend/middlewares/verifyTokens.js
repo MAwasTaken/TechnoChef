@@ -29,7 +29,7 @@ const verifyTokenAndAuth = (req, res, next) => {
 	verifyToken(req, res, async () => {
 		const DbUser = await User.findById(req.user.id);
 		//check the AUTH
-		if (DbUser || req.user.isAdmin) {
+		if (DbUser) {
 			next();
 		} else {
 			res.status(403).json('You are not allowed to do that!');
@@ -40,16 +40,24 @@ const verifyTokenAndAuth = (req, res, next) => {
 // A middleware function to validate TOKEN and check ADMIN
 const verifyTokenAndAdmin = (req, res, next) => {
 	// call the verifyToken function
-	verifyToken(req, res, () => {
-		//check the ADMIN
-		if (req.user.isAdmin) {
-			next();
-		} else {
-			res.status(403).json('You are not allowed to do that!');
+	verifyToken(req, res, async () => {
+		try {
+			//check the ADMIN
+			const DbUser = await User.findById(req.user.id);
+			if (!DbUser) {
+				return res.status(403).json('You are not allowed to do that!');
+			}
+			if (DbUser.isAdmin == true) {
+				next();
+			} else {
+				res.status(403).json('You are not allowed to do that!');
+			}
+		} catch (err) {
+			console.log(err);
+			res.status(500).json(err);
 		}
 	});
 };
-
 // export the middleware
 module.exports = {
 	verifyTokenAndAuth,
