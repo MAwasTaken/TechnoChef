@@ -33,13 +33,14 @@ const registerController = async (req, res) => {
 // user Login Controller
 const logInController = async (req, res) => {
 	try {
+		let user;
 		// find the user By username or email
 		if (req.body.username) {
-			const user = await User.findOne({
+			user = await User.findOne({
 				username: req.body.username
 			});
 		} else if (req.body.email) {
-			const user = await User.findOne({
+			user = await User.findOne({
 				email: req.body.email
 			});
 		}
@@ -61,7 +62,8 @@ const logInController = async (req, res) => {
 			const accessToken = jwt.sign(
 				{
 					id: user._id,
-					isAdmin: user.isAdmin
+					isAdmin: user.isAdmin,
+					email: user.email
 				},
 				process.env.JWT_SEC_key,
 				{ expiresIn: '1d' }

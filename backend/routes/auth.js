@@ -2,6 +2,7 @@
 const router = require('express').Router();
 const authController = require('../controllers/authController');
 const emailController = require('../controllers/accountVerification');
+const { verifyTokenAndAuth } = require('../middlewares/verifyTokens');
 
 //REGISTER router
 router.post('/register', authController.registerController);
@@ -10,10 +11,10 @@ router.post('/register', authController.registerController);
 router.post('/login', authController.logInController);
 
 // send a verification email
-router.post('/sendVerificationEmail', emailController.sendValidateUserEmail);
+router.post('/sendVerificationEmail', verifyTokenAndAuth, emailController.sendValidateUserEmail);
 
 //  verify email By sended code
-router.post('/VerifyEmail', emailController.validateUserByCode);
+router.post('/VerifyEmail', verifyTokenAndAuth, emailController.validateUserByCode);
 
 //export the Router
 module.exports = router;
