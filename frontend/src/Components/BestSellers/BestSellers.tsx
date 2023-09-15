@@ -6,11 +6,18 @@ import 'swiper/css/pagination';
 import { AiOutlineStar } from 'react-icons/ai';
 import { BiChevronLeft } from 'react-icons/bi';
 
+// react query
+
 // components
 import ProductBox from '../ProductBox/ProductBox';
+import useBestSellers from '../../hooks/useBestSellers';
+import { ProductProps } from '../../Types/Products.types';
 
 // best sellers
 const BestSellers = () => {
+	// GET best sellers
+	const { data } = useBestSellers();
+
 	// tsx
 	return (
 		<section className="bg-Info/50 container relative h-[320px] py-5 backdrop-blur-[2px] sm:rounded-2xl md:h-[400px] md:py-10">
@@ -51,62 +58,11 @@ const BestSellers = () => {
 						</button>
 					</div>
 				</SwiperSlide>
-				<SwiperSlide>
-					<ProductBox
-						gradientColor="#b91c1c"
-						colors={['#334155', '#ffffff', '#000000']}
-						imageSrc="Images/Products/p1.png"
-					/>
-				</SwiperSlide>
-				<SwiperSlide>
-					<ProductBox
-						gradientColor="#c2410c"
-						colors={['#334155', '#ffffff', '#000000']}
-						imageSrc="Images/Products/p2.png"
-					/>
-				</SwiperSlide>
-				<SwiperSlide>
-					<ProductBox
-						gradientColor="#b45309"
-						colors={['#334155', '#ffffff', '#000000']}
-						imageSrc="Images/Products/p3.png"
-					/>
-				</SwiperSlide>
-				<SwiperSlide>
-					<ProductBox
-						gradientColor="#a16207"
-						colors={['#334155', '#ffffff', '#000000']}
-						imageSrc="Images/Products/p4.png"
-					/>
-				</SwiperSlide>
-				<SwiperSlide>
-					<ProductBox
-						gradientColor="#4d7c0f"
-						colors={['#334155', '#ffffff', '#000000']}
-						imageSrc="Images/Products/p5.png"
-					/>
-				</SwiperSlide>
-				<SwiperSlide>
-					<ProductBox
-						gradientColor="#15803d"
-						colors={['#334155', '#ffffff', '#000000']}
-						imageSrc="Images/Products/p6.png"
-					/>
-				</SwiperSlide>
-				<SwiperSlide>
-					<ProductBox
-						gradientColor="#15803d"
-						colors={['#334155', '#ffffff', '#000000']}
-						imageSrc="Images/Products/p7.png"
-					/>
-				</SwiperSlide>
-				<SwiperSlide>
-					<ProductBox
-						gradientColor="#047857"
-						colors={['#334155', '#ffffff', '#000000']}
-						imageSrc="Images/Products/p8.png"
-					/>
-				</SwiperSlide>
+				{data?.map((product: ProductProps) => (
+					<SwiperSlide className='mt-1' key={product._id}>
+						<ProductBox {...product} />
+					</SwiperSlide>
+				))}
 			</Swiper>
 		</section>
 	);

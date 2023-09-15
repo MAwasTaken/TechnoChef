@@ -8,17 +8,20 @@ import { BiChevronLeft } from 'react-icons/bi';
 // types
 import { ProductProps } from '../../Types/Products.types';
 
+// types
+
 // product box
-const ProductBox: React.FC<ProductProps> = ({ colors, imageSrc }) => {
+const ProductBox: React.FC<ProductProps> = ({ productColor, images, discount, price }) => {
+	// product hovering
 	const [isProductHover, setIsProductHover] = useState<boolean>(false);
 
 	// tsx
 	return (
 		<>
-			<div className="bg-Dark/70 hover:shadow-Dark/30 relative h-[245px] w-[150px] select-none rounded-xl shadow-md duration-500 hover:-translate-y-[2px] hover:shadow-lg md:h-[295px] md:w-[215px]">
+			<div className="bg-Dark/40 hover:shadow-Dark/30 relative h-[245px] w-[150px] select-none rounded-xl shadow-md duration-500 hover:-translate-y-[2px] hover:shadow-lg md:h-[295px] md:w-[215px]">
 				<div className="flex h-auto w-fit flex-col p-2 md:p-4">
 					<div className="absolute left-2 flex flex-col gap-y-1">
-						{colors.map((color, index) => (
+						{productColor?.map((color, index) => (
 							<span
 								key={index}
 								className="border-Dark/70 block h-3 w-3 rounded-full border"
@@ -27,22 +30,26 @@ const ProductBox: React.FC<ProductProps> = ({ colors, imageSrc }) => {
 						))}
 					</div>
 					<Link to="/">
-						<img
-							className="mx-auto h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
-							src={imageSrc}
-							alt="تصویر محصول"
-							loading="lazy"
-						/>
+						{images ? (
+							<img
+								className="mx-auto h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
+								src={`http://localhost:3000/${images[0]}`}
+								alt="تصویر محصول"
+								loading="lazy"
+							/>
+						) : null}
 						<span className="text-Light/80 mt-1 line-clamp-2 text-center text-sm font-bold tracking-tighter md:text-lg">
 							یخچال فریز امرسان مدل xd-wtf8569
 						</span>
 					</Link>
 					<div className="mt-3 flex items-center justify-between">
-						<span className="h-5 w-7 rounded-lg bg-gradient-to-l from-red-500 to-red-600 pt-[3px] text-center text-[10px] font-bold text-white/70 md:h-6 md:w-9 md:pt-1 md:text-xs">
-							۱۰۰٪
-						</span>
+						{discount ? (
+							<span className="h-5 w-7 rounded-lg bg-gradient-to-l from-red-500 to-red-600 pt-[3px] text-center text-[10px] font-bold text-white/70 md:h-6 md:w-9 md:pt-1 md:text-xs">
+								{discount.toLocaleString('fa-IR')}
+							</span>
+						) : null}
 						<span className="line font-Lalezar mt-1 text-left font-bold tracking-tight text-red-500/80 line-through md:text-lg">
-							۹۹۹٫۹۹۹٫۹۹۹
+							{price.toLocaleString('fa-IR')}
 						</span>
 					</div>
 				</div>
@@ -62,7 +69,7 @@ const ProductBox: React.FC<ProductProps> = ({ colors, imageSrc }) => {
 					) : (
 						<>
 							<span className="font-Lalezar text-sm text-black/70 md:mt-1 md:text-xl">
-								۹۹۹٫۹۹۹٫۹۹۹
+								{(((100 - discount) * price) / 100).toLocaleString('fa-IR')}
 							</span>
 							<div className="h-4 w-4 text-red-600">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" fill="currentColor">
