@@ -18,7 +18,7 @@ const ProductBox: React.FC<ProductProps> = ({ productColor, images, discount, pr
 	// tsx
 	return (
 		<>
-			<div className="bg-Dark/40 hover:shadow-Dark/30 relative h-[245px] w-[150px] select-none rounded-xl shadow-md duration-500 hover:-translate-y-[2px] hover:shadow-lg md:h-[295px] md:w-[215px]">
+			<div className="bg-Dark/70 hover:shadow-Dark/30 relative h-[245px] w-[150px] select-none rounded-xl shadow-md duration-500 hover:-translate-y-[2px] hover:shadow-lg md:h-[295px] md:w-[215px]">
 				<div className="flex h-auto w-fit flex-col p-2 md:p-4">
 					<div className="absolute left-2 flex flex-col gap-y-1">
 						{productColor?.map((color, index) => (
