@@ -6,11 +6,7 @@ const model = joi.object({
 	productName: joi.string(),
 	price: joi.number().positive(),
 	categories: joi.array().single(),
-	colors: joi.object({
-		gradin: joi.array().max(2),
-		title: joi.array().max(1),
-		productColor: joi.array()
-	}),
+	productColor: joi.array(),
 	QTY: joi.number().positive(),
 	discount: joi.number().min(0).max(100),
 	images: joi.array().max(5),
