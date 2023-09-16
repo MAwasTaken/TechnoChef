@@ -33,12 +33,12 @@ const Products = () => {
     return (
         <div className="flex min-h-screen flex-col">
             <Header />
-            <div className="flex flex-grow items-center justify-center">
-                <main className='flex flex-row w-[95%] gap-x-20 py-5 px-16'>
+            <div className="flex items-center justify-center">
+                <main className='flex flex-col xl:flex-row 2xl:w-[1610px] xl:w-[1300px] gap-y-10 justify-center  gap-x-20 py-5 px-16'>
                     {/* right side */}
-                    <div id='right side' className='flex flex-col h-[800px] gap-y-8 sticky top-10 w-[600px]'>
+                    <div id='right side' className='flex flex-col xl:flex-col md:flex-row md:gap-x-10 h-max md:gap-y-8 gap-y-10 xl:sticky xl:top-10 '>
                         {/* product category */}
-                        <div id="prod-category" className='flex p-9 flex-col gap-y-9 w-full rounded-3xl h-max bg-gray-300'>
+                        <div id="prod-category" className='flex p-9 flex-col md:items-start items-center gap-y-9 xl:w-[330px] 2xl:w-[370px] md:w-1/2 rounded-3xl h-max bg-gray-300'>
                             <label htmlFor="" className='flex items-center text-xl gap-x-3 flex-rowtext-2xl'>
                                 <BiCategory className='text-red-500 text-3xl' />
                                 <span>دسته بندی محصولات</span>
@@ -137,7 +137,7 @@ const Products = () => {
                             </div>
                         </div>
                         {/* product price */}
-                        <div id="prod-price" className='flex p-9 flex-col gap-y-9 w-full h-max rounded-3xl bg-gray-300'>
+                        <div id="prod-price" className='flex p-9 flex-col gap-y-9 xl:w-[330px] 2xl:w-[370px] md:w-1/2 md:items-start items-center h-max rounded-3xl bg-gray-300'>
                             <label htmlFor="" className='flex items-center text-xl gap-x-3 flex-rowtext-2xl'>
                                 <AiFillDollarCircle className='text-red-500 text-3xl' />
                                 <span>انتخاب بازه قیمت</span>
@@ -173,25 +173,25 @@ const Products = () => {
                         </div>
                     </div>
                     {/* divider */}
-                    <div id='divider' className="flex ">
+                    <div id='divider' className="xl:flex hidden ">
                         <div className="w-px h-[800px] sticky top-10 bg-gray-500"></div>
                     </div>
                     {/* left side */}
-                    <div id='left side' className='flex flex-col gap-y-5 h-max w-full'>
+                    <div id='left side' className='flex flex-col gap-y-5 h-max  '>
                         {/* product sort */}
-                        <div id="prod-sort" className='flex flex-row gap-x-5 items-center w-full p-9 h-20 rounded-3xl bg-gray-300'>
-                            <label htmlFor="" className='flex items-center text-xl gap-x-2 flex-rowtext-2xl'>
+                        <div id="prod-sort" className='flex flex-col xl:flex-row xl:gap-x-5 items-center  xl:p-9 p-5 gap-y-3 xl:h-20 rounded-3xl bg-gray-300'>
+                            <label htmlFor="" className='flex text-base whitespace-no-wrap items-center xl:text-xl gap-x-2 flex-rowtext-2xl'>
                                 <BiSort className='text-red-500 text-3xl' />
                                 <span>مرتب سازی :</span>
                             </label>
                             <div className="flex flex-row gap-x-4 ">
-                                <a href="" className='bg-amber-400 transition duration-300 flex hover:bg-gray-400 px-7 py-3 items-center justify-center text-base rounded-xl'>ارزان ترین</a>
-                                <a href="" className='bg-gray-200 transition duration-300 flex hover:bg-gray-400 px-7 py-3 items-center justify-center text-base rounded-xl'>گران ترین</a>
-                                <a href="" className='bg-gray-200 transition duration-300 flex hover:bg-gray-400 px-7 py-3 items-center justify-center text-base rounded-xl'>تخفیف دارها</a>
+                                <a href="" className='bg-amber-400 transition duration-300 flex hover:bg-gray-400 px-4 xl:px-7 py-2 xl:py-3 items-center justify-center text-sm xl:text-base rounded-xl'>ارزان ترین</a>
+                                <a href="" className='bg-gray-200 transition duration-300 flex hover:bg-gray-400 px-4 xl:px-7 py-2 xl:py-3 items-center justify-center text-sm xl:text-base rounded-xl'>گران ترین</a>
+                                <a href="" className='bg-gray-200 transition duration-300 flex hover:bg-gray-400 px-4 xl:px-7 py-2 xl:py-3 items-center justify-center text-sm xl:text-base rounded-xl'>تخفیف دارها</a>
                             </div>
                         </div>
                         {/* all products */}
-                        <div id="prod-all" className='flex flex-wrap gap-x-7 gap-y-10 justify-center items-center'>
+                        <div id="prod-all" className='flex flex-wrap 2xl:w-full xl:w-[780px] gap-x-7 gap-y-10 justify-center items-center'>
                             <ProductBox
                                 gradientColor="#b91c1c"
                                 colors={['#334155', '#ffffff', '#000000']}
