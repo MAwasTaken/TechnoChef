@@ -11,7 +11,7 @@ const Header: React.FC = () => {
 		// container
 		<header className="container flex items-center justify-between py-4 text-xs md:py-8 md:text-lg">
 			{/* right section */}
-			<div className="font-Lalezar text-LightYellow hover:text-DarkYellow text-sm font-bold tracking-tight transition-all md:text-3xl">
+			<div className="font-Lalezar text-LightYellow hover:text-DarkYellow text-sm font-bold tracking-tight transition-all sm:text-2xl md:text-3xl">
 				{/* logo */}
 				<Link to="/" className="flex flex-col items-center">
 					TechnoShef
