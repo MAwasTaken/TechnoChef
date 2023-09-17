@@ -11,7 +11,7 @@ const sendValidateUserEmail = async (req, res) => {
 
 		transporter
 			.sendMail({
-				from: 'info@technoshef.com',
+				from: process.env.VERIFICATION_EMAIL,
 				to: req.user.email,
 				subject: 'Technoshef Verification Code', // Subject line
 				text: `your verification code is : ${verificationCode.verificationCode}`, // plain text body

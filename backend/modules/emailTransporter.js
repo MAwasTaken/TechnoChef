@@ -2,12 +2,12 @@ const nodemailer = require('nodemailer');
 
 // Create a transporter object
 const transporter = nodemailer.createTransport({
-	host: 'mail.technoshef.com',
-	port: 587,
+	host: process.env.EMAIL_SERVER,
+	port: process.env.EMAIL_SERVER_PORT,
 	secure: false,
 	auth: {
-		user: 'info',
-		pass: '!qaz2wsx'
+		user: process.env.EMAIL_SERVER_USER,
+		pass: process.env.EMAIL_SERVER_PASSWORD
 	}
 });
 
