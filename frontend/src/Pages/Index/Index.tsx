@@ -7,7 +7,7 @@ import AboutBrand from '../../Components/AboutBrand/AboutBrand';
 import Footer from '../../Components/Footer/Footer';
 import BestSellers from '../../Components/BestSellers/BestSellers';
 import Categories from '../../Components/Categories/Categories';
-import Services from '../../Components/Services/Services';
+import Services from '../../Services/Services';
 import LatestProducts from '../../Components/LatestProducts/LatestProducts';
 import HeroSection from '../../Components/HeroSection/HeroSection';
 
