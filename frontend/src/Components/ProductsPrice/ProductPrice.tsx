@@ -8,7 +8,7 @@ import { AiFillDollarCircle } from 'react-icons/ai';
 const ProductPrice: React.FC = () => {
 	// tsx
 	return (
-		<div className="bg-Info/50 hidden h-max w-[300px] flex-col items-center gap-y-5 rounded-3xl p-5 md:items-start xl:flex">
+		<div className="bg-Info/50 hidden h-max w-[300px] flex-col items-center gap-y-5 rounded-3xl p-6 md:items-start xl:flex">
 			<div className="flex items-center gap-x-2">
 				<AiFillDollarCircle className="text-3xl text-red-500" />
 				<span className="font-Lalezar select-none text-sm md:text-2xl">انتخاب بازه قیمتی</span>

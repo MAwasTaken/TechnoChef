@@ -10,7 +10,7 @@ const ProductCategories: React.FC = () => {
 	return (
 		<div
 			id="prod-category"
-			className="bg-Info/50 hidden h-max flex-col gap-y-5 rounded-3xl p-5 xl:flex xl:w-[300px]"
+			className="bg-Info/50 hidden h-max flex-col gap-y-5 rounded-3xl p-6 xl:flex xl:w-[300px]"
 		>
 			<div className="flex items-center gap-x-2">
 				<BiCategory className="text-3xl text-red-500" />
