@@ -25,8 +25,7 @@ const registerController = async (req, res) => {
 		res.status(201).json(savedUser);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
-		console.log(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -85,7 +84,6 @@ const logInController = async (req, res) => {
 		}
 	} catch (err) {
 		// return the err if there is one
-		console.log(err);
 		res.status(500).json(err);
 	}
 };

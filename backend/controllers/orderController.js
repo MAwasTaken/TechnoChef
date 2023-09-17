@@ -20,7 +20,7 @@ const createOrderController = async (req, res) => {
 		res.status(201).json(savedOrder);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -46,7 +46,7 @@ const updateOrderController = async (req, res) => {
 		res.status(200).json(updatedOrder);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -63,7 +63,7 @@ const deleteOrderController = async (req, res) => {
 		res.status(200).json('Order has been deleted...');
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -80,7 +80,7 @@ const getOrderByUserIdController = async (req, res) => {
 		res.status(200).json(orders);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -96,7 +96,7 @@ const getOrderByIdController = async (req, res) => {
 		res.status(200).json(orders);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -110,7 +110,7 @@ const getAllOrdersController = async (req, res) => {
 		res.status(200).json(orders);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 

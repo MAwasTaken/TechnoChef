@@ -15,7 +15,7 @@ const sendValidateUserEmail = async (req, res) => {
 				to: req.user.email,
 				subject: 'Technoshef Verification Code', // Subject line
 				text: `your verification code is : ${verificationCode.verificationCode}`, // plain text body
-				html: `<b>your verification code is : ${verificationCode.verificationCode}<b>` // html body
+				html: `<h1>your verification code is : ${verificationCode.verificationCode}<h1>` // html body
 			})
 			.then(async (info, err) => {
 				if (err) {
@@ -37,18 +37,23 @@ const sendValidateUserEmail = async (req, res) => {
 };
 
 const validateUserByCode = async (req, res) => {
+	const inputCode = req.body.code;
+	let verifyCode;
 	try {
-		const inputCode = req.body.code;
-		const verifyCode = await VerificationCodeDB.findOne({ user_id: req.user.id });
-
-		if (inputCode == verifyCode.verificationCode) {
-			await User.findByIdAndUpdate(req.body.id, { $set: { emailVerified: true } }, { new: true });
-			return res.status(200).json({ massage: 'the user has been verified ' });
-		} else {
-			return res.status(400).json({ massage: 'the input code is not valid' });
-		}
+		verifyCode = await VerificationCodeDB.findOne({ user_id: req.user.id });
 	} catch (err) {
-		res.status(500).json(err);
+		res.status(401).json(err, { massage: 'the input code is not valid' });
+	}
+
+	if (inputCode == verifyCode?.verificationCode) {
+		try {
+			await User.findByIdAndUpdate(req.body.id, { $set: { emailVerified: true } }, { new: true });
+		} catch (err) {
+			res.status(400).json(err);
+		}
+		return res.status(200).json({ massage: 'the user has been verified ' });
+	} else {
+		return res.status(400).json({ massage: 'the input code is not valid' });
 	}
 };
 

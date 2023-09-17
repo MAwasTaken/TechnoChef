@@ -33,7 +33,7 @@ const updateUserController = async (req, res) => {
 		res.status(200).json(updatedUser);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -51,7 +51,7 @@ const deleteUserController = async (req, res) => {
 		res.status(200).json({ massage: 'User has been deleted...', deletedUser });
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -70,7 +70,7 @@ const getUserByIdController = async (req, res) => {
 		res.status(200).json(others);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -96,7 +96,7 @@ const getAllUsersController = async (req, res) => {
 		res.status(200).json(users);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
