@@ -32,17 +32,10 @@ const registerController = async (req, res) => {
 // user Login Controller
 const logInController = async (req, res) => {
 	try {
-		let user;
 		// find the user By username or email
-		if (req.body.username) {
-			user = await User.findOne({
-				username: req.body.username
-			});
-		} else if (req.body.email) {
-			user = await User.findOne({
-				email: req.body.email
-			});
-		}
+		const user = await User.findOne({
+			$or: [{ username: req.body.userInfo }, { email: req.body.userInfo }]
+		});
 
 		// if there is not a user with that info
 		if (user == null) {
@@ -78,7 +71,7 @@ const logInController = async (req, res) => {
 				// if it matches we return the object without thw PASSWORD and the access token
 				res
 					.status(200)
-					.cookie('accessToken', accessToken, { httpOnly: true })
+					.cookie('accessToken', accessToken, { httpOnly: true, sameSite: 'None', secure: true })
 					.json({ ...others });
 			}
 		}
