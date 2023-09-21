@@ -28,6 +28,7 @@ const createCommentController = async (req, res) => {
 const updateCommentController = async (req, res) => {
 	try {
 		if (!req.body) return res.status(400).json({ massage: 'the request needs a body.' });
+		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
 
 		// validate input
 		await validation.validateAsync(req.body);

@@ -9,6 +9,7 @@ const userRouter = require('../routes/user');
 const productRouter = require('../routes/product');
 const commentRouter = require('../routes/comment');
 const orderRouter = require('../routes/order');
+const categoryRouter = require('../routes/category');
 
 //use the routers and middleware , Export the function
 module.exports = function (app) {
@@ -30,4 +31,5 @@ module.exports = function (app) {
 	app.use('/api/products', productRouter);
 	app.use('/api/comments', commentRouter);
 	app.use('/api/orders', orderRouter);
+	app.use('/api/category', categoryRouter);
 };
