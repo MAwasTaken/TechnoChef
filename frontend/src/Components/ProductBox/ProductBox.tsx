@@ -8,10 +8,17 @@ import { BiChevronLeft } from 'react-icons/bi';
 // types
 import { ProductProps } from '../../Types/Products.types';
 
-// types
+// helpers
+import toFarsiNumber from '../../Utils/toFarsiNumber';
 
 // product box
-const ProductBox: React.FC<ProductProps> = ({ productColor, images, discount, price }) => {
+const ProductBox: React.FC<ProductProps> = ({
+	productColor,
+	images,
+	discount,
+	price,
+	productName
+}) => {
 	// product hovering
 	const [isProductHover, setIsProductHover] = useState<boolean>(false);
 
@@ -19,7 +26,7 @@ const ProductBox: React.FC<ProductProps> = ({ productColor, images, discount, pr
 	return (
 		<>
 			<div className="bg-Dark/70 hover:shadow-Dark/30 relative h-[245px] w-[150px] select-none rounded-xl shadow-md duration-500 hover:-translate-y-[2px] hover:shadow-lg md:h-[295px] md:w-[215px]">
-				<div className="flex h-auto w-fit flex-col p-2 md:p-4">
+				<div className="flex h-auto flex-col p-2 w-full md:p-4">
 					<div className="absolute left-2 flex flex-col gap-y-1">
 						{productColor?.map((color, index) => (
 							<span
@@ -38,8 +45,8 @@ const ProductBox: React.FC<ProductProps> = ({ productColor, images, discount, pr
 								loading="lazy"
 							/>
 						) : null}
-						<span className="text-Light/80 mt-1 line-clamp-2 text-center text-sm font-bold tracking-tighter md:text-lg">
-							یخچال فریز امرسان مدل xd-wtf8569
+						<span className="text-Light/80 mt-1 line-clamp-2 md:h-14 h-10 text-center text-sm font-bold tracking-tighter md:text-lg">
+							{productName ? toFarsiNumber(productName) : ''}
 						</span>
 					</Link>
 					<div className="mt-3 flex items-center justify-between">
@@ -49,7 +56,7 @@ const ProductBox: React.FC<ProductProps> = ({ productColor, images, discount, pr
 							</span>
 						) : null}
 						<span className="line font-Lalezar mt-1 text-left font-bold tracking-tight text-red-500/80 line-through md:text-lg">
-							{price.toLocaleString('fa-IR')}
+							{price?.toLocaleString('fa-IR')}
 						</span>
 					</div>
 				</div>

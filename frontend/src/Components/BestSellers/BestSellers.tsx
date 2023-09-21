@@ -10,7 +10,7 @@ import { BiChevronLeft } from 'react-icons/bi';
 
 // components
 import ProductBox from '../ProductBox/ProductBox';
-import useBestSellers from '../../hooks/useBestSellers';
+import useBestSellers from '../../Hooks/useBestSellers';
 import { ProductProps } from '../../Types/Products.types';
 
 // best sellers
@@ -59,7 +59,7 @@ const BestSellers = () => {
 					</div>
 				</SwiperSlide>
 				{data?.map((product: ProductProps) => (
-					<SwiperSlide className='mt-1' key={product._id}>
+					<SwiperSlide className="mt-1" key={product._id}>
 						<ProductBox {...product} />
 					</SwiperSlide>
 				))}

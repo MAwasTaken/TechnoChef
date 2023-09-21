@@ -6,9 +6,28 @@ import { BiSort } from 'react-icons/bi';
 import { BiCategory } from 'react-icons/bi';
 import { HiOutlineAdjustmentsHorizontal } from 'react-icons/hi2';
 import { AiFillDollarCircle } from 'react-icons/ai';
+
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { setCategory } from '../../Services/Redux/Slices/Category';
+
 // tsx
 const ProductSort: React.FC = () => {
+	// show & hide mobile modal
 	const [shownFilters, setShownFilters] = useState<Boolean>(false);
+
+	// redux dispatch hook
+	const dispatch = useDispatch();
+
+	// GET categories from redux
+	const category = useSelector((state: any) => state.category);
+
+	// change category
+	const changeCategoryHandler = (categoryName: string) => {
+		category === categoryName ? dispatch(setCategory('')) : dispatch(setCategory(categoryName));
+
+		// setShownFilters(false);
+	};
 
 	// tsx
 	return (
@@ -67,6 +86,8 @@ const ProductSort: React.FC = () => {
 								type="checkbox"
 								className="accent-DarkYellow bg-DarkYellow/50 h-4 w-4 rounded-md outline-none"
 								id="mobile-cat1"
+								onChange={() => changeCategoryHandler('برودتی')}
+								checked={category.includes('برودتی')}
 							/>
 							<span className="text-Dark/75 cursor-pointer select-none text-base font-semibold tracking-tight">
 								یخچال ها و برودتی
@@ -77,6 +98,8 @@ const ProductSort: React.FC = () => {
 								type="checkbox"
 								className="accent-DarkYellow bg-DarkYellow/50 h-4 w-4 rounded-md outline-none"
 								id="mobile-cat2"
+								onChange={() => changeCategoryHandler('سرمایشی')}
+								checked={category.includes('سرمایشی')}
 							/>
 							<span className="text-Dark/75 cursor-pointer select-none text-base font-semibold tracking-tight">
 								مایکروویو

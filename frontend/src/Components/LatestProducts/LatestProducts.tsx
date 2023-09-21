@@ -2,7 +2,7 @@ import { MdOutlineWatchLater } from 'react-icons/md';
 
 // components
 import ProductBox from '../ProductBox/ProductBox';
-import useLatest from '../../hooks/useLatest';
+import useLatest from '../../Hooks/useLatest';
 import { ProductProps } from '../../Types/Products.types';
 
 // latest products

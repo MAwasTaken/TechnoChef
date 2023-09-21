@@ -1,5 +1,5 @@
 // types
-import { ServiceItemProps } from '../../Types/ServiceItems.types';
+import { ServiceItemProps } from '../../../Types/ServiceItems.types';
 
 // service item
 const ServiceItem: React.FC<ServiceItemProps> = ({ icon, title }) => {
