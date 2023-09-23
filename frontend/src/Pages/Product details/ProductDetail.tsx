@@ -23,10 +23,8 @@ const ProductDetails = () => {
 
         <div className="flex h-screen flex-col justify-between">
             <Header />
-            <div className="flex flex-col items-center justify-center">
-            <ProductDetailsBox />
-            <ProductDetailsCm />
-            </div>
+                <ProductDetailsBox />
+                <ProductDetailsCm />
             <Footer />
         </div>
     )
