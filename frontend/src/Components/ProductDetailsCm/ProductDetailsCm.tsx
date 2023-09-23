@@ -2,14 +2,23 @@
 import React, { useState } from 'react';
 
 // icons
-import { BiShoppingBag, BiSort } from 'react-icons/bi';
-import { BiCategory } from 'react-icons/bi';
-import { HiOutlineAdjustmentsHorizontal } from 'react-icons/hi2';
-import { AiFillDollarCircle } from 'react-icons/ai';
+import { BiComment, BiShoppingBag, BiSort } from 'react-icons/bi';
+
+// components
+import ProductDetailsCmBox from '../../Components/ProductDetailsCm/ProductDetailsCmBox';
 
 const ProductDetailsCm = () => {
     return (
-        <div className='flex flex-col md:flex-row gap-x-2 items-center p-5 justify-center w-[1200px] h-max lg:rounded-3xl bg-gray-600	'>
+        <div className='flex flex-col gap-x-2 gap-y-4 items-center p-5 justify-center w-[1200px] h-max lg:rounded-3xl'>
+            {/* comment label */}
+            <div className="flex flex-row w-full">
+                <label htmlFor="" className='flex flex-row gap-x-3 items-center text-3xl'><BiComment className='text-red-500'></BiComment><span>نظرات</span></label>
+            </div>
+            {/* divider */}
+            <div className="border-t border-red-500 w-full"></div>
+            {/* comment box */}
+            <ProductDetailsCmBox />
+            <ProductDetailsCmBox />
         </div>
     )
 }
