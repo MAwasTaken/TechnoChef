@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
 import ProductDetailsBox from '../../Components/ProductDetailsBox/ProductDetailsBox';
+import ProductDetailsCm from '../../Components/ProductDetailsCm/ProductDetailsCm';
+
 
 
 const ProductDetails = () => {
@@ -21,9 +23,9 @@ const ProductDetails = () => {
 
         <div className="flex h-screen flex-col justify-between">
             <Header />
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center justify-center">
             <ProductDetailsBox />
-
+            <ProductDetailsCm />
             </div>
             <Footer />
         </div>
