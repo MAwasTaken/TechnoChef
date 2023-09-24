@@ -205,7 +205,7 @@ const getAllProductsController = async (req, res) => {
 			const countProducts = await Product.countDocuments();
 			pages = Math.ceil(countProducts / 9);
 		} else if (qPriceSort) {
-			products = await Product.find().sort({ price: qPriceSort });
+			products = await Product.find().sort({ finalPrice: qPriceSort });
 		} else {
 			//return All Products
 			products = await Product.find();
