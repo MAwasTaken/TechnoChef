@@ -19,7 +19,7 @@ const verifyToken = (req, res, next) => {
 		});
 	} else {
 		// if the token in not valid return not authenticated
-		return res.status(401).json('You are not authenticated!');
+		return res.status(401).json({ massage: 'You are not authenticated!' });
 	}
 };
 
@@ -32,7 +32,7 @@ const verifyTokenAndAuth = (req, res, next) => {
 		if (DbUser) {
 			next();
 		} else {
-			res.status(403).json('You are not allowed to do that!');
+			res.status(401).json({ massage: 'You are not authenticated!' });
 		}
 	});
 };
@@ -45,12 +45,12 @@ const verifyTokenAndAdmin = (req, res, next) => {
 			//check the ADMIN
 			const DbUser = await User.findById(req.user.id);
 			if (!DbUser) {
-				return res.status(403).json('You are not allowed to do that!');
+				return res.status(403).json({ massage: 'You are not allowed to do that!' });
 			}
 			if (DbUser.isAdmin == true) {
 				next();
 			} else {
-				res.status(403).json('You are not allowed to do that!');
+				res.status(403).json({ massage: 'You are not allowed to do that!' });
 			}
 		} catch (err) {
 			console.log(err);

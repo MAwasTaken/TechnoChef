@@ -7,7 +7,7 @@ const productsSchema = new mongoose.Schema(
 		shortName: { type: String, required: true, unique: true },
 		productName: { type: String, require: true },
 		price: { type: Number },
-		categories: { type: Array },
+		category: { type: String },
 		productColor: { type: Array },
 		QTY: {
 			type: Number,
@@ -19,15 +19,7 @@ const productsSchema = new mongoose.Schema(
 				message: (props) => `${props.value} is not a positive number!`
 			}
 		},
-		discount: {
-			type: Number,
-			validate: {
-				validator: function (v) {
-					return 0 < v < 100;
-				},
-				message: (props) => `${props.value} is not a valid discount!`
-			}
-		},
+		finalPrice: { type: Number },
 		images: { type: Array },
 		description: { type: String },
 		best_seller: { type: Boolean, default: false }

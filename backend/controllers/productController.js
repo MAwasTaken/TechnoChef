@@ -25,7 +25,7 @@ const createProductController = async (req, res) => {
 		res.status(201).json(savedProduct);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 
 		newProduct.images.forEach((Image) => {
 			fs.unlinkSync(Image);
@@ -62,7 +62,7 @@ const updateProductController = async (req, res) => {
 		res.status(200).json(updatedProduct);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 
 		req.files
 			.map((element) => element.path)
@@ -92,7 +92,7 @@ const deleteProductByIdController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		console.log(err);
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -117,7 +117,7 @@ const deleteProductByShortNameController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		console.log(err);
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -132,7 +132,7 @@ const getProductByIdController = async (req, res) => {
 		res.status(200).json(product);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -149,7 +149,7 @@ const getProductByShortName = async (req, res) => {
 		res.status(200).json(product);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -161,6 +161,7 @@ const getAllProductsController = async (req, res) => {
 	const qBestSeller = req.query.bestseller;
 	const qPage = req.query.page;
 	const qCategory = req.query.category;
+	const qPriceSort = req.query.pricesort;
 
 	try {
 		//Define the response objects
@@ -175,17 +176,13 @@ const getAllProductsController = async (req, res) => {
 		else if (qCategory) {
 			//return the Products in that categories
 			products = await Product.find({
-				categories: {
-					$in: [qCategory.trim()]
-				}
+				category: qCategory.trim()
 			})
 				.skip(qPage * 9)
 				.limit(9);
 
 			const countProductsCategory = await Product.countDocuments({
-				categories: {
-					$in: [qCategory.trim()]
-				}
+				category: qCategory.trim()
 			});
 			pages = Math.ceil(countProductsCategory / 9);
 		} // if there is "Search" query
@@ -197,7 +194,7 @@ const getAllProductsController = async (req, res) => {
 		} // if there is "BestSeller" query
 		else if (qBestSeller) {
 			// return BestSeller Products
-			products = await Product.find({ best_seller: true }).limit(best_seller);
+			products = await Product.find({ best_seller: true });
 		} // if there is "Page" query
 		else if (qPage) {
 			// return the page of Products
@@ -207,6 +204,8 @@ const getAllProductsController = async (req, res) => {
 
 			const countProducts = await Product.countDocuments();
 			pages = Math.ceil(countProducts / 9);
+		} else if (qPriceSort) {
+			products = await Product.find().sort({ price: qPriceSort });
 		} else {
 			//return All Products
 			products = await Product.find();
@@ -215,23 +214,8 @@ const getAllProductsController = async (req, res) => {
 		// set the response
 		res.status(200).json({ products, pages });
 	} catch (err) {
-		res.status(500).json(err);
-	}
-};
-
-// get all categories
-const getAllCategoriesController = async (req, res) => {
-	try {
-		let categories = [];
-		const product = await Product.find();
-		product.forEach((element) => {
-			categories = categories.concat(element.categories);
-		});
-		const result = categories.filter((item, idx) => categories.indexOf(item) === idx);
-
-		res.status(200).json(result);
-	} catch (err) {
-		res.status(500).json(err);
+		res.status(400).json(err);
+		console.log(err);
 	}
 };
 
@@ -243,6 +227,5 @@ module.exports = {
 	deleteProductByShortNameController,
 	getProductByIdController,
 	getProductByShortName,
-	getAllProductsController,
-	getAllCategoriesController
+	getAllProductsController
 };

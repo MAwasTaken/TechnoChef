@@ -20,7 +20,7 @@ const createCommentController = async (req, res) => {
 		res.status(201).json(savedComment);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -28,6 +28,7 @@ const createCommentController = async (req, res) => {
 const updateCommentController = async (req, res) => {
 	try {
 		if (!req.body) return res.status(400).json({ massage: 'the request needs a body.' });
+		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
 
 		// validate input
 		await validation.validateAsync(req.body);
@@ -45,7 +46,7 @@ const updateCommentController = async (req, res) => {
 		res.status(200).json(updatedComment);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -61,7 +62,7 @@ const confirmCommentController = async (req, res) => {
 		res.status(200).json({ massage: 'comment confirmed successfully !' });
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -78,7 +79,7 @@ const deleteCommentController = async (req, res) => {
 		res.status(200).json('comment deleted successfully !');
 	} catch (err) {
 		// return the err if there is one.
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -92,7 +93,7 @@ const getAllUserCommentsController = async (req, res) => {
 		res.status(200).json(userComments);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -108,7 +109,7 @@ const getOneCommentByIdController = async (req, res) => {
 		res.status(200).json(comment);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 
@@ -125,7 +126,7 @@ const getCommentByProductController = async (req, res) => {
 		res.status(200).json(userComments);
 	} catch (err) {
 		// return the err if there is one
-		res.status(500).json(err);
+		res.status(400).json(err);
 	}
 };
 

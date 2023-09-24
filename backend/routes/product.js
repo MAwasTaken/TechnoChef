@@ -39,8 +39,5 @@ router.get('/findByShortName/:shortname', controller.getProductByShortName);
 //GET ALL PRODUCTS router
 router.get('/', controller.getAllProductsController);
 
-// GET ALL Categories
-router.get('/getCategories', controller.getAllCategoriesController);
-
 //export the Router
 module.exports = router;

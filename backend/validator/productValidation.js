@@ -5,7 +5,7 @@ const model = joi.object({
 	shortName: joi.string().max(10),
 	productName: joi.string(),
 	price: joi.number().positive(),
-	categories: joi.array().single(),
+	category: joi.string(),
 	productColor: joi.array(),
 	QTY: joi.number().positive(),
 	discount: joi.number().min(0).max(100),
