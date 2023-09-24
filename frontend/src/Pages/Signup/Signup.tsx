@@ -1,13 +1,9 @@
 // react
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // icons
 import { IoCreateOutline } from 'react-icons/io5';
-import { BsTelephone } from 'react-icons/bs';
-import { AiOutlineIdcard } from 'react-icons/ai';
-import { BiUser } from 'react-icons/bi';
-import { FiLock } from 'react-icons/fi';
 
 // google recaptcha
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -15,6 +11,17 @@ import ReCAPTCHA from 'react-google-recaptcha';
 // components
 import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
+
+// react hook form
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { signUpAuthSchema } from '../../Services/Yup/signupAuth';
+
+// types
+import { signupInputs } from '../../Types/signupInputs.types';
+
+// react query
+import useSignup from '../../Hooks/useSignup';
 
 // signup page
 const Signup: React.FC = () => {
@@ -27,12 +34,34 @@ const Signup: React.FC = () => {
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 	}, []);
 
+	// initialize hook form
+	const {
+		register,
+		handleSubmit,
+		getValues,
+		formState: { errors }
+	} = useForm<signupInputs>({
+		mode: 'onBlur',
+		resolver: yupResolver(signUpAuthSchema)
+	});
+
+	// google recaptch handler
+	const [isRecaptcha, setIsRecaptcha] = useState<boolean>(true);
+
+	// POST auth signup
+	const { isSuccess, isError, mutate: signup } = useSignup(getValues());
+
+	// signup handler
+	const signupHandler: SubmitHandler<signupInputs> = (data) => {
+		console.log(data);
+	};
+
 	// tsx
 	return (
 		<div className="flex h-screen flex-col justify-between">
 			<Header />
 			<div className="flex items-center justify-center">
-				<main className="bg-Info/50 flex h-auto w-full flex-col items-center gap-y-2 px-8 py-8 backdrop-blur-[2px] sm:w-4/4 md:rounded-3xl md:gap-y-4 md:w-[690px]">
+				<main className="md:bg-Info/50 bg-white flex h-auto w-full flex-col items-center gap-y-2 px-8 py-8 backdrop-blur-[2px] sm:w-4/4 md:rounded-3xl md:gap-y-4 md:w-[690px]">
 					{/* logo */}
 					<Link
 						className="font-Lalezar mt-2 text-3xl font-bold tracking-tight text-orange-500 transition-all hover:text-orange-600 md:text-3xl"
@@ -46,56 +75,35 @@ const Signup: React.FC = () => {
 							<IoCreateOutline className="text-red-500" />
 							<span>ساخت حساب‌کاربری</span>
 						</h2>
-						{/* <p className="flex items-center gap-x-[2px] text-[10px] tracking-tighter md:gap-x-1 md:text-sm">
-							<span className="hidden md:inline-block">حساب‌کاربری دارید؟</span>
-							<Link className="font-bold text-blue-600 hover:text-blue-700" to="/login">
-								ورود به حساب‌کاربری
-							</Link>
-						</p> */}
 					</section>
 					{/* form */}
-					<form className="flex flex-col gap-y-2 md:gap-y-4">
+					<form className="flex flex-col gap-y-2 md:gap-y-4" onSubmit={handleSubmit(signupHandler)}>
 						{/* first name */}
 						<label className="flex items-center justify-center" htmlFor="firstName">
-							{/* label */}
-							<div className="md:right-[56px] absolute right-[20px] flex items-center gap-x-[2px] text-[16px] tracking-tighter md:gap-x-1 md:text-lg">
-								<BiUser className="text-red-500" />
-								<span>نام:</span>
-							</div>
 							{/* input */}
 							<input
-								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px-4 w-10/12 text-right focus:shadow-md transition-all"
-								placeholder="مثلا: محسن"
+								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px-4 w-full text-right focus:shadow-md transition-all"
+								placeholder="نام"
 								type="text"
 								id="firstName"
 							/>
 						</label>
 						{/* last name */}
 						<label className="flex items-center justify-center" htmlFor="lastName">
-							{/* label */}
-							<div className="md:right-[56px] absolute right-[20px] flex items-center gap-x-[2px] text-[16px] tracking-tighter md:gap-x-1 md:text-lg">
-								<AiOutlineIdcard className="text-red-500" />
-								<span>نام‌خانوادگی:</span>
-							</div>
 							{/* input */}
 							<input
-								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px-4 w-10/12 text-right focus:shadow-md transition-all"
-								placeholder="مثلا: رضایی"
+								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px-4 w-full text-right focus:shadow-md transition-all"
+								placeholder="نام‌خانوادگی"
 								type="text"
 								id="lastName"
 							/>
 						</label>
 						{/* phone */}
 						<label className="flex items-center justify-center" htmlFor="phone">
-							{/* label */}
-							<div className="md:right-[56px] absolute right-[20px] flex items-center gap-x-[2px] text-[16px] tracking-tighter md:gap-x-1 md:text-lg">
-								<BsTelephone className="text-red-500" />
-								<span>شماره‌تماس:</span>
-							</div>
 							{/* input */}
 							<input
-								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px-4 w-10/12 text-right focus:shadow-md transition-all"
-								placeholder="مثلا: ۰۹۱۲۲۲۷۴۸۷۶"
+								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px-4 w-full text-right focus:shadow-md transition-all"
+								placeholder="شماره‌تماس"
 								type="tel"
 								inputMode="tel"
 								id="phone"
@@ -103,53 +111,53 @@ const Signup: React.FC = () => {
 						</label>
 						{/* email */}
 						<label className="flex items-center justify-center" htmlFor="email">
-							{/* label */}
-							<div className="md:right-[56px] absolute right-[20px] flex items-center gap-x-[2px] text-[16px] tracking-tighter md:gap-x-1 md:text-lg">
-								<BsTelephone className="text-red-500" />
-								<span>ایمیل:</span>
-							</div>
 							{/* input */}
 							<input
-								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px-4 w-10/12 text-right focus:shadow-md transition-all"
-								placeholder="مثلا: hi@technoshef.com"
+								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px-4 w-full text-right focus:shadow-md transition-all"
+								placeholder="ایمیل"
 								type="email"
 								inputMode="email"
 								id="email"
 							/>
 						</label>
-						{/* password */}
-						<label className="flex items-center justify-center" htmlFor="password">
-							{/* label */}
-							<div className="md:right-[56px] absolute right-[20px] flex items-center gap-x-[2px] text-[16px] tracking-tighter md:gap-x-1 md:text-lg">
-								<FiLock className="text-red-500" />
-								<span>رمزعبور:</span>
-							</div>
+						{/* username */}
+						<label className="flex items-center justify-center" htmlFor="username">
 							{/* input */}
 							<input
-								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px-4 w-10/12 text-right focus:shadow-md transition-all"
-								placeholder="مثلا: @techn0$hef"
+								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px-4 w-full text-right focus:shadow-md transition-all"
+								placeholder="نام‌کاربری"
+								type="email"
+								inputMode="email"
+								id="username"
+							/>
+						</label>
+						{/* password */}
+						<label className="flex items-center justify-center" htmlFor="password">
+							{/* input */}
+							<input
+								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px-4 w-full text-right focus:shadow-md transition-all"
+								placeholder="رمزعبور"
 								type="password"
 								id="password"
 							/>
 						</label>
 						{/* confirm password */}
 						<label className="flex items-center justify-center" htmlFor="confirmPassword">
-							{/* label */}
-							<div className="md:right-[56px] absolute right-[20px] flex items-center gap-x-[2px] text-[16px] tracking-tighter md:gap-x-1 md:text-lg">
-								<FiLock className="text-red-500" />
-								<span>تکرار رمزعبور:</span>
-							</div>
 							{/* input */}
 							<input
-								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px-4 w-10/12 text-right focus:shadow-md transition-all"
-								placeholder="مثلا: @techn0$hef"
+								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px-4 w-full text-right focus:shadow-md transition-all"
+								placeholder="تکرار رمزعبور"
 								type="password"
 								id="confirmPassword"
 							/>
 						</label>
 						{/* google recaptcha */}
 						<section>
-							<ReCAPTCHA sitekey="6LcFwgAoAAAAAEmWVSlMLHjYKEMqcOPu1UnCsUTb" size="normal" />
+							<ReCAPTCHA
+								onChange={() => setIsRecaptcha(!isRecaptcha)}
+								sitekey="6LcFwgAoAAAAAEmWVSlMLHjYKEMqcOPu1UnCsUTb"
+								size="normal"
+							/>
 						</section>
 						{/* submit button */}
 						<button
@@ -159,12 +167,15 @@ const Signup: React.FC = () => {
 							ورود
 						</button>
 					</form>
-					<p className="flex mt-3 w-full items-center justify-center gap-x-[2px] text-xs md:gap-x-1 md:text-sm">
-							<span className="md:inline-block md:text-sm">حساب‌کاربری دارید؟</span>
-							<Link className="text-blue-600 hover:text-blue-700" to="/login">
-								ورود به حساب‌کاربری
-							</Link>
-						</p>
+					<p className="flex w-full items-center justify-center gap-x-[2px] text-xs md:gap-x-1 md:text-sm">
+						<span className="md:text-xs">حساب‌کاربری دارید</span>
+						<Link
+							className="text-blue-600 tracking-tight font-bold hover:text-blue-700"
+							to="/login"
+						>
+							ورود به حساب‌کاربری
+						</Link>
+					</p>
 					{/* rules */}
 					<ul className="text-Dark/75 list-disc text-xs self-start px-8 py-4">
 						<li>
