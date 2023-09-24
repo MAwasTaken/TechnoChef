@@ -2,6 +2,7 @@
 const express = require('express');
 var cookieParser = require('cookie-parser');
 const cors = require('cors');
+const corsOptions = require('./corsConfig');
 
 // routers imports
 const authRouter = require('../routes/auth');
@@ -14,7 +15,7 @@ const categoryRouter = require('../routes/category');
 //use the routers and middleware , Export the function
 module.exports = function (app) {
 	// CORS for browsers
-	app.use(cors());
+	app.use(cors(corsOptions));
 
 	// JSON converter
 	app.use(express.json());
