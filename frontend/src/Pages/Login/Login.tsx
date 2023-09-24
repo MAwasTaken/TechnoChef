@@ -24,6 +24,7 @@ import { loginInputs } from '../../Types/loginInputs.types';
 // react toastify
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import { postLogin } from '../../Services/Axios/Requests/auth';
 
 // login page
 const Login: React.FC = () => {
@@ -46,7 +47,7 @@ const Login: React.FC = () => {
 		getValues,
 		formState: { errors }
 	} = useForm<loginInputs>({
-		mode: 'onBlur',
+		mode: 'onChange',
 		resolver: yupResolver(loginAuthSchema)
 	});
 
@@ -100,6 +101,7 @@ const Login: React.FC = () => {
 									inputMode="email"
 									placeholder="نام کاربری یا ایمیل"
 									id="username"
+									autoComplete="username"
 								/>
 								{errors.userInfo ? (
 									<span className="text-red-500 cursor-pointer">{errors.userInfo.message}</span>
@@ -120,6 +122,7 @@ const Login: React.FC = () => {
 									type="password"
 									id="password"
 									dir="ltr"
+									autoComplete="current-password"
 								/>
 								{errors.password ? (
 									<span className="text-red-500 cursor-pointer">{errors.password.message}</span>
@@ -180,14 +183,14 @@ const Login: React.FC = () => {
 			{/* error toast */}
 			{isError
 				? toast.error('ورود به حساب‌کاربری موفقیت‌آمیز نبود ❌', {
-						onClose: () => location.reload()
+						// onClose: () => location.reload()
 				  })
 				: null}
 
 			{/* success toast */}
 			{isSuccess
-				? toast.error('ورود به حساب‌کاربری موفقیت‌آمیز بود ✅', {
-						onClose: () => navigate('/panel')
+				? toast.success('ورود به حساب‌کاربری موفقیت‌آمیز بود ✅', {
+						// onClose: () => navigate('/panel')
 				  })
 				: null}
 			{/* react toastify container */}
