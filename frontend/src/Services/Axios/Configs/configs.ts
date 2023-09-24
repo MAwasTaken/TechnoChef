@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // create instance
 const axiosInstance = axios.create({
-	baseURL: 'http://localhost:3000/api'
+	baseURL: 'http://45.159.150.221:3000/api'
 });
 
 // request interceptors
