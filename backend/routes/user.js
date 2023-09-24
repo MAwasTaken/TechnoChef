@@ -10,10 +10,13 @@ router.put('/:id', verifyTokenAndAuth, controller.updateUserController);
 router.delete('/:id', verifyTokenAndAuth, controller.deleteUserController);
 
 //GET USER router
-router.get('/find/:id', verifyTokenAndAuth, controller.getUserByIdController);
+router.get('/find/:id', verifyTokenAndAdmin, controller.getUserByIdController);
 
 //GET ALL USER router
-router.get('/', verifyTokenAndAdmin, controller.getAllUsersController);
+router.get('/getAll', verifyTokenAndAdmin, controller.getAllUsersController);
+
+// GET Me router
+router.get('/', verifyTokenAndAuth, controller.getMeController);
 
 //export the Router
 module.exports = router;

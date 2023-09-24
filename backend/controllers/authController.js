@@ -62,7 +62,7 @@ const logInController = async (req, res) => {
 			);
 
 			// split the PASSWORD from the object
-			const { password, ...others } = user._doc;
+			const { password, isAdmin, __v, ...others } = user._doc;
 
 			// if the password doesn't match
 			if (inputPassword !== originalPassword) {
@@ -77,7 +77,7 @@ const logInController = async (req, res) => {
 						secure: true,
 						credentials: true
 					})
-					.json({ ...others });
+					.json(others);
 			}
 		}
 	} catch (err) {

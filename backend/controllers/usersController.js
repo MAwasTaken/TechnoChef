@@ -58,10 +58,12 @@ const deleteUserController = async (req, res) => {
 // get User By Id
 const getUserByIdController = async (req, res) => {
 	try {
-		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+		if (req.params.id == ':id')
+			return res.status(400).json({ massage: 'the request needs an Id params.' });
 
 		// find the User By the ID
 		const user = await User.findById(req.params.id);
+		if (!user) return res.status(404).json({ massage: 'user not found' });
 
 		// split the from the object
 		const { password, ...others } = user._doc;
@@ -70,7 +72,19 @@ const getUserByIdController = async (req, res) => {
 		res.status(200).json(others);
 	} catch (err) {
 		// return the err if there is one
+		console.log(err);
 		res.status(400).json(err);
+	}
+};
+
+// Get Me
+const getMeController = async (req, res) => {
+	try {
+		const user = await User.findById(req.user.id);
+		const { password, isAdmin, __v, ...others } = user._doc;
+		res.status(200).json(others);
+	} catch (err) {
+		res.status(401).json({ massage: 'you are not authenticated' });
 	}
 };
 
@@ -105,5 +119,6 @@ module.exports = {
 	updateUserController,
 	deleteUserController,
 	getUserByIdController,
-	getAllUsersController
+	getAllUsersController,
+	getMeController
 };
