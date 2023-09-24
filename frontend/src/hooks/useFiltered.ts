@@ -2,7 +2,7 @@
 import { useQuery } from 'react-query';
 
 // axios
-import { getFiltered } from '../Services/Axios/Requests/products/products';
+import { getFiltered } from '../Services/Axios/Requests/products';
 
 // use best sellers
 const useFiltered = (category: string[], search: string) =>
@@ -13,7 +13,7 @@ const useFiltered = (category: string[], search: string) =>
 		},
 		{
 			refetchOnWindowFocus: false,
-			initialData: () => {}
+			keepPreviousData: true
 		}
 	);
 

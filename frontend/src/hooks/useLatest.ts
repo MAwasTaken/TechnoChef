@@ -2,7 +2,7 @@
 import { useQuery } from 'react-query';
 
 // axios
-import { getLatest } from '../Services/Axios/Requests/products/products';
+import { getLatest } from '../Services/Axios/Requests/products';
 
 // use best sellers
 const useLatest = () =>

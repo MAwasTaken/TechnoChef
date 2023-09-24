@@ -1,8 +1,8 @@
 // axios
-import axiosInstance from '../../Configs/configs';
+import axiosInstance from '../Configs/configs';
 
 // GET best sellers
-const getBestSellers = async () => axiosInstance.get('/products?bestseller');
+const getBestSellers = async () => axiosInstance.get('/products?bestseller=true');
 
 // GET latest
 const getLatest = async () => axiosInstance.get('/products?new');
