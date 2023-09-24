@@ -22,7 +22,7 @@ const signUpAuthSchema = object().shape({
 		.min(8, 'طول رمزعبور حداقل ۸ کاراکتر می‌باشد!'),
 	confirmPassword: string()
 		.required('لطفا این قسمت را خالی رها نکنید!')
-		.oneOf([ref('password')], 'مقدار وارد شده صحیح نمی‌باشد!')
+		.oneOf([ref('password')], 'مقدار وارد شده با رمزعبور برابر نمی‌باشد!')
 });
 
 export { signUpAuthSchema };

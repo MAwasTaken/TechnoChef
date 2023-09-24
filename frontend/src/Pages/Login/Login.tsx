@@ -11,7 +11,6 @@ import ReCAPTCHA from 'react-google-recaptcha';
 // components
 import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
-import useLogin from '../../Hooks/useLogin';
 
 // react hook form
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -44,21 +43,46 @@ const Login: React.FC = () => {
 	const {
 		register,
 		handleSubmit,
-		getValues,
 		formState: { errors }
 	} = useForm<loginInputs>({
-		mode: 'onChange',
+		mode: 'all',
 		resolver: yupResolver(loginAuthSchema)
 	});
 
 	// google recaptch handler
-	const [isRecaptcha, setIsRecaptcha] = useState<boolean>(true);
+	const [isRecaptcha, setIsRecaptcha] = useState<boolean>(false);
 
-	// POST auth login
-	const { isSuccess, isError, mutate: login } = useLogin(getValues());
+	// form xss prevent handler
+	const [isFormReady, setIsFormReady] = useState<boolean>(true);
 
 	// login handler
-	const loginHandler: SubmitHandler<loginInputs> = () => login();
+	const loginHandler: SubmitHandler<loginInputs> = (data) => {
+		// set form unavailable
+		setIsFormReady(false);
+
+		// POST login
+		postLogin(data)
+			// on success
+			.then((res) =>
+				toast.success(`${res.data.firstName} ${res.data.lastName} با موفقیت وارد شدید 👋`, {
+					onClose: () => {
+						// navigate to panel
+						// navigate('/panel');
+
+						// set form available
+						setIsFormReady(true);
+					}
+				})
+			)
+			// on error
+			.catch(() =>
+				toast.error('اطلاعات وارد شده صحیح نمی‌باشند ❌', {
+					onClose: () =>
+						// set form available
+						setIsFormReady(true)
+				})
+			);
+	};
 
 	// tsx
 	return (
@@ -66,7 +90,7 @@ const Login: React.FC = () => {
 			<div className="flex h-screen flex-col justify-between">
 				<Header />
 				<div className="flex items-center justify-center">
-					<main className="md:bg-Info/50 bg-white flex h-auto w-full flex-col items-center gap-y-2 px-8 py-8 backdrop-blur-[2px] sm:w-4/4 md:rounded-3xl md:gap-y-4 md:w-[590px]">
+					<main className="md:bg-Info/50 bg-transparent flex h-auto w-full flex-col items-center gap-y-2 px-8 py-8 backdrop-blur-[2px] sm:w-4/4 md:rounded-3xl md:gap-y-4 md:w-[590px]">
 						{/* logo */}
 						<Link
 							className="font-Lalezar mt-2 text-3xl font-bold tracking-tight text-orange-500 transition-all hover:text-orange-600 md:text-3xl"
@@ -148,7 +172,7 @@ const Login: React.FC = () => {
 							</section>
 							{/* submit button */}
 							<button
-								disabled={!isRecaptcha}
+								disabled={!(isRecaptcha && isFormReady)}
 								className="font-Lalezar mx-auto mt-2 bg-DarkYellow flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-base shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg disabled:bg-gray-400"
 								type="submit"
 							>
@@ -180,19 +204,6 @@ const Login: React.FC = () => {
 				</div>
 				<Footer />
 			</div>
-			{/* error toast */}
-			{isError
-				? toast.error('ورود به حساب‌کاربری موفقیت‌آمیز نبود ❌', {
-						// onClose: () => location.reload()
-				  })
-				: null}
-
-			{/* success toast */}
-			{isSuccess
-				? toast.success('ورود به حساب‌کاربری موفقیت‌آمیز بود ✅', {
-						// onClose: () => navigate('/panel')
-				  })
-				: null}
 			{/* react toastify container */}
 			<ToastContainer
 				position="bottom-right"

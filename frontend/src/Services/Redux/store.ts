@@ -5,12 +5,14 @@ import { useDispatch } from 'react-redux';
 // reducers
 import Search from './Slices/Search';
 import Category from './Slices/Category';
+import User from './Slices/User';
 
 // store
 export const store = configureStore({
 	reducer: {
 		search: Search,
-		category: Category
+		category: Category,
+		user: User
 	}
 });
 
