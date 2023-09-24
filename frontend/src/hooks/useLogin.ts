@@ -5,7 +5,7 @@ import { useMutation } from 'react-query';
 import { postLogin } from '../Services/Axios/Requests/auth';
 
 // use user login
-const useLogin = (userInfos: string[]) =>
+const useLogin = (userInfos: { userInfo: string; password: string }) =>
 	useMutation('Auth/login', () => postLogin(userInfos).then((res) => res.data));
 
 // exports

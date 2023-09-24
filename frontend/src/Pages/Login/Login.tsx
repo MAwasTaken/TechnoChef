@@ -51,7 +51,7 @@ const Login: React.FC = () => {
 	});
 
 	// google recaptch handler
-	const [isRecaptcha, setIsRecaptcha] = useState<boolean>(false);
+	const [isRecaptcha, setIsRecaptcha] = useState<boolean>(true);
 
 	// POST auth login
 	const { isSuccess, isError, mutate: login } = useLogin(getValues());
@@ -65,7 +65,7 @@ const Login: React.FC = () => {
 			<div className="flex h-screen flex-col justify-between">
 				<Header />
 				<div className="flex items-center justify-center">
-					<main className="bg-Info/50 flex h-auto w-full flex-col items-center gap-y-2 px-8 py-8 backdrop-blur-[2px] sm:w-4/4 md:rounded-3xl md:gap-y-4 md:w-[590px]">
+					<main className="md:bg-Info/50 bg-white flex h-auto w-full flex-col items-center gap-y-2 px-8 py-8 backdrop-blur-[2px] sm:w-4/4 md:rounded-3xl md:gap-y-4 md:w-[590px]">
 						{/* logo */}
 						<Link
 							className="font-Lalezar mt-2 text-3xl font-bold tracking-tight text-orange-500 transition-all hover:text-orange-600 md:text-3xl"
@@ -128,7 +128,10 @@ const Login: React.FC = () => {
 							{/* forgot password */}
 							<p className="flex w-full items-center justify-center gap-x-[2px] text-xs md:gap-x-1 md:text-sm">
 								<span className="md:text-xs">رمزعبور خود را فراموش کرده‌اید؟</span>
-								<Link className="text-blue-600 hover:text-blue-700" to="/signup">
+								<Link
+									className="text-blue-600 tracking-tight font-bold hover:text-blue-700"
+									to="/signup"
+								>
 									بازیابی رمزعبور
 								</Link>
 							</p>
@@ -150,9 +153,12 @@ const Login: React.FC = () => {
 							</button>
 						</form>
 						{/* signup */}
-						<p className="flex mt-3 w-full items-center justify-center gap-x-[2px] text-xs md:gap-x-1 md:text-sm">
-							<span className="md:inline-block md:text-sm">حساب‌کاربری ندارید؟</span>
-							<Link className="text-blue-600 hover:text-blue-700" to="/signup">
+						<p className="flex w-full items-center justify-center gap-x-[2px] text-xs md:gap-x-1 md:text-sm">
+							<span className="md:text-xs">حساب‌کاربری ندارید؟</span>
+							<Link
+								className="text-blue-600 tracking-tight font-bold hover:text-blue-700"
+								to="/signup"
+							>
 								ساخت حساب‌کاربری
 							</Link>
 						</p>
