@@ -17,9 +17,7 @@ const postSignup = async (userInfos: {
 	password: string;
 	isAdmin?: false;
 }) =>
-	axiosInstance.post('/auth/register', userInfos, {
-		withCredentials: true
-	});
+	axiosInstance.post('/auth/register', userInfos);
 
 // exports
 export { postLogin, postSignup };

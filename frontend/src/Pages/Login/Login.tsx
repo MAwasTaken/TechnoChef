@@ -23,12 +23,24 @@ import { loginInputs } from '../../Types/loginInputs.types';
 // react toastify
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+
+// axios
 import { postLogin } from '../../Services/Axios/Requests/auth';
+
+// react query
+import useGetMe from '../../Hooks/useGetMe';
+
+// redux
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../Services/Redux/Slices/User';
 
 // login page
 const Login: React.FC = () => {
 	// navigator
 	const navigate = useNavigate();
+
+	// redux dispatch hook
+	const dispatch = useDispatch();
 
 	// mounting side effects
 	useEffect(() => {
@@ -55,19 +67,28 @@ const Login: React.FC = () => {
 	// form xss prevent handler
 	const [isFormReady, setIsFormReady] = useState<boolean>(true);
 
+	// GET user data when already login
+	const { data, refetch } = useGetMe();
+
 	// login handler
-	const loginHandler: SubmitHandler<loginInputs> = (data) => {
+	const loginHandler: SubmitHandler<loginInputs> = (formData) => {
 		// set form unavailable
 		setIsFormReady(false);
 
 		// POST login
-		postLogin(data)
+		postLogin(formData)
 			// on success
 			.then((res) =>
 				toast.success(`${res.data.firstName} ${res.data.lastName} با موفقیت وارد شدید 👋`, {
+					onOpen: () => {
+						refetch();
+
+						// set user data to redux global state
+						dispatch(setUser(data));
+					},
 					onClose: () => {
 						// navigate to panel
-						// navigate('/panel');
+						navigate('/panel');
 
 						// set form available
 						setIsFormReady(true);

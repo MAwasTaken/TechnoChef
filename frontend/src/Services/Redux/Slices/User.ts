@@ -49,10 +49,26 @@ const slice = createSlice({
 				isAdmin: boolean;
 				updatedAt: string;
 			}>
-		) => action.payload
+		) => action.payload,
+		clearUser: () => {
+			return {
+				_id: '',
+				username: '',
+				firstName: '',
+				lastName: '',
+				phoneNumber: '',
+				email: '',
+				postalCode: '',
+				nationalCode: '',
+				address: '',
+				emailVerified: false,
+				createdAt: '',
+				updatedAt: ''
+			};
+		}
 	}
 });
 
 // exports
-export const {} = slice.actions;
+export const { setUser, clearUser } = slice.actions;
 export default slice.reducer;

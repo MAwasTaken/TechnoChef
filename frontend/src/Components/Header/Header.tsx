@@ -1,11 +1,35 @@
 // react
+import { useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 // components
 import GlobalSearch from '../GlobalSearch/GlobalSearch';
 
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { clearUser, setUser } from '../../Services/Redux/Slices/User';
+
+// react query
+import useGetMe from '../../Hooks/useGetMe';
+
+// icons
+import { AiOutlineUser } from 'react-icons/ai';
+
 // header
 const Header: React.FC = () => {
+	// redux dispatch hook
+	const dispatch = useDispatch();
+
+	// GET user data when already login
+	const { data, isFetching } = useGetMe();
+
+	useEffect(() => {
+		// set user data to redux global state
+		data ? dispatch(setUser(data)) : dispatch(clearUser());
+	}, [data]);
+
+	const user = useSelector((state: any) => state.user);
+
 	// tsx
 	return (
 		// container
@@ -55,19 +79,34 @@ const Header: React.FC = () => {
 				{/* search button */}
 				<GlobalSearch />
 				{/* login / register / panel button */}
-				<Link
-					to="/login"
-					className="border-Dark/50 hover:border-Dark relative flex justify-between rounded-lg border p-1.5 transition-all hover:shadow-md md:gap-x-4 md:border-2 md:p-2 md:px-5"
-				>
-					{/* login */}
-					<span className="text-Dark">ورود</span>
-					{/* divider */}
-					<span className="bg-DarkYellow absolute right-[27px] top-1 mr-1  h-3/4 w-px rounded-full md:right-12 md:top-1.5 md:mx-3 md:mr-3.5 md:w-[2px]">
-						{' '}
-					</span>
-					{/* register */}
-					<span className="text-Dark mr-2 md:mr-2">ثبت‌نام</span>
-				</Link>
+				{user._id ? (
+					<Link
+						to="/panel"
+						className="border-DarkYellow relative flex justify-between rounded-lg border p-1.5 transition-all hover:shadow-md md:gap-x-4 md:border-2 md:p-2 md:px-5"
+					>
+						<AiOutlineUser className="sm:hidden" />
+						<span className="hidden sm:block">
+							{user.firstName} {user.lastName}
+						</span>
+					</Link>
+				) : (
+					<Link
+						to="/login"
+						className={`border-Dark/50 hover:border-Dark relative flex justify-between rounded-lg border p-1.5 transition-all hover:shadow-md md:gap-x-4 md:border-2 md:p-2 md:px-5 ${
+							isFetching ? 'animate-bounce' : ''
+						}`}
+					>
+						<AiOutlineUser className="sm:hidden text-DarkYellow" />
+						{/* login */}
+						<span className="text-Dark hidden sm:block">ورود</span>
+						{/* divider */}
+						<span className="bg-DarkYellow hidden sm:block absolute right-[27px] top-1 mr-1  h-3/4 w-px rounded-full md:right-12 md:top-1.5 md:mx-3 md:mr-3.5 md:w-[2px]">
+							{' '}
+						</span>
+						{/* register */}
+						<span className="text-Dark hidden sm:block mr-2 md:mr-2">ثبت‌نام</span>
+					</Link>
+				)}
 			</div>
 		</header>
 	);
