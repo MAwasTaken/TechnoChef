@@ -58,7 +58,7 @@ const logInController = async (req, res) => {
 					email: user.email
 				},
 				process.env.JWT_SEC_key,
-				{ expiresIn: '1d' }
+				{ expiresIn: '6h' }
 			);
 
 			// split the PASSWORD from the object
