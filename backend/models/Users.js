@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema(
 		phoneNumber: { type: String, unique: true },
 		email: { type: String, unique: true, required: true },
 		postalCode: { type: String },
-		nationalCode: { type: String, unique: true },
+		nationalCode: { type: String},
 		address: { type: String },
 		isAdmin: { type: Boolean, default: false },
 		emailVerified: { type: Boolean, default: false }
