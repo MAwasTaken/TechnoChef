@@ -26,6 +26,9 @@ import { postSignup } from '../../Services/Axios/Requests/auth';
 // react toastify
 import { ToastContainer, toast } from 'react-toastify';
 
+// react spinner
+import { BeatLoader } from 'react-spinners';
+
 // signup page
 const Signup: React.FC = () => {
 	// navigator
@@ -56,6 +59,9 @@ const Signup: React.FC = () => {
 
 	// form xss prevent handler
 	const [isFormReady, setIsFormReady] = useState<boolean>(true);
+
+	// spinner handler
+	const [isFormFetching, setIsFormFetching] = useState<boolean>(false);
 
 	// signup handler
 	const signupHandler: SubmitHandler<signupInputs> = (data) => {
@@ -257,11 +263,11 @@ const Signup: React.FC = () => {
 							</section>
 							{/* submit button */}
 							<button
-								disabled={!(isRecaptcha && isFormReady)}
-								className="font-Lalezar mx-auto mt-2 bg-DarkYellow flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-base shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg disabled:bg-gray-400"
+								// disabled={!(isRecaptcha && isFormReady)}
+								className="font-Lalezar mx-auto mt-2 md:h-11 h-9 bg-DarkYellow flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-base shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg disabled:bg-gray-400"
 								type="submit"
 							>
-								ورود
+								{isFormFetching ? <BeatLoader size={10} color="#FCFCFC" /> : 'ثبت‌نام'}
 							</button>
 						</form>
 						<p className="flex w-full items-center justify-center gap-x-[2px] text-xs md:gap-x-1 md:text-sm">

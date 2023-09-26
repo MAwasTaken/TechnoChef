@@ -34,6 +34,9 @@ import useGetMe from '../../Hooks/useGetMe';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../Services/Redux/Slices/User';
 
+// react spinner
+import { BeatLoader } from 'react-spinners';
+
 // login page
 const Login: React.FC = () => {
 	// navigator
@@ -70,10 +73,16 @@ const Login: React.FC = () => {
 	// GET user data when already login
 	const { data, refetch } = useGetMe();
 
+  // spinner handler
+	const [isFormFetching, setIsFormFetching] = useState<boolean>(false);
+
 	// login handler
 	const loginHandler: SubmitHandler<loginInputs> = (formData) => {
 		// set form unavailable
 		setIsFormReady(false);
+
+		// set is fetching to true
+		setIsFormFetching(true);
 
 		// POST login
 		postLogin(formData)
@@ -102,7 +111,9 @@ const Login: React.FC = () => {
 						// set form available
 						setIsFormReady(true)
 				})
-			);
+			)
+			// set is fetching to false
+			.finally(() => setIsFormFetching(false));
 	};
 
 	// tsx
@@ -193,11 +204,11 @@ const Login: React.FC = () => {
 							</section>
 							{/* submit button */}
 							<button
-								disabled={!(isRecaptcha && isFormReady)}
-								className="font-Lalezar mx-auto mt-2 bg-DarkYellow flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-base shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg disabled:bg-gray-400"
+								// disabled={!(isRecaptcha && isFormReady)}
+								className="font-Lalezar mx-auto mt-2 md:h-11 h-9 bg-DarkYellow flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-base shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg disabled:bg-gray-400"
 								type="submit"
 							>
-								ورود
+								{isFormFetching ? <BeatLoader size={10} color="#FCFCFC" /> : 'ورود'}
 							</button>
 						</form>
 						{/* signup */}

@@ -7,9 +7,8 @@ import { getMe } from '../Services/Axios/Requests/user';
 // use best sellers
 const useGetMe = () =>
 	useQuery('User/GetME', () => getMe().then((res) => res.data), {
-		// refetchOnWindowFocus: false,
-		retry: false,
-		cacheTime: 0
+		refetchOnWindowFocus: false,
+    refetchOnMount: false
 	});
 
 // exports
