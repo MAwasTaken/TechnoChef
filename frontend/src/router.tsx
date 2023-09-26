@@ -8,7 +8,7 @@ import ProductDetails from './Pages/Product details/ProductDetail';
 
 // AdminPanel
 import AdminPanel from './Pages/AdminPanel/AdminPanel';
-
+import PanelPrivate from './Components/Private/PanelPrivate';
 
 const routes = [
 	{ path: '/', element: <Index /> },
@@ -16,7 +16,14 @@ const routes = [
 	{ path: '/productDetails', element: <ProductDetails /> },
 	{ path: '/login', element: <Login /> },
 	{ path: '/signup', element: <Signup /> },
-	{ path: 'admin', element: <AdminPanel /> },
+	{
+		path: '/panel',
+		element: (
+			<PanelPrivate>
+				<AdminPanel />
+			</PanelPrivate>
+		)
+	},
 	{ path: '*', element: <UnknownPage /> }
 ];
 
