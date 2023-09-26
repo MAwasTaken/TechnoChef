@@ -1,5 +1,5 @@
 // react
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 // components
 import Header from '../../Components/Header/Header';
@@ -9,16 +9,46 @@ import ProductCategories from '../../Components/ProductsCategories/ProductCatego
 import ProductPrice from '../../Components/ProductsPrice/ProductPrice';
 import ProductSort from '../../Components/ProductSort/ProductSort';
 
+// react query
+import useFiltered from '../../Hooks/useFiltered';
+
+// types
+import { ProductProps } from '../../Types/Products.types';
+
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchValue } from '../../Services/Redux/Slices/Search';
+
 // Products page
 const Products = () => {
+	// redux dispatch hook
+	const dispatch = useDispatch();
+
 	// mounting side effects
 	useEffect(() => {
 		// change document title
-		document.title = 'تکنو | Technoshef - ورود';
+		document.title = 'تکنو | Technoshef - محصولات';
 
 		// scroll to top when mounting
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 	}, []);
+
+	// search
+	const searchValue = useSelector((state: any) => state.search);
+
+	// category
+	const categoryValue = useSelector((state: any) => state.category);
+
+	// GET products from react query
+	const { data, refetch, isFetching } = useFiltered(categoryValue, searchValue);
+
+	useEffect(() => {
+		// refetch data for search in products page
+		refetch();
+
+		// set search value to empty string for next usage
+		dispatch(setSearchValue(''));
+	}, [searchValue]);
 
 	// tsx
 	return (
@@ -36,194 +66,22 @@ const Products = () => {
 						<span className="bg-Dark/50 sticky top-10 h-full w-[2px]"></span>
 					</div>
 					{/* left side */}
-					<section className="flex h-max flex-col gap-y-5">
+					<section className="flex h-max flex-col gap-y-5 w-full">
 						<ProductSort />
 						{/* all products */}
-						<div
-							id="prod-all"
-							className="flex flex-wrap items-center justify-center gap-x-7 gap-y-10 xl:w-[780px] 2xl:w-full"
-						>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-							<ProductBox
-								gradientColor="#b91c1c"
-								colors={['#334155', '#ffffff', '#000000']}
-								imageSrc="Images/Products/p1.png"
-							/>
-						</div>
+						<main className="flex flex-wrap items-center justify-end gap-x-7 gap-y-10 xl:w-[780px] 2xl:w-full">
+							{isFetching ? (
+								<span className="flex items-center justify-center gap-x-5 text-center w-full font-bold xl:text-lg bg-sky-500 md:py-4 text-Light py-2 rounded-md">
+									در حال دریافت لیست محصولات از سرور صبر کنید !
+								</span>
+							) : data?.length ? (
+								data.map((product: ProductProps) => <ProductBox {...product} key={product._id} />)
+							) : (
+								<span className="text-center w-full font-bold xl:text-lg bg-rose-500 py-2 md:py-4 text-Light rounded-md flex gap-x-5 items-center justify-center mb-40">
+									این آرشیو یا فیلتر ها هیچ محصولی ندارند !
+								</span>
+							)}
+						</main>
 					</section>
 				</main>
 			</div>

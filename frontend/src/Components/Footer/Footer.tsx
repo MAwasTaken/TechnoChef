@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
 							</li>
 						</ul>
 					</div>
-					<div className="w-6/12">
+					<div className="w-5/12">
 						<h4 className="font-Lalezar mr-4 flex select-none items-center gap-x-1 text-sm md:gap-x-4 md:text-3xl">
 							<BsTelephone className="text-orange-500" />
 							ارتباط با ما
@@ -90,7 +90,7 @@ const Footer: React.FC = () => {
 									className="flex items-center justify-center gap-x-2 transition-all hover:text-blue-500 md:gap-x-4"
 									to="mailto:hi@technoshef.com"
 								>
-									<span>ایمیل:</span>
+									<span className="hidden sm:block">ایمیل:</span>
 									<span>info@technoshef.com</span>
 								</Link>
 							</li>
@@ -100,21 +100,9 @@ const Footer: React.FC = () => {
 									className="flex items-center justify-center gap-x-2 transition-all hover:text-blue-500 md:gap-x-4"
 									to="tel:09122274876"
 								>
-									<span>شماره تماس:</span>
+									<span className="hidden sm:block">شماره تماس:</span>
 									<span style={{ direction: 'ltr' }}>09122274876</span>
 								</Link>
-							</li>
-							<li className="flex items-start justify-center gap-x-1 md:gap-x-2">
-								<HiOutlineLocationMarker className="h-[18px] w-[18px] text-red-500" />
-								<div className="flex flex-wrap items-start justify-start gap-x-2 md:gap-x-4">
-									<span>آدرس:</span>
-									<div className="flex flex-col">
-										<span className="">
-											تهران٫ شهرک‌غرب٫ بلوار دریا٫ نرسیده به چهار‌راه مسجد٫ خیابان رامشه٫ پلاک25٫
-											واحد2
-										</span>
-									</div>
-								</div>
 							</li>
 							<li className="bg-Dark/60 hover:bg-Dark/70 h-10 w-10 cursor-pointer self-end rounded-lg p-2 transition-colors md:h-20 md:w-20">
 								<Link
@@ -129,7 +117,18 @@ const Footer: React.FC = () => {
 						</ul>
 					</div>
 				</div>
-				<span className="text-Dark/75 mt-2 w-full text-center md:mt-0">
+				<div className="flex gap-x-1 items-center justify-center mt-1">
+					<HiOutlineLocationMarker className="text-red-500 hidden sm:block" />
+					<div className="flex flex-wrap md:text-base text-[10px] items-start justify-start gap-x-2 md:gap-x-2">
+						<span className="hidden sm:block">آدرس:</span>
+						<div className="flex flex-col">
+							<span>
+								تهران٫ شهرک‌غرب٫ بلوار دریا٫ نرسیده به چهار‌راه مسجد٫ خیابان رامشه٫ پلاک٫25 واحد2
+							</span>
+						</div>
+					</div>
+				</div>
+				<span className="text-Dark/75 mt-2 w-full text-center md:mt-2">
 					تمامی حقوق این سایت متعلق به
 					<Link to="/" className="text-orange-500">
 						{' '}
