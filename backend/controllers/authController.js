@@ -86,5 +86,20 @@ const logInController = async (req, res) => {
 	}
 };
 
+// log out route
+const logOutController = async (req, res) => {
+	if (!req.cookies?.accessToken) {
+		return res.sendStatus(204);
+	}
+	res
+		.clearCookies('accessToken', {
+			httpOnly: true,
+			sameSite: 'None',
+			secure: true,
+			credentials: true
+		})
+		.status(204);
+};
+
 // export the functions.
-module.exports = { registerController, logInController };
+module.exports = { registerController, logInController, logOutController };
