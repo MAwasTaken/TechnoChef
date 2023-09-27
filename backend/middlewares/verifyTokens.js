@@ -5,7 +5,7 @@ const User = require('../models/Users');
 // A middleware function to validate TOKEN
 const verifyToken = (req, res, next) => {
 	// if there is cookie then verify it
-	if (req.cookies) {
+	if (req.cookies?.accessToken) {
 		//get the TOKEN from the cookies
 		const token = req.cookies.accessToken;
 		// verify the TOKEN
