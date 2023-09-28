@@ -20,7 +20,6 @@ const registerController = async (req, res) => {
 
 		// save the user in DB
 		const savedUser = await newUser.save();
-
 		// set the response
 		res.status(201).json(savedUser);
 	} catch (err) {
@@ -62,7 +61,7 @@ const logInController = async (req, res) => {
 			);
 
 			// split the PASSWORD from the object
-			const { password, isAdmin, __v, ...others } = user._doc;
+			const { password, __v, ...others } = user._doc;
 
 			// if the password doesn't match
 			if (inputPassword !== originalPassword) {
@@ -88,17 +87,22 @@ const logInController = async (req, res) => {
 
 // log out route
 const logOutController = async (req, res) => {
-	if (!req.cookies?.accessToken) {
-		return res.sendStatus(204);
+	try {
+		if (!req.cookies.accessToken) {
+			return res.sendStatus(204).json({ massage: 'you logged out' });
+		}
+		res
+			.clearCookie('accessToken', {
+				httpOnly: true,
+				sameSite: 'None',
+				secure: true
+			})
+			.json({ massage: 'you logged out successfully !! ' })
+			.status(204)
+			.end();
+	} catch (err) {
+		res.status(500).json(err);
 	}
-	res
-		.clearCookies('accessToken', {
-			httpOnly: true,
-			sameSite: 'None',
-			secure: true,
-			credentials: true
-		})
-		.status(204);
 };
 
 // export the functions.
