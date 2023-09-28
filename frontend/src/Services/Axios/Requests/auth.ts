@@ -16,8 +16,9 @@ const postSignup = async (userInfos: {
 	username: string;
 	password: string;
 	isAdmin?: false;
-}) =>
-	axiosInstance.post('/auth/register', userInfos);
+}) => axiosInstance.post('/auth/register', userInfos);
+
+const postLogout = async () => axiosInstance.post('/auth/logout', '', { withCredentials: true });
 
 // exports
 export { postLogin, postSignup };

@@ -6,9 +6,17 @@ import Signup from './Pages/Signup/Signup';
 import Products from './Pages/Products/products';
 import ProductDetails from './Pages/Product details/ProductDetail';
 
-// AdminPanel
-import AdminPanel from './Pages/AdminPanel/AdminPanel';
+// private routes
 import PanelPrivate from './Components/Private/PanelPrivate';
+
+// Admin Panel
+import AdminPanel from './Pages/AdminPanel/AdminPanel';
+import AdminPrivate from './Components/Private/AdminPrivate';
+
+// user panel
+import UserPanel from './Pages/UserPanel/UserPanel';
+import AllProducts from './Components/AdminPanel/Products/AllProducts';
+import Users from './Components/AdminPanel/Users/Users';
 
 const routes = [
 	{ path: '/', element: <Index /> },
@@ -20,9 +28,21 @@ const routes = [
 		path: '/panel',
 		element: (
 			<PanelPrivate>
-				<AdminPanel />
+				<UserPanel />
 			</PanelPrivate>
 		)
+	},
+	{
+		path: '/admin',
+		element: (
+			<AdminPrivate>
+				<AdminPanel />
+			</AdminPrivate>
+		),
+		children: [
+			{ path: 'products', element: <AllProducts /> },
+			{ path: 'users', element: <Users /> }
+		]
 	},
 	{ path: '*', element: <UnknownPage /> }
 ];

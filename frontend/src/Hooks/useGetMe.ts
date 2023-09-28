@@ -8,7 +8,8 @@ import { getMe } from '../Services/Axios/Requests/user';
 const useGetMe = () =>
 	useQuery('User/GetME', () => getMe().then((res) => res.data), {
 		refetchOnWindowFocus: false,
-    refetchOnMount: false
+		refetchOnMount: false,
+		retry: false
 	});
 
 // exports
