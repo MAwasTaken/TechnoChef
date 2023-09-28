@@ -81,7 +81,7 @@ const getUserByIdController = async (req, res) => {
 const getMeController = async (req, res) => {
 	try {
 		const user = await User.findById(req.user.id);
-		const { password, isAdmin, __v, ...others } = user._doc;
+		const { password, __v, ...others } = user._doc;
 		res.status(200).json(others);
 	} catch (err) {
 		res.status(401).json({ massage: 'you are not authenticated' });

@@ -10,6 +10,9 @@ router.post('/register', authController.registerController);
 // LOGIN router
 router.post('/login', authController.logInController);
 
+// LOGOUT router
+router.post('/logOut', authController.logOutController);
+
 // send a verification email
 router.post('/sendVerificationEmail', verifyTokenAndAuth, emailController.sendValidateUserEmail);
 
