@@ -3,7 +3,7 @@ const Order = require('../models/Order');
 const validator = require('../validator/orderVAlidation');
 
 // create Order
-const createOrderController = async (req, res) => {
+const createOrderController = async (req, res, next) => {
 	if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
 
 	// create the Order object
@@ -21,11 +21,13 @@ const createOrderController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // update Order
-const updateOrderController = async (req, res) => {
+const updateOrderController = async (req, res, next) => {
 	try {
 		if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
 		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
@@ -47,11 +49,13 @@ const updateOrderController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // delete Order
-const deleteOrderController = async (req, res) => {
+const deleteOrderController = async (req, res, next) => {
 	try {
 		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
 
@@ -64,11 +68,13 @@ const deleteOrderController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // get Order By User Id
-const getOrderByUserIdController = async (req, res) => {
+const getOrderByUserIdController = async (req, res, next) => {
 	try {
 		if (!req.params.id)
 			return res.status(400).json({ massage: 'the request needs an userId params.' });
@@ -81,11 +87,13 @@ const getOrderByUserIdController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // get Order By Id
-const getOrderByIdController = async (req, res) => {
+const getOrderByIdController = async (req, res, next) => {
 	try {
 		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
 
@@ -97,11 +105,13 @@ const getOrderByIdController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // get all Orders
-const getAllOrdersController = async (req, res) => {
+const getAllOrdersController = async (req, res, next) => {
 	try {
 		// find all the orders saved in DB
 		const orders = await Order.find();
@@ -111,6 +121,8 @@ const getAllOrdersController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 

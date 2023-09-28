@@ -4,7 +4,7 @@ const productValidate = require('../validator/productValidation');
 const fs = require('fs');
 
 // create Product
-const createProductController = async (req, res) => {
+const createProductController = async (req, res, next) => {
 	if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
 
 	// create the Product object
@@ -30,11 +30,13 @@ const createProductController = async (req, res) => {
 		newProduct.images.forEach((Image) => {
 			fs.unlinkSync(Image);
 		});
+		req.err = err;
+		next();
 	}
 };
 
 // update Product
-const updateProductController = async (req, res) => {
+const updateProductController = async (req, res, next) => {
 	try {
 		if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
 		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
@@ -69,11 +71,13 @@ const updateProductController = async (req, res) => {
 			.forEach((Image) => {
 				fs.unlinkSync(Image);
 			});
+		req.err = err;
+		next();
 	}
 };
 
 // delete product by Id
-const deleteProductByIdController = async (req, res) => {
+const deleteProductByIdController = async (req, res, next) => {
 	try {
 		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
 
@@ -91,13 +95,14 @@ const deleteProductByIdController = async (req, res) => {
 		res.status(200).json('Product has been deleted...');
 	} catch (err) {
 		// return the err if there is one
-		console.log(err);
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // delete product by shortName
-const deleteProductByShortNameController = async (req, res) => {
+const deleteProductByShortNameController = async (req, res, next) => {
 	try {
 		if (!req.params.id)
 			return res.status(400).json({ massage: 'the request needs an shortname params.' });
@@ -116,13 +121,14 @@ const deleteProductByShortNameController = async (req, res) => {
 		res.status(200).json('Product has been deleted...');
 	} catch (err) {
 		// return the err if there is one
-		console.log(err);
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // get product By Id
-const getProductByIdController = async (req, res) => {
+const getProductByIdController = async (req, res, next) => {
 	try {
 		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
 
@@ -133,11 +139,13 @@ const getProductByIdController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // get Product by shortName
-const getProductByShortName = async (req, res) => {
+const getProductByShortName = async (req, res, next) => {
 	try {
 		if (!req.params.id)
 			return res.status(400).json({ massage: 'the request needs an shortName params.' });
@@ -150,11 +158,13 @@ const getProductByShortName = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // get all product
-const getAllProductsController = async (req, res) => {
+const getAllProductsController = async (req, res, next) => {
 	// Define queries
 	const qNew = req.query.new;
 	const qSearch = req.query.search;
@@ -215,7 +225,8 @@ const getAllProductsController = async (req, res) => {
 		res.status(200).json({ products, pages });
 	} catch (err) {
 		res.status(400).json(err);
-		console.log(err);
+		req.err = err;
+		next();
 	}
 };
 

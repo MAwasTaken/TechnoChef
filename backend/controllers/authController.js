@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const userValidation = require('../validator/userValidation');
 
 // User register Controller (sign up)
-const registerController = async (req, res) => {
+const registerController = async (req, res, next) => {
 	try {
 		if (!req.body) {
 			return res.status(400).json({ massage: 'the request needs a body.' });
@@ -30,13 +30,14 @@ const registerController = async (req, res) => {
 		res.status(201).json(others);
 	} catch (err) {
 		// return the err if there is one
-		console.log(err);
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // user Login Controller
-const logInController = async (req, res) => {
+const logInController = async (req, res, next) => {
 	try {
 		// find the user By username or email
 		const user = await User.findOne({
@@ -89,11 +90,13 @@ const logInController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(500).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // log out route
-const logOutController = async (req, res) => {
+const logOutController = async (req, res, next) => {
 	try {
 		if (!req.cookies.accessToken) {
 			return res.sendStatus(204).json({ massage: 'you logged out' });
@@ -109,6 +112,8 @@ const logOutController = async (req, res) => {
 			.end();
 	} catch (err) {
 		res.status(500).json(err);
+		req.err = err;
+		next();
 	}
 };
 

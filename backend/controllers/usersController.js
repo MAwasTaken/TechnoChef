@@ -4,7 +4,7 @@ const CryptoJS = require('crypto-js');
 const validate = require('../validator/userValidation');
 
 // update User
-const updateUserController = async (req, res) => {
+const updateUserController = async (req, res, next) => {
 	try {
 		if (!req.body) return res.status(400).json({ massage: 'the request needs a.' });
 		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
@@ -38,11 +38,13 @@ const updateUserController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // delete User
-const deleteUserController = async (req, res) => {
+const deleteUserController = async (req, res, next) => {
 	try {
 		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
 
@@ -56,11 +58,13 @@ const deleteUserController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // get User By Id
-const getUserByIdController = async (req, res) => {
+const getUserByIdController = async (req, res, next) => {
 	try {
 		if (req.params.id == ':id')
 			return res.status(400).json({ massage: 'the request needs an Id params.' });
@@ -77,22 +81,26 @@ const getUserByIdController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // Get Me
-const getMeController = async (req, res) => {
+const getMeController = async (req, res, next) => {
 	try {
 		const user = await User.findById(req.user.id);
 		const { password, __v, ...others } = user._doc;
 		res.status(200).json(others);
 	} catch (err) {
 		res.status(401).json({ massage: 'you are not authenticated' });
+		req.err = err;
+		next();
 	}
 };
 
 // get All Users
-const getAllUsersController = async (req, res) => {
+const getAllUsersController = async (req, res, next) => {
 	// Define queries
 	const query = req.query.new;
 
@@ -114,6 +122,8 @@ const getAllUsersController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
