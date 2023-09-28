@@ -35,9 +35,9 @@ const routes = [
 	{
 		path: '/admin',
 		element: (
-			<AdminPrivate>
+			// <AdminPrivate>
 				<AdminPanel />
-			</AdminPrivate>
+			// </AdminPrivate>
 		),
 		children: [
 			{ path: 'products', element: <AllProducts /> },

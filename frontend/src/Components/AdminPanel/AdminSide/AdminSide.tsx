@@ -1,6 +1,8 @@
 // react
-import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+
+// icons
+import { BsBoxSeam, BsPeople } from 'react-icons/bs';
 
 // admin side
 const AdminSide: React.FC<{
@@ -25,27 +27,29 @@ const AdminSide: React.FC<{
 				</Link>
 				{/* menu items */}
 				<ul className="flex flex-col gap-y-2 text-xs pt-2 md:pt-4 lg:text-base child:transition-all text-Dark child:duration-500 child:rounded-md xl:text-lg">
-					<li className="text-center">
+					<li className="text-center" onClick={() => setIsMenuShown(false)}>
 						<NavLink
 							to="products"
 							className={({ isActive }) =>
-								`block py-1 rounded hover:bg-Info/50 ${
+								`py-1 rounded hover:bg-Info/50 flex gap-x-2 justify-center items-center ${
 									isActive ? 'bg-DarkYellow/50 hover:bg-DarkYellow/50' : 'hover:bg-Info/50'
 								} `
 							}
 						>
+							<BsBoxSeam className="text-red-500" />
 							محصولات
 						</NavLink>
 					</li>
-					<li className="text-center">
+					<li className="text-center" onClick={() => setIsMenuShown(false)}>
 						<NavLink
 							to="users"
 							className={({ isActive }) =>
-								`block py-1 rounded ${
+								`flex justify-center items-center gap-x-2 py-1 rounded  ${
 									isActive ? 'bg-DarkYellow/50 hover:bg-DarkYellow/50' : 'hover:bg-Info/50'
 								} `
 							}
 						>
+							<BsPeople className='text-red-500' />
 							کاربران
 						</NavLink>
 					</li>

@@ -1,14 +1,9 @@
 // react
 import React, { useState } from 'react';
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 // components
 import AdminSide from '../../Components/AdminPanel/AdminSide/AdminSide';
-
-import { useSelector } from 'react-redux';
-
-import { FaBars, FaUserTie } from 'react-icons/fa';
-import { FiLogOut } from 'react-icons/fi';
 import AdminHeader from '../../Components/AdminPanel/AdminHeader/AdminHeader';
 
 // admin panel

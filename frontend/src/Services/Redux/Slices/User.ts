@@ -51,10 +51,11 @@ const slice = createSlice({
 				isAdmin: boolean;
 				updatedAt: string;
 			}>
-		) => action.payload
+		) => action.payload,
+		clearUser: () => initialState
 	}
 });
 
 // exports
-export const { setUser } = slice.actions;
+export const { setUser, clearUser } = slice.actions;
 export default slice.reducer;
