@@ -15,8 +15,10 @@ import AdminPrivate from './Components/Private/AdminPrivate';
 
 // user panel
 import UserPanel from './Pages/UserPanel/UserPanel';
-import AllProducts from './Components/AdminPanel/Products/AllProducts';
 import Users from './Components/AdminPanel/Users/Users';
+import AdminProducts from './Components/AdminPanel/Products/AdminProducts';
+import CreateNewProduct from './Components/AdminPanel/Products/CreateNewProduct/CreateNewProduct';
+import SingleProduct from './Components/AdminPanel/Products/SingleProduct/SingleProduct';
 
 const routes = [
 	{ path: '/', element: <Index /> },
@@ -35,12 +37,23 @@ const routes = [
 	{
 		path: '/admin',
 		element: (
-			// <AdminPrivate>
+			<AdminPrivate>
 				<AdminPanel />
-			// </AdminPrivate>
+			</AdminPrivate>
 		),
 		children: [
-			{ path: 'products', element: <AllProducts /> },
+			{
+				path: 'products',
+				element: <AdminProducts />
+			},
+			{
+				path: 'products/create',
+				element: <CreateNewProduct />
+			},
+			{
+				path: 'products/:shortName',
+				element: <SingleProduct />
+			},
 			{ path: 'users', element: <Users /> }
 		]
 	},

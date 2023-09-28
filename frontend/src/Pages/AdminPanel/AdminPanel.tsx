@@ -14,7 +14,7 @@ const AdminPanel: React.FC = () => {
 	return (
 		<>
 			<AdminSide isMenuShown={isMenuShown} setIsMenuShown={setIsMenuShown} />
-			<main className="md:w-9/12 w-full left-0 absolute text-left">
+			<main className="md:w-9/12 w-full left-0 absolute">
 				<AdminHeader setIsMenuShown={setIsMenuShown} />
 				<Outlet />
 			</main>

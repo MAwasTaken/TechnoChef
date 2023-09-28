@@ -20,6 +20,8 @@ const AdminPrivate: React.FC<React.PropsWithChildren> = ({ children }) => {
 	// POST validate user token
 	const { data, isFetching } = useGetMe();
 
+  console.log(data);
+
 	// set user data to redux store
 	data ? dispatch(setUser(data)) : null;
 

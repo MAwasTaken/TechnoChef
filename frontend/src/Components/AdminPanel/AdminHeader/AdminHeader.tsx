@@ -47,8 +47,7 @@ const AdminHeader: React.FC<{
 		postLogout().then(() => {
 			toast.success('با موفقیت از سیستم خارج شدید ! ✅', {
 				onClose: () => {
-					dispatch(clearUser());
-					navigate('/');
+					location.reload();
 				}
 			});
 		});
