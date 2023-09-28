@@ -3,6 +3,14 @@ const fs = require('fs');
 const express = require('express');
 const app = express();
 
+// Read the SSL certificate and private key files
+const privateKey = fs.readFileSync('./ssl/privatekey.pem', 'utf8');
+const certificate = fs.readFileSync('./ssl/certificate.pem', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+
+ // Create the HTTPS server
+ const httpsServer = https.createServer(credentials, app);
+
 // require the mongoose
 const mongoose = require('mongoose');
 
@@ -21,14 +29,6 @@ mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => {
     console.log('DB connected successfully !!');
-
-    // Read the SSL certificate and private key files
-    const privateKey = fs.readFileSync('./ssl/privatekey.pem', 'utf8');
-    const certificate = fs.readFileSync('./ssl/certificate.pem', 'utf8');
-    const credentials = { key: privateKey, cert: certificate };
-
-    // Create the HTTPS server
-    const httpsServer = https.createServer(credentials, app);
 
     // Start the server
     httpsServer.listen(process.env.PORT || PORT, () => {
