@@ -98,10 +98,8 @@ const logInController = async (req, res, next) => {
 // log out route
 const logOutController = async (req, res, next) => {
 	try {
-		if (!req.cookies?.accessToken) {
-			return res.sendStatus(204).json({ massage: 'you logged out' });
-		}
-
+		
+		
 		res
 			.clearCookie('accessToken', {
 				httpOnly: true,
@@ -109,7 +107,6 @@ const logOutController = async (req, res, next) => {
 				secure: true,
 				credentials: true
 			})
-			.json({ massage: 'you logged out successfully !! ' })
 			.status(204)
 			.end();
 
