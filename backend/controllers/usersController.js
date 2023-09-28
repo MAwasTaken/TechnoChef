@@ -29,8 +29,12 @@ const updateUserController = async (req, res) => {
 			{ new: true }
 		);
 
+		if (!updatedUser) return res.status(404).json({ massage: 'user NOT FOUND' });
+		// split the PASSWORD from the object
+		const { password, __v, ...others } = updatedUser._doc;
+
 		// set the response
-		res.status(200).json(updatedUser);
+		res.status(200).json(others);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
@@ -66,13 +70,12 @@ const getUserByIdController = async (req, res) => {
 		if (!user) return res.status(404).json({ massage: 'user not found' });
 
 		// split the from the object
-		const { password, ...others } = user._doc;
+		const { password, __v, ...others } = user._doc;
 
 		// set the response
 		res.status(200).json(others);
 	} catch (err) {
 		// return the err if there is one
-		console.log(err);
 		res.status(400).json(err);
 	}
 };
@@ -100,10 +103,10 @@ const getAllUsersController = async (req, res) => {
 		//if there is "NEW" query
 		if (query) {
 			// return the newest Users
-			users = await User.find().sort({ _id: -1 }).limit(query);
+			users = await User.find().sort({ _id: -1 }).select(['-password', '-__v']).limit(query);
 		} else {
 			//return ALL
-			users = await User.find();
+			users = await User.find().select(['-password', '-__v']);
 		}
 
 		// set the response

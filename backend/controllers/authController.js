@@ -14,16 +14,23 @@ const registerController = async (req, res) => {
 		await userValidation.validateAsync(req.body);
 
 		// create the user object
-		const password = CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC_KEY).toString();
+		const userPassword = CryptoJS.AES.encrypt(
+			req.body.password,
+			process.env.PASS_SEC_KEY
+		).toString();
 		const newUser = new User(req.body);
-		newUser.password = password;
+		newUser.password = userPassword;
+
+		// split the PASSWORD from the object
+		const { password, __v, ...others } = newUser._doc;
 
 		// save the user in DB
 		const savedUser = await newUser.save();
 		// set the response
-		res.status(201).json(savedUser);
+		res.status(201).json(others);
 	} catch (err) {
 		// return the err if there is one
+		console.log(err);
 		res.status(400).json(err);
 	}
 };
