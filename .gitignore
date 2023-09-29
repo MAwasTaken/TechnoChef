@@ -4,3 +4,5 @@
 .vscode/settings.json
 
 backend/public/*
+backend/logs/errLog.txt
+backend/logs/reqLog.txt
