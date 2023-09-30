@@ -1,5 +1,6 @@
 // react
 import React from 'react';
+import Switch from '@mui/material/Switch';
 
 // icons
 import { AiFillDollarCircle } from 'react-icons/ai';
@@ -9,7 +10,13 @@ const ProductPrice: React.FC = () => {
 	// tsx
 	return (
 		<div className="bg-Info/50 hidden h-max w-[300px] flex-col items-center gap-y-5 rounded-3xl p-6 md:items-start xl:flex">
-			<div className="flex items-center gap-x-2">
+			<label htmlFor='' className="flex items-center font-Lalezar w-full text-lg justify-between flex-row ">
+					<div className="flex justify-start w-2/3 p-2"><span>کالاهای تخفیف دار</span></div>
+					<div className="flex justify-end w-1/3"><Switch defaultChecked color="warning" /></div>
+			</label>
+
+
+			{/* <div className="flex items-center gap-x-2">
 				<AiFillDollarCircle className="text-3xl text-red-500" />
 				<span className="font-Lalezar select-none text-sm md:text-2xl">انتخاب بازه قیمتی</span>
 			</div>
@@ -40,7 +47,7 @@ const ProductPrice: React.FC = () => {
 						/>
 					</label>
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 };
