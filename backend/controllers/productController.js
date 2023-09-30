@@ -12,11 +12,10 @@ const createProductController = async (req, res, next) => {
 
 	try {
 		// set the uploaded images address
-		let images = req.files.map((element) => element.path);
-		newProduct.images = images;
+		newProduct.images = req.files.map((element) => element.path);
 
 		// validate the input
-		await productValidate.validateAsync(newProduct._doc);
+		await productValidate.validateAsync(req.body);
 
 		// save the user in DB
 		const savedProduct = await newProduct.save();
@@ -71,6 +70,7 @@ const updateProductController = async (req, res, next) => {
 			.forEach((Image) => {
 				fs.unlinkSync(Image);
 			});
+
 		req.err = err;
 		next();
 	}
