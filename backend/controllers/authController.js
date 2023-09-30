@@ -98,8 +98,6 @@ const logInController = async (req, res, next) => {
 // log out route
 const logOutController = async (req, res, next) => {
 	try {
-		
-		
 		res
 			.clearCookie('accessToken', {
 				httpOnly: true,
@@ -109,7 +107,6 @@ const logOutController = async (req, res, next) => {
 			})
 			.status(204)
 			.end();
-
 	} catch (err) {
 		res.status(500).json(err);
 		req.err = err;

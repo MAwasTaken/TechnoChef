@@ -8,7 +8,7 @@ const model = joi.object({
 	category: joi.string(),
 	productColor: joi.array(),
 	QTY: joi.number().positive(),
-	discount: joi.number().min(0).max(100),
+	finalPrice: joi.number().positive(),
 	images: joi.array().max(5),
 	description: joi.string(),
 	best_seller: joi.boolean(),
