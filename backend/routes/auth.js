@@ -2,7 +2,7 @@
 const router = require('express').Router();
 const authController = require('../controllers/authController');
 const emailController = require('../controllers/accountVerification');
-const resetPasswordController = require('../controllers/resetPassword');
+const resetPasswordController = require('../controllers/resetPasswordController');
 const { verifyTokenAndAuth } = require('../middlewares/verifyTokens');
 
 //REGISTER router
