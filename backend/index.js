@@ -2,6 +2,7 @@ const https = require('https');
 const fs = require('fs');
 const express = require('express');
 const app = express();
+const { logEvents } = require('./middlewares/logger');
 
 // Read the SSL certificate and private key files
 const privateKey = fs.readFileSync('./ssl/privatekey.pem', 'utf8');
@@ -23,6 +24,11 @@ const PORT = 3000;
 
 // server Config
 require('./server/serverConfig')(app);
+
+process.on('uncaughtException' , (err)=>{
+  console.log(err);
+  logEvents(`${req.err}`, 'errLog.txt');
+})
 
 // set the DB connection
 mongoose

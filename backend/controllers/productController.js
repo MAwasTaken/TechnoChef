@@ -27,6 +27,7 @@ const createProductController = async (req, res, next) => {
 		res.status(400).json(err);
 
 		newProduct.images.forEach((Image) => {
+			if(typeof Image == "string")
 			fs.unlinkSync(Image);
 		});
 		req.err = err;
@@ -68,6 +69,7 @@ const updateProductController = async (req, res, next) => {
 		req.files
 			.map((element) => element.path)
 			.forEach((Image) => {
+				if(typeof Image == "string")
 				fs.unlinkSync(Image);
 			});
 

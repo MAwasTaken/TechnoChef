@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Controller = require('../controllers/categoryController');
-const { verifyTokenAndAdmin, verifyTokenAndAuth } = require('../middlewares/verifyTokens');
+const { verifyTokenAndAdmin } = require('../middlewares/verifyTokens');
 const uploader = require('../middlewares/uploader');
 
 //CRUD
@@ -21,6 +21,6 @@ router.put(
 
 router.delete('/:id', verifyTokenAndAdmin, Controller.deleteCategoryController);
 
-router.get('/', verifyTokenAndAuth, Controller.getAllCategoryController);
+router.get('/', Controller.getAllCategoryController);
 
 module.exports = router;
