@@ -27,7 +27,7 @@ require('./server/serverConfig')(app);
 
 process.on('uncaughtException' , (err)=>{
   console.log(err);
-  logEvents(`${req.err}`, 'errLog.txt');
+  logEvents(`${err}`, 'errLog.txt');
 })
 
 // set the DB connection
