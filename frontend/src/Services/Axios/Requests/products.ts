@@ -20,5 +20,8 @@ const postCreateProduct = async (newProductInfos: FormData) =>
 		withCredentials: true
 	});
 
+// GET all
+const getAllProducts = async () => axiosInstance.get('/products');
+
 // exports
-export { getBestSellers, getLatest, getFiltered, postCreateProduct };
+export { getBestSellers, getLatest, getFiltered, postCreateProduct, getAllProducts };

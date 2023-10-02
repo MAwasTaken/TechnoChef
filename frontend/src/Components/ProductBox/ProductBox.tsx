@@ -14,7 +14,7 @@ import toFarsiNumber from '../../Utils/toFarsiNumber';
 // product box
 const ProductBox: React.FC<ProductProps> = ({
 	productColor,
-	image,
+	images,
 	finalPrice,
 	price,
 	productName
@@ -39,8 +39,7 @@ const ProductBox: React.FC<ProductProps> = ({
 					<Link to="/">
 						<img
 							className="mx-auto h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
-							// src={`http://localhost:3000/${image}`}
-							src={image ? image : '/Images/Products/p1.png'}
+							src={images ? `https://45.159.150.221:3000/api/${images[0]}` : '/Images/Products/p1.png'}
 							alt="تصویر محصول"
 							loading="lazy"
 						/>

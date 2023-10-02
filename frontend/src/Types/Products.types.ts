@@ -3,10 +3,10 @@ export type ProductProps = {
 	productName?: string;
 	price: number;
 	finalPrice: number;
-	categories?: string[];
+	category?: string;
 	productColor?: string[];
 	QTY?: number;
-	image?: string;
+	images?: string[];
 	description?: string;
 	best_seller?: boolean;
 	_id?: string;

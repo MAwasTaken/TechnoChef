@@ -2,9 +2,18 @@
 import { BsBoxSeam, BsPlusLg } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 
+// react query
+import useAllProducts from '../../../Hooks/useAllProducts';
+import { ProductProps } from '../../../Types/Products.types';
+
 const AdminProducts = () => {
 	// navigator
 	const navigate = useNavigate();
+
+	// GET all product from react query
+	const { data } = useAllProducts();
+
+	data ? console.log(data) : '';
 
 	// tsx
 	return (
@@ -35,26 +44,29 @@ const AdminProducts = () => {
 					</tr>
 				</thead>
 				<tbody>
-					<tr
-						className="border-b border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer"
-						onClick={() => navigate(`shortName`)}
-					>
-						<td className="font-Lalezar text-base lg:text-lg">100</td>
-						<td>
-							<img
-								className="w-32 max-h-32 object-contain mx-auto"
-								src="/Images/Products/p1.png"
-								alt="product image"
-							/>
-						</td>
-						<td className="tracking-tighter sm:text-base">
-							یخچال امرسان مدل جدید ۱۲ فوت سایز بزرگ
-						</td>
-						<td>یخچال</td>
-						<td className="tracking-tighter">
-							123,456,789 <span className="text-red-500">تومان</span>
-						</td>
-					</tr>
+					{data?.reverse().map((product: ProductProps, index: number) => (
+						<tr
+							key={product._id}
+							className="border-b border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer"
+							onClick={() => navigate(String(product.shortName))}
+						>
+							<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
+							<td>
+								<img
+									className="w-32 max-h-32 object-contain mx-auto"
+									src={`https://45.159.150.221:3000/api/${
+										product.images ? product.images[0] : undefined
+									}`}
+									alt="تصویر محصول"
+								/>
+							</td>
+							<td className="tracking-tighter sm:text-base">{product.productName}</td>
+							<td>{product.category}</td>
+							<td className="tracking-tighter">
+								{product.finalPrice} <span className="text-red-500 mr-1">تومان</span>
+							</td>
+						</tr>
+					))}
 				</tbody>
 			</table>
 		</section>
