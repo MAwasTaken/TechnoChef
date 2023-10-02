@@ -1,4 +1,4 @@
-export type signupInputs = {
+export type SignupInputs = {
 	firstName: string;
 	lastName: string;
 	phoneNumber: string;

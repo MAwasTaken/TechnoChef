@@ -14,8 +14,8 @@ import toFarsiNumber from '../../Utils/toFarsiNumber';
 // product box
 const ProductBox: React.FC<ProductProps> = ({
 	productColor,
-	images,
-	discount,
+	image,
+	finalPrice,
 	price,
 	productName
 }) => {
@@ -37,26 +37,25 @@ const ProductBox: React.FC<ProductProps> = ({
 						))}
 					</div>
 					<Link to="/">
-						{images ? (
-							<img
-								className="mx-auto h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
-								src={`http://localhost:3000/${images[0]}`}
-								alt="تصویر محصول"
-								loading="lazy"
-							/>
-						) : null}
-						<span className="text-Light/80 mt-1 line-clamp-2 md:h-14 h-10 text-center text-sm font-bold tracking-tighter md:text-lg">
+						<img
+							className="mx-auto h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
+							// src={`http://localhost:3000/${image}`}
+							src={image ? image : '/Images/Products/p1.png'}
+							alt="تصویر محصول"
+							loading="lazy"
+						/>
+						<span className="text-Light/80 mt-1 line-clamp-2 h-10 md:h-14 text-center text-sm font-bold tracking-tighter md:text-lg">
 							{productName ? toFarsiNumber(productName) : ''}
 						</span>
 					</Link>
 					<div className="mt-3 flex items-center justify-between">
-						{discount ? (
+						{finalPrice !== price ? (
 							<span className="h-5 w-7 rounded-lg bg-gradient-to-l from-red-500 to-red-600 pt-[3px] text-center text-[10px] font-bold text-white/70 md:h-6 md:w-9 md:pt-1 md:text-xs">
-								{discount.toLocaleString('fa-IR')}
+								{Math.trunc(100 - (finalPrice * 100) / price).toLocaleString('fa-IR')}
 							</span>
 						) : null}
-						<span className="line font-Lalezar mt-1 text-left font-bold tracking-tight text-red-500/80 line-through md:text-lg">
-							{price?.toLocaleString('fa-IR')}
+						<span className="font-Lalezar mt-1 text-left font-bold tracking-tight text-red-500/80 line-through md:text-lg">
+							{finalPrice !== price ? price.toLocaleString('fa-IR') : ''}
 						</span>
 					</div>
 				</div>
@@ -76,7 +75,7 @@ const ProductBox: React.FC<ProductProps> = ({
 					) : (
 						<>
 							<span className="font-Lalezar text-sm text-black/70 md:mt-1 md:text-xl">
-								{(((100 - discount) * price) / 100).toLocaleString('fa-IR')}
+								{finalPrice?.toLocaleString('fa-IR')}
 							</span>
 							<div className="h-4 w-4 text-red-600">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" fill="currentColor">

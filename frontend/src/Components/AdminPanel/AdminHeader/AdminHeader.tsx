@@ -1,31 +1,26 @@
 // react
-import React from 'react';
+import React, { useState } from 'react';
 
 // icons
 import { FaBars, FaUserTie } from 'react-icons/fa';
 import { FiLogOut } from 'react-icons/fi';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 // axios
 import { postLogout } from '../../../Services/Axios/Requests/auth';
 
 // react toastify
 import { ToastContainer, toast } from 'react-toastify';
-import { clearUser } from '../../../Services/Redux/Slices/User';
-import { useNavigate } from 'react-router-dom';
+
+// react spinner
+import { BeatLoader } from 'react-spinners';
 
 // admin header
 const AdminHeader: React.FC<{
 	setIsMenuShown: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ setIsMenuShown }) => {
-	// redux dispatch hook
-	const dispatch = useDispatch();
-
-	// navigator
-	const navigate = useNavigate();
-
 	// GET user infos from redux
 	const user: {
 		_id: string;
@@ -43,14 +38,25 @@ const AdminHeader: React.FC<{
 		isAdmin: boolean;
 	} = useSelector((state: any) => state.user);
 
+	// logout fetch state
+	const [isFetching, seIsFetching] = useState<boolean>(false);
+
+	// auth logout handler
 	const logoutHandler = () => {
-		postLogout().then(() => {
-			toast.success('با موفقیت از سیستم خارج شدید ! ✅', {
-				onClose: () => {
-					location.reload();
-				}
-			});
-		});
+		// set is fetching state to true
+		seIsFetching(true);
+
+		// POST logout
+		postLogout()
+			.then(() => {
+				toast.success('با موفقیت از سیستم خارج شدید ! ✅', {
+					onClose: () => location.assign('/')
+				});
+			})
+			.finally(() =>
+				// set is fetching state to false
+				seIsFetching(false)
+			);
 	};
 
 	// tsx
@@ -59,9 +65,13 @@ const AdminHeader: React.FC<{
 			<header className="h-auto w-full md:p-5 p-3 border-b-2 bg-gray-200 shadow-lg">
 				<div className="flex items-center justify-between">
 					<button onClick={logoutHandler}>
-						<FiLogOut className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow" />
+						{isFetching ? (
+							<BeatLoader size={10} color="#FCA921" />
+						) : (
+							<FiLogOut className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow" />
+						)}
 					</button>
-					<span className="flex items-center gap-x-2 justify-end text-Dark md:text-sm lg:text-lg text-xs">
+					<span className="flex items-center gap-x-2 justify-end text-Dark md:text-sm lg:text-lg text-xs select-none">
 						<span className="text-DarkYellow">{user.phoneNumber}</span> |{' '}
 						<span className="text-Info">{user.username}</span> |{' '}
 						<span className="font-semibold text-Dark">

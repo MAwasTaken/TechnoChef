@@ -205,7 +205,7 @@ const Login: React.FC = () => {
 							{/* submit button */}
 							<button
 								// disabled={!(isRecaptcha && isFormReady)}
-								className="font-Lalezar mx-auto mt-2 md:h-11 h-9 bg-DarkYellow flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-base shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg disabled:bg-gray-400"
+								className="font-Lalezar mx-auto mt-2 md:h-11 h-9 from-LightYellow to-DarkYellow flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-base shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg disabled:bg-gray-400"
 								type="submit"
 							>
 								{isFormFetching ? <BeatLoader size={10} color="#FCFCFC" /> : 'ورود'}

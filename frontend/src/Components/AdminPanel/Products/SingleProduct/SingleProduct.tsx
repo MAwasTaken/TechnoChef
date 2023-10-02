@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 // icons
 import { BsBoxSeam } from 'react-icons/bs';
 import { BiArrowBack } from 'react-icons/bi';
+import ProductBox from '../../../ProductBox/ProductBox';
 
 // single product
 const SingleProduct = () => {

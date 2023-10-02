@@ -1,11 +1,17 @@
 // components
 import CategoryItem from './CategoryItem/CategoryItem';
 
+// react query
+import useCategories from '../../Hooks/useCategories';
+
 // packages
 import { BiCategoryAlt } from 'react-icons/bi';
 
 // categories
 const Categories = () => {
+	const { data } = useCategories();
+	console.log(data);
+
 	// tsx
 	return (
 		<>

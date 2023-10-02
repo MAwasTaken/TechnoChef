@@ -11,5 +11,14 @@ const getLatest = async () => axiosInstance.get('/products?new');
 const getFiltered = async (category: string[], search: string) =>
 	axiosInstance.get(`/products/?category=${category}&search=${search}`);
 
+// POST create
+const postCreateProduct = async (newProductInfos: FormData) =>
+	axiosInstance.postForm('/products', newProductInfos, {
+		headers: {
+			'Content-Type': 'multipart/form-data'
+		},
+		withCredentials: true
+	});
+
 // exports
-export { getBestSellers, getLatest, getFiltered };
+export { getBestSellers, getLatest, getFiltered, postCreateProduct };
