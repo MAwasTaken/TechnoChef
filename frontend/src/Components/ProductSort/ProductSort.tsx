@@ -1,6 +1,6 @@
 // react
 import React, { useState } from 'react';
-
+import Switch from '@mui/material/Switch';
 // icons
 import { BiSort } from 'react-icons/bi';
 import { BiCategory } from 'react-icons/bi';
@@ -55,9 +55,9 @@ const ProductSort: React.FC = () => {
 					<li className="bg-Light/75 hover:bg-Info/90 flex cursor-pointer items-center  justify-center rounded-xl px-4 py-2 text-sm font-semibold tracking-tighter transition duration-300 xl:px-7 xl:py-3 xl:text-base">
 						گران ترین
 					</li>
-					<li className="bg-Light/75 hover:bg-Info/90 flex cursor-pointer items-center  justify-center rounded-xl px-4 py-2 text-sm font-semibold tracking-tighter transition duration-300 xl:px-7 xl:py-3 xl:text-base">
+					{/* <li className="bg-Light/75 hover:bg-Info/90 flex cursor-pointer items-center  justify-center rounded-xl px-4 py-2 text-sm font-semibold tracking-tighter transition duration-300 xl:px-7 xl:py-3 xl:text-base">
 						تخفیف دارها
-					</li>
+					</li> */}
 				</ul>
 			</div>
 			{/* overlay */}
@@ -150,7 +150,11 @@ const ProductSort: React.FC = () => {
 				{/* divider */}
 				<span className="border-Info mx-auto my-5 block h-[2px] w-full border-b-2"></span>
 				{/* prices */}
-				<div className="flex flex-col gap-y-3">
+				<label htmlFor='' className="flex items-center font-Lalezar w-full text-lg justify-between flex-row ">
+					<div className="flex justify-start w-2/3 p-2"><span>کالاهای تخفیف دار</span></div>
+					<div className="flex justify-end w-1/3"><Switch defaultChecked color="warning" /></div>
+			</label>
+				{/* <div className="flex flex-col gap-y-3">
 					<div className="flex items-center gap-x-2">
 						<AiFillDollarCircle className="text-2xl text-red-500 md:text-3xl" />
 						<span className="font-Lalezar select-none text-xl md:text-2xl">انتخاب بازه قیمتی</span>
@@ -185,7 +189,7 @@ const ProductSort: React.FC = () => {
 							/>
 						</label>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</>
 	);
