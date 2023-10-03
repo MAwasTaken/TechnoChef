@@ -6,7 +6,7 @@ const model = joi.object({
 	productName: joi.string(),
 	price: joi.number().positive(),
 	category: joi.string(),
-	productColor: joi.array(),
+	productColor: joi.array().single(),
 	details: joi.object(),
 	QTY: joi.number().positive(),
 	finalPrice: joi.number().positive(),

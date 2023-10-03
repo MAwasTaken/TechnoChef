@@ -149,7 +149,7 @@ const getProductByIdController = async (req, res, next) => {
 // get Product by shortName
 const getProductByShortName = async (req, res, next) => {
 	try {
-		if (!req.params.id)
+		if (!req.params.shortname)
 			return res.status(400).json({ massage: 'the request needs an shortName params.' });
 
 		// find the card By the shortName.
