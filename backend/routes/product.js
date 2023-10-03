@@ -8,15 +8,21 @@ const router = require('express').Router();
 router.post(
 	'/',
 	verifyTokenAndAdmin,
-	uploader.array('images', 5),
+	uploader.fields([
+		{ name: 'images', maxCount: 5 },
+		{ name: 'cover', maxCount: 1 }
+	]),
 	controller.createProductController
 );
 
 //UPDATE router
 router.put(
-	'/:id',
+	'/:shortname',
 	verifyTokenAndAdmin,
-	uploader.array('images', 5),
+	uploader.fields([
+		{ name: 'images', maxCount: 5 },
+		{ name: 'cover', maxCount: 1 }
+	]),
 	controller.updateProductController
 );
 

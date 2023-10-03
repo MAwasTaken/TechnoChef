@@ -12,7 +12,8 @@ const createProductController = async (req, res, next) => {
 
 	try {
 		// set the uploaded images address
-		newProduct.images = req.files.map((element) => element.path);
+		newProduct.images = req.files.images.map((element) => element.path);
+		newProduct.cover = req.files.cover[0].path;
 
 		// validate the input
 		await productValidate.validateAsync(req.body);
@@ -27,8 +28,16 @@ const createProductController = async (req, res, next) => {
 		res.status(400).json(err);
 
 		newProduct.images.forEach((Image) => {
-			if (typeof Image == 'string') fs.unlinkSync(Image);
+			if (typeof Image == 'string')
+				fs.unlink(Image, (err) => {
+					if (err) console.log(err);
+				});
 		});
+		if (typeof newProduct.cover == 'string')
+			fs.unlink(newProduct.cover, (err) => {
+				if (err) console.log(err);
+			});
+
 		req.err = err;
 		next();
 	}
@@ -38,25 +47,32 @@ const createProductController = async (req, res, next) => {
 const updateProductController = async (req, res, next) => {
 	try {
 		if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
-		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+		if (!req.params.shortname)
+			return res.status(400).json({ massage: 'the request needs an shortname params.' });
 
-		const oldProduct = await Product.findById(req.params.id);
+		const oldProduct = await Product.findOne({ shortName: req.params.shortname });
 
 		// validate the input
 		await productValidate.validateAsync(req.body);
 
 		// find the Product by ID and update it
-		const updatedProduct = await Product.findByIdAndUpdate(
-			req.params.id,
+		const updatedProduct = await Product.findOneAndUpdate(
+			{ shortName: req.params.shortname },
 			{
 				$set: req.body,
-				images: req.files.map((element) => element.path)
+				images: req.files.images.map((element) => element.path),
+				cover: req.files.cover[0].path
 			},
 			{ new: true }
 		);
 
 		oldProduct.images?.forEach((Image) => {
-			fs.unlinkSync(Image);
+			fs.unlink(Image, (err) => {
+				if (err) console.log(err);
+			});
+		});
+		fs.unlink(oldProduct?.cover, (err) => {
+			if (err) console.log(err);
 		});
 
 		//set the response
@@ -65,11 +81,13 @@ const updateProductController = async (req, res, next) => {
 		// return the err if there is one
 		res.status(400).json(err);
 
-		req.files
+		req.files.images
 			.map((element) => element.path)
 			.forEach((Image) => {
 				if (typeof Image == 'string') fs.unlinkSync(Image);
 			});
+
+		if (typeof req.files.cover[0].path == 'string') fs.unlinkSync(req.files.cover[0].path);
 
 		req.err = err;
 		next();
@@ -104,7 +122,7 @@ const deleteProductByIdController = async (req, res, next) => {
 // delete product by shortName
 const deleteProductByShortNameController = async (req, res, next) => {
 	try {
-		if (!req.params.id)
+		if (!req.params.shortname)
 			return res.status(400).json({ massage: 'the request needs an shortname params.' });
 
 		// find By shortname And Delete the Product

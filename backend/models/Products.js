@@ -21,6 +21,7 @@ const productsSchema = new mongoose.Schema(
 			}
 		},
 		finalPrice: { type: Number },
+		cover: { type: String },
 		images: { type: Array },
 		description: { type: String },
 		best_seller: { type: Boolean, default: false }
