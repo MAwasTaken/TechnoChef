@@ -27,8 +27,7 @@ const createProductController = async (req, res, next) => {
 		res.status(400).json(err);
 
 		newProduct.images.forEach((Image) => {
-			if(typeof Image == "string")
-			fs.unlinkSync(Image);
+			if (typeof Image == 'string') fs.unlinkSync(Image);
 		});
 		req.err = err;
 		next();
@@ -69,8 +68,7 @@ const updateProductController = async (req, res, next) => {
 		req.files
 			.map((element) => element.path)
 			.forEach((Image) => {
-				if(typeof Image == "string")
-				fs.unlinkSync(Image);
+				if (typeof Image == 'string') fs.unlinkSync(Image);
 			});
 
 		req.err = err;
@@ -149,7 +147,7 @@ const getProductByIdController = async (req, res, next) => {
 // get Product by shortName
 const getProductByShortName = async (req, res, next) => {
 	try {
-		if (!req.params.id)
+		if (!req.params.shortname)
 			return res.status(400).json({ massage: 'the request needs an shortName params.' });
 
 		// find the card By the shortName.
