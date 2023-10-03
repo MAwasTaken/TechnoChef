@@ -106,7 +106,7 @@ const deleteProductByIdController = async (req, res, next) => {
 // delete product by shortName
 const deleteProductByShortNameController = async (req, res, next) => {
 	try {
-		if (!req.params.id)
+		if (!req.params.shortname)
 			return res.status(400).json({ massage: 'the request needs an shortname params.' });
 
 		// find By shortname And Delete the Product
