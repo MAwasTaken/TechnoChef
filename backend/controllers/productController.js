@@ -27,12 +27,12 @@ const createProductController = async (req, res, next) => {
 		// return the err if there is one
 		res.status(400).json(err);
 
-		newProduct?.images.forEach((Image) => {
-			if (Image)
+		if (newProduct.images)
+			newProduct.images.forEach((Image) => {
 				fs.unlink(Image, (err) => {
 					if (err) console.log(err);
 				});
-		});
+			});
 		if (newProduct.cover)
 			fs.unlink(newProduct.cover, (err) => {
 				if (err) console.log(err);
@@ -55,39 +55,57 @@ const updateProductController = async (req, res, next) => {
 		// validate the input
 		await productValidate.validateAsync(req.body);
 
+		let images;
+		let cover;
+
+		if (req.files.images) {
+			images = req.files.images.map((element) => element.path);
+		} else {
+			images = req.body.images;
+		}
+
+		if (req.files.cover) {
+			cover = req.files.cover[0].path;
+		} else {
+			cover = req.body.cover;
+		}
+
 		// find the Product by ID and update it
 		const updatedProduct = await Product.findOneAndUpdate(
 			{ shortName: req.params.shortname },
 			{
 				$set: req.body,
-				images: req.files.images.map((element) => element.path),
-				cover: req.files.cover[0].path
+				images: images,
+				cover: cover
 			},
 			{ new: true }
 		);
 
-		oldProduct.images?.forEach((Image) => {
-			fs.unlink(Image, (err) => {
+		if (oldProduct.images)
+			oldProduct.images.forEach((Image) => {
+				fs.unlink(Image, (err) => {
+					if (err) console.log(err);
+				});
+			});
+
+		if (oldProduct.cover)
+			fs.unlink(oldProduct?.cover, (err) => {
 				if (err) console.log(err);
 			});
-		});
-		fs.unlink(oldProduct?.cover, (err) => {
-			if (err) console.log(err);
-		});
 
 		//set the response
 		res.status(200).json(updatedProduct);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		if (req.files.images)
+			req.files?.images
+				.map((element) => element.path)
+				.forEach((Image) => {
+					if (Image) fs.unlinkSync(Image);
+				});
 
-		req.files?.images
-			.map((element) => element.path)
-			.forEach((Image) => {
-				if (Image) fs.unlinkSync(Image);
-			});
-
-		if (req.files.cover[0].path) fs.unlinkSync(req.files.cover[0].path);
+		if (req.files.cover) fs.unlinkSync(req.files.cover[0].path);
 
 		req.err = err;
 		next();
