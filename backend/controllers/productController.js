@@ -12,8 +12,8 @@ const createProductController = async (req, res, next) => {
 
 	try {
 		// set the uploaded images address
-		newProduct.images = req.files.images.map((element) => element.path);
-		newProduct.cover = req.files.cover[0].path;
+		if (req.files.images) newProduct.images = req.files.images.map((element) => element.path);
+		if (req.files.cover) newProduct.cover = req.files.cover[0].path;
 
 		// validate the input
 		await productValidate.validateAsync(req.body);
@@ -27,13 +27,13 @@ const createProductController = async (req, res, next) => {
 		// return the err if there is one
 		res.status(400).json(err);
 
-		newProduct.images.forEach((Image) => {
-			if (typeof Image == 'string')
+		newProduct?.images.forEach((Image) => {
+			if (Image)
 				fs.unlink(Image, (err) => {
 					if (err) console.log(err);
 				});
 		});
-		if (typeof newProduct.cover == 'string')
+		if (newProduct.cover)
 			fs.unlink(newProduct.cover, (err) => {
 				if (err) console.log(err);
 			});
@@ -81,13 +81,13 @@ const updateProductController = async (req, res, next) => {
 		// return the err if there is one
 		res.status(400).json(err);
 
-		req.files.images
+		req.files?.images
 			.map((element) => element.path)
 			.forEach((Image) => {
-				if (typeof Image == 'string') fs.unlinkSync(Image);
+				if (Image) fs.unlinkSync(Image);
 			});
 
-		if (typeof req.files.cover[0].path == 'string') fs.unlinkSync(req.files.cover[0].path);
+		if (req.files.cover[0].path) fs.unlinkSync(req.files.cover[0].path);
 
 		req.err = err;
 		next();
