@@ -7,7 +7,7 @@ import GlobalSearch from '../GlobalSearch/GlobalSearch';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { clearUser, setUser } from '../../Services/Redux/Slices/User';
+import { setUser } from '../../Services/Redux/Slices/User';
 
 // react query
 import useGetMe from '../../Hooks/useGetMe';
@@ -84,21 +84,24 @@ const Header: React.FC = () => {
 				{/* login / register / panel button */}
 				{isFetching ? (
 					<>
-						<div className="border-Dark/50 hidden sm:flex w-[75px] h-[30px] md:w-[141px] md:h-12 rounded-lg justify-center border px-4 md:border-2">
+						<Link
+							to="/login"
+							className="border-Dark/50 hidden sm:flex w-[75px] h-[30px] md:w-[141px] md:h-12 rounded-lg justify-center border px-4 md:border-2"
+						>
 							<div className="md:hidden sm:block hidden mt-2">
 								<BeatLoader size={8} color="#FCA921" />
 							</div>
 							<div className="md:block hidden mt-3">
 								<BeatLoader color="#FCA921" />
 							</div>
-						</div>
+						</Link>
 						<div className="border-Dark/50 sm:hidden hover:border-Dark relative flex justify-between rounded-lg border p-1.5 transition-all hover:shadow-md md:gap-x-4 md:border-2 md:p-2 md:px-5">
 							<AiOutlineUser className="sm:hidden text-DarkYellow" />
 						</div>
 					</>
 				) : user._id ? (
 					<Link
-						to="/panel"
+						to={user.isAdmin ? '/admin' : '/panel'}
 						className="border-DarkYellow relative flex justify-between rounded-lg border p-1.5 transition-all hover:shadow-md md:gap-x-4 md:border-2 md:p-2 md:px-5"
 					>
 						<AiOutlineUser className="sm:hidden" />

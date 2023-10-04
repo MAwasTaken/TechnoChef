@@ -73,7 +73,7 @@ const Login: React.FC = () => {
 	// GET user data when already login
 	const { data, refetch } = useGetMe();
 
-  // spinner handler
+	// spinner handler
 	const [isFormFetching, setIsFormFetching] = useState<boolean>(false);
 
 	// login handler
@@ -96,8 +96,8 @@ const Login: React.FC = () => {
 						dispatch(setUser(data));
 					},
 					onClose: () => {
-						// navigate to panel
-						navigate('/panel');
+						// navigate to user panel
+						res.data.isAdmin === true ? navigate('/admin') : navigate('/panel');
 
 						// set form available
 						setIsFormReady(true);

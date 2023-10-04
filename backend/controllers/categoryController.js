@@ -2,7 +2,7 @@ const Category = require('../models/category');
 const validation = require('../validator/categoryValidation');
 const fs = require('fs');
 
-const createCategoryController = async (req, res) => {
+const createCategoryController = async (req, res, next) => {
 	if (!req.body) return res.status(400).json({ massage: 'the request needs a body.' });
 
 	try {
@@ -23,10 +23,12 @@ const createCategoryController = async (req, res) => {
 		// return the err if there is one
 		res.status(400).json(err);
 		if (req.file) fs.unlinkSync(savedCategory.image);
+		req.err = err;
+		next();
 	}
 };
 
-const updateCategoryController = async (req, res) => {
+const updateCategoryController = async (req, res, next) => {
 	if (req.params.id == ':id')
 		return res.status(400).json({ massage: 'the request needs an Id params.' });
 	if (!req.body) return res.status(400).json({ massage: 'the request needs a body.' });
@@ -55,10 +57,12 @@ const updateCategoryController = async (req, res) => {
 		res.status(400).json(err);
 
 		if (req.file) fs.unlinkSync(req.file.path);
+		req.err = err;
+		next();
 	}
 };
 
-const deleteCategoryController = async (req, res) => {
+const deleteCategoryController = async (req, res, next) => {
 	if (req.params.id == ':id')
 		return res.status(400).json({ massage: 'the request needs an Id params.' });
 
@@ -74,10 +78,12 @@ const deleteCategoryController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
-const getAllCategoryController = async (req, res) => {
+const getAllCategoryController = async (req, res, next) => {
 	try {
 		// find the Categories
 		const categories = await Category.find();
@@ -87,6 +93,8 @@ const getAllCategoryController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 

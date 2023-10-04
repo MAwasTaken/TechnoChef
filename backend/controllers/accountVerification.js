@@ -2,7 +2,7 @@ const User = require('../models/Users');
 const VerificationCodeDB = require('../models/verificationCode');
 const transporter = require('../modules/emailTransporter');
 
-const sendValidateUserEmail = async (req, res) => {
+const sendValidateUserEmail = async (req, res, next) => {
 	try {
 		const verificationCode = new VerificationCodeDB({
 			user_id: req.user.id,
@@ -31,12 +31,13 @@ const sendValidateUserEmail = async (req, res) => {
 				console.log(err);
 			});
 	} catch (err) {
-		console.log(err);
 		res.status(500).json(err);
+		req.err = err;
+		next();
 	}
 };
 
-const validateUserByCode = async (req, res) => {
+const validateUserByCode = async (req, res, next) => {
 	const inputCode = req.body.code;
 	let verifyCode;
 	try {
@@ -50,6 +51,8 @@ const validateUserByCode = async (req, res) => {
 			await User.findByIdAndUpdate(req.body.id, { $set: { emailVerified: true } }, { new: true });
 		} catch (err) {
 			res.status(400).json(err);
+			req.err = err;
+			next();
 		}
 		return res.status(200).json({ massage: 'the user has been verified ' });
 	} else {

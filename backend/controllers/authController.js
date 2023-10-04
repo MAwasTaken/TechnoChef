@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const userValidation = require('../validator/userValidation');
 
 // User register Controller (sign up)
-const registerController = async (req, res) => {
+const registerController = async (req, res, next) => {
 	try {
 		if (!req.body) {
 			return res.status(400).json({ massage: 'the request needs a body.' });
@@ -14,23 +14,30 @@ const registerController = async (req, res) => {
 		await userValidation.validateAsync(req.body);
 
 		// create the user object
-		const password = CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC_KEY).toString();
+		const userPassword = CryptoJS.AES.encrypt(
+			req.body.password,
+			process.env.PASS_SEC_KEY
+		).toString();
 		const newUser = new User(req.body);
-		newUser.password = password;
+		newUser.password = userPassword;
+
+		// split the PASSWORD from the object
+		const { password, __v, ...others } = newUser._doc;
 
 		// save the user in DB
 		const savedUser = await newUser.save();
-
 		// set the response
-		res.status(201).json(savedUser);
+		res.status(201).json(others);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // user Login Controller
-const logInController = async (req, res) => {
+const logInController = async (req, res, next) => {
 	try {
 		// find the user By username or email
 		const user = await User.findOne({
@@ -62,7 +69,7 @@ const logInController = async (req, res) => {
 			);
 
 			// split the PASSWORD from the object
-			const { password, isAdmin, __v, ...others } = user._doc;
+			const { password, __v, ...others } = user._doc;
 
 			// if the password doesn't match
 			if (inputPassword !== originalPassword) {
@@ -83,22 +90,28 @@ const logInController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(500).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // log out route
-const logOutController = async (req, res) => {
-	if (!req.cookies?.accessToken) {
-		return res.sendStatus(204);
+const logOutController = async (req, res, next) => {
+	try {
+		res
+			.clearCookie('accessToken', {
+				httpOnly: true,
+				sameSite: 'None',
+				secure: true,
+				credentials: true
+			})
+			.status(204)
+			.end();
+	} catch (err) {
+		res.status(500).json(err);
+		req.err = err;
+		next();
 	}
-	res
-		.clearCookies('accessToken', {
-			httpOnly: true,
-			sameSite: 'None',
-			secure: true,
-			credentials: true
-		})
-		.status(204);
 };
 
 // export the functions.

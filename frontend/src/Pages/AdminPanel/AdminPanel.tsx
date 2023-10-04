@@ -1,12 +1,26 @@
-import React from 'react';
-import AdminSide from './../../Components/AdminPanel/AdminSide/AdminSide';
+// react
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
-const AdminPanel = () => {
-    return (
-        <div className='w-[1730px]'>
-            <AdminSide />
-        </div>
-    )
-}
+// components
+import AdminSide from '../../Components/AdminPanel/AdminSide/AdminSide';
+import AdminHeader from '../../Components/AdminPanel/AdminHeader/AdminHeader';
 
+// admin panel
+const AdminPanel: React.FC = () => {
+	const [isMenuShown, setIsMenuShown] = useState<boolean>(false);
+
+	// tsx
+	return (
+		<>
+			<AdminSide isMenuShown={isMenuShown} setIsMenuShown={setIsMenuShown} />
+			<main className="md:w-9/12 w-full left-0 absolute">
+				<AdminHeader setIsMenuShown={setIsMenuShown} />
+				<Outlet />
+			</main>
+		</>
+	);
+};
+
+// exports
 export default AdminPanel;

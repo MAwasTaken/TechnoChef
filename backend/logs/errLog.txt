@@ -1,0 +1,3 @@
+20230928	16:55:10	ValidationError: "username" must only contain alpha-numeric characters
+20230928	16:55:35	ValidationError: "username" must only contain alpha-numeric characters
+20230928	17:40:12	ValidationError: "phoneNumber" with value "01014127135" fails to match the required pattern: /^(\+98|0)?9\d{9}$/
