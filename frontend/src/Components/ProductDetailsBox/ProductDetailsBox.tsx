@@ -11,7 +11,7 @@ import { AiFillDollarCircle } from 'react-icons/ai';
 export const ProductDetailsBox = () => {
     return (
         <div className="flex justify-center items-center">
-            <div className='flex flex-col md:flex-row gap-x-2 items-center p-5 justify-center w-[1200px] h-max lg:rounded-3xl bg-gray-600	'>
+            <div className='flex flex-col md:flex-row gap-x-2 items-center p-5 justify-center w-[1300px] h-max lg:rounded-3xl bg-gray-600 shadow-md	'>
                 {/* right side (responsive:up) */}
                 <div className="flex w-2/6 justify-center items-center h-max">
                     <div className="flex w-[250px] h-[300px]">
@@ -44,7 +44,7 @@ export const ProductDetailsBox = () => {
 
                     </div>
                     <div className="flex h-max md:h-1/2 justify-center gap-y-8 items-center flex-col md:flex-row">
-                        <div className="flex leading-6 mt-4 md:w-1/2">
+                        <div className="flex leading-6 text-white mt-4 md:w-1/2">
                             <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, deserunt eligendi! Beatae sint, fuga pariatur quidem quas temporibus tempore quibusdam aperiam voluptates, labore nihil doloribus nostrum eius placeat quos est. Sapiente vel, cum praesentium corrupti quam id at debitis voluptatibus, expedita eos deserunt sunt, cupiditate nisi delectus numquam alias aspernatur recusandae soluta!</span>
                         </div>
                         <div className="flex flex-col w-1/2 gap-y-1 items-end px-10 justify-center ">

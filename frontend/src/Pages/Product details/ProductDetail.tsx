@@ -6,7 +6,7 @@ import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
 import ProductDetailsBox from '../../Components/ProductDetailsBox/ProductDetailsBox';
 import ProductDetailsCm from '../../Components/ProductDetailsCm/ProductDetailsCm';
-
+import ProductProperties from '../../Components/ProductProperties/ProductProperties';
 
 
 const ProductDetails = () => {
@@ -23,8 +23,11 @@ const ProductDetails = () => {
 
         <div className="flex h-screen flex-col justify-between">
             <Header />
+            <main className='flex flex-col gap-y-10'>
                 <ProductDetailsBox />
+                <ProductProperties />
                 <ProductDetailsCm />
+            </main>
             <Footer />
         </div>
     )
