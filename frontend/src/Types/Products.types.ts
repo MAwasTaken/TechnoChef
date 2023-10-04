@@ -6,7 +6,8 @@ export type ProductProps = {
 	category?: string;
 	productColor?: string[];
 	QTY?: number;
-	images?: string[];
+	images?: any;
+	cover?: any;
 	description?: string;
 	best_seller?: boolean;
 	_id?: string;

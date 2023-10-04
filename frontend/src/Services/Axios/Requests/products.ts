@@ -23,5 +23,26 @@ const postCreateProduct = async (newProductInfos: FormData) =>
 // GET all
 const getAllProducts = async () => axiosInstance.get('/products');
 
+// GET single product by short name
+const getSingleProduct = async (shortName: string) =>
+	axiosInstance.get(`/products/findByShortName/${shortName}`);
+
+// DELETE single product by short name
+const deleteSingleProduct = async (shortName: string) =>
+	axiosInstance.delete(`/products/deleteByShortName/${shortName}`, { withCredentials: true });
+
+// PUT single product by short name
+const putSingleProduct = async (shortName: string, newProductInfos: FormData) =>
+	axiosInstance.put(`/products/${shortName}`, newProductInfos, { withCredentials: true });
+
 // exports
-export { getBestSellers, getLatest, getFiltered, postCreateProduct, getAllProducts };
+export {
+	getBestSellers,
+	getLatest,
+	getFiltered,
+	postCreateProduct,
+	getAllProducts,
+	getSingleProduct,
+	deleteSingleProduct,
+	putSingleProduct
+};

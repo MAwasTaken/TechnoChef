@@ -7,5 +7,6 @@ export type NewProductInputs = {
 	description?: string;
 	category?: string;
 	productColor?: string[];
-	images?: any;
+	cover?: any;
+	best_seller?: boolean;
 };

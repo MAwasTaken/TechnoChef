@@ -13,8 +13,6 @@ const AdminProducts = () => {
 	// GET all product from react query
 	const { data } = useAllProducts();
 
-	data ? console.log(data) : '';
-
 	// tsx
 	return (
 		<section className="md:p-5 p-3">
@@ -53,10 +51,8 @@ const AdminProducts = () => {
 							<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
 							<td>
 								<img
-									className="w-32 max-h-32 object-contain mx-auto"
-									src={`https://45.159.150.221:3000/api/${
-										product.images ? product.images[0] : undefined
-									}`}
+									className="w-32 h-32 object-contain mx-auto"
+									src={`https://45.159.150.221:3000/${product?.cover}`}
 									alt="تصویر محصول"
 								/>
 							</td>

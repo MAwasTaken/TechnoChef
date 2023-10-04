@@ -7,26 +7,45 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 // components
 import ProductBox from '../../../ProductBox/ProductBox';
 import { BsBoxSeam } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 
 // react query
 import useCategories from '../../../../Hooks/useCategories';
+
+// axios
 import { postCreateProduct } from '../../../../Services/Axios/Requests/products';
+
+// types
 import { NewProductInputs } from '../../../../Types/NewProductInputs.types';
+
+// react toastify
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+
+// react spinner
+import { BeatLoader } from 'react-spinners';
 
 // create new product
 const CreateNewProduct: React.FC = () => {
+	// navigator
+	const navigate = useNavigate();
+
 	// initialize hook form
 	const { register, handleSubmit, getValues } = useForm({
 		mode: 'all'
 	});
+
+	// spinner handler
+	const [isFormFetching, setIsFormFetching] = useState<boolean>(false);
 
 	// GET categories from backend
 	const { data } = useCategories();
 
 	// create new product handler
 	const newProductHandler: SubmitHandler<NewProductInputs> = (formData) => {
+		setIsFormFetching(true);
+
 		formData.productColor = productColor;
 
 		const data = new FormData();
@@ -37,11 +56,23 @@ const CreateNewProduct: React.FC = () => {
 		data.append('finalPrice', String(formData.finalPrice));
 		formData.productColor.map((color) => data.append('productColor', color));
 		data.append('QTY', String(formData.QTY));
-		data.append('images', formData.images ? formData.images[0] : '');
+		data.append('cover', formData.cover ? formData.cover[0] : '');
 		data.append('description', String(formData.description));
 		data.append('category', String(formData.category));
+		data.append('best_seller', String(formData.best_seller));
 
-		postCreateProduct(data);
+		postCreateProduct(data)
+			.then((res) => {
+				toast.success(`محصول ${res.data.productName} با موفقیت افزوده شد ✅‍`, {
+					onClose: () => navigate('/admin/products')
+				});
+			})
+			.catch(() =>
+				toast.error(`افزودن محصول انجام نشد! ❌‍`, {
+					onClose: () => location.reload()
+				})
+			)
+			.finally(() => setIsFormFetching(false));
 	};
 
 	// form values
@@ -82,7 +113,7 @@ const CreateNewProduct: React.FC = () => {
 							price={Number(getValues('price'))}
 							finalPrice={Number(getValues('finalPrice'))}
 							productColor={productColor}
-							image={image}
+							cover={image}
 						/>
 					) : (
 						<ProductBox
@@ -219,7 +250,7 @@ const CreateNewProduct: React.FC = () => {
 						{/* category */}
 						<div className="flex gap-y-1 relative items-center justify-center">
 							<span className="absolute sm:text-base right-0 top-1/2 -translate-y-1/2 font-Lalezar text-sm text-Dark/80">
-								دسته بندی محصول:
+								دسته بندی:
 							</span>
 							{/* input */}
 							<select
@@ -242,15 +273,15 @@ const CreateNewProduct: React.FC = () => {
 								)}
 							</select>
 						</div>
-						{/* images */}
+						{/* cover */}
 						<div className="flex gap-y-1 relative items-center justify-between">
 							<span className="absolute sm:text-base right-0 -translate-y-1/2 top-1/2 font-Lalezar text-sm text-Dark/80">
-								تصویر محصول:
+								کاور محصول:
 							</span>
 							{/* input */}
 							<input
 								required
-								{...register('images')}
+								{...register('cover')}
 								onChange={(e) =>
 									setImage(e.target.files ? URL.createObjectURL(e.target.files[0]) : '')
 								}
@@ -262,22 +293,59 @@ const CreateNewProduct: React.FC = () => {
 							{image ? (
 								<img
 									onClick={() => setImage('')}
-									className="mx-auto absolute hidden xl:block left-0 border-2 border-DarkYellow p-1 rounded-lg h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
+									className="mx-auto absolute cursor-pointer hidden xl:block left-0 border-2 border-DarkYellow p-1 rounded-lg h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
 									src={image}
 									alt="تصویر محصول"
 									loading="lazy"
 								/>
 							) : null}
 						</div>
+						{/* best seller */}
+						<label
+							className="inline-flex gap-y-1 items-center justify-between w-1/2"
+							htmlFor="best_seller"
+						>
+							<span className="select-none cursor-pointer font-Lalezar text-Dark/80 sm:text-base text-sm">
+								نمایش به عنوان پرفروش:
+							</span>
+							{/* input */}
+							<input
+								{...register('best_seller')}
+								className="w-5 h-5 accent-DarkYellow cursor-pointer shadow-lg"
+								type="checkbox"
+								placeholder="قیمت پس از تخفیف"
+								id="best_seller"
+							/>
+						</label>
+						{/* submit button */}
 						<button
 							className="font-Lalezar mx-auto mt-2 md:h-11 h-9 from-LightYellow to-DarkYellow flex w-auto items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-base shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg disabled:bg-gray-400"
-							// type="submit"
+							type="submit"
 						>
-							افزودن محصول جدید
+							{isFormFetching ? <BeatLoader size={10} color="#FCFCFC" /> : 'افزودن محصول جدید'}
 						</button>
 					</form>
 				</section>
 			</main>
+			{/* react toastify container */}
+			<ToastContainer
+				position="bottom-right"
+				autoClose={4000}
+				hideProgressBar={false}
+				newestOnTop
+				closeOnClick={false}
+				rtl={true}
+				theme="light"
+				pauseOnFocusLoss
+				draggable={false}
+				pauseOnHover
+				toastStyle={{
+					color: '#0A0706',
+					fontFamily: 'Lalezar',
+					background: '#FCFCFC',
+					fontSize: '16px'
+				}}
+			/>
 		</>
 	);
 };
