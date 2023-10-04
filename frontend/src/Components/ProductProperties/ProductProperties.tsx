@@ -5,7 +5,7 @@ import ProductPropertiesBox from '../../Components/ProductPropertiesBox/ProductP
 const ProductProperties = () => {
     return (
         <div className='flex justify-center items-center'>
-            <main className='flex flex-col gap-x-2 gap-y-4 items-center p-8 justify-center w-[1400px] h-max lg:rounded-3xl bg-white shadow-md'>
+            <main className='flex flex-col gap-x-2 gap-y-4 items-center p-8 justify-center w-[1300px] h-max lg:rounded-3xl bg-white shadow-md'>
                 {/* Property label */}
                 <div className="flex flex-row w-full">
                     <label htmlFor="" className='flex flex-row gap-x-3 items-center text-3xl'><BiInfoCircle className='text-red-500'></BiInfoCircle><span>مشخصات</span></label>
