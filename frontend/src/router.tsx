@@ -6,10 +6,6 @@ import Signup from './Pages/Signup/Signup';
 import Products from './Pages/Products/products';
 import ProductDetails from './Pages/Product details/ProductDetail';
 
-// AdminPanel
-import AdminPanel from './Pages/AdminPanel/AdminPanel';
-
-
 // private routes
 import PanelPrivate from './Components/Private/PanelPrivate';
 

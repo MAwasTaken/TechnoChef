@@ -32,7 +32,7 @@ const ProductSort: React.FC = () => {
 	// tsx
 	return (
 		<>
-			<div className="bg-Info/50 relative flex flex-col items-center gap-y-3 rounded-xl p-5 md:p-4 xl:h-20 xl:flex-row xl:gap-x-5 xl:rounded-3xl xl:p-9">
+			<div className="bg-slate-300 relative flex flex-col items-center gap-y-3 rounded-xl p-5 md:p-4 xl:h-20 xl:flex-row xl:gap-x-5 xl:rounded-3xl xl:p-9">
 				<button
 					className="from-LightYellow to-DarkYellow absolute right-5 flex items-center gap-x-1 rounded-lg bg-gradient-to-tl px-2 py-1 hover:bg-gradient-to-br md:right-10 md:top-1/2 md:-translate-y-1/2 md:rounded-xl md:px-4 md:py-2 xl:hidden"
 					onClick={() => setShownFilters(true)}
