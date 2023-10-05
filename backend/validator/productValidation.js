@@ -7,7 +7,7 @@ const model = joi.object({
 	price: joi.number().positive(),
 	category: joi.string(),
 	productColor: joi.array().single(),
-	details: joi.object(),
+	details: joi.array().sparse().items(joi.object()),
 	QTY: joi.number().positive(),
 	finalPrice: joi.number().positive(),
 	cover: joi.string(),
