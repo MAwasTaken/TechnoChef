@@ -22,7 +22,7 @@ const ProductCategories: React.FC = () => {
 
 	// tsx
 	return (
-		<div className="bg-Info/50 hidden h-max flex-col gap-y-5 rounded-3xl p-6 xl:flex xl:w-[300px]">
+		<div className="bg-slate-300 hidden h-max flex-col gap-y-5 rounded-3xl p-6 xl:flex xl:w-[300px]">
 			<div className="flex items-center gap-x-2">
 				<BiCategory className="text-3xl text-red-500" />
 				<span className="font-Lalezar select-none md:text-2xl">دسته بندی محصولات</span>
