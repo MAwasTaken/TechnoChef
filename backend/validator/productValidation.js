@@ -11,7 +11,7 @@ const model = joi.object({
 	QTY: joi.number().positive(),
 	finalPrice: joi.number().positive(),
 	cover: joi.string(),
-	images: joi.array().max(5),
+	images: joi.array().single().max(5),
 	description: joi.string(),
 	best_seller: joi.boolean()
 });
