@@ -9,4 +9,9 @@ export type NewProductInputs = {
 	productColor?: string[];
 	cover?: any;
 	best_seller?: boolean;
+	details?: {
+		title: string;
+		value: string;
+	}[];
+	images?: any;
 };

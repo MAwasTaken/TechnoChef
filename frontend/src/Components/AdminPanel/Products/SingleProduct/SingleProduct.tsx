@@ -58,7 +58,7 @@ const SingleProduct = () => {
 	const [productColor, setProductColor] = useState<string[]>([]);
 
 	// product image data url
-	const [image, setImage] = useState<string>('');
+	const [cover, setCover] = useState<string>('');
 
 	useEffect(() => {
 		getSingleProduct(String(params.shortName)).then((res) => {
@@ -73,11 +73,11 @@ const SingleProduct = () => {
 				description: res.data.description,
 				productColor: res.data.productColor,
 				category: res.data.category,
-				images: res.data.images
+				cover: res.data.cover
 			});
 
 			setProductColor(res.data.productColor);
-			setImage(`${res.data.images}`);
+			setCover(`${res.data.cover}`);
 		});
 	}, []);
 
@@ -95,7 +95,7 @@ const SingleProduct = () => {
 		data.append('finalPrice', String(formData.finalPrice));
 		formData.productColor.map((color) => data.append('productColor', color));
 		data.append('QTY', String(formData.QTY));
-		data.append('images', formData.images ? formData.images[0] : '');
+		data.append('cover', formData.cover);
 		data.append('description', String(formData.description));
 		data.append('category', String(formData.category));
 
@@ -163,8 +163,8 @@ const SingleProduct = () => {
 							shortName={formValue.shortName}
 							price={Number(formValue.price)}
 							finalPrice={Number(formValue.finalPrice)}
-							productColor={formValue.productColor}
-							images={image}
+							productColor={productColor}
+							cover={cover}
 						/>
 					) : (
 						<ProductBox
@@ -275,7 +275,7 @@ const SingleProduct = () => {
 						{/* productColor */}
 						<div className="flex relative flex-col gap-y-1 items-center justify-center">
 							<span className="absolute sm:text-base right-0 top-1/4 font-Lalezar text-sm text-Dark/80">
-								رنگ محصول:
+								رنگ:
 							</span>
 							{/* input */}
 							<input
@@ -304,7 +304,7 @@ const SingleProduct = () => {
 						{/* category */}
 						<div className="flex gap-y-1 relative items-center justify-center">
 							<span className="absolute sm:text-base right-0 top-1/2 -translate-y-1/2 font-Lalezar text-sm text-Dark/80">
-								دسته بندی محصول:
+								دسته بندی:
 							</span>
 							{/* input */}
 							<select
@@ -328,28 +328,28 @@ const SingleProduct = () => {
 								)}
 							</select>
 						</div>
-						{/* images */}
+						{/* cover */}
 						<div className="flex gap-y-1 relative items-center justify-between">
 							<span className="absolute sm:text-base right-0 -translate-y-1/2 top-1/2 font-Lalezar text-sm text-Dark/80">
-								تصویر محصول:
+								کاور:
 							</span>
 							{/* input */}
 							<input
-								{...register('images')}
+								{...register('cover')}
 								onChange={(e) =>
-									setImage(e.target.files ? URL.createObjectURL(e.target.files[0]) : '')
+									setCover(e.target.files ? URL.createObjectURL(e.target.files[0]) : '')
 								}
 								className="rounded-lg border-2 md:w-24 w-[77px] py-1 mx-auto border-r-DarkYellow pr-0.5 my-3"
 								type="file"
 								accept="image/*"
 								id="images"
 							/>
-							{image ? (
+							{cover ? (
 								<img
-									onClick={() => setImage('')}
+									onClick={() => setCover('')}
 									className="mx-auto absolute cursor-pointer hidden xl:block left-0 border-2 border-DarkYellow p-1 rounded-lg h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
 									src={
-										image.includes('public') ? `https://45.159.150.221:3000/${image}` : `${image}`
+										cover.includes('public') ? `https://45.159.150.221:3000/${cover}` : `${cover}`
 									}
 									alt="تصویر محصول"
 									loading="lazy"

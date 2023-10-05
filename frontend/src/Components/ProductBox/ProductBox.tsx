@@ -26,7 +26,7 @@ const ProductBox: React.FC<ProductProps> = ({
 	// tsx
 	return (
 		<>
-			<div className="bg-Dark/70 hover:shadow-Dark/30 relative h-[245px] w-[150px] select-none rounded-xl shadow-md duration-500 hover:-translate-y-[2px] hover:shadow-lg md:h-[295px] md:w-[215px]">
+			<div className="bg-Dark/70 hover:shadow-Dark/30 relative h-[245px] w-[150px] select-none rounded-xl shadow-md duration-500 hover:shadow-lg md:h-[295px] md:w-[215px]">
 				<div className="flex h-auto flex-col p-2 w-full md:p-4">
 					<div className="absolute left-2 flex flex-col gap-y-1">
 						{productColor?.map((color, index) => (
@@ -57,7 +57,7 @@ const ProductBox: React.FC<ProductProps> = ({
 					<div className="mt-3 flex items-center justify-between">
 						{finalPrice !== price ? (
 							<span className="h-5 w-7 rounded-lg bg-gradient-to-l from-red-500 to-red-600 pt-[3px] text-center text-[10px] font-bold text-white/70 md:h-6 md:w-9 md:pt-1 md:text-xs">
-								{Math.trunc(100 - (finalPrice * 100) / price).toLocaleString('fa-IR')}
+								{Math.trunc(100 - (finalPrice * 100) / price).toLocaleString('fa-IR')}%
 							</span>
 						) : null}
 						<span className="font-Lalezar mt-1 text-left font-bold tracking-tight text-red-500/80 line-through md:text-lg">
