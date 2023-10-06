@@ -20,9 +20,10 @@ const createProductController = async (req, res, next) => {
 
 		// save the user in DB
 		const savedProduct = await newProduct.save();
+		const { __v, ...others } = savedProduct._doc;
 
 		// set the response
-		res.status(201).json(savedProduct);
+		res.status(201).json(others);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
@@ -94,7 +95,8 @@ const updateProductController = async (req, res, next) => {
 			});
 
 		//set the response
-		res.status(200).json(updatedProduct);
+		const { __v, ...others } = updatedProduct._doc;
+		res.status(200).json(others);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
@@ -169,7 +171,7 @@ const getProductByIdController = async (req, res, next) => {
 		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
 
 		// find the card By the ID
-		const product = await Product.findById(req.params.id);
+		const product = await Product.findById(req.params.id).select('-__v');
 		//set the response
 		res.status(200).json(product);
 	} catch (err) {
@@ -187,7 +189,7 @@ const getProductByShortName = async (req, res, next) => {
 			return res.status(400).json({ massage: 'the request needs an shortName params.' });
 
 		// find the card By the shortName.
-		const product = await Product.findOne({ shortName: req.params.shortname });
+		const product = await Product.findOne({ shortName: req.params.shortname }).select('-__v');
 
 		//set the response
 		res.status(200).json(product);
@@ -217,14 +219,15 @@ const getAllProductsController = async (req, res, next) => {
 		// if there is "new" query
 		if (qNew) {
 			//return the newest Products
-			products = await Product.find().sort({ createdAt: -1 }).limit(qNew);
+			products = await Product.find().select('-__v').sort({ createdAt: -1 }).limit(qNew);
 		} // if there is "Category" query
 		else if (qCategory) {
 			//return the Products in that categories
 			products = await Product.find({
 				category: qCategory.trim()
 			})
-				.skip(qPage * 9)
+				.select('-__v')
+				.skip((qPage - 1) * 9)
 				.limit(9);
 
 			const countProductsCategory = await Product.countDocuments({
@@ -236,29 +239,32 @@ const getAllProductsController = async (req, res, next) => {
 			// search in Products and return the result
 			products = await Product.find({
 				productName: { $regex: qSearch.trim() }
-			}).sort({ createdAt: -1 });
+			})
+				.select('-__v')
+				.sort({ createdAt: -1 });
 		} // if there is "BestSeller" query
 		else if (qBestSeller) {
 			// return BestSeller Products
-			products = await Product.find({ best_seller: true });
+			products = await Product.find({ best_seller: true }).select('-__v');
 		} // if there is "Page" query
 		else if (qPage) {
 			// return the page of Products
 			products = await Product.find()
+				.select('-__v')
 				.skip((qPage - 1) * 9)
 				.limit(9);
 
 			const countProducts = await Product.countDocuments();
 			pages = Math.ceil(countProducts / 9);
 		} else if (qPriceSort) {
-			products = await Product.find().sort({ finalPrice: qPriceSort });
+			products = await Product.find().select('-__v').sort({ finalPrice: qPriceSort });
 		} else {
 			//return All Products
-			products = await Product.find();
+			products = await Product.find().select('-__v');
 		}
 
 		// set the response
-		res.status(200).json({ products, pages });
+		res.status(200).json({ products, pages, currentPage: qPage });
 	} catch (err) {
 		res.status(400).json(err);
 		req.err = err;
