@@ -8,6 +8,7 @@ import { getAllProducts, getBestSellers } from '../Services/Axios/Requests/produ
 const useAllProducts = () =>
 	useQuery('Products/All', () => getAllProducts().then((res) => res.data.products), {
 		refetchOnWindowFocus: false,
+		refetchOnMount: true
 	});
 
 // exports

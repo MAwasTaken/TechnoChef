@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 // icons
-import { BsBoxSeam } from 'react-icons/bs';
+import { BsBoxSeam, BsPlus, BsTrash } from 'react-icons/bs';
 import { BiArrowBack } from 'react-icons/bi';
 
 // components
@@ -44,6 +44,9 @@ const SingleProduct = () => {
 		mode: 'all'
 	});
 
+	// details count
+	const [detailsCount, setDetailsCount] = useState<number>(1);
+
 	// spinner handlers
 	const [isFormFetching, setIsFormFetching] = useState<boolean>(false);
 	const [isFormFetching2, setIsFormFetching2] = useState<boolean>(false);
@@ -60,6 +63,9 @@ const SingleProduct = () => {
 	// product image data url
 	const [cover, setCover] = useState<string>('');
 
+	// product images
+	const [images, setImages] = useState<any>([]);
+
 	useEffect(() => {
 		getSingleProduct(String(params.shortName)).then((res) => {
 			setFormValues(res.data);
@@ -73,19 +79,26 @@ const SingleProduct = () => {
 				description: res.data.description,
 				productColor: res.data.productColor,
 				category: res.data.category,
-				cover: res.data.cover
+				cover: res.data.cover,
+				details: res.data.details,
+				images: res.data.images,
+				best_seller: res.data.best_seller
 			});
 
 			setProductColor(res.data.productColor);
 			setCover(`${res.data.cover}`);
+			setDetailsCount(res.data.details.length);
+			setImages(res.data.images);
 		});
 	}, []);
 
 	// edit product handler
 	const editProductHandler: SubmitHandler<NewProductInputs> = (formData) => {
-		setIsFormFetching(true);
+		// setIsFormFetching(true);
 
+		formData.details = formData.details?.slice(0, detailsCount);
 		formData.productColor = productColor;
+		formData.images = images;
 
 		const data = new FormData();
 
@@ -95,26 +108,38 @@ const SingleProduct = () => {
 		data.append('finalPrice', String(formData.finalPrice));
 		formData.productColor.map((color) => data.append('productColor', color));
 		data.append('QTY', String(formData.QTY));
-		data.append('cover', formData.cover);
+		cover === ''
+			? data.append('cover', '')
+			: typeof formData.cover === 'string'
+			? data.append('cover', formData.cover)
+			: data.append('cover', formData.cover[0]);
 		data.append('description', String(formData.description));
 		data.append('category', String(formData.category));
+		formData.images.length === 0
+			? data.append('images', '')
+			: formData.images.map((image: File) => data.append('images', image));
+		formData.details?.map((item: { title: string; value: string }, index) => {
+			data.append(`details[${index}][title]`, item.title);
+			data.append(`details[${index}][value]`, item.value);
+		});
+		data.append('best_seller', String(formData.best_seller));
 
-		for (var [key, value] of data.entries()) {
-			console.log(key, value);
-		}
+		// for (var [key, value] of data.entries()) {
+		//   console.log(key, value);
+		// }
 
-		putSingleProduct(String(params.shortName), data)
-			.then((res) => {
-				toast.success(`محصول ${res.data.productName} با موفقیت ویرایش شد ✅‍`, {
-					onClose: () => location.reload()
-				});
-			})
-			.catch(() =>
-				toast.error(`ویرایش محصول انجام نشد! ❌‍`, {
-					// onClose: () => location.reload()
-				})
-			)
-			.finally(() => setIsFormFetching(false));
+		// putSingleProduct(String(params.shortName), data)
+		// 	.then((res) => {
+		// 		toast.success(`محصول ${res.data.productName} با موفقیت ویرایش شد ✅‍`, {
+		// 			onClose: () => location.reload()
+		// 		});
+		// 	})
+		// 	.catch(() =>
+		// 		toast.error(`ویرایش محصول انجام نشد! ❌‍`, {
+		// 			// onClose: () => location.reload()
+		// 		})
+		// 	)
+		// 	.finally(() => setIsFormFetching(false));
 	};
 
 	// delete product handler
@@ -127,11 +152,7 @@ const SingleProduct = () => {
 					onClose: () => navigate('/admin/products')
 				})
 			)
-			.catch(() =>
-				toast.error('حذف محصول انجام نشد ! ❌', {
-					onClose: () => location.reload()
-				})
-			)
+			.catch(() => toast.error('حذف محصول انجام نشد ! ❌'))
 			.finally(() => setIsFormFetching(false));
 	};
 
@@ -155,7 +176,7 @@ const SingleProduct = () => {
 					</Link>
 				</h3>
 			</div>
-			<main className="m-10 flex flex-col md:flex-row-reverse gap-y-10 justify-center md:justify-between">
+			<main className="m-10 flex relative flex-col md:flex-row-reverse gap-y-10 justify-center md:justify-between">
 				<section className="mx-auto md:mx-0">
 					{formValue ? (
 						<ProductBox
@@ -178,10 +199,7 @@ const SingleProduct = () => {
 				<section className="grow">
 					{/* form */}
 					<form
-						onChange={() => {
-							console.log(getValues());
-							setFormValues(getValues());
-						}}
+						onChange={() => setFormValues(getValues())}
 						onSubmit={handleSubmit(editProductHandler)}
 						className="flex flex-col gap-y-2 md:gap-y-4"
 					>
@@ -272,6 +290,54 @@ const SingleProduct = () => {
 								autoComplete="description"
 							/>
 						</label>
+						{/* details */}
+						<section className="flex flex-col gap-y-2">
+							<span className="sm:text-base font-Lalezar text-sm text-Dark/80">مشخصات:</span>
+							{Array.from({ length: detailsCount }).map((item, index) => (
+								<label
+									key={index}
+									htmlFor="details"
+									className="flex items-center relative justify-between"
+								>
+									<span className="block absolute font-Lalezar text-xl -right-6">
+										{Number(index + 1).toLocaleString('fa-IR')}
+									</span>
+									<span className="h-full w-0.5 rounded-full block absolute bg-red-500 -right-1"></span>
+									{/* input */}
+									<div className="flex flex-col w-full lg:flex-row relative gap-y-px items-center justify-center gap-x-px">
+										<input
+											{...register(`details[${index}][title]`)}
+											type="text"
+											placeholder="عنوان"
+											className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 w-full lg:w-2/6 text-right px-2"
+										/>
+										<input
+											{...register(`details[${index}][value]`)}
+											type="text"
+											placeholder="مقدار"
+											className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 w-full text-right px-2"
+										/>
+									</div>
+								</label>
+							))}
+							<div className="flex self-end gap-x-2">
+								<button
+									type="button"
+									className="bg-red-500 shadow-md p-1 md:p-1.5 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-red-600 transition-colors mr-1.5"
+									onClick={() => setDetailsCount(detailsCount - 1)}
+									disabled={detailsCount === 1}
+								>
+									<BsTrash className="md:w-6 md:h-6 h-4 w-4 text-white" />
+								</button>
+								<button
+									type="button"
+									className="bg-sky-500 shadow-md p-1 md:p-1.5 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-sky-600 transition-colors mr-1.5"
+									onClick={() => setDetailsCount(detailsCount + 1)}
+								>
+									<BsPlus className="md:w-6 md:h-6 h-5 w-5 text-white" />
+								</button>
+							</div>
+						</section>
 						{/* productColor */}
 						<div className="flex relative flex-col gap-y-1 items-center justify-center">
 							<span className="absolute sm:text-base right-0 top-1/4 font-Lalezar text-sm text-Dark/80">
@@ -356,6 +422,60 @@ const SingleProduct = () => {
 								/>
 							) : null}
 						</div>
+						{/* best seller */}
+						<label
+							className="inline-flex gap-y-1 gap-x-2 items-center justify-between absolute -top-10 -right-5"
+							htmlFor="best_seller"
+						>
+							<span className="select-none cursor-pointer font-Lalezar text-Dark/80 sm:text-base text-sm">
+								نمایش به عنوان پرفروش:
+							</span>
+							{/* input */}
+							<input
+								{...register('best_seller')}
+								className="w-5 h-5 accent-DarkYellow cursor-pointer shadow-md"
+								type="checkbox"
+								placeholder="قیمت پس از تخفیف"
+								id="best_seller"
+							/>
+						</label>
+						{/* images */}
+						<section className="flex flex-col gap-y-1 relative items-center justify-between">
+							<div className="flex items-center justify-evenly w-full">
+								<span className="sm:text-base font-Lalezar text-sm text-Dark/80">تصاویر:</span>
+								<input
+									disabled={images.length >= 5}
+									{...register('images')}
+									onChange={(e) =>
+										setImages([...images, e.target.files ? e.target.files[0] : null])
+									}
+									className="rounded-lg shadow-md border-2 md:w-[95px] w-[80px] py-1 mx-auto border-r-DarkYellow pr-0.5 my-3"
+									type="file"
+									accept="image/*"
+									id="images"
+								/>
+							</div>
+							<div className="flex gap-x-2.5 flex-wrap gap-y-2.5">
+								{images?.map((image: any, index: number) => (
+									<img
+										key={index}
+										onClick={() =>
+											setImages(
+												images.filter((item: File, itemIndex: number) => itemIndex !== index)
+											)
+										}
+										className="mx-auto cursor-pointer border-2 border-red-500 p-1 rounded-lg h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
+										src={
+											typeof image === 'string'
+												? `https://45.159.150.221:3000/${image}`
+												: `${URL.createObjectURL(image)}`
+										}
+										alt="تصویر محصول"
+										loading="lazy"
+									/>
+								))}
+							</div>
+						</section>
 						<div className="flex items-center justify-evenly">
 							<button
 								className="font-Lalezar mt-2 md:h-11 h-9 from-emerald-400 to-green-500 flex w-auto items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-base shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg disabled:bg-gray-400"

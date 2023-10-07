@@ -39,8 +39,11 @@ const Products = () => {
 	// category
 	const categoryValue = useSelector((state: any) => state.category);
 
+	// price sort
+	const priceSort = useSelector((state: any) => state.priceSort);
+
 	// GET products from react query
-	const { data, refetch, isFetching } = useFiltered(categoryValue, searchValue);
+	const { data, refetch, isFetching } = useFiltered(categoryValue, searchValue, priceSort);
 
 	useEffect(() => {
 		// refetch data for search in products page
@@ -69,7 +72,7 @@ const Products = () => {
 					<section className="flex h-max flex-col gap-y-5 w-full">
 						<ProductSort />
 						{/* all products */}
-						<main className="flex flex-wrap items-center justify-end gap-x-7 gap-y-10 xl:w-[780px] 2xl:w-full">
+						<main className="flex flex-wrap items-start justify-center xl:justify-startG gap-x-7 gap-y-10 xl:w-[780px] 2xl:w-full">
 							{isFetching ? (
 								<span className="flex items-center justify-center gap-x-5 text-center w-full font-bold xl:text-lg bg-sky-500 md:py-4 text-Light py-2 rounded-md">
 									در حال دریافت لیست محصولات از سرور صبر کنید !

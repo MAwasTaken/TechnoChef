@@ -2,17 +2,18 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 // init value
-const initialState: string = '';
+const initialState: string = '1';
 
 // page slice
 const slice = createSlice({
-	name: 'Category',
+	name: 'PriceSort',
 	initialState,
 	reducers: {
-		setCategory: (state, action: PayloadAction<string>) => action.payload
+		descending: () => '1',
+		acceding: () => '-1'
 	}
 });
 
 // exports
-export const { setCategory } = slice.actions;
+export const { descending, acceding } = slice.actions;
 export default slice.reducer;

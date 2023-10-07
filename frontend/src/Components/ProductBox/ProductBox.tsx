@@ -43,7 +43,7 @@ const ProductBox: React.FC<ProductProps> = ({
 							src={
 								cover?.includes('public')
 									? `https://45.159.150.221:3000/${cover}`
-									: cover?.includes('http://localhost:5173')
+									: cover?.includes('http://localhost:5173' || 'https://www.technoshef.com')
 									? `${cover}`
 									: '/Images/Products/p1.png'
 							}

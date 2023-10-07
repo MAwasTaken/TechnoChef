@@ -2,17 +2,17 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 // init value
-const initialState: string = '';
+const initialState: string = 'all';
 
 // page slice
 const slice = createSlice({
-	name: 'Category',
+	name: 'AdminShownProducts',
 	initialState,
 	reducers: {
-		setCategory: (state, action: PayloadAction<string>) => action.payload
+		setFilter: (state, action: PayloadAction<string>) => action.payload
 	}
 });
 
 // exports
-export const { setCategory } = slice.actions;
+export const { setFilter } = slice.actions;
 export default slice.reducer;

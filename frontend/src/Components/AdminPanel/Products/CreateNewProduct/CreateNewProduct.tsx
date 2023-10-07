@@ -86,21 +86,13 @@ const CreateNewProduct: React.FC = () => {
 		data.append('best_seller', String(formData.best_seller));
 		formData.images.map((image: File) => data.append('images', image));
 
-		for (var [key, value] of data.entries()) {
-			console.log(key, value);
-		}
-
 		postCreateProduct(data)
 			.then((res) => {
 				toast.success(`محصول ${res.data.productName} با موفقیت افزوده شد ✅‍`, {
 					onClose: () => navigate('/admin/products')
 				});
 			})
-			.catch(() =>
-				toast.error(`افزودن محصول انجام نشد! ❌‍`, {
-					// onClose: () => location.reload()
-				})
-			)
+			.catch(() => toast.error(`افزودن محصول انجام نشد! ❌‍`))
 			.finally(() => setIsFormFetching(false));
 	};
 
@@ -158,6 +150,7 @@ const CreateNewProduct: React.FC = () => {
 						>
 							{/* input */}
 							<input
+								required
 								{...register('productName')}
 								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
 								type="text"
@@ -172,6 +165,8 @@ const CreateNewProduct: React.FC = () => {
 						>
 							{/* input */}
 							<input
+								required
+								maxLength={25}
 								{...register('shortName')}
 								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
 								type="text"
@@ -383,6 +378,7 @@ const CreateNewProduct: React.FC = () => {
 							<div className="flex items-center justify-evenly w-full">
 								<span className="sm:text-base font-Lalezar text-sm text-Dark/80">تصاویر:</span>
 								<input
+									disabled={images.length >= 5}
 									{...register('images')}
 									onChange={(e) =>
 										setImages([...images, e.target.files ? e.target.files[0] : null])

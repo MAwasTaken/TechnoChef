@@ -80,9 +80,7 @@ const Header: React.FC = () => {
 			{/* left section */}
 			<div className="flex items-center justify-between gap-x-2 sm:gap-x-1 md:gap-x-6">
 				{/* search button */}
-				<div className="flex bg-slate-200 md:p-4 p-2 hover:bg-slate-300 transition-all duration-200 rounded-full">
-					<GlobalSearch />
-				</div>
+				<GlobalSearch />
 				{/* login / register / panel button */}
 				{isFetching ? (
 					<>

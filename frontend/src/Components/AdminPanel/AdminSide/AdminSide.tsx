@@ -21,7 +21,7 @@ const AdminSide: React.FC<{
 				{/* menu title */}
 				<Link
 					to="/"
-					className="flex border-b border-Info pb-2 md:pb-4 gap-x-2 w-full items-center font-black justify-center text-DarkYellow xl:text-2xl md:text-[11px] lg:text-lg text-xs"
+					className="flex border-b border-Info pb-2 md:pb-4 gap-x-2 w-full items-center font-black justify-center text-LightYellow hover:text-DarkYellow xl:text-2xl md:text-[11px] lg:text-lg text-xs"
 				>
 					تکنوشف | Technoshef
 				</Link>
