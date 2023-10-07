@@ -57,18 +57,22 @@ const updateProductController = async (req, res, next) => {
 		await productValidate.validateAsync(req.body);
 
 		let images;
-		let cover;
+		let cover = req.body.cover;
 
-		if (req.files.images) {
-			images = req.files.images.map((element) => element.path);
+		if (typeof req.body.images == 'string') {
+			images = [req.body.images];
 		} else {
 			images = req.body.images;
 		}
+		if (req.files.images) {
+			req.files.images.map((element) => {
+				images.push(element.path);
+			});
+		}
+		console.log(images);
 
 		if (req.files.cover) {
 			cover = req.files.cover[0].path;
-		} else {
-			cover = req.body.cover;
 		}
 
 		// find the Product by ID and update it
@@ -108,7 +112,7 @@ const updateProductController = async (req, res, next) => {
 				});
 
 		if (req.files.cover) fs.unlinkSync(req.files.cover[0].path);
-
+		console.log(err);
 		req.err = err;
 		next();
 	}
