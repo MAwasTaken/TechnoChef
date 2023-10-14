@@ -378,7 +378,6 @@ const SingleProduct = () => {
 								id="category"
 								className="md:w-2/12 cursor-pointer w-1/2 h-10 rounded-lg border-2 border-DarkYellow p-0.5 my-3"
 							>
-								<option value="test">test</option>
 								{data?.map(
 									(category: {
 										_id: string;

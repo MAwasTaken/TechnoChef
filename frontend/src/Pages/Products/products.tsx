@@ -18,6 +18,7 @@ import { ProductProps } from '../../Types/Products.types';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchValue } from '../../Services/Redux/Slices/Search';
+import { setCategory } from '../../Services/Redux/Slices/Category';
 
 // Products page
 const Products = () => {
@@ -77,6 +78,10 @@ const Products = () => {
 								<span className="flex items-center justify-center gap-x-5 text-center w-full font-bold xl:text-lg bg-sky-500 md:py-4 text-Light py-2 rounded-md">
 									در حال دریافت لیست محصولات از سرور صبر کنید !
 								</span>
+							) : priceSort === '' && data?.length ? (
+								data
+									.reverse()
+									.map((product: ProductProps) => <ProductBox {...product} key={product._id} />)
 							) : data?.length ? (
 								data.map((product: ProductProps) => <ProductBox {...product} key={product._id} />)
 							) : (

@@ -8,6 +8,7 @@ import GlobalSearch from '../GlobalSearch/GlobalSearch';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../Services/Redux/Slices/User';
+import { setCategory } from '../../Services/Redux/Slices/Category';
 
 // react query
 import useGetMe from '../../Hooks/useGetMe';
@@ -62,6 +63,7 @@ const Header: React.FC = () => {
 						<NavLink
 							className={({ isActive }) => (isActive ? 'decoration-DarkYellow underline' : '')}
 							to="/products"
+							onClick={() => dispatch(setCategory(''))}
 						>
 							محصولات
 						</NavLink>

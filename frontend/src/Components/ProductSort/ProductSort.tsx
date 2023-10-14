@@ -5,14 +5,13 @@ import Switch from '@mui/material/Switch';
 import { BiSort } from 'react-icons/bi';
 import { BiCategory } from 'react-icons/bi';
 import { HiOutlineAdjustmentsHorizontal } from 'react-icons/hi2';
-import { AiFillDollarCircle } from 'react-icons/ai';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategory } from '../../Services/Redux/Slices/Category';
 import useCategories from '../../Hooks/useCategories';
 import { CategoryItemProps } from '../../Types/CategoryItems.types';
-import { acceding, descending } from '../../Services/Redux/Slices/PriceSort';
+import { acceding, descending, reset } from '../../Services/Redux/Slices/PriceSort';
 
 // tsx
 const ProductSort: React.FC = () => {
@@ -25,6 +24,9 @@ const ProductSort: React.FC = () => {
 	// GET categories from redux
 	const currentCategory = useSelector((state: any) => state.category);
 
+	// GET categories from redux
+	const currentSort = useSelector((state: any) => state.priceSort);
+
 	// price sort
 	const priceSort = useSelector((state: any) => state.priceSort);
 
@@ -36,6 +38,14 @@ const ProductSort: React.FC = () => {
 		if (currentCategory === categoryName) dispatch(setCategory(''));
 		else dispatch(setCategory(categoryName));
 	};
+
+	// change sort
+	const changeSortHandler = (sortValue: number) =>
+		currentSort != sortValue
+			? sortValue === 1
+				? dispatch(acceding())
+				: dispatch(descending())
+			: dispatch(reset());
 
 	// tsx
 	return (
@@ -59,11 +69,21 @@ const ProductSort: React.FC = () => {
 				<ul className="flex flex-row flex-wrap items-center justify-center gap-x-4 gap-y-2">
 					<li
 						className={`flex cursor-pointer items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold tracking-tighter transition duration-500 xl:px-7 xl:py-3 xl:text-base ${
+							priceSort === ''
+								? 'from-LightYellow to-DarkYellow bg-gradient-to-br'
+								: 'bg-Light/75 hover:bg-Info/50'
+						}`}
+						onClick={() => dispatch(reset())}
+					>
+						پیش‌فرض
+					</li>
+					<li
+						className={`flex cursor-pointer items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold tracking-tighter transition duration-500 xl:px-7 xl:py-3 xl:text-base ${
 							priceSort === '1'
 								? 'from-LightYellow to-DarkYellow bg-gradient-to-br'
-								: 'bg-Light/75 hover:bg-Info/60'
+								: 'bg-Light/75 hover:bg-Info/50'
 						}`}
-						onClick={() => dispatch(descending())}
+						onClick={() => changeSortHandler(1)}
 					>
 						ارزان ترین
 					</li>
@@ -71,9 +91,9 @@ const ProductSort: React.FC = () => {
 						className={`flex cursor-pointer items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold tracking-tighter transition duration-500 xl:px-7 xl:py-3 xl:text-base ${
 							priceSort === '-1'
 								? 'from-LightYellow to-DarkYellow bg-gradient-to-br'
-								: 'bg-Light/75 hover:bg-Info/60'
+								: 'bg-Light/75 hover:bg-Info/50'
 						}`}
-						onClick={() => dispatch(acceding())}
+						onClick={() => changeSortHandler(-1)}
 					>
 						گران ترین
 					</li>
