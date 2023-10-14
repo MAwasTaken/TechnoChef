@@ -9,7 +9,7 @@ const productsSchema = new mongoose.Schema(
 		price: { type: Number },
 		category: { type: String },
 		productColor: { type: Array },
-		details: { type: Object },
+		details: { type: Array },
 		QTY: {
 			type: Number,
 			required: true,
@@ -21,6 +21,7 @@ const productsSchema = new mongoose.Schema(
 			}
 		},
 		finalPrice: { type: Number },
+		cover: { type: String },
 		images: { type: Array },
 		description: { type: String },
 		best_seller: { type: Boolean, default: false }

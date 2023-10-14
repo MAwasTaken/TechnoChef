@@ -5,9 +5,15 @@ const ObjectId = mongoose.Schema.ObjectId;
 // create the mongoose schema
 const transactionSchema = mongoose.Schema(
 	{
-		order_id: { type: ObjectId, required: true, unique: true },
-		trans_id: { type: String, required: true, unique: true },
-		amount: { type: Number }
+		authority: { type: String },
+		transactionDate: { type: Number },
+		amount: { type: Number },
+		description: { type: String, default: 'for buying a product.' },
+		verify: { type: Boolean, default: false },
+		user_id: { type: ObjectId, ref: 'Users' },
+		order_id: { type: ObjectId, ref: 'Order' },
+		refID: { type: String, default: undefined },
+		card_pan: { type: String, default: undefined }
 	},
 	{ timestamps: true }
 );
