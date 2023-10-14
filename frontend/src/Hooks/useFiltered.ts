@@ -7,7 +7,7 @@ import { getFiltered } from '../Services/Axios/Requests/products';
 // use best sellers
 const useFiltered = (category: string, search: string, priceSort: string) =>
 	useQuery(
-		['Products/Filtered', category, priceSort],
+		['Products/Filtered'],
 		() => {
 			return getFiltered(category, search, priceSort).then((res) => res.data.products);
 		},

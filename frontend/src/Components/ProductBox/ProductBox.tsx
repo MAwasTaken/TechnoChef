@@ -15,10 +15,10 @@ import toFarsiNumber from '../../Utils/toFarsiNumber';
 const ProductBox: React.FC<ProductProps> = ({
 	productColor,
 	cover,
-	images,
 	finalPrice,
 	price,
-	productName
+	productName,
+	shortName
 }) => {
 	// product hovering
 	const [isProductHover, setIsProductHover] = useState<boolean>(false);
@@ -37,7 +37,7 @@ const ProductBox: React.FC<ProductProps> = ({
 							></span>
 						))}
 					</div>
-					<Link to="/">
+					<Link to={`/products/${shortName}`}>
 						<img
 							className="mx-auto h-[134px] w-[134px] md:h-[170px] md:w-[170px]"
 							src={
@@ -66,7 +66,7 @@ const ProductBox: React.FC<ProductProps> = ({
 					</div>
 				</div>
 				<Link
-					to="/"
+					to={`/products/${shortName}`}
 					className="hover:shadow-product from-LightYellow to-DarkYellow shadow-LightYellow/50 absolute -bottom-3 right-5 z-10 flex h-[25px] w-[110px] cursor-pointer items-center justify-center rounded-xl bg-gradient-to-r transition-shadow md:-bottom-[23px] md:right-12 md:h-[44px] md:w-[140px]"
 					onMouseEnter={() => setIsProductHover(true)}
 					onMouseLeave={() => setIsProductHover(false)}

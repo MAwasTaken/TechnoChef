@@ -58,7 +58,7 @@ const BestSellers = () => {
 						</button>
 					</div>
 				</SwiperSlide>
-				{data?.map((product: ProductProps) => (
+				{data?.reverse().map((product: ProductProps) => (
 					<SwiperSlide className="mt-1" key={product._id}>
 						<ProductBox {...product} />
 					</SwiperSlide>

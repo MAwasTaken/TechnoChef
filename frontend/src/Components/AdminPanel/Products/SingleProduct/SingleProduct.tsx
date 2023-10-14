@@ -124,22 +124,18 @@ const SingleProduct = () => {
 		});
 		data.append('best_seller', String(formData.best_seller));
 
-		// for (var [key, value] of data.entries()) {
-		//   console.log(key, value);
-		// }
-
-		// putSingleProduct(String(params.shortName), data)
-		// 	.then((res) => {
-		// 		toast.success(`محصول ${res.data.productName} با موفقیت ویرایش شد ✅‍`, {
-		// 			onClose: () => location.reload()
-		// 		});
-		// 	})
-		// 	.catch(() =>
-		// 		toast.error(`ویرایش محصول انجام نشد! ❌‍`, {
-		// 			// onClose: () => location.reload()
-		// 		})
-		// 	)
-		// 	.finally(() => setIsFormFetching(false));
+		putSingleProduct(String(params.shortName), data)
+			.then((res) => {
+				toast.success(`محصول ${getValues('productName')} با موفقیت ویرایش شد ✅‍`, {
+					onClose: () => navigate('/admin/products')
+				});
+			})
+			.catch((err) =>
+				toast.error(`ویرایش محصول انجام نشد! ❌‍`, {
+					// onClose: () => location.reload()
+				})
+			)
+			.finally(() => setIsFormFetching(false));
 	};
 
 	// delete product handler
@@ -455,24 +451,26 @@ const SingleProduct = () => {
 								/>
 							</div>
 							<div className="flex gap-x-2.5 flex-wrap gap-y-2.5">
-								{images?.map((image: any, index: number) => (
-									<img
-										key={index}
-										onClick={() =>
-											setImages(
-												images.filter((item: File, itemIndex: number) => itemIndex !== index)
-											)
-										}
-										className="mx-auto cursor-pointer border-2 border-red-500 p-1 rounded-lg h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
-										src={
-											typeof image === 'string'
-												? `https://45.159.150.221:3000/${image}`
-												: `${URL.createObjectURL(image)}`
-										}
-										alt="تصویر محصول"
-										loading="lazy"
-									/>
-								))}
+								{images?.map((image: any, index: number) =>
+									image !== '' ? (
+										<img
+											key={index}
+											onClick={() =>
+												setImages(
+													images.filter((item: File, itemIndex: number) => itemIndex !== index)
+												)
+											}
+											className="mx-auto cursor-pointer border-2 border-red-500 p-1 rounded-lg h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
+											src={
+												typeof image === 'string'
+													? `https://45.159.150.221:3000/${image}`
+													: `${URL.createObjectURL(image)}`
+											}
+											alt="تصویر محصول"
+											loading="lazy"
+										/>
+									) : null
+								)}
 							</div>
 						</section>
 						<div className="flex items-center justify-evenly">

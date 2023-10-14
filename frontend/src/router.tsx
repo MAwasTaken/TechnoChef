@@ -23,7 +23,7 @@ import SingleProduct from './Components/AdminPanel/Products/SingleProduct/Single
 const routes = [
 	{ path: '/', element: <Index /> },
 	{ path: '/products', element: <Products /> },
-	{ path: '/productDetails', element: <ProductDetails /> },
+	{ path: '/products/:shortName', element: <ProductDetails /> },
 	{ path: '/login', element: <Login /> },
 	{ path: '/signup', element: <Signup /> },
 	{

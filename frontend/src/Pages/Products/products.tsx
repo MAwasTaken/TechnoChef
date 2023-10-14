@@ -52,7 +52,7 @@ const Products = () => {
 
 		// set search value to empty string for next usage
 		dispatch(setSearchValue(''));
-	}, [searchValue]);
+	}, [searchValue, categoryValue, priceSort]);
 
 	// tsx
 	return (
