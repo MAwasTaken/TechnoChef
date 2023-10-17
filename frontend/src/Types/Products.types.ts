@@ -13,4 +13,5 @@ export type ProductProps = {
 	_id?: string;
 	createdAt?: string;
 	updatedAt?: string;
+	details?: { title: string; value: string }[];
 };

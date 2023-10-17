@@ -31,13 +31,11 @@ export const ProductDetailsBox: React.FC<ProductProps> = ({
 	// navigator
 	const navigate = useNavigate();
 
-	console.log(images);
-
 	// tsx
 	return (
 		<>
 			<div className="flex justify-center items-center lg:container">
-				<div className="flex flex-col lg:flex-row gap-x-2 items-center md:p-5 justify-center h-max rounded-3xl lg:bg-Info/50 backdrop-blur-[2px] lg:shadow-md	w-full">
+				<div className="flex flex-col lg:flex-row gap-x-2 items-center md:p-5 justify-center h-max rounded-3xl lg:bg-white backdrop-blur-[2px] lg:shadow-md	w-full">
 					{/* right side (responsive:up) */}
 					<div className="flex w-2/6 justify-center items-center h-max">
 						<div className="flex h-auto w-full">

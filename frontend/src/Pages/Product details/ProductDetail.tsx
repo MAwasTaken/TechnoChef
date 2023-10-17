@@ -31,7 +31,7 @@ const ProductDetails = () => {
 			<Header />
 			<main className="flex flex-col gap-y-5 md:gap-y-10">
 				<ProductDetailsBox {...data} />
-				<ProductProperties />
+				<ProductProperties {...data} />
 				<ProductDetailsCm />
 			</main>
 			<Footer />
