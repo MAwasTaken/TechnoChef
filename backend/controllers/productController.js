@@ -65,7 +65,7 @@ const updateProductController = async (req, res, next) => {
 			});
 		} else if (typeof req.body.images == 'string') {
 			images.push(req.body.images);
-		} else {
+		} else if (req.body?.images) {
 			req.body.images.map((image) => {
 				images.push(image);
 			});
