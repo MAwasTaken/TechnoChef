@@ -202,7 +202,7 @@ const getAllProductsController = async (req, res, next) => {
 	const qNew = req.query.new;
 	const qSearch = req.query.search;
 	const qBestSeller = req.query.bestseller;
-	const qPage = req.query.page;
+	const qPage = req.query?.page || 1;
 	const qCategory = req.query.category;
 	const qPriceSort = req.query.pricesort;
 
@@ -210,6 +210,11 @@ const getAllProductsController = async (req, res, next) => {
 		//Define the response objects
 		let products;
 		let pages;
+		let sortValue = { createdAt: -1 };
+		if (qPriceSort)
+			sortValue: {
+				finalPrice: qPriceSort;
+			}
 
 		// if there is "new" query
 		if (qNew) {
@@ -218,16 +223,19 @@ const getAllProductsController = async (req, res, next) => {
 		} // if there is "Category" query
 		else if (qCategory) {
 			//return the Products in that categories
+
 			products = await Product.find({
 				category: qCategory.trim()
 			})
 				.select('-__v')
 				.skip((qPage - 1) * 9)
+				.sort(sortValue)
 				.limit(9);
 
 			const countProductsCategory = await Product.countDocuments({
 				category: qCategory.trim()
 			});
+
 			pages = Math.ceil(countProductsCategory / 9);
 		} // if there is "Search" query
 		else if (qSearch) {
@@ -236,16 +244,17 @@ const getAllProductsController = async (req, res, next) => {
 				productName: { $regex: qSearch.trim() }
 			})
 				.select('-__v')
-				.sort({ createdAt: -1 });
+				.sort(sortValue);
 		} // if there is "BestSeller" query
 		else if (qBestSeller) {
 			// return BestSeller Products
-			products = await Product.find({ best_seller: true }).select('-__v');
+			products = await Product.find({ best_seller: true }).sort(sortValue).select('-__v');
 		} // if there is "Page" query
 		else if (qPage) {
 			// return the page of Products
 			products = await Product.find()
 				.select('-__v')
+				.sort(sortValue)
 				.skip((qPage - 1) * 9)
 				.limit(9);
 
@@ -255,7 +264,7 @@ const getAllProductsController = async (req, res, next) => {
 			products = await Product.find().select('-__v').sort({ finalPrice: qPriceSort });
 		} else {
 			//return All Products
-			products = await Product.find().select('-__v');
+			products = await Product.find().sort({ createdAt: -1 }).select('-__v');
 		}
 
 		// set the response
