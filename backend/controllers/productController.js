@@ -56,32 +56,33 @@ const updateProductController = async (req, res, next) => {
 		// validate the input
 		await productValidate.validateAsync(req.body);
 
-		let images;
-		let cover = req.body.cover;
+		let images = [];
+		let cover;
 
-		if (typeof req.body.images == 'string') {
-			images = [req.body.images];
-		} else {
-			images = req.body.images;
-		}
 		if (req.files.images) {
 			req.files.images.map((element) => {
 				images.push(element.path);
 			});
+		} else if (typeof req.body.images == 'string') {
+			images = [req.body.images];
+		} else {
+			images = req.body.images;
 		}
-		console.log(images);
 
 		if (req.files.cover) {
 			cover = req.files.cover[0].path;
+		} else {
+			cover = req.body.cover;
 		}
+
+		req.body.cover = cover;
+		req.body.images = images;
 
 		// find the Product by ID and update it
 		const updatedProduct = await Product.findOneAndUpdate(
 			{ shortName: req.params.shortname },
 			{
-				$set: req.body,
-				images: images,
-				cover: cover
+				$set: req.body
 			},
 			{ new: true }
 		);
@@ -112,7 +113,6 @@ const updateProductController = async (req, res, next) => {
 				});
 
 		if (req.files.cover) fs.unlinkSync(req.files.cover[0].path);
-		console.log(err);
 		req.err = err;
 		next();
 	}
