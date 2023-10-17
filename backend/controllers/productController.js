@@ -64,9 +64,11 @@ const updateProductController = async (req, res, next) => {
 				images.push(element.path);
 			});
 		} else if (typeof req.body.images == 'string') {
-			images = [req.body.images];
+			images.push(req.body.images);
 		} else {
-			images = req.body.images;
+			req.body.images.map((image) => {
+				images.push(image);
+			});
 		}
 
 		if (req.files.cover) {
