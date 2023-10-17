@@ -63,12 +63,13 @@ const updateProductController = async (req, res, next) => {
 			req.files.images.map((element) => {
 				images.push(element.path);
 			});
-		} else if (typeof req.body.images == 'string') {
-			images.push(req.body.images);
-		} else if (req.body?.images) {
-			req.body.images.map((image) => {
-				images.push(image);
-			});
+			if (typeof req.body.images == 'string') {
+				images.push(req.body.images);
+			} else {
+				req.body.images.map((image) => {
+					images.push(image);
+				});
+			}
 		}
 
 		if (req.files.cover) {
@@ -88,18 +89,6 @@ const updateProductController = async (req, res, next) => {
 			},
 			{ new: true }
 		);
-
-		if (oldProduct.images)
-			oldProduct.images.forEach((Image) => {
-				fs.unlink(Image, (err) => {
-					if (err) console.log(err);
-				});
-			});
-
-		if (oldProduct.cover)
-			fs.unlink(oldProduct?.cover, (err) => {
-				if (err) console.log(err);
-			});
 
 		//set the response
 		const { __v, ...others } = updatedProduct._doc;
