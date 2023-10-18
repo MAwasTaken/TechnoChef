@@ -86,10 +86,10 @@ export const ProductDetailsBox: React.FC<ProductProps> = ({
 					{/* left side (responsive:down) */}
 					<div className="flex px-5 items-center md:items-start flex-col w-full h-full">
 						<div className="flex flex-col items-start md:gap-y-8 gap-y-4 justify-center h-2/3 w-full lg:w-2/3">
-							<h1 className="font-Lalezar mr-4 flex select-none items-center self-center gap-x-1 text-sm md:gap-x-4 md:text-3xl line-clamp-2">
+							<h1 className="font-Lalezar mr-4 flex select-none items-center self-center gap-x-1 text-sm md:gap-x-4 md:text-3xl line-clamp-2 mt-5 lg:mt-0">
 								{productName}
 							</h1>
-							<div className="flex w-full lg:w-full mx-auto justify-between md:gap-y-8 md:gap-x-0 gap-x-20 items-center flex-row">
+							<div className="flex w-3/4 mx-auto justify-between md:gap-y-8 md:gap-x-0 gap-x-20 items-center flex-row">
 								{category ? (
 									<button
 										onClick={() => {

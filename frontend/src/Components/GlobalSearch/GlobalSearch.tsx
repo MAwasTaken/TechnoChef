@@ -33,7 +33,7 @@ const GlobalSearch: React.FC = () => {
 	// search button handler
 	const closeModalHandler = () => setIsShowSearchModal(false);
 
-  // search value
+	// search value
 	const [search, setSearch] = useState<string>('');
 
 	const searchHandler = (e: React.FormEvent<HTMLFormElement>) => {
