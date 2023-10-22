@@ -18,7 +18,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { signUpAuthSchema } from '../../Services/Yup/signupAuth';
 
 // types
-import { SignupInputs } from '../../Types/SignupInputs.types';
+import { SignupInputs } from '../../Types/signupInputs.types';
 
 // axios
 import { postSignup } from '../../Services/Axios/Requests/auth';
