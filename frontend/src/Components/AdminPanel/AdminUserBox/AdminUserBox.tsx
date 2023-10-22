@@ -1,6 +1,23 @@
-import React, { useState } from 'react';
-// import { Accordion, AccordionSummary, AccordionDetails, Typography } from "@mui/material";
-// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+// react
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+// icons
+import { BsBoxSeam, BsPlusLg, BsBoxes } from 'react-icons/bs';
+import { AiOutlineStar } from 'react-icons/ai';
+import { MdOutlineWatchLater } from 'react-icons/md';
+
+// react query
+import useAllProducts from '../../../Hooks/useAllProducts';
+import useBestSellers from '../../../Hooks/useBestSellers';
+import useLatest from '../../../Hooks/useLatest';
+
+// types
+import { ProductProps } from '../../../Types/Products.types';
+
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilter } from '../../../Services/Redux/Slices/AdminShownProducts';
 
 interface UserItem {
 	title: string;
@@ -19,18 +36,10 @@ const AdminUserBox: React.FC<UserProps> = ({ items }) => {
 	};
 
 	return (
-		<div>
-			{/* {items.map((item, index) => (
-                <Accordion key={index}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>{item.title}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>{item.content}</Typography>
-                    </AccordionDetails>
-                </Accordion>
-            ))} */}
-		</div>
+		<section className="md:p-5 p-3 bg-red-300">
+			
+		</section>
+
 	);
 };
 
