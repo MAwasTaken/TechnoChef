@@ -19,6 +19,7 @@ import Users from './Components/AdminPanel/Users/Users';
 import AdminProducts from './Components/AdminPanel/Products/AdminProducts';
 import CreateNewProduct from './Components/AdminPanel/Products/CreateNewProduct/CreateNewProduct';
 import SingleProduct from './Components/AdminPanel/Products/SingleProduct/SingleProduct';
+import AboutUs from './Pages/AboutUs/AboutUs';
 
 const routes = [
 	{ path: '/', element: <Index /> },
@@ -26,6 +27,8 @@ const routes = [
 	{ path: '/products/:shortName', element: <ProductDetails /> },
 	{ path: '/login', element: <Login /> },
 	{ path: '/signup', element: <Signup /> },
+	{ path: '/about-us', element: <AboutUs /> },
+
 	{
 		path: '/panel',
 		element: (
