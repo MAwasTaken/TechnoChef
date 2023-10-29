@@ -15,11 +15,11 @@ import AdminPrivate from './Components/Private/AdminPrivate';
 
 // user panel
 import UserPanel from './Pages/UserPanel/UserPanel';
-import Users from './Components/AdminPanel/Users/Users';
 import AdminProducts from './Components/AdminPanel/Products/AdminProducts';
 import CreateNewProduct from './Components/AdminPanel/Products/CreateNewProduct/CreateNewProduct';
 import SingleProduct from './Components/AdminPanel/Products/SingleProduct/SingleProduct';
 import AboutUs from './Pages/AboutUs/AboutUs';
+import AdminUsers from './Components/AdminPanel/Users/AdminUsers';
 
 const routes = [
 	{ path: '/', element: <Index /> },
@@ -57,7 +57,7 @@ const routes = [
 				path: 'products/:shortName',
 				element: <SingleProduct />
 			},
-			{ path: 'users', element: <Users /> }
+			{ path: 'users', element: <AdminUsers /> }
 		]
 	},
 	{ path: '*', element: <UnknownPage /> }

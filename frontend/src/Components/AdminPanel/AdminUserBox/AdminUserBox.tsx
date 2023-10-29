@@ -35,12 +35,7 @@ const AdminUserBox: React.FC<UserProps> = ({ items }) => {
 		setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
 	};
 
-	return (
-		<section className="md:p-5 p-3 bg-red-300">
-			
-		</section>
-
-	);
+	return <section className="md:p-5 p-3 bg-red-300"></section>;
 };
 
 export default AdminUserBox;
