@@ -69,7 +69,7 @@ const AdminUsers = () => {
 						data?.reverse().map((user: user, index: number) => (
 							<tr
 								key={user._id}
-								className="border-b border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer"
+								className="border-b border-DarkYellow hover:bg-Info/20 p-52 transition-all duration-500 cursor-pointer"
 								onClick={() => navigate(String(user.username))}
 							>
 								<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>

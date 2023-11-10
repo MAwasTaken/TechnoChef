@@ -1,7 +1,11 @@
 import React from 'react';
+import Header from '../../Components/Header/Header';
 
 const UserPanel = () => {
-	return <div>UserPanel</div>;
+	return <div>
+		
+		<Header />
+	</div>;
 };
 
 export default UserPanel;
