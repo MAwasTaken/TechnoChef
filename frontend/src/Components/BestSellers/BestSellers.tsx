@@ -5,6 +5,10 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { AiOutlineStar } from 'react-icons/ai';
 import { BiChevronLeft } from 'react-icons/bi';
+import { Link } from 'react-router-dom';
+import { setCategory } from '../../Services/Redux/Slices/Category';
+import { reset } from '../../Services/Redux/Slices/PriceSort';
+import { useDispatch } from 'react-redux';
 
 // react query
 
@@ -17,6 +21,9 @@ import { ProductProps } from '../../Types/Products.types';
 const BestSellers = () => {
 	// GET best sellers
 	const { data } = useBestSellers();
+
+	// redux dispatch hook
+	const dispatch = useDispatch();
 
 	// tsx
 	return (
@@ -52,13 +59,20 @@ const BestSellers = () => {
 							<AiOutlineStar className="text-orange-500" />
 							محصولات پرفروش
 						</h2>
-						<button className="font-Lalezar from-LightYellow to-DarkYellow mt-2 flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-[10px] tracking-tighter shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg">
+						<Link
+							to="/products"
+							onClick={() => {
+								dispatch(setCategory(''));
+								dispatch(reset());
+							}}
+							className="font-Lalezar from-LightYellow to-DarkYellow mt-2 flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-[10px] tracking-tighter shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg"
+						>
 							همه محصولات
 							<BiChevronLeft className="h-5 w-5" />
-						</button>
+						</Link>
 					</div>
 				</SwiperSlide>
-				{data?.map((product: ProductProps) => (
+				{data?.reverse().map((product: ProductProps) => (
 					<SwiperSlide className="mt-1" key={product._id}>
 						<ProductBox {...product} />
 					</SwiperSlide>

@@ -1,6 +1,8 @@
 // react
-import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+
+// icons
+import { BsBoxSeam, BsPeople } from 'react-icons/bs';
 
 // admin side
 const AdminSide: React.FC<{
@@ -12,40 +14,46 @@ const AdminSide: React.FC<{
 		<>
 			{/* menu */}
 			<aside
-				className={`fixed z-30 md:right-0 top-0 rounded-l-xl md:rounded-none shadow-lg flex flex-col md:w-3/12 w-5/12 gap-y-2 bg-gray-200 md:p-8 p-5 h-screen transition-all duration-1000 ${
+				className={`fixed z-30 md:right-0 top-0 rounded-l-xl md:rounded-none shadow-lg flex flex-col md:w-3/12 w-5/12 gap-y-2 bg-white/75 md:bg-gray-200 backdrop-blur-sm md:p-8 p-5 h-screen transition-all duration-1000 ${
 					isMenuShown ? 'right-0' : '-right-full'
 				}`}
 			>
 				{/* menu title */}
 				<Link
 					to="/"
-					className="flex border-b border-Info pb-2 md:pb-4 gap-x-2 w-full items-center font-black justify-center text-DarkYellow xl:text-2xl md:text-[11px] lg:text-lg text-xs"
+					className="flex border-b border-Info pb-2 md:pb-4 gap-x-2 w-full items-center font-black justify-center text-LightYellow hover:text-DarkYellow xl:text-2xl md:text-[11px] lg:text-lg text-xs"
 				>
 					تکنوشف | Technoshef
 				</Link>
 				{/* menu items */}
 				<ul className="flex flex-col gap-y-2 text-xs pt-2 md:pt-4 lg:text-base child:transition-all text-Dark child:duration-500 child:rounded-md xl:text-lg">
-					<li className="text-center">
+					<li className="text-center" onClick={() => setIsMenuShown(false)}>
 						<NavLink
 							to="products"
 							className={({ isActive }) =>
-								`block py-1 rounded hover:bg-Info/50 ${
-									isActive ? 'bg-DarkYellow/50 hover:bg-DarkYellow/50' : 'hover:bg-Info/50'
+								`py-1 rounded hover:bg-Info/50 tracking-tighter flex gap-x-2 justify-center items-center ${
+									isActive
+										? 'bg-DarkYellow/50 hover:bg-DarkYellow/50 font-semibold'
+										: 'hover:bg-Info/50'
 								} `
 							}
 						>
+							<BsBoxSeam className="text-red-500" />
 							محصولات
 						</NavLink>
 					</li>
-					<li className="text-center">
+					<li className="text-center" onClick={() => setIsMenuShown(false)}>
 						<NavLink
 							to="users"
 							className={({ isActive }) =>
-								`block py-1 rounded ${
-									isActive ? 'bg-DarkYellow/50 hover:bg-DarkYellow/50' : 'hover:bg-Info/50'
+								`flex justify-center items-center tracking-tighter gap-x-2 py-1 rounded  ${
+									isActive
+										? 'bg-DarkYellow/50 hover:bg-DarkYellow/50 font-semibold'
+										: 'hover:bg-Info/50'
 								} `
 							}
 						>
+							<BsPeople className="text-red-500" />
 							کاربران
 						</NavLink>
 					</li>

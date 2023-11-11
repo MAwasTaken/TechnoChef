@@ -17,7 +17,7 @@ const AboutBrand: React.FC = () => {
 			</h3>
 			<div className="flex items-start justify-between gap-x-10 md:gap-x-40">
 				<p
-					className={`mt-2 select-none indent-5 text-[10px] text-gray-600 md:mt-4 md:indent-10 md:text-lg ${
+					className={`mt-2 indent-5 text-[10px] text-gray-600 md:mt-4 md:indent-10 md:text-lg ${
 						isInterest ? 'line-clamp-none' : 'line-clamp-5 '
 					}`}
 				>

@@ -18,7 +18,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { signUpAuthSchema } from '../../Services/Yup/signupAuth';
 
 // types
-import { signupInputs } from '../../Types/signupInputs.types';
+import { SignupInputs } from '../../Types/signupInputs.types';
 
 // axios
 import { postSignup } from '../../Services/Axios/Requests/auth';
@@ -49,7 +49,7 @@ const Signup: React.FC = () => {
 		reset,
 		handleSubmit,
 		formState: { errors }
-	} = useForm<signupInputs>({
+	} = useForm<SignupInputs>({
 		mode: 'all',
 		resolver: yupResolver(signUpAuthSchema)
 	});
@@ -64,7 +64,7 @@ const Signup: React.FC = () => {
 	const [isFormFetching, setIsFormFetching] = useState<boolean>(false);
 
 	// signup handler
-	const signupHandler: SubmitHandler<signupInputs> = (data) => {
+	const signupHandler: SubmitHandler<SignupInputs> = (data) => {
 		// set form unavailable
 		setIsFormReady(false);
 
@@ -264,7 +264,7 @@ const Signup: React.FC = () => {
 							{/* submit button */}
 							<button
 								// disabled={!(isRecaptcha && isFormReady)}
-								className="font-Lalezar mx-auto mt-2 md:h-11 h-9 bg-DarkYellow flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-base shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg disabled:bg-gray-400"
+								className="font-Lalezar mx-auto mt-2 md:h-11 h-9 from-LightYellow to-DarkYellow flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-base shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg disabled:bg-gray-400"
 								type="submit"
 							>
 								{isFormFetching ? <BeatLoader size={10} color="#FCFCFC" /> : 'ثبت‌نام'}
