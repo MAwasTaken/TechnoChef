@@ -19,6 +19,8 @@ import Users from './Components/AdminPanel/Users/Users';
 import AdminProducts from './Components/AdminPanel/Products/AdminProducts';
 import CreateNewProduct from './Components/AdminPanel/Products/CreateNewProduct/CreateNewProduct';
 import SingleProduct from './Components/AdminPanel/Products/SingleProduct/SingleProduct';
+import PanelEditUser from './Components/Panel/PanelEditUser/PanelEditUser';
+import PanelBasket from './Components/Panel/PanelBasket/PanelBasket';
 
 const routes = [
 	{ path: '/', element: <Index /> },
@@ -32,7 +34,17 @@ const routes = [
 			<PanelPrivate>
 				<UserPanel />
 			</PanelPrivate>
-		)
+		),
+		children: [
+			{
+				path: ':userID',
+				element: <PanelEditUser />
+			},
+			{
+				path: 'basket',
+				element: <PanelBasket />
+			}
+		]
 	},
 	{
 		path: '/admin',

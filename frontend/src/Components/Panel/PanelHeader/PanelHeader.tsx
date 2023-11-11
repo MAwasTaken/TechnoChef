@@ -17,8 +17,8 @@ import { ToastContainer, toast } from 'react-toastify';
 // react spinner
 import { BeatLoader } from 'react-spinners';
 
-// admin header
-const AdminHeader: React.FC<{
+// user header
+const PanelHeader: React.FC<{
 	setIsMenuShown: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ setIsMenuShown }) => {
 	// GET user infos from redux
@@ -37,8 +37,6 @@ const AdminHeader: React.FC<{
 		updatedAt: string;
 		isAdmin: boolean;
 	} = useSelector((state: any) => state.user);
-
-  console.log(user);
 
 	// logout fetch state
 	const [isFetching, seIsFetching] = useState<boolean>(false);
@@ -111,4 +109,4 @@ const AdminHeader: React.FC<{
 };
 
 // exports
-export default AdminHeader;
+export default PanelHeader;
