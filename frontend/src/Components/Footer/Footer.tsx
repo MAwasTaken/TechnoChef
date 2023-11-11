@@ -12,7 +12,7 @@ import { TbDeviceLandlinePhone } from 'react-icons/tb';
 const Footer: React.FC = () => {
 	// tsx
 	return (
-		<div className="relative">
+		<div className="relative overflow-hidden">
 			<footer className="bg-Info/50 relative mt-4 flex flex-col p-4 backdrop-blur-[2px] md:mt-8 md:p-8">
 				<div className="flex items-start justify-between">
 					<div>
