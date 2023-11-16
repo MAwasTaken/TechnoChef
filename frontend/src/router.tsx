@@ -20,6 +20,8 @@ import CreateNewProduct from './Components/AdminPanel/Products/CreateNewProduct/
 import SingleProduct from './Components/AdminPanel/Products/SingleProduct/SingleProduct';
 import AboutUs from './Pages/AboutUs/AboutUs';
 import AdminUsers from './Components/AdminPanel/Users/AdminUsers';
+import PanelEditUser from './Components/Panel/PanelEditUser/PanelEditUser';
+import PanelBasket from './Components/Panel/PanelBasket/PanelBasket';
 
 const routes = [
 	{ path: '/', element: <Index /> },
@@ -35,7 +37,17 @@ const routes = [
 			<PanelPrivate>
 				<UserPanel />
 			</PanelPrivate>
-		)
+		),
+		children: [
+			{
+				path: ':userID',
+				element: <PanelEditUser />
+			},
+			{
+				path: 'basket',
+				element: <PanelBasket />
+			}
+		]
 	},
 	{
 		path: '/admin',

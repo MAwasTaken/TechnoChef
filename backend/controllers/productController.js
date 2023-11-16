@@ -56,47 +56,39 @@ const updateProductController = async (req, res, next) => {
 		// validate the input
 		await productValidate.validateAsync(req.body);
 
-		let images;
-		let cover = req.body.cover;
+		let images = [];
+		let cover;
 
-		if (typeof req.body.images == 'string') {
-			images = [req.body.images];
-		} else {
-			images = req.body.images;
-		}
 		if (req.files.images) {
 			req.files.images.map((element) => {
 				images.push(element.path);
 			});
+			if (typeof req.body.images == 'string') {
+				images.push(req.body.images);
+			} else if(req.body.images) {
+				req.body.images.map((image) => {
+					images.push(image);
+				});
+			}
 		}
-		console.log(images);
 
 		if (req.files.cover) {
 			cover = req.files.cover[0].path;
+		} else {
+			cover = req.body.cover;
 		}
+
+		req.body.cover = cover;
+		req.body.images = images;
 
 		// find the Product by ID and update it
 		const updatedProduct = await Product.findOneAndUpdate(
 			{ shortName: req.params.shortname },
 			{
-				$set: req.body,
-				images: images,
-				cover: cover
+				$set: req.body
 			},
 			{ new: true }
 		);
-
-		if (oldProduct.images)
-			oldProduct.images.forEach((Image) => {
-				fs.unlink(Image, (err) => {
-					if (err) console.log(err);
-				});
-			});
-
-		if (oldProduct.cover)
-			fs.unlink(oldProduct?.cover, (err) => {
-				if (err) console.log(err);
-			});
 
 		//set the response
 		const { __v, ...others } = updatedProduct._doc;
@@ -112,7 +104,7 @@ const updateProductController = async (req, res, next) => {
 				});
 
 		if (req.files.cover) fs.unlinkSync(req.files.cover[0].path);
-		console.log(err);
+		console.log(err)
 		req.err = err;
 		next();
 	}
@@ -211,7 +203,7 @@ const getAllProductsController = async (req, res, next) => {
 	const qNew = req.query.new;
 	const qSearch = req.query.search;
 	const qBestSeller = req.query.bestseller;
-	const qPage = req.query.page;
+	const qPage = req.query?.page || 1;
 	const qCategory = req.query.category;
 	const qPriceSort = req.query.pricesort;
 
@@ -219,6 +211,11 @@ const getAllProductsController = async (req, res, next) => {
 		//Define the response objects
 		let products;
 		let pages;
+		let sortValue = { createdAt: -1 };
+		if (qPriceSort)
+			sortValue: {
+				finalPrice: qPriceSort;
+			}
 
 		// if there is "new" query
 		if (qNew) {
@@ -227,16 +224,19 @@ const getAllProductsController = async (req, res, next) => {
 		} // if there is "Category" query
 		else if (qCategory) {
 			//return the Products in that categories
+
 			products = await Product.find({
 				category: qCategory.trim()
 			})
 				.select('-__v')
 				.skip((qPage - 1) * 9)
+				.sort(sortValue)
 				.limit(9);
 
 			const countProductsCategory = await Product.countDocuments({
 				category: qCategory.trim()
 			});
+
 			pages = Math.ceil(countProductsCategory / 9);
 		} // if there is "Search" query
 		else if (qSearch) {
@@ -245,16 +245,17 @@ const getAllProductsController = async (req, res, next) => {
 				productName: { $regex: qSearch.trim() }
 			})
 				.select('-__v')
-				.sort({ createdAt: -1 });
+				.sort(sortValue);
 		} // if there is "BestSeller" query
 		else if (qBestSeller) {
 			// return BestSeller Products
-			products = await Product.find({ best_seller: true }).select('-__v');
+			products = await Product.find({ best_seller: true }).sort(sortValue).select('-__v');
 		} // if there is "Page" query
 		else if (qPage) {
 			// return the page of Products
 			products = await Product.find()
 				.select('-__v')
+				.sort(sortValue)
 				.skip((qPage - 1) * 9)
 				.limit(9);
 
@@ -264,7 +265,7 @@ const getAllProductsController = async (req, res, next) => {
 			products = await Product.find().select('-__v').sort({ finalPrice: qPriceSort });
 		} else {
 			//return All Products
-			products = await Product.find().select('-__v');
+			products = await Product.find().sort({ createdAt: -1 }).select('-__v');
 		}
 
 		// set the response
