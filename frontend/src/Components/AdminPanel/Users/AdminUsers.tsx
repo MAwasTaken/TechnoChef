@@ -12,10 +12,12 @@ import { user } from '../../../Types/User.types';
 // admin users
 const AdminUsers = () => {
 	// navigator
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	// GET all users from react query
-	const { data } = useGetAllUsers()
+	const { data } = useGetAllUsers();
+
+	console.log(data);
 
 	// tsx
 	return (
@@ -26,63 +28,34 @@ const AdminUsers = () => {
 					<FaUsers className="text-red-500" />
 					کاربران
 				</span>
-				{/* <div className="flex gap-x-2">
-					<button
-						className={`md:border-2 border text- duration-500 transition-all border-Info p-1 md:p-1.5 border-dashed rounded-md hover:bg-Info/50 flex tracking-tighter gap-x-2 items-center justify-center ${filter === 'all' ? 'bg-Info/50' : ''
-							}`}
-						onClick={() => dispatch(setFilter('all'))}
-					>
-						<span className="hidden md:block">همه محصولات</span>
-						<BsBoxes className="text-red-500 w-5 h-5" />
-					</button>
-					<button
-						className={`md:border-2 border text- duration-500 transition-all border-Info p-1 md:p-1.5 border-dashed rounded-md hover:bg-Info/50 flex tracking-tighter gap-x-2 items-center justify-center ${filter === 'bestSellers' ? 'bg-Info/50' : ''
-							}`}
-						onClick={() => dispatch(setFilter('bestSellers'))}
-					>
-						<span className="hidden md:block">محصولات پرفروش</span>
-						<AiOutlineStar className="text-red-500 w-5 h-5" />
-					</button>
-					<button
-						className={`md:border-2 border text- duration-500 transition-all border-Info p-1 md:p-1.5 border-dashed rounded-md hover:bg-Info/50 flex tracking-tighter gap-x-2 items-center justify-center ${filter === 'latest' ? 'bg-Info/50' : ''
-							}`}
-						onClick={() => dispatch(setFilter('latest'))}
-					>
-						<span className="hidden md:block">جدیدترین محصولات</span>
-						<MdOutlineWatchLater className="text-red-500 w-5 h-5" />
-					</button>
-				</div> */}
 			</h3>
 			{/* table */}
 			<table className="table-auto mt-3 md:mt-5 border md:border-2 border-Info w-full text-center">
 				<thead className="border-b-2 h-10 border-Info">
 					<tr className="">
 						<td className="sm:text-sm font-black text-Dark/70 h-10">ردیف</td>
-						<td className="sm:text-sm font-black text-Dark/70 h-10">تصویر</td>
-						<td className="sm:text-sm font-black text-Dark/70 h-10">عنوان</td>
-						<td className="sm:text-sm font-black text-Dark/70 h-10">دسته‌بندی</td>
-						<td className="sm:text-sm font-black text-Dark/70 h-10 border-l border-l-Info">قیمت</td>
+						<td className="sm:text-sm font-black text-Dark/70 h-10">نام و نام‌خانوادگی</td>
+						<td className="sm:text-sm font-black text-Dark/70 h-10">نام کاربری</td>
+						<td className="sm:text-sm font-black text-Dark/70 h-10">شماره تماس</td>
+						<td className="sm:text-sm font-black text-Dark/70 h-10">ایمیل</td>
 					</tr>
 				</thead>
 				<tbody>
-					{
-						data?.reverse().map((user: user, index: number) => (
-							<tr
-								key={user._id}
-								className="border-b border-DarkYellow hover:bg-Info/20 p-52 transition-all duration-500 cursor-pointer"
-								onClick={() => navigate(String(user.username))}
-							>
-								<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
-								<td>
-								</td>
-								<td className="tracking-tighter sm:text-base">{user.firstName} {user.lastName}</td>
-								<td>{user.email}</td>
-								<td className="tracking-tighter">
-
-								</td>
-							</tr>
-						))
-					}
+					{data?.reverse().map((user: user, index: number) => (
+						<tr
+							key={user._id}
+							className="border-b border-DarkYellow hover:bg-Info/20 p-52 transition-all duration-500 cursor-pointer h-20"
+							onClick={() => navigate(String(user._id))}
+						>
+							<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
+							<td className="tracking-tighter sm:text-base">
+								{user.firstName} {user.lastName}
+							</td>
+							<td className="tracking-tighter sm:text-base">{user.username}</td>
+							<td className="tracking-tighter sm:text-base">{user.phoneNumber}</td>
+							<td className="tracking-tighter">{user.email}</td>
+						</tr>
+					))}
 				</tbody>
 			</table>
 		</section>

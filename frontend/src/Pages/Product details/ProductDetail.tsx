@@ -23,19 +23,22 @@ const ProductDetails = () => {
 	// url params
 	const { shortName } = useParams();
 
+  // GET product details from react query
 	const { data } = useSingleProduct(String(shortName));
 
 	// tsx
 	return (
-		<div className="flex h-screen flex-col justify-between">
-			<Header />
-			<main className="flex flex-col gap-y-5 md:gap-y-10">
-				<ProductDetailsBox {...data} />
-				<ProductProperties {...data} />
-				<ProductDetailsCm />
-			</main>
+		<>
+			<div className="flex flex-col justify-between">
+				<Header />
+				<main className="flex flex-col gap-y-5 md:gap-y-10">
+					<ProductDetailsBox {...data} />
+					<ProductProperties {...data} />
+					{/* <ProductDetailsCm /> */}
+				</main>
+			</div>
 			<Footer />
-		</div>
+		</>
 	);
 };
 

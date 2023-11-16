@@ -206,7 +206,7 @@ const Header: React.FC = () => {
 				<ul className="flex flex-col gap-y-2 text-xs pt-2 md:pt-4 lg:text-base child:transition-all text-Dark child:duration-500 child:rounded-md xl:text-lg">
 					<li className="text-center" onClick={() => setIsAdminMenuShown(false)}>
 						<Link
-							to={`panel/${user.username}`}
+							to={`/panel/${user.username}`}
 							className="py-1 rounded hover:bg-Info/50 tracking-tighter flex gap-x-2 justify-center items-center"
 						>
 							<FiEdit className="text-red-500" />
@@ -215,7 +215,7 @@ const Header: React.FC = () => {
 					</li>
 					<li className="text-center" onClick={() => setIsAdminMenuShown(false)}>
 						<Link
-							to="panel/basket"
+							to="/panel/basket"
 							className="py-1 rounded hover:bg-Info/50 tracking-tighter flex gap-x-2 justify-center items-center"
 						>
 							<BsBasket className="text-red-500" />
@@ -224,7 +224,7 @@ const Header: React.FC = () => {
 					</li>
 					<li className="text-center" onClick={() => setIsAdminMenuShown(false)}>
 						<Link
-							to="panel/orders"
+							to="/panel/orders"
 							className="py-1 rounded hover:bg-Info/50 tracking-tighter flex gap-x-2 justify-center items-center"
 						>
 							<MdProductionQuantityLimits className="text-red-500" />

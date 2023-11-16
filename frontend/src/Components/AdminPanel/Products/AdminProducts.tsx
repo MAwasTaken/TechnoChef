@@ -122,7 +122,7 @@ const AdminProducts = () => {
 									</td>
 									<td className="tracking-tighter sm:text-base">{product.productName}</td>
 									<td>{product.category}</td>
-									<td className="tracking-tighter">
+									<td className="tracking-tighter sm:text-base">
 										{product.finalPrice} <span className="text-red-500 mr-1">تومان</span>
 									</td>
 								</tr>

@@ -30,7 +30,7 @@ const AboutUs = () => {
 						</div>
 					</section>
 					<section className="flex flex-row">
-						<img src="./../../../public/Images/AboutUs/aboutus.png" alt="" width="900" />
+						<img src="/Images/AboutUs/aboutus.png" alt="" width="900" />
 						<div className="flex flex-col justify-center gap-y-7 text-center">
 							<h1 className="text-4xl text-center font-bold">شرایط فروش محصولات</h1>
 							<p className="text-gray-800 leading-6 text-base">
