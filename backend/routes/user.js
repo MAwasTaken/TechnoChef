@@ -4,13 +4,13 @@ const { verifyTokenAndAdmin, verifyTokenAndAuth } = require('../middlewares/veri
 const controller = require('../controllers/usersController');
 
 //UPDATE router
-router.put('/:id', verifyTokenAndAuth, controller.updateUserController);
+router.put('/:username', verifyTokenAndAuth, controller.updateUserController);
 
 //DELETE router
-router.delete('/:id', verifyTokenAndAuth, controller.deleteUserController);
+router.delete('/:username', verifyTokenAndAuth, controller.deleteUserController);
 
 //GET USER router
-router.get('/find/:id', verifyTokenAndAdmin, controller.getUserByIdController);
+router.get('/find/:username', verifyTokenAndAdmin, controller.getUserByIdController);
 
 //GET ALL USER router
 router.get('/getAll', verifyTokenAndAdmin, controller.getAllUsersController);
