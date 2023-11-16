@@ -65,7 +65,7 @@ const updateProductController = async (req, res, next) => {
 			});
 			if (typeof req.body.images == 'string') {
 				images.push(req.body.images);
-			} else if(req.body.images) {
+			} else if (req.body.images) {
 				req.body.images.map((image) => {
 					images.push(image);
 				});
@@ -104,7 +104,7 @@ const updateProductController = async (req, res, next) => {
 				});
 
 		if (req.files.cover) fs.unlinkSync(req.files.cover[0].path);
-		console.log(err)
+		console.log(err);
 		req.err = err;
 		next();
 	}
@@ -203,7 +203,7 @@ const getAllProductsController = async (req, res, next) => {
 	const qNew = req.query.new;
 	const qSearch = req.query.search;
 	const qBestSeller = req.query.bestseller;
-	const qPage = req.query?.page || 1;
+	const qPage = req.query?.page;
 	const qCategory = req.query.category;
 	const qPriceSort = req.query.pricesort;
 
