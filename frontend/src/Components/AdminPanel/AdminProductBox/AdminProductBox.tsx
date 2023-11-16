@@ -8,7 +8,7 @@ const AdminProductBox = () => {
 				<div className="flex flex-col gap-y-4 bg-gray-300 rounded-2xl w-[290px] h-[420px] p-5">
 					<img
 						className="mx-auto h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
-						src="../../../../public/Images/Products/p1.png"
+						src="/Images/Products/p1.png"
 						alt="تصویر محصول"
 						loading="lazy"
 					/>
