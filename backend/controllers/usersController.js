@@ -122,10 +122,13 @@ const getAllUsersController = async (req, res, next) => {
 		//if there is "NEW" query
 		if (query) {
 			// return the newest Users
-			users = await User.find().sort({ _id: -1 }).select(['-password', '-__v']).limit(query);
+			users = await User.find()
+				.sort({ _id: -1 })
+				.select(['-password', '-basket', '-__v'])
+				.limit(query);
 		} else {
 			//return ALL
-			users = await User.find().select(['-password', '-__v']);
+			users = await User.find().select(['-password', '-basket', '-__v']);
 		}
 
 		// set the response
