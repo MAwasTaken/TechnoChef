@@ -39,6 +39,7 @@ const PanelEditUser: React.FC = () => {
 
 	// spinner handler
 	const [isFormFetching, setIsFormFetching] = useState<boolean>(false);
+	const isDisabled = true;
 
 	// update user infos
 	const updateUserDetail: SubmitHandler<user> = (data) => {
@@ -81,11 +82,12 @@ const PanelEditUser: React.FC = () => {
 				>
 					{/* firstName */}
 					<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="firstName">
+						<span className='text-base text-right'>نام</span>
 						{/* input */}
 						<input
 							required
 							{...register('firstName')}
-							className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
+							className="text-base outline-none bg-white focus:drop-shadow-lg duration-100 rounded-lg py-4 drop-shadow-sm md:w-3/4 xl:w-1/2 w-full text-right px-4 flex items-center"
 							type="text"
 							placeholder="نام"
 							id="firstName"
@@ -93,11 +95,12 @@ const PanelEditUser: React.FC = () => {
 					</label>
 					{/* lastName */}
 					<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="lastName">
+						<span>نام خانوادگی</span>
 						{/* input */}
 						<input
 							required
 							{...register('lastName')}
-							className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
+							className="text-base outline-none bg-white focus:drop-shadow-lg duration-100 rounded-lg py-4 drop-shadow-sm md:w-3/4 xl:w-1/2 w-full text-right px-4 flex items-center"
 							type="text"
 							placeholder="نام خانوادگی"
 							id="lastName"
@@ -109,10 +112,12 @@ const PanelEditUser: React.FC = () => {
 						htmlFor="phoneNumber"
 					>
 						{/* input */}
+						<span>شماره تماس</span>
 						<input
+							disabled={isDisabled}
 							required
 							{...register('phoneNumber')}
-							className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
+							className="text-base outline-none cursor-not-allowed focus:drop-shadow-lg duration-100 rounded-lg py-4 drop-shadow-sm md:w-3/4 xl:w-1/2 w-full text-right px-4 flex items-center"
 							type="text"
 							placeholder="شماره تماس"
 							id="phoneNumber"
@@ -121,10 +126,12 @@ const PanelEditUser: React.FC = () => {
 					{/* username */}
 					<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="username">
 						{/* input */}
+						<span>نام کاربری</span>
+
 						<input
 							required
 							{...register('username')}
-							className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
+							className="text-base outline-none bg-white focus:drop-shadow-lg duration-100 rounded-lg py-4 drop-shadow-sm md:w-3/4 xl:w-1/2 w-full text-right px-4 flex items-center"
 							type="text"
 							placeholder="نام کاربری"
 							id="username"
@@ -133,12 +140,26 @@ const PanelEditUser: React.FC = () => {
 					{/* email */}
 					<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="email">
 						{/* input */}
+						<span>آدرس ایمیل</span>
 						<input
 							required
 							{...register('email')}
-							className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
+							className="text-base outline-none bg-white focus:drop-shadow-lg duration-100 rounded-lg py-4 drop-shadow-sm md:w-3/4 xl:w-1/2 w-full text-right px-4 flex items-center"
 							type="email"
 							placeholder="شماره تماس"
+							id="email"
+						/>
+					</label>
+					{/* Address */}
+					<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="email">
+						{/* input */}
+						<span>نشانی</span>
+						<input
+							required
+							{...register('email')}
+							className="text-base outline-none bg-white focus:drop-shadow-lg duration-100 rounded-lg py-4 drop-shadow-sm md:w-3/4 xl:w-1/2 w-full text-right px-4 flex items-center"
+							type="email"
+							placeholder="نشانی"
 							id="email"
 						/>
 					</label>
