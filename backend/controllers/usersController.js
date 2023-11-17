@@ -1,5 +1,6 @@
 // dependency imports
 const User = require('../models/Users');
+const Order = require('../models/Order');
 const CryptoJS = require('crypto-js');
 const validate = require('../validator/userValidation');
 
@@ -65,21 +66,29 @@ const deleteUserController = async (req, res, next) => {
 	}
 };
 
-// get User By Id
+// get User By username
 const getUserByIdController = async (req, res, next) => {
 	try {
 		if (req.params.username == ':username')
 			return res.status(400).json({ massage: 'the request needs a username params.' });
 
 		// find the User By the ID
-		const user = await User.findOne({ username: req.params.username });
+		const user = await User.findOne({ username: req.params.username }).populate({
+			path: 'basket.products.productId',
+			select: { __v: false, updatedAt: false, createdAt: false }
+		});
+
 		if (!user) return res.status(404).json({ massage: 'user not found' });
 
+		const orders = await Order.find({ userId: user._id });
+
 		// split the from the object
-		const { password, __v, ...others } = user._doc;
+		const { password, __v, ...userInfo } = user._doc;
+
+		const result = { userInfo, orders };
 
 		// set the response
-		res.status(200).json(others);
+		res.status(200).json(result);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
