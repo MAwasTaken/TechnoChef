@@ -14,7 +14,22 @@ const userSchema = mongoose.Schema(
 		nationalCode: { type: String },
 		address: { type: String },
 		isAdmin: { type: Boolean, default: false },
-		emailVerified: { type: Boolean, default: false }
+		emailVerified: { type: Boolean, default: false },
+		basket: {
+			products: [
+				{
+					productId: {
+						type: mongoose.Types.ObjectId,
+						ref: 'Products'
+					},
+					quantity: {
+						type: Number,
+						default: 1
+					}
+				}
+			],
+			totalPrice: { type: Number, required: true, default: 0 }
+		}
 	},
 	{ timestamps: true }
 );

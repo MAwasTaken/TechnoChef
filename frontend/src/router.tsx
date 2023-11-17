@@ -22,6 +22,7 @@ import AboutUs from './Pages/AboutUs/AboutUs';
 import AdminUsers from './Components/AdminPanel/Users/AdminUsers';
 import PanelEditUser from './Components/Panel/PanelEditUser/PanelEditUser';
 import PanelBasket from './Components/Panel/PanelBasket/PanelBasket';
+import SingleUser from './Components/AdminPanel/Users/SingleUser/SingleUser';
 
 const routes = [
 	{ path: '/', element: <Index /> },
@@ -69,7 +70,8 @@ const routes = [
 				path: 'products/:shortName',
 				element: <SingleProduct />
 			},
-			{ path: 'users', element: <AdminUsers /> }
+			{ path: 'users', element: <AdminUsers /> },
+			{ path: 'users/:userName', element: <SingleUser /> }
 		]
 	},
 	{ path: '*', element: <UnknownPage /> }

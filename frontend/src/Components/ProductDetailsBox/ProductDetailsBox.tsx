@@ -5,7 +5,7 @@ import { BiShoppingBag, BiCategory } from 'react-icons/bi';
 // types
 import { ProductProps } from '../../Types/Products.types';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCategory } from '../../Services/Redux/Slices/Category';
 
 // swiper
@@ -13,6 +13,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay, Keyboard, Pagination } from 'swiper/modules';
+
+// react toastify
+import { ToastContainer, toast } from 'react-toastify';
+
+// axios
+import { putAddProduct } from '../../Services/Axios/Requests/basket';
 
 // product details box
 export const ProductDetailsBox: React.FC<ProductProps> = ({
@@ -23,13 +29,39 @@ export const ProductDetailsBox: React.FC<ProductProps> = ({
 	price,
 	cover,
 	images,
-	productColor
+	productColor,
+	_id
 }) => {
 	// redux dispatch hook
 	const dispatch = useDispatch();
 
 	// navigator
 	const navigate = useNavigate();
+
+	// GET user details from redux
+	const user = useSelector((state: any) => state.user);
+
+	// add product to basket
+	const addProductToBasket = () => {
+		user._id
+			? putAddProduct([
+					{
+						productId: _id!,
+						quantity: 1
+					}
+			  ]).then((res) =>
+					toast.success(`محصول ${productName} به سبدخرید اضافه شد ! ✅`, {
+						onClose: () =>
+							// navigate to basket panel
+							navigate('/panel/basket')
+					})
+			  )
+			: toast.error('برای اضافه کردن محصول به سبدخرید ابتدا باید وارد شوید! ❌', {
+					onClose: () =>
+						// navigate to login page
+						navigate('/login')
+			  });
+	};
 
 	// tsx
 	return (
@@ -151,7 +183,10 @@ export const ProductDetailsBox: React.FC<ProductProps> = ({
 										</div>
 									</div>
 								) : null}
-								<button className="font-Lalezar from-LightYellow to-DarkYellow flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-[10px] tracking-tighter shadow-md transition-all hover:bg-gradient-to-t md:w-[150px] md:p-2 md:text-lg">
+								<button
+									onClick={addProductToBasket}
+									className="font-Lalezar from-LightYellow to-DarkYellow flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-[10px] tracking-tighter shadow-md transition-all hover:bg-gradient-to-t md:w-[150px] md:p-2 md:text-lg"
+								>
 									<div className="flex gap-x-3 items-center justify-between">
 										<span className="font-Lalezar mt-1 text-2xl">
 											{finalPrice?.toLocaleString('fa-IR')}
@@ -171,7 +206,10 @@ export const ProductDetailsBox: React.FC<ProductProps> = ({
 						{Math.trunc(100 - (finalPrice * 100) / price).toLocaleString('fa-IR')}%
 					</span>
 				) : null}
-				<button className="flex justify-center items-center gap-x-1 bg-gradient-to-r from-LightYellow to-DarkYellow hover:bg-gradient-to-l transition-colors duration-500 rounded-md px-2 py-1">
+				<button
+					onClick={addProductToBasket}
+					className="flex justify-center items-center gap-x-1 bg-gradient-to-r from-LightYellow to-DarkYellow hover:bg-gradient-to-l transition-colors duration-500 rounded-md px-2 py-1"
+				>
 					<BiShoppingBag className="text-red-500 w-5 h-5" />
 					<span className="font-Lalezar text-xl tracking-tight">
 						{finalPrice?.toLocaleString('fa-IR')}
@@ -191,6 +229,25 @@ export const ProductDetailsBox: React.FC<ProductProps> = ({
 					</span>
 				) : null}
 			</section>
+			{/* react toastify container */}
+			<ToastContainer
+				position="bottom-right"
+				autoClose={4000}
+				hideProgressBar={false}
+				newestOnTop
+				closeOnClick={false}
+				rtl={true}
+				theme="light"
+				pauseOnFocusLoss
+				draggable={false}
+				pauseOnHover
+				toastStyle={{
+					color: '#0A0706',
+					fontFamily: 'Lalezar',
+					background: '#FCFCFC',
+					fontSize: '16px'
+				}}
+			/>
 		</>
 	);
 };

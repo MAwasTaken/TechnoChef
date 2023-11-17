@@ -94,7 +94,7 @@ const SingleProduct = () => {
 
 	// edit product handler
 	const editProductHandler: SubmitHandler<NewProductInputs> = (formData) => {
-		// setIsFormFetching(true);
+		setIsFormFetching(true);
 
 		formData.details = formData.details?.slice(0, detailsCount);
 		formData.productColor = productColor;

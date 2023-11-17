@@ -11,7 +11,8 @@ const model = joi.object({
 	phoneNumber: joi.string().pattern(new RegExp('^(\\+98|0)?9\\d{9}$')),
 	postalCode: joi.string().pattern(new RegExp('\\b(?!(\\d)\\1{3})[13-9]{4}[1346-9][013-9]{5}\\b')),
 	nationalCode: joi.string().pattern(new RegExp('^[0-9]{10}$')),
-	address: joi.string()
+	address: joi.string(),
+	basket: joi.object()
 });
 
 // export the models
