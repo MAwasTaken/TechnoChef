@@ -42,6 +42,7 @@ const CategoryItem: React.FC<CategoryItemProps> = (category) => {
 						className="h-full w-full object-scale-down"
 						src={`https://45.159.150.221:3000/${category.image}`}
 						alt="category image"
+            loading="lazy"
 					/>
 				</div>
 			</Link>

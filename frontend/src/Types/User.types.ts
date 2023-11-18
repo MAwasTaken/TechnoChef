@@ -9,4 +9,6 @@ export type user = {
 	updatedAt?: string;
 	username?: string;
 	_id?: string;
+	nationalCode?: number;
+	postalCode?: number;
 };

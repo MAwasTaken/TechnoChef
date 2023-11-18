@@ -115,6 +115,7 @@ const AdminProducts = () => {
 									<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
 									<td>
 										<img
+                    loading="lazy"
 											className="w-32 h-32 object-contain mx-auto"
 											src={`https://45.159.150.221:3000/${product?.cover}`}
 											alt="تصویر محصول"
@@ -137,6 +138,7 @@ const AdminProducts = () => {
 									<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
 									<td>
 										<img
+                    loading="lazy"
 											className="w-32 h-32 object-contain mx-auto"
 											src={`https://45.159.150.221:3000/${product?.cover}`}
 											alt="تصویر محصول"
@@ -158,6 +160,7 @@ const AdminProducts = () => {
 									<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
 									<td>
 										<img
+                    loading="lazy"
 											className="w-32 h-32 object-contain mx-auto"
 											src={`https://45.159.150.221:3000/${product?.cover}`}
 											alt="تصویر محصول"

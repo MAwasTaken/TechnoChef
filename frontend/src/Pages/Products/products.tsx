@@ -6,7 +6,6 @@ import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
 import ProductBox from '../../Components/ProductBox/ProductBox';
 import ProductCategories from '../../Components/ProductsCategories/ProductCategories';
-import ProductPrice from '../../Components/ProductsPrice/ProductPrice';
 import ProductSort from '../../Components/ProductSort/ProductSort';
 
 // react query
@@ -18,7 +17,6 @@ import { ProductProps } from '../../Types/Products.types';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchValue } from '../../Services/Redux/Slices/Search';
-import { setCategory } from '../../Services/Redux/Slices/Category';
 
 // Products page
 const Products = () => {
@@ -63,7 +61,6 @@ const Products = () => {
 					{/* right side */}
 					<aside className="flex h-max gap-y-10 md:flex-row md:gap-y-8 xl:sticky xl:top-10 xl:flex-col">
 						<ProductCategories />
-						<ProductPrice />
 					</aside>
 					{/* divider */}
 					<div className="hidden xl:flex">

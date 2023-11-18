@@ -17,31 +17,54 @@ import { ToastContainer, toast } from 'react-toastify';
 
 // react spinner
 import { BeatLoader } from 'react-spinners';
+import { useSelector } from 'react-redux';
+import { HiRss } from 'react-icons/hi';
 
 // panel basket
 const PanelBasket: React.FC = () => {
 	// navigator
 	const navigate = useNavigate();
 
-	// get basket from react query
-	const { data, refetch } = useGetBasket();
+	// GET user data from redux
+	const user = useSelector((state: any) => state.user);
 
+	// get basket from react query
+	const { data, isFetching, refetch } = useGetBasket();
+
+	// spinner handler
 	const [isFormFetching, setIsFormFetching] = useState<boolean>(false);
+	const [isFormFetching2, setIsFormFetching2] = useState<boolean>(false);
 
 	// remove product
 	const removeProductFromBasket = (
 		event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 		productID: string
 	) => {
+		setIsFormFetching2(true);
+
 		event.stopPropagation();
 
 		putRemoveProduct({ productId: productID, quantity: 1 })
 			.then(() =>
-				toast.success('محصول با موفقیت از سبدخرید حذف شد ✅', {
+				toast.success('محصول با موفقیت از سبدخرید حذف شد !', {
 					onOpen: () => refetch()
 				})
 			)
-			.catch(() => toast.error('حذف محصول با اشکال مواجه شد! ❌', { onOpen: () => refetch() }));
+			.catch(() => toast.error('حذف محصول با اشکال مواجه شد! ❌', { onOpen: () => refetch() }))
+			.finally(() => setIsFormFetching2(false));
+	};
+
+	// payment
+	const payBasket = () => {
+		setIsFormFetching(true);
+
+		// check user details for payment
+		if (!user.nationalCode || !user.postalCode || !user.address) {
+			toast.error('برای ثبت سفارش ابتدا اطلاعات کاربری خود را تکمیل کنید !', {
+				onOpen: () => setIsFormFetching(false),
+				onClose: () => navigate(`/panel/${user.username}`)
+			});
+		}
 	};
 
 	return (
@@ -53,23 +76,19 @@ const PanelBasket: React.FC = () => {
 						<BsBasket className="text-red-500" />
 						سبدخرید
 					</span>
-					<Link
-						to="/panel"
-						className="md:border-2 border duration-500 transition-all border-Info p-1 border-dashed rounded-md hover:bg-Info/50 flex tracking-tighter gap-x-2 items-center justify-center"
-					>
-						<span>
-							<BiArrowBack className="text-red-500 w-5 h-5" />
-						</span>
-					</Link>
 				</h3>
 			</div>
 			<main className="mx-5 gap-y-10">
-				{data?.products.length ? (
+				{isFetching ? (
+					<span className="flex items-center justify-center gap-x-5 text-center w-full font-bold xl:text-lg bg-sky-500 md:py-4 text-Light py-2 rounded-md">
+						در حال دریافت اطلاعات سبدخرید از سرور صبر کنید !
+					</span>
+				) : data?.products.length ? (
 					<>
 						<table className="table-auto mt-3 md:mt-5 border md:border-2 border-Info w-full text-center">
 							<thead className="border-b-2 h-10 border-Info">
 								<tr className="">
-									<td className="sm:text-sm font-black text-Dark/70 h-10">ردیف</td>
+									<td className="sm:text-sm font-black text-Dark/70 h-10">تعداد</td>
 									<td className="sm:text-sm font-black text-Dark/70 h-10">تصویر</td>
 									<td className="sm:text-sm font-black text-Dark/70 h-10">عنوان</td>
 									<td className="sm:text-sm font-black text-Dark/70 h-10 border-l border-l-Info">
@@ -87,12 +106,13 @@ const PanelBasket: React.FC = () => {
 										className="border-b border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer"
 										onClick={() => navigate(`/products/${String(product.productId.shortName)}`)}
 									>
-										<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
+										<td className="font-Lalezar text-base lg:text-lg">{product.quantity}</td>
 										<td>
 											<img
 												className="w-32 h-32 object-contain mx-auto"
 												src={`https://45.159.150.221:3000/${product.productId?.cover}`}
 												alt="تصویر محصول"
+												loading="lazy"
 											/>
 										</td>
 										<td className="tracking-tighter sm:text-base">
@@ -108,7 +128,11 @@ const PanelBasket: React.FC = () => {
 												type="button"
 												className="bg-red-500 shadow-md p-1 md:p-1.5 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-red-600 transition-colors mr-1.5"
 											>
-												<BsTrash className="md:w-6 md:h-6 h-4 w-4 text-white" />
+												{isFormFetching2 ? (
+													<HiRss className="md:w-6 md:h-6 h-4 w-4 text-white animate-pulse duration-[20ms]" />
+												) : (
+													<BsTrash className="md:w-6 md:h-6 h-4 w-4 text-white" />
+												)}
 											</button>
 										</td>
 									</tr>
@@ -128,7 +152,8 @@ const PanelBasket: React.FC = () => {
 							{/* submit button */}
 							<button
 								disabled={isFormFetching}
-								className="font-Lalezar mx-auto mt-2 md:h-11 h-9 from-emerald-500 to-emerald-600 flex w-auto items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-base shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg disabled:bg-gray-400"
+								className="font-Lalezar mx-auto mt-2 md:h-11 h-9 from-emerald-400 to-green-500 flex w-auto items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-base shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg disabled:bg-gray-400"
+								onClick={payBasket}
 								type="submit"
 							>
 								{isFormFetching ? <BeatLoader size={10} color="#FCFCFC" /> : 'پرداخت'}

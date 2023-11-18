@@ -1,14 +1,15 @@
 // react
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // redux
 import { useSelector } from 'react-redux';
 
 // react hook form
 import { SubmitHandler, useForm } from 'react-hook-form';
+
+// react spinner
 import { BeatLoader } from 'react-spinners';
-import { BsBoxSeam } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
 
 // icons
 import { BiArrowBack } from 'react-icons/bi';
@@ -16,6 +17,15 @@ import { FiEdit } from 'react-icons/fi';
 import { user } from '../../../Types/User.types';
 import { putSingleUser } from '../../../Services/Axios/Requests/user';
 import { toast } from 'react-toastify';
+import { HiEnvelope, HiMapPin } from 'react-icons/hi2';
+import {
+	HiFingerPrint,
+	HiIdentification,
+	HiMap,
+	HiPhone,
+	HiScale,
+	HiUserCircle
+} from 'react-icons/hi';
 
 // edit user panel
 const PanelEditUser: React.FC = () => {
@@ -33,13 +43,15 @@ const PanelEditUser: React.FC = () => {
 			lastName: user.lastName,
 			phoneNumber: user.phoneNumber,
 			email: user.email,
-			username: user.username
+			username: user.username,
+			nationalCode: user.nationalCode,
+			postalCode: user.postalCode,
+			address: user.address
 		});
 	}, []);
 
 	// spinner handler
 	const [isFormFetching, setIsFormFetching] = useState<boolean>(false);
-	const isDisabled = true;
 
 	// update user infos
 	const updateUserDetail: SubmitHandler<user> = (data) => {
@@ -53,7 +65,11 @@ const PanelEditUser: React.FC = () => {
 					onClose: () => location.reload()
 				})
 			)
-			.catch(() => toast.error('ویرایش اطلاعات کاربری با مشکل مواجه شد ! ❌'));
+			.catch(() =>
+				toast.error('ویرایش اطلاعات کاربری با مشکل مواجه شد !', {
+					onClose: () => setIsFormFetching(false)
+				})
+			);
 	};
 
 	return (
@@ -65,14 +81,6 @@ const PanelEditUser: React.FC = () => {
 						<FiEdit className="text-red-500" />
 						ویرایش اطلاعات کاربری
 					</span>
-					<Link
-						to="/panel"
-						className="md:border-2 border duration-500 transition-all border-Info p-1 border-dashed rounded-md hover:bg-Info/50 flex tracking-tighter gap-x-2 items-center justify-center"
-					>
-						<span>
-							<BiArrowBack className="text-red-500 w-5 h-5" />
-						</span>
-					</Link>
 				</h3>
 			</div>
 			<main className="m-5 flex flex-col relative md:flex-row-reverse gap-y-10 justify-center md:justify-between">
@@ -81,86 +89,107 @@ const PanelEditUser: React.FC = () => {
 					className="flex flex-col gap-y-2 md:gap-y-4 grow"
 				>
 					{/* firstName */}
-					<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="firstName">
-						<span className='text-base text-right'>نام</span>
+					<label className="flex gap-x-2 items-center justify-center" htmlFor="firstName">
+						<HiUserCircle className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 						{/* input */}
 						<input
 							required
 							{...register('firstName')}
-							className="text-base outline-none bg-white focus:drop-shadow-lg duration-100 rounded-lg py-4 drop-shadow-sm md:w-3/4 xl:w-1/2 w-full text-right px-4 flex items-center"
+							className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
 							type="text"
 							placeholder="نام"
 							id="firstName"
 						/>
 					</label>
 					{/* lastName */}
-					<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="lastName">
-						<span>نام خانوادگی</span>
+					<label className="flex gap-x-2 items-center justify-center" htmlFor="lastName">
+						<HiIdentification className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 						{/* input */}
 						<input
 							required
 							{...register('lastName')}
-							className="text-base outline-none bg-white focus:drop-shadow-lg duration-100 rounded-lg py-4 drop-shadow-sm md:w-3/4 xl:w-1/2 w-full text-right px-4 flex items-center"
+							className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
 							type="text"
 							placeholder="نام خانوادگی"
 							id="lastName"
 						/>
 					</label>
 					{/* phoneNumber */}
-					<label
-						className="flex flex-col gap-y-1 items-center justify-center"
-						htmlFor="phoneNumber"
-					>
+					<label className="flex gap-x-2 items-center justify-center" htmlFor="phoneNumber">
+						<HiPhone className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 						{/* input */}
-						<span>شماره تماس</span>
 						<input
-							disabled={isDisabled}
 							required
 							{...register('phoneNumber')}
-							className="text-base outline-none cursor-not-allowed focus:drop-shadow-lg duration-100 rounded-lg py-4 drop-shadow-sm md:w-3/4 xl:w-1/2 w-full text-right px-4 flex items-center"
+							className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
 							type="text"
 							placeholder="شماره تماس"
 							id="phoneNumber"
 						/>
 					</label>
 					{/* username */}
-					<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="username">
+					<label className="flex gap-x-2 items-center justify-center" htmlFor="username">
+						<HiFingerPrint className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 						{/* input */}
-						<span>نام کاربری</span>
-
 						<input
 							required
 							{...register('username')}
-							className="text-base outline-none bg-white focus:drop-shadow-lg duration-100 rounded-lg py-4 drop-shadow-sm md:w-3/4 xl:w-1/2 w-full text-right px-4 flex items-center"
+							className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
 							type="text"
 							placeholder="نام کاربری"
 							id="username"
 						/>
 					</label>
 					{/* email */}
-					<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="email">
+					<label className="flex gap-x-2 items-center justify-center" htmlFor="email">
+						<HiEnvelope className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 						{/* input */}
-						<span>آدرس ایمیل</span>
 						<input
 							required
 							{...register('email')}
-							className="text-base outline-none bg-white focus:drop-shadow-lg duration-100 rounded-lg py-4 drop-shadow-sm md:w-3/4 xl:w-1/2 w-full text-right px-4 flex items-center"
+							className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
 							type="email"
+							inputMode="email"
 							placeholder="شماره تماس"
 							id="email"
 						/>
 					</label>
-					{/* Address */}
-					<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="email">
+					{/* postalCode */}
+					<label className="flex gap-x-2 items-center justify-center" htmlFor="nationalCode">
+						<HiScale className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-Info/50 hover:bg-Info cursor-pointer" />
 						{/* input */}
-						<span>نشانی</span>
 						<input
-							required
-							{...register('email')}
-							className="text-base outline-none bg-white focus:drop-shadow-lg duration-100 rounded-lg py-4 drop-shadow-sm md:w-3/4 xl:w-1/2 w-full text-right px-4 flex items-center"
-							type="email"
-							placeholder="نشانی"
-							id="email"
+							{...register('nationalCode')}
+							className="border-2 border-Info text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
+							type="text"
+							inputMode="decimal"
+							placeholder="کدملی"
+							id="nationalCode"
+						/>
+					</label>
+					{/* postalCode */}
+					<label className="flex gap-x-2 items-center justify-center" htmlFor="postalCode">
+						<HiMap className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-Info/50 hover:bg-Info cursor-pointer" />
+						{/* input */}
+						<input
+							{...register('postalCode')}
+							className="border-2 border-Info text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
+							type="text"
+							inputMode="decimal"
+							placeholder="کدپستی"
+							id="postalCode"
+						/>
+					</label>
+					{/* address */}
+					<label className="flex gap-x-2 items-center justify-center" htmlFor="address">
+						<HiMapPin className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-Info/50 hover:bg-Info cursor-pointer" />
+						{/* input */}
+						<textarea
+							{...register('address')}
+							className="border-2 border-Info text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
+							inputMode="decimal"
+							placeholder="آدرس"
+							id="address"
 						/>
 					</label>
 					{/* submit button */}

@@ -23,7 +23,7 @@ const ProductDetails = () => {
 	// url params
 	const { shortName } = useParams();
 
-  // GET product details from react query
+	// GET product details from react query
 	const { data } = useSingleProduct(String(shortName));
 
 	// tsx

@@ -119,7 +119,7 @@ const Login: React.FC = () => {
 	// tsx
 	return (
 		<>
-			<div className="flex h-screen flex-col justify-between">
+			<div className="flex flex-col justify-between">
 				<Header />
 				<div className="flex items-center justify-center">
 					<main className="md:bg-Info/50 bg-transparent flex h-auto w-full flex-col items-center gap-y-2 px-8 py-8 backdrop-blur-[2px] sm:w-4/4 md:rounded-3xl md:gap-y-4 md:w-[590px]">

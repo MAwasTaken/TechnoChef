@@ -17,8 +17,6 @@ const AdminUsers = () => {
 	// GET all users from react query
 	const { data } = useGetAllUsers();
 
-	console.log(data);
-
 	// tsx
 	return (
 		<section className="md:p-5 p-3">
@@ -45,7 +43,7 @@ const AdminUsers = () => {
 						<tr
 							key={user._id}
 							className="border-b border-DarkYellow hover:bg-Info/20 p-52 transition-all duration-500 cursor-pointer h-20"
-							onClick={() => navigate(String(user._id))}
+							onClick={() => navigate(String(user.username))}
 						>
 							<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
 							<td className="tracking-tighter sm:text-base">

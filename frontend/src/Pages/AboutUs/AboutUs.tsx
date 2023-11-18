@@ -30,12 +30,16 @@ const AboutUs = () => {
 						</div>
 					</section>
 					<section className="flex gap-x-10 flex-row">
-						<img src="./../../../public/Images/AboutUs/aboutus.png" alt="" width="900" />
+						<img
+							src="./../../../public/Images/AboutUs/aboutus.png"
+							alt=""
+							width="900"
+							loading="lazy"
+						/>
 						<div className="flex flex-col justify-center gap-y-7 text-center">
 							<h1 className="text-4xl text-center font-bold">شرایط فروش محصولات</h1>
 							<p className="text-gray-800 leading-6 text-base">
-
-							شرکت بازرگانی لوازم خانگی پارسیان سرو نیوساد با برند تکنوشف بیش از یک دهه تجربه یکی
+								شرکت بازرگانی لوازم خانگی پارسیان سرو نیوساد با برند تکنوشف بیش از یک دهه تجربه یکی
 								از شرکت های پیشگام در زمینه توزیع و فروش لوازم خانگی می باشد . این شرکت کوشش دارد با
 								افتخار نیازهای خانواده هارا در زمینه امور خانگی برآورده نماید. هدف ما اراءه محصولات
 								با کیفیت با برند معتبر تکنو در پی توسعه فرهنگ مصرف پایدار خانواده است : تا یک همراه

@@ -10,6 +10,7 @@ const BetaPlan = () => {
 					className="max-h-[225px] lg:h-auto lg:w-auto"
 					src="/Images/MainSlider/beta.jpeg"
 					alt=""
+          loading="lazy"
 				/>
 			</Link>
 			<Link to="https://beta.refah-bank.ir/" target="_blank">
@@ -17,6 +18,7 @@ const BetaPlan = () => {
 					className="max-h-[225px] lg:h-auto lg:w-auto"
 					src="/Images/MainSlider/beta2.png"
 					alt=""
+          loading="lazy"
 				/>
 			</Link>
 		</section>
