@@ -84,7 +84,7 @@
 
 	@font-face {
 		font-family: 'Lalezar';
-		src: url(../Fonts/Lalezar/Lalezar-Regular.ttf) format('truetype');
+		src: url('../Fonts/Lalezar/Lalezar-Regular.ttf') format('truetype');
 		font-style: normal;
 		font-weight: 400;
 	}
