@@ -3,14 +3,13 @@ const Order = require('../models/Order');
 const User = require('../models/Users');
 const axios = require('axios');
 const moment = require('moment-jalali');
-const { version } = require('mongoose');
 
 // create a transaction gateway.
 const transactionGatewayController = async (req, res, next) => {
 	try {
-		const order = await Order.findById(req.body.order_id).populate('products');
 		const user = await User.findById(req.user.id);
-		const amount = order.totalPrice;
+		const basket = user.basket;
+		const amount = user.basket.totalPrice;
 		const description = req.body.description;
 
 		const zarinpal_request_url = 'https://api.zarinpal.com/pg/v4/payment/request.json';
@@ -39,14 +38,13 @@ const transactionGatewayController = async (req, res, next) => {
 			user: user._id,
 			description,
 			authority,
-			order_id: order._id
 		});
 		if (code == 100 && authority) {
 			return res.status(200).json({
 				statusCode: 200,
 				data: {
 					code,
-					order: order.products,
+					basket: basket,
 					gatewayURL: `${zarinpalGatewayURL}/${authority}`
 				}
 			});
@@ -88,11 +86,25 @@ const verifyTransactionController = async (req, res, next) => {
 					}
 				}
 			);
-			await Order.findByIdAndUpdate(transaction.order_id, { paymentStatus: true }, { new: true });
+			const user = await User.findById(req.user.id)
+			const confirmedOrder = new Order(
+				{
+					userId: user._id,
+					postalCode: user.postalCode,
+					address: user.address,
+					products: user.basket.products,
+					totalPrice: user.baslet.totalPrice,
+					paymentStatus: true,
+					status: 'pending...'
+				}
+			);
+			const savedOrder = await confirmedOrder.save();
+			const updatedTransaction = await Transaction.findOneAndUpdate(authority, order_id = savedOrder._id)
 			return res.status(200).json({
 				statusCode: 200,
 				data: {
-					message: 'Your payment has been successfully completed'
+					message: 'Your payment has been successfully completed',
+					transaction: updatedTransaction
 				}
 			});
 		}
