@@ -37,7 +37,7 @@ const transactionGatewayController = async (req, res, next) => {
 			amount,
 			user: user._id,
 			description,
-			authority,
+			authority
 		});
 		if (code == 100 && authority) {
 			return res.status(200).json({
@@ -86,20 +86,21 @@ const verifyTransactionController = async (req, res, next) => {
 					}
 				}
 			);
-			const user = await User.findById(req.user.id)
-			const confirmedOrder = new Order(
-				{
-					userId: user._id,
-					postalCode: user.postalCode,
-					address: user.address,
-					products: user.basket.products,
-					totalPrice: user.baslet.totalPrice,
-					paymentStatus: true,
-					status: 'pending...'
-				}
-			);
+			const user = await User.findById(req.user.id);
+			const confirmedOrder = new Order({
+				userId: user._id,
+				postalCode: user.postalCode,
+				address: user.address,
+				products: user.basket.products,
+				totalPrice: user.basket.totalPrice,
+				paymentStatus: true,
+				status: 'pending...'
+			});
 			const savedOrder = await confirmedOrder.save();
-			const updatedTransaction = await Transaction.findOneAndUpdate(authority, order_id = savedOrder._id)
+			const updatedTransaction = await Transaction.findOneAndUpdate(
+				authority,
+				(order_id = savedOrder._id)
+			);
 			return res.status(200).json({
 				statusCode: 200,
 				data: {
