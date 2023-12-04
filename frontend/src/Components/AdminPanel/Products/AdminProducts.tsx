@@ -124,7 +124,7 @@ const AdminProducts = () => {
 									<td className="tracking-tighter sm:text-base">{product.productName}</td>
 									<td>{product.category}</td>
 									<td className="tracking-tighter sm:text-base">
-										{product.finalPrice} <span className="text-red-500 mr-1">تومان</span>
+										{product.finalPrice.toLocaleString('fa-IR')} <span className="text-red-500 mr-1">تومان</span>
 									</td>
 								</tr>
 						  ))
@@ -147,7 +147,7 @@ const AdminProducts = () => {
 									<td className="tracking-tighter sm:text-base">{product.productName}</td>
 									<td>{product.category}</td>
 									<td className="tracking-tighter">
-										{product.finalPrice} <span className="text-red-500 mr-1">تومان</span>
+										{product.finalPrice.toLocaleString('fa-IR')} <span className="text-red-500 mr-1">تومان</span>
 									</td>
 								</tr>
 						  ))
@@ -169,7 +169,7 @@ const AdminProducts = () => {
 									<td className="tracking-tighter sm:text-base">{product.productName}</td>
 									<td>{product.category}</td>
 									<td className="tracking-tighter">
-										{product.finalPrice} <span className="text-red-500 mr-1">تومان</span>
+										{product.finalPrice.toLocaleString('fa-IR')} <span className="text-red-500 mr-1">تومان</span>
 									</td>
 								</tr>
 						  ))}

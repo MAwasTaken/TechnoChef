@@ -12,17 +12,19 @@ import PanelPrivate from './Components/Private/PanelPrivate';
 // Admin Panel
 import AdminPanel from './Pages/AdminPanel/AdminPanel';
 import AdminPrivate from './Components/Private/AdminPrivate';
-
-// user panel
-import UserPanel from './Pages/UserPanel/UserPanel';
+import AdminCategories from './Components/AdminPanel/Categories/AdminCategories';
 import AdminProducts from './Components/AdminPanel/Products/AdminProducts';
 import CreateNewProduct from './Components/AdminPanel/Products/CreateNewProduct/CreateNewProduct';
 import SingleProduct from './Components/AdminPanel/Products/SingleProduct/SingleProduct';
-import AboutUs from './Pages/AboutUs/AboutUs';
 import AdminUsers from './Components/AdminPanel/Users/AdminUsers';
+import SingleUser from './Components/AdminPanel/Users/SingleUser/SingleUser';
+import CreateNewCategory from './Components/AdminPanel/Categories/CreateNewCategory/CreateNewCategory';
+
+// user panel
+import UserPanel from './Pages/UserPanel/UserPanel';
+import AboutUs from './Pages/AboutUs/AboutUs';
 import PanelEditUser from './Components/Panel/PanelEditUser/PanelEditUser';
 import PanelBasket from './Components/Panel/PanelBasket/PanelBasket';
-import SingleUser from './Components/AdminPanel/Users/SingleUser/SingleUser';
 
 const routes = [
 	{ path: '/', element: <Index /> },
@@ -71,7 +73,10 @@ const routes = [
 				element: <SingleProduct />
 			},
 			{ path: 'users', element: <AdminUsers /> },
-			{ path: 'users/:userName', element: <SingleUser /> }
+			{ path: 'users/:userName', element: <SingleUser /> },
+			{ path: 'categories', element: <AdminCategories /> },
+			{ path: 'categories/:href', element: <AdminCategories /> },
+			{ path: 'categories/create', element: <CreateNewCategory /> }
 		]
 	},
 	{ path: '*', element: <UnknownPage /> }

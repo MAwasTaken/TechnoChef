@@ -40,9 +40,15 @@ const CategoryItem: React.FC<CategoryItemProps> = (category) => {
 				<div className="absolute -right-2 bottom-0 h-[65px] w-[65px] md:-right-3 md:h-[120px] md:w-[120px]">
 					<img
 						className="h-full w-full object-scale-down"
-						src={`https://45.159.150.221:3000/${category.image}`}
+						src={
+							category.image?.includes('public')
+								? `https://45.159.150.221:3000/${category.image}`
+								: category.image?.includes('http://localhost:5173' || 'https://www.technoshef.com')
+								? `${category.image}`
+								: '/Images/Products/p1.png'
+						}
 						alt="category image"
-            loading="lazy"
+						loading="lazy"
 					/>
 				</div>
 			</Link>

@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 // icons
 import { BsBoxSeam, BsPeople } from 'react-icons/bs';
+import { BiCategory } from 'react-icons/bi';
 
 // admin side
 const AdminSide: React.FC<{
@@ -55,6 +56,21 @@ const AdminSide: React.FC<{
 						>
 							<BsPeople className="text-red-500" />
 							کاربران
+						</NavLink>
+					</li>
+					<li className="text-center" onClick={() => setIsMenuShown(false)}>
+						<NavLink
+							to="categories"
+							className={({ isActive }) =>
+								`flex justify-center items-center tracking-tighter gap-x-2 py-1 rounded  ${
+									isActive
+										? 'bg-DarkYellow/50 hover:bg-DarkYellow/50 font-semibold'
+										: 'hover:bg-Info/50'
+								} `
+							}
+						>
+							<BiCategory className="text-red-500" />
+							دسته‌بندی‌ ها
 						</NavLink>
 					</li>
 				</ul>

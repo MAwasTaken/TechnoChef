@@ -1,16 +1,18 @@
 // react
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // icons
-import { FaUsers } from 'react-icons/fa';
+import { BsPeople } from 'react-icons/bs';
 
 // react query
 import useGetAllUsers from '../../../Hooks/useGetAllUsers';
+
+// types
 import { user } from '../../../Types/User.types';
 
 // admin users
-const AdminUsers = () => {
+const AdminUsers: React.FC = () => {
 	// navigator
 	const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ const AdminUsers = () => {
 			{/* header */}
 			<h3 className="flex justify-between items-center border-b border-Info pb-3">
 				<span className="flex select-none transition-colors items-center gap-x-2 text-xl md:text-2xl lg:text-3xl font-Lalezar tracking-wider">
-					<FaUsers className="text-red-500" />
+					<BsPeople className="text-red-500" />
 					کاربران
 				</span>
 			</h3>

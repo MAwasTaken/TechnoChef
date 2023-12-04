@@ -119,7 +119,7 @@ const PanelBasket: React.FC = () => {
 											{product.productId.productName}
 										</td>
 										<td className="tracking-tighter sm:text-base">
-											{product.productId.finalPrice}{' '}
+											{product.productId.finalPrice.toLocaleString('fa-IR')}{' '}
 											<span className="text-red-500 mr-1">تومان</span>
 										</td>
 										<td className="tracking-tighter sm:text-base">

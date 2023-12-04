@@ -17,11 +17,12 @@ import useGetMe from '../../Hooks/useGetMe';
 import { AiOutlineUser } from 'react-icons/ai';
 import { FiEdit } from 'react-icons/fi';
 import { BsBasket, BsBoxSeam, BsPeople } from 'react-icons/bs';
+import { BiCategory } from 'react-icons/bi';
+import { MdProductionQuantityLimits } from 'react-icons/md';
 
 // react spinner
 import { BeatLoader } from 'react-spinners';
 import { reset } from '../../Services/Redux/Slices/PriceSort';
-import { MdProductionQuantityLimits } from 'react-icons/md';
 
 // header
 const Header: React.FC = () => {
@@ -185,6 +186,15 @@ const Header: React.FC = () => {
 						>
 							<BsPeople className="text-red-500" />
 							کاربران
+						</Link>
+					</li>
+					<li className="text-center" onClick={() => setIsAdminMenuShown(false)}>
+						<Link
+							to="/admin/categories"
+							className="py-1 rounded hover:bg-Info/50 tracking-tighter flex gap-x-2 justify-center items-center"
+						>
+							<BiCategory className="text-red-500" />
+              دسته‌بندی ها
 						</Link>
 					</li>
 				</ul>

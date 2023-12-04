@@ -22,7 +22,7 @@ import { BeatLoader } from 'react-spinners';
 import { newUserInputs } from '../../../../Types/NewUserInputs.types';
 
 // icons
-import { BsBoxSeam } from 'react-icons/bs';
+import { BsBasket, BsBoxSeam } from 'react-icons/bs';
 import { BiArrowBack } from 'react-icons/bi';
 import {
 	HiAtSymbol,
@@ -44,6 +44,12 @@ const SingleUser: React.FC = () => {
 	// navigator
 	const navigate = useNavigate();
 
+	// user basket
+	const [basket, setBasket] = useState<any>();
+
+	// user orders
+	const [orders, setOrders] = useState<any>();
+
 	// spinner handlers
 	const [isFormFetching, setIsFormFetching] = useState<boolean>(false);
 	const [isFormFetching2, setIsFormFetching2] = useState<boolean>(false);
@@ -55,37 +61,53 @@ const SingleUser: React.FC = () => {
 
 	useEffect(() => {
 		getSingleUser(String(userName)).then((res) => {
+			setBasket(res.data.userInfo.basket);
+			setOrders(res.data.orders);
+
+			console.log(res.data.orders);
+
 			reset({
-				firstName: res.data.firstName,
-				lastName: res.data.lastName,
-				phoneNumber: res.data.phoneNumber,
-				email: res.data.email,
-				username: res.data.username,
-				nationalCode: res.data.nationalCode,
-				postalCode: res.data.postalCode,
-				address: res.data.address,
-				createdAt: `${res.data.createdAt.slice(0, 10)} - ${res.data.createdAt.slice(11, 19)}`,
-				updatedAt: `${res.data.updatedAt.slice(0, 10)} - ${res.data.updatedAt.slice(11, 19)}`,
-				emailVerified: res.data.emailVerified === false ? 'خیر' : 'بله',
-				isAdmin: res.data.isAdmin === false ? 'خیر' : 'بله'
+				firstName: res.data.userInfo.firstName,
+				lastName: res.data.userInfo.lastName,
+				phoneNumber: res.data.userInfo.phoneNumber,
+				email: res.data.userInfo.email,
+				username: res.data.userInfo.username,
+				nationalCode: res.data.userInfo.nationalCode,
+				postalCode: res.data.userInfo.postalCode,
+				address: res.data.userInfo.address,
+				createdAt: `${res.data.userInfo.createdAt.slice(
+					0,
+					10
+				)} - ${res.data.userInfo.createdAt.slice(11, 19)}`,
+				updatedAt: `${res.data.userInfo.updatedAt.slice(
+					0,
+					10
+				)} - ${res.data.userInfo.updatedAt.slice(11, 19)}`,
+				emailVerified: res.data.userInfo.emailVerified === false ? 'خیر' : 'بله',
+				isAdmin: res.data.userInfo.isAdmin === false ? 'خیر' : 'بله'
 			});
 		});
 	}, []);
 
 	// edit user handler
-	const editUserHandler: SubmitHandler<newUserInputs> = (formData) => {
+	const editUserHandler: SubmitHandler<any> = (formData) => {
 		// set is fetching to true
 		setIsFormFetching(true);
 
+		delete formData.createdAt;
+		delete formData.updatedAt;
+		delete formData.emailVerified;
+		formData.isAdmin === 'بله' ? (formData.isAdmin = true) : (formData.isAdmin = false);
+
 		putSingleUser(formData)
 			.then(() =>
-				toast.success('ویرایش اطلاعات کاربری با موفقیت انجام شد ✅', {
+				toast.success('ویرایش اطلاعات با موفقیت انجام شد ✅', {
 					onOpen: () => setIsFormFetching(false),
 					onClose: () => location.reload()
 				})
 			)
 			.catch(() =>
-				toast.error('ویرایش اطلاعات کاربری با مشکل مواجه شد !', {
+				toast.error('ویرایش اطلاعات با مشکل مواجه شد !', {
 					onClose: () => setIsFormFetching(false)
 				})
 			);
@@ -317,6 +339,97 @@ const SingleUser: React.FC = () => {
 							</button>
 						</div>
 					</form>
+					{/* header */}
+					<h4 className="flex justify-between items-center py-3 mt-10">
+						<span className="flex select-none transition-colors items-center gap-x-2 text-lg md:text-xl lg:text-2xl font-Lalezar tracking-wider">
+							<BsBasket className="text-red-500" />
+							سفارشات کاربر
+						</span>
+						<span className="font-Vazir text-sm md:text-lg lg:text-xl tracking-tight mx-2 select-none font-bold text-slate-600">
+							<span className="text-red-600"> تعداد: </span>
+							{orders?.length.toLocaleString('fa-IR')}
+						</span>
+					</h4>
+					<table className="table-auto border md:border-2 border-Info w-full text-center">
+						<thead className="border-b-2 h-10 border-Info">
+							<tr className="">
+								<td className="sm:text-sm font-black text-Dark/70 h-10">ردیف</td>
+								<td className="sm:text-sm font-black text-Dark/70 h-10">تاریخ</td>
+								<td className="sm:text-sm font-black text-Dark/70 h-10">وضعیت</td>
+								<td className="sm:text-sm font-black text-Dark/70 h-10 border-l border-l-Info">
+									قیمت کل
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							{orders?.map((order: any, index: number) => (
+								<tr
+									key={index}
+									className="border-b border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer h-20"
+									onClick={() => navigate(`/admin/orders/${String(order._id)}`)}
+								>
+									<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
+									<td className="tracking-tighter sm:text-base">{order.updatedAt.slice(0, 16)}</td>
+									<td className="tracking-tighter sm:text-base">
+										{order.status === 'pending' ? (
+											<span className="bg-yellow-400 px-5 font-bold py-1 rounded-full">انتظار</span>
+										) : null}
+									</td>
+									<td className="tracking-tighter sm:text-base">
+										{order.totalPrice.toLocaleString('fa-IR')}{' '}
+										<span className="text-red-500 mr-1">تومان</span>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+					{/* header */}
+					<h4 className="flex justify-between items-center py-3 mt-10">
+						<span className="flex select-none transition-colors items-center gap-x-2 text-lg md:text-xl lg:text-2xl font-Lalezar tracking-wider">
+							<BsBasket className="text-red-500" />
+							سبدخرید کاربر
+						</span>
+						<span className="font-Vazir text-sm md:text-lg lg:text-xl tracking-tight mx-2 select-none font-bold text-slate-600">
+							{basket?.totalPrice.toLocaleString('fa-IR')}
+							<span className="text-red-600"> تومان </span>
+						</span>
+					</h4>
+					<table className="table-auto border md:border-2 border-Info w-full text-center">
+						<thead className="border-b-2 h-10 border-Info">
+							<tr className="">
+								<td className="sm:text-sm font-black text-Dark/70 h-10">تعداد</td>
+								<td className="sm:text-sm font-black text-Dark/70 h-10">تصویر</td>
+								<td className="sm:text-sm font-black text-Dark/70 h-10">عنوان</td>
+								<td className="sm:text-sm font-black text-Dark/70 h-10 border-l border-l-Info">
+									قیمت
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							{basket?.products.map((product: any, index: number) => (
+								<tr
+									key={index}
+									className="border-b border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer"
+									onClick={() => navigate(`/products/${String(product.productId.shortName)}`)}
+								>
+									<td className="font-Lalezar text-base lg:text-lg">{product.quantity}</td>
+									<td>
+										<img
+											className="w-32 h-32 object-contain mx-auto"
+											src={`https://45.159.150.221:3000/${product.productId?.cover}`}
+											alt="تصویر محصول"
+											loading="lazy"
+										/>
+									</td>
+									<td className="tracking-tighter sm:text-base">{product.productId.productName}</td>
+									<td className="tracking-tighter sm:text-base">
+										{product.productId.finalPrice.toLocaleString('fa-IR')}{' '}
+										<span className="text-red-500 mr-1">تومان</span>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
 				</section>
 			</main>
 			{/* react toastify container */}
