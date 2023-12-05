@@ -132,7 +132,7 @@ const SingleProduct = () => {
 			})
 			.catch((err) =>
 				toast.error(`ویرایش محصول انجام نشد! ❌‍`, {
-					// onClose: () => location.reload()
+					onClose: () => location.reload()
 				})
 			)
 			.finally(() => setIsFormFetching(false));

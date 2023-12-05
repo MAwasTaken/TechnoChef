@@ -22,9 +22,6 @@ import { ToastContainer, toast } from 'react-toastify';
 
 // create new category
 const CreateNewCategory: React.FC = () => {
-	// navigator
-	const navigate = useNavigate();
-
 	// category cover
 	const [image, setImage] = useState<string>();
 
@@ -59,7 +56,7 @@ const CreateNewCategory: React.FC = () => {
 		postCreateCategory(data)
 			.then((res) => {
 				toast.success(`دسته‌بندی ${res.data.Name} با موفقیت افزوده شد ✅‍`, {
-					onClose: () => navigate('/admin/categories')
+					onClose: () => location.assign('/admin/categories')
 				});
 			})
 			.catch(() => toast.error(`افزودن دسته‌بندی انجام نشد! ❌‍`))
