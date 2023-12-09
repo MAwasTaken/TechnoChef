@@ -37,18 +37,15 @@ const updateCategoryController = async (req, res, next) => {
 		//validate input
 		await validation.validateAsync(req.body);
 
-		const oldCategory = await Category.findById(req.params.id);
-
 		// find and update By Id
 		const updatedCategory = await Category.findByIdAndUpdate(
 			req.params.id,
 			{
 				$set: req.body,
-				image: req.file.path
+				image: req.file?.path
 			},
 			{ new: true }
 		);
-		if (oldCategory.image) fs.unlinkSync(oldCategory.image);
 
 		// set the response
 		res.status(200).json(updatedCategory);
@@ -56,7 +53,8 @@ const updateCategoryController = async (req, res, next) => {
 		// return the err if there is one
 		res.status(400).json(err);
 
-		if (req.file) fs.unlinkSync(req.file.path);
+		if (req.file) fs.unlink(req.file.path);
+		console.log(err);
 		req.err = err;
 		next();
 	}
