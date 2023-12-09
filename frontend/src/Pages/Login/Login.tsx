@@ -189,7 +189,7 @@ const Login: React.FC = () => {
 								<span className="md:text-xs">رمزعبور خود را فراموش کرده‌اید؟</span>
 								<Link
 									className="text-blue-600 tracking-tight font-bold hover:text-blue-700"
-									to="/signup"
+									to="/reset-password"
 								>
 									بازیابی رمزعبور
 								</Link>
@@ -204,7 +204,7 @@ const Login: React.FC = () => {
 							</section>
 							{/* submit button */}
 							<button
-								// disabled={!(isRecaptcha && isFormReady)}
+								disabled={!(isRecaptcha && isFormReady)}
 								className="font-Lalezar mx-auto mt-2 md:h-11 h-9 from-LightYellow to-DarkYellow flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-base shadow-md transition-all hover:bg-gradient-to-t md:mt-4 md:w-[150px] md:p-2 md:text-lg disabled:bg-gray-400"
 								type="submit"
 							>

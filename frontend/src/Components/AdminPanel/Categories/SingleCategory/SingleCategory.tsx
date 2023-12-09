@@ -86,19 +86,15 @@ const SingleCategory: React.FC = () => {
 			? data.append('image', formData.image)
 			: data.append('image', formData.image[0]);
 
-		for (var [key, value] of data.entries()) {
-			console.log(key, value);
-		}
-
 		putCategory(categoryID, data)
 			.then(() => {
 				toast.success(`دسته‌بندی ${getValues('Name')} با موفقیت ویرایش شد ✅‍`, {
-					onClose: () => location.assign('/admin/products')
+					onClose: () => location.assign('/admin/categories')
 				});
 			})
 			.catch(() =>
 				toast.error(`ویرایش دسته‌بندی انجام نشد! ❌‍`, {
-					// onClose: () => location.reload()
+					onClose: () => location.reload()
 				})
 			)
 			.finally(() => setIsFormFetching(false));
