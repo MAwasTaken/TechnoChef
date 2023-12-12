@@ -6,7 +6,7 @@ const sendValidateUserEmail = async (req, res, next) => {
 	try {
 		const verificationCode = new VerificationCodeDB({
 			user_id: req.user.id,
-			verificationCode: Math.round(Math.random() * 10000)
+			verificationCode: Math.round(Math.floor(1000 + Math.random() * 9000))
 		});
 
 		transporter
