@@ -5,6 +5,8 @@ import Login from './Pages/Login/Login';
 import Signup from './Pages/Signup/Signup';
 import Products from './Pages/Products/products';
 import ProductDetails from './Pages/Product details/ProductDetail';
+import ResetPassword from './Pages/ResetPassword/ResetPassword';
+import ChangePassword from './Components/ChangePassword/ChangePassword';
 
 // private routes
 import PanelPrivate from './Components/Private/PanelPrivate';
@@ -33,6 +35,8 @@ const routes = [
 	{ path: '/products/:shortName', element: <ProductDetails /> },
 	{ path: '/login', element: <Login /> },
 	{ path: '/signup', element: <Signup /> },
+	{ path: '/reset-password', element: <ResetPassword /> },
+	{ path: '/reset-password/:jwtToken', element: <ChangePassword /> },
 	{ path: '/about-us', element: <AboutUs /> },
 
 	{

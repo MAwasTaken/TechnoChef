@@ -64,8 +64,6 @@ const SingleUser: React.FC = () => {
 			setBasket(res.data.userInfo.basket);
 			setOrders(res.data.orders);
 
-			console.log(res.data.orders);
-
 			reset({
 				firstName: res.data.userInfo.firstName,
 				lastName: res.data.userInfo.lastName,

@@ -194,6 +194,7 @@ export const ProductDetailsBox: React.FC<ProductProps> = ({
 								) : null}
 								{!isFormFetching ? (
 									<button
+										disabled={user.isAdmin}
 										onClick={addProductToBasket}
 										className="font-Lalezar from-LightYellow to-DarkYellow flex w-24 items-center justify-center rounded-lg bg-gradient-to-r p-1.5 text-[10px] tracking-tighter shadow-md transition-all hover:bg-gradient-to-t md:w-[150px] md:p-2 md:text-lg"
 									>
@@ -223,6 +224,7 @@ export const ProductDetailsBox: React.FC<ProductProps> = ({
 				) : null}
 				{!isFormFetching ? (
 					<button
+						disabled={user.isAdmin}
 						onClick={addProductToBasket}
 						className="flex justify-center items-center gap-x-1 bg-gradient-to-r from-LightYellow to-DarkYellow hover:bg-gradient-to-l transition-colors duration-500 rounded-md px-2 py-1"
 					>
