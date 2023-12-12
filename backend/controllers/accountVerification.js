@@ -48,7 +48,7 @@ const validateUserByCode = async (req, res, next) => {
 
 	if (inputCode == verifyCode?.verificationCode) {
 		try {
-			await User.findByIdAndUpdate(req.body.id, { $set: { emailVerified: true } }, { new: true });
+			await User.findByIdAndUpdate(req.user.id, { $set: { emailVerified: true } }, { new: true });
 		} catch (err) {
 			res.status(400).json(err);
 			req.err = err;
