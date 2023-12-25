@@ -41,8 +41,7 @@ const updateCategoryController = async (req, res, next) => {
 		const updatedCategory = await Category.findByIdAndUpdate(
 			req.params.id,
 			{
-				$set: req.body,
-				image: req.file?.path
+				$set: { ...req.body, image: req.file?.path || ' ' }
 			},
 			{ new: true }
 		);

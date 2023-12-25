@@ -23,7 +23,7 @@ const transactionGatewayController = async (req, res, next) => {
 				email: user?.email || 'example@domain.com',
 				mobile: user?.phoneNumber
 			},
-			callback_url: 'http://localhost:3000/api/transactions/verify'
+			callback_url: 'http://localhost:5173/check-payment/'
 		};
 
 		const transactionRequestResult = await axios
@@ -35,7 +35,7 @@ const transactionGatewayController = async (req, res, next) => {
 		await Transaction.create({
 			transactionDate: moment().format('jYYYYjMMjDD-HH:mm'),
 			amount,
-			user: user._id,
+			user_id: user._id,
 			description,
 			authority
 		});
@@ -63,30 +63,22 @@ const verifyTransactionController = async (req, res, next) => {
 		const { Authority: authority } = req.query;
 		const verifyURL = 'https://api.zarinpal.com/pg/v4/payment/verify.json';
 		const transaction = await Transaction.findOne({ authority });
+
 		if (!transaction)
 			return res.status(404).json({ massage: 'Pending payment transaction not found.' });
 		if (transaction.verify)
-			return res.status(400).json({ massage: 'The desired transaction has already been paid' });
+			return res.status(204).json({ massage: 'The desired transaction has already been paid' });
 
-		const verifyBody = JSON.stringify({
+		const verifyBody = {
 			authority,
 			amount: transaction.amount,
 			merchant_id: process.env.ZARINPAL_MERCHANTID
-		});
+		};
 
 		const verifyResult = await axios.post(verifyURL, verifyBody).then((res) => res.data);
+
 		if (verifyResult.data.code == 100) {
-			await Transaction.updateOne(
-				{ authority },
-				{
-					$set: {
-						refID: verifyResult.data.ref_id,
-						card_pan: verifyResult.data.ref_pan,
-						verify: true
-					}
-				}
-			);
-			const user = await User.findById(req.user.id);
+			const user = await User.findById(transaction.user_id);
 			const confirmedOrder = new Order({
 				userId: user._id,
 				postalCode: user.postalCode,
@@ -96,16 +88,34 @@ const verifyTransactionController = async (req, res, next) => {
 				paymentStatus: true,
 				status: 'pending...'
 			});
+
 			const savedOrder = await confirmedOrder.save();
-			const updatedTransaction = await Transaction.findOneAndUpdate(
-				authority,
-				(order_id = savedOrder._id)
+			await Transaction.findOneAndUpdate(
+				{ authority },
+				{
+					$set: {
+						refID: verifyResult.data.ref_id,
+						card_pan: verifyResult.data.ref_pan,
+						verify: true,
+						order_id: savedOrder._id
+					}
+				},
+				{ new: true }
 			);
+
 			return res.status(200).json({
 				statusCode: 200,
 				data: {
 					message: 'Your payment has been successfully completed',
-					transaction: updatedTransaction
+					transaction: verifyResult
+				}
+			});
+		} else {
+			return res.status(502).json({
+				statusCode: 502,
+				data: {
+					message: 'something went wrong.',
+					transaction: verifyResult
 				}
 			});
 		}
