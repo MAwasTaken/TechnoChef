@@ -78,7 +78,7 @@ const verifyTransactionController = async (req, res, next) => {
 		const verifyResult = await axios.post(verifyURL, verifyBody).then((res) => res.data);
 
 		if (verifyResult.data.code == 100) {
-			const user = await User.findById(transaction.username);
+			const user = await User.findOne({username : transaction.username});
 			const confirmedOrder = new Order({
 				username: user.username,
 				postalCode: user.postalCode,
