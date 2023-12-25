@@ -23,7 +23,11 @@ const sendResetPasswordEmailController = async (req, res, next) => {
 				to: user.email,
 				subject: 'Technoshef reset Password link', // Subject line
 				text: `your reset password link is : http://www.technoshef.com/reset-password/${resPassJWT}`, // plain text body
-				html: `<h1>your verification link is : http://www.technoshef.com/reset-password/${resPassJWT}<h1>` // html body
+				html: `<h3 style="font-size: 24px; color: #000000;">بازگردانی رمز عبور</h3>
+				<p style="font-size: 16px; color: #000000;">کاربر محترم تکنوشف شما میتوانید از طریق دکمه زیر برای بازیابی رمز عبور خود اقدام فرمایید</p>
+				<a href="http://www.technoshef.com/reset-password/${resPassJWT}" style="display: inline-block; background-color: #FFCC00; color: #000000; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">بازیابی</a>
+				<p style="font-size: 16px; color: #000000;">در صورتی که اقدامی برای تغییر رمز عبور خود در وبسایت تکنوشف نکرده اید این ایمیل را نادیده بگیرید</p>
+				<p>با تشکر</p>` // html body
 			})
 			.then(async (info, err) => {
 				if (err) {
