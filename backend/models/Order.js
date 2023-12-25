@@ -5,7 +5,7 @@ const ObjectId = mongoose.Schema.ObjectId;
 // create the mongoose schema
 const orderSchema = mongoose.Schema(
 	{
-		userId: { type: ObjectId, ref: 'Users' },
+		username: { type: String },
 		postalCode: { type: String },
 		address: { type: String },
 		products: [

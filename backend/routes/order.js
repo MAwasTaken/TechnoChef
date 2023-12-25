@@ -11,8 +11,8 @@ router.put('/:id', controller.updateOrderController);
 // delete Order
 router.delete('/:id', controller.deleteOrderController);
 
-// get Order by User Id
-router.get('/getByUser/:userId', controller.getOrderByUserIdController);
+// get Order by Username
+router.get('/getByUser/:username', controller.getOrderByUsernameController);
 
 // get Order By Id
 router.get('/getById/:id', controller.getOrderByIdController);

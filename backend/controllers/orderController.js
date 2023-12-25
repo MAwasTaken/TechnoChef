@@ -73,14 +73,14 @@ const deleteOrderController = async (req, res, next) => {
 	}
 };
 
-// get Order By User Id
-const getOrderByUserIdController = async (req, res, next) => {
+// get Order By Username
+const getOrderByUsernameController = async (req, res, next) => {
 	try {
-		if (!req.params.id)
+		if (!req.params.username)
 			return res.status(400).json({ massage: 'the request needs an userId params.' });
 
 		// find the card By the userID
-		const orders = await Order.find({ userId: req.params.userId });
+		const orders = await Order.find({ username: req.params.username });
 
 		// set the response
 		res.status(200).json(orders);
@@ -133,5 +133,5 @@ module.exports = {
 	deleteOrderController,
 	getAllOrdersController,
 	getOrderByIdController,
-	getOrderByUserIdController
+	getOrderByUsernameController
 };
