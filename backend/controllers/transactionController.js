@@ -23,7 +23,7 @@ const transactionGatewayController = async (req, res, next) => {
 				email: user?.email || 'example@domain.com',
 				mobile: user?.phoneNumber
 			},
-			callback_url: 'http://localhost:5173/check-payment/'
+			callback_url: 'http://localhost:5173/orders'
 		};
 
 		const transactionRequestResult = await axios
