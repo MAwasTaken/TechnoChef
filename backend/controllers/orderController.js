@@ -114,7 +114,7 @@ const getOrderByIdController = async (req, res, next) => {
 const getAllOrdersController = async (req, res, next) => {
 	try {
 		// find all the orders saved in DB
-		const orders = await Order.find();
+		const orders = await Order.find().sort({ createdAt: -1 });
 
 		// set the response
 		res.status(200).json(orders);
