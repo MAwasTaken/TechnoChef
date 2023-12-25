@@ -117,7 +117,7 @@ const Footer: React.FC = () => {
 						<span className="hidden sm:block">آدرس:</span>
 						<div className="flex flex-col">
 							<span>
-								تهران٫ شهرک‌غرب٫ بلوار دریا٫ نرسیده به چهار‌راه مسجد٫ خیابان رامشه٫ پلاک٫25 واحد2
+								تهران٫ شهرک‌غرب٫ بلوار دریا٫ نرسیده به چهار‌راه مسجد٫ خیابان رامشه٫ پلاک٫24 واحد2
 							</span>
 						</div>
 					</div>
