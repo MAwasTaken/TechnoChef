@@ -22,8 +22,8 @@ const sendResetPasswordEmailController = async (req, res, next) => {
 				from: process.env.VERIFICATION_EMAIL,
 				to: user.email,
 				subject: 'Technoshef reset Password link', // Subject line
-				text: `your reset password link is : https://www.technoshef.com/reset-password/?token=${resPassJWT}`, // plain text body
-				html: `<h1>your verification link is : https://www.technoshef.com/reset-password/?token=${resPassJWT}<h1>` // html body
+				text: `your reset password link is : http://www.technoshef.com/reset-password/${resPassJWT}`, // plain text body
+				html: `<h1>your verification link is : http://www.technoshef.com/reset-password/${resPassJWT}<h1>` // html body
 			})
 			.then(async (info, err) => {
 				if (err) {
