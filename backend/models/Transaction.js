@@ -10,7 +10,7 @@ const transactionSchema = mongoose.Schema(
 		amount: { type: Number },
 		description: { type: String, default: 'for buying a product.' },
 		verify: { type: Boolean, default: false },
-		username: { type: ObjectId, ref: 'Users' },
+		username: { type: String, ref: 'Users' },
 		order_id: { type: ObjectId, ref: 'Order' },
 		refID: { type: String, default: undefined },
 		card_pan: { type: String, default: undefined },
