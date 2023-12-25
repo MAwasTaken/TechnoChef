@@ -6,7 +6,8 @@ import Signup from './Pages/Signup/Signup';
 import Products from './Pages/Products/products';
 import ProductDetails from './Pages/Product details/ProductDetail';
 import ResetPassword from './Pages/ResetPassword/ResetPassword';
-import ChangePassword from './Components/ChangePassword/ChangePassword';
+import ChangePassword from './Pages/ChangePassword/ChangePassword';
+import CheckPayment from './Pages/CheckPayment/CheckPayment';
 
 // private routes
 import PanelPrivate from './Components/Private/PanelPrivate';
@@ -38,6 +39,7 @@ const routes = [
 	{ path: '/reset-password', element: <ResetPassword /> },
 	{ path: '/reset-password/:jwtToken', element: <ChangePassword /> },
 	{ path: '/about-us', element: <AboutUs /> },
+	{ path: 'check-payment/*', element: <CheckPayment /> },
 
 	{
 		path: '/panel',

@@ -27,8 +27,8 @@ const postResetPasswordEmail = async (userEmail: string) =>
 
 // POST reset password
 const postResetPassword = async (jwtToken: string, newPassword: string) =>
-	axiosInstance.post(`/auth/resetPass/${jwtToken}`, newPassword);
-
+	axiosInstance.post(`/auth/resetPass/${jwtToken}`, { newPassword: newPassword });
+  
 // POST send verify email code
 const postSendVerifyCode = async () =>
 	axiosInstance.post('/auth/sendVerificationEmail', null, { withCredentials: true });

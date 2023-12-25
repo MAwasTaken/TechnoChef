@@ -20,6 +20,7 @@ import { BeatLoader } from 'react-spinners';
 // react toastify
 import { ToastContainer, toast } from 'react-toastify';
 import { deleteCategory, putCategory } from '../../../../Services/Axios/Requests/category';
+import { boolean } from 'yup';
 
 // single category
 const SingleCategory: React.FC = () => {
@@ -35,7 +36,7 @@ const SingleCategory: React.FC = () => {
 	const [gradientColor, setGradientColor] = useState<string>();
 
 	// category cover
-	const [image, setImage] = useState<string>();
+	const [image, setImage] = useState<any>();
 
 	// spinner handlers
 	const [isFormFetching, setIsFormFetching] = useState<boolean>(false);
@@ -71,7 +72,6 @@ const SingleCategory: React.FC = () => {
 		setIsFormFetching(true);
 
 		formData.shortName = formData.href;
-		formData.image = image;
 		formData.gradientColor = gradientColor;
 
 		const data = new FormData();
@@ -80,11 +80,7 @@ const SingleCategory: React.FC = () => {
 		data.append('shortName', String(formData.shortName));
 		data.append('href', String(formData.href));
 		data.append('gradientColor', String(formData.gradientColor));
-		image === ''
-			? data.append('image', '')
-			: typeof formData.image === 'string'
-			? data.append('image', formData.image)
-			: data.append('image', formData.image[0]);
+		formData.image.length ? data.append('image', formData.image[0]) : data.append('image', image);
 
 		putCategory(categoryID, data)
 			.then(() => {

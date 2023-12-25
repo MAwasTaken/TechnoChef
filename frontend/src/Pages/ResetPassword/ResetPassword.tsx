@@ -1,5 +1,5 @@
 // react
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 // components
@@ -19,6 +19,15 @@ import { postResetPasswordEmail } from '../../Services/Axios/Requests/auth';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 const ResetPassword: React.FC = () => {
+	// mounting side effects
+	useEffect(() => {
+		// change document title
+		document.title = `تکنو | Technoshef - بازیابی رمزعبور`;
+
+		// scroll to top when mounting
+		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+	}, []);
+
 	// navigator
 	const navigate = useNavigate();
 

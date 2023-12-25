@@ -1,18 +1,38 @@
-import React from 'react';
+// react
+import React, { useEffect } from 'react';
+
 // components
 import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
 import Services from '../../Components/BrandServices/Services';
-const AboutUs = () => {
+
+// about us
+const AboutUs: React.FC = () => {
+	// mounting side effects
+	useEffect(() => {
+		// change document title
+		document.title = 'تکنو | Technoshef - درباره ما';
+
+		// scroll to top when mounting
+		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+	}, []);
+
 	return (
 		<>
 			<Header />
 			<div className="container">
 				<main className="flex flex-col justify-center gap-y-10">
 					<section className="flex gap-x-10 flex-col items-center gap-y-4">
-						<img className='hidden md:block' src="./Images/AboutUs/aboutus.png" alt="" width="1200" />
+						<img
+							className="hidden md:block"
+							src="./Images/AboutUs/aboutus.png"
+							alt=""
+							width="1200"
+						/>
 						<div className="flex flex-col justify-center gap-y-7 text-center">
-							<h1 className="md:text-4xl text-2xl text-center font-bold">شرکت بازرگانی پارسیان سرو نیوساد</h1>
+							<h1 className="md:text-4xl text-2xl text-center font-bold">
+								شرکت بازرگانی پارسیان سرو نیوساد
+							</h1>
 							<p className="text-gray-800 md:leading-9 text-justify md:text-lg text-base leading-7">
 								شرکت بازرگانی لوازم خانگی پارسیان سرو نیوساد با برند تکنوشف بیش از یک دهه تجربه یکی
 								از شرکت های پیشگام در زمینه توزیع و فروش لوازم خانگی می باشد . این شرکت کوشش دارد با

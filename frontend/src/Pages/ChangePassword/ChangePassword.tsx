@@ -1,10 +1,10 @@
 // react
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 // components
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import Header from '../../Components/Header/Header';
+import Footer from '../../Components/Footer/Footer';
 
 // icons
 import { TbStatusChange } from 'react-icons/tb';
@@ -24,6 +24,15 @@ import { postResetPassword } from '../../Services/Axios/Requests/auth';
 
 // change password
 const ChangePassword: React.FC = () => {
+	// mounting side effects
+	useEffect(() => {
+		// change document title
+		document.title = `تکنو | Technoshef - تغییر رمزعبور`;
+
+		// scroll to top when mounting
+		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+	}, []);
+
 	// navigator
 	const navigate = useNavigate();
 
