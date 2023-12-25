@@ -95,7 +95,7 @@ const deleteCommentController = async (req, res, next) => {
 const getAllUserCommentsController = async (req, res, next) => {
 	try {
 		// find the comments of that user By Id
-		const userComments = await Comment.find({ user_Id: req.params.user_Id });
+		const userComments = await Comment.find({ username: req.params.username });
 
 		// set response
 		res.status(200).json(userComments);
@@ -128,11 +128,11 @@ const getOneCommentByIdController = async (req, res, next) => {
 // get all the comments of one product.
 const getCommentByProductController = async (req, res, next) => {
 	try {
-		if (!req.params.id)
+		if (!req.params.shortName)
 			return res.status(400).json({ massage: 'the request needs an product_Id params.' });
 
 		// find the comments of that product By Id
-		const userComments = await Comment.find({ product_Id: req.params.product_Id });
+		const userComments = await Comment.find({ shortName: req.params.shortName });
 
 		// set response
 		res.status(200).json(userComments);

@@ -1,5 +1,6 @@
 // dependency imports
 const Order = require('../models/Order');
+const Users = require('../models/Users');
 const validator = require('../validator/orderVAlidation');
 
 // create Order
@@ -73,17 +74,31 @@ const deleteOrderController = async (req, res, next) => {
 	}
 };
 
-// get Order By User Id
-const getOrderByUserIdController = async (req, res, next) => {
+// get Order By Username
+const getOrderByUsernameController = async (req, res, next) => {
 	try {
-		if (!req.params.id)
+		if (!req.params.username)
 			return res.status(400).json({ massage: 'the request needs an userId params.' });
 
 		// find the card By the userID
-		const orders = await Order.find({ userId: req.params.userId });
+		const orders = await Order.find({ username: req.params.username }).populate({
+			path: 'products.productId',
+			select: { __v: false, updatedAt: false, createdAt: false }
+		});
+
+		let result = [];
+		for (const order of orders) {
+			const user = await Users.findOne({ username: order.username }).select([
+				'-basket',
+				'-__v',
+				'-password'
+			]);
+			const { username, ...orderInfo } = order._doc;
+			result.push({ orderInfo, user });
+		}
 
 		// set the response
-		res.status(200).json(orders);
+		res.status(200).json(result);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
@@ -98,10 +113,21 @@ const getOrderByIdController = async (req, res, next) => {
 		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
 
 		// find the card By the userID
-		const orders = await Order.findById(req.params.id);
+		const order = await Order.findById(req.params.id).populate({
+			path: 'products.productId',
+			select: { __v: false, updatedAt: false, createdAt: false }
+		});
+
+		const user = await Users.findOne({ username: order.username }).select([
+			'-basket',
+			'-__v',
+			'-password'
+		]);
+		const { username, ...orderInfo } = order._doc;
+		const result = { orderInfo, user };
 
 		// set the response
-		res.status(200).json(orders);
+		res.status(200).json(result);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
@@ -114,10 +140,26 @@ const getOrderByIdController = async (req, res, next) => {
 const getAllOrdersController = async (req, res, next) => {
 	try {
 		// find all the orders saved in DB
-		const orders = await Order.find();
+		const orders = await Order.find()
+			.sort({ createdAt: -1 })
+			.populate({
+				path: 'products.productId',
+				select: { __v: false, updatedAt: false, createdAt: false }
+			});
+
+		let result = [];
+		for (const order of orders) {
+			const user = await Users.findOne({ username: order.username }).select([
+				'-basket',
+				'-__v',
+				'-password'
+			]);
+			const { username, ...orderInfo } = order._doc;
+			result.push({ orderInfo, user });
+		}
 
 		// set the response
-		res.status(200).json(orders);
+		res.status(200).json(result);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
@@ -133,5 +175,5 @@ module.exports = {
 	deleteOrderController,
 	getAllOrdersController,
 	getOrderByIdController,
-	getOrderByUserIdController
+	getOrderByUsernameController
 };

@@ -9,7 +9,7 @@ const transactionGatewayController = async (req, res, next) => {
 	try {
 		const user = await User.findById(req.user.id);
 		const basket = user.basket;
-		const amount = user.basket.totalPrice;
+		const amount = user.basket.totalPrice * 10;
 		const description = req.body.description;
 
 		const zarinpal_request_url = 'https://api.zarinpal.com/pg/v4/payment/request.json';
@@ -23,7 +23,7 @@ const transactionGatewayController = async (req, res, next) => {
 				email: user?.email || 'example@domain.com',
 				mobile: user?.phoneNumber
 			},
-			callback_url: 'http://localhost:5173/check-payment/'
+			callback_url: 'http://localhost:5173/panel/orders'
 		};
 
 		const transactionRequestResult = await axios
@@ -35,7 +35,7 @@ const transactionGatewayController = async (req, res, next) => {
 		await Transaction.create({
 			transactionDate: moment().format('jYYYYjMMjDD-HH:mm'),
 			amount,
-			user_id: user._id,
+			username: user.username,
 			description,
 			authority
 		});
@@ -78,15 +78,15 @@ const verifyTransactionController = async (req, res, next) => {
 		const verifyResult = await axios.post(verifyURL, verifyBody).then((res) => res.data);
 
 		if (verifyResult.data.code == 100) {
-			const user = await User.findById(transaction.user_id);
+			const user = await User.findOne({username : transaction.username});
 			const confirmedOrder = new Order({
-				userId: user._id,
+				username: user.username,
 				postalCode: user.postalCode,
 				address: user.address,
 				products: user.basket.products,
 				totalPrice: user.basket.totalPrice,
 				paymentStatus: true,
-				status: 'pending...'
+				status: 'درحال بررسی'
 			});
 
 			const savedOrder = await confirmedOrder.save();
@@ -95,7 +95,8 @@ const verifyTransactionController = async (req, res, next) => {
 				{
 					$set: {
 						refID: verifyResult.data.ref_id,
-						card_pan: verifyResult.data.ref_pan,
+						card_pan: verifyResult.data.card_pan,
+						fee: verifyResult.data.fee,
 						verify: true,
 						order_id: savedOrder._id
 					}

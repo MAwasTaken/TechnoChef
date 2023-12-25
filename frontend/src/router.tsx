@@ -22,6 +22,7 @@ import AdminUsers from './Components/AdminPanel/Users/AdminUsers';
 import SingleUser from './Components/AdminPanel/Users/SingleUser/SingleUser';
 import CreateNewCategory from './Components/AdminPanel/Categories/CreateNewCategory/CreateNewCategory';
 import SingleCategory from './Components/AdminPanel/Categories/SingleCategory/SingleCategory';
+import AllOrders from './Components/AdminPanel/AllOrders/AllOrders';
 
 // user panel
 import UserPanel from './Pages/UserPanel/UserPanel';
@@ -82,6 +83,7 @@ const routes = [
 				element: <SingleProduct />
 			},
 			{ path: 'users', element: <AdminUsers /> },
+			{ path: 'all-orders', element: <AllOrders /> },
 			{ path: 'users/:userName', element: <SingleUser /> },
 			{ path: 'categories', element: <AdminCategories /> },
 			{ path: 'categories/:href', element: <SingleCategory /> },
