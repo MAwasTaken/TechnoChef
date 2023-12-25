@@ -6,7 +6,7 @@ const ObjectId = mongoose.Schema.ObjectId;
 const transactionSchema = mongoose.Schema(
 	{
 		authority: { type: String },
-		transactionDate: { type: Number },
+		transactionDate: { type: String },
 		amount: { type: Number },
 		description: { type: String, default: 'for buying a product.' },
 		verify: { type: Boolean, default: false },
