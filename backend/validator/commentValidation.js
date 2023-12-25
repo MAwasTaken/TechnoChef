@@ -2,8 +2,8 @@ const joi = require('joi');
 
 // USER JOI MODEL  (A model for validation)
 const model = joi.object({
-	user_Id: joi.string(),
-	product_Id: joi.string(),
+	username: joi.string(),
+	shortName: joi.string(),
 	text: joi.string(),
 	valid: joi.boolean()
 });
