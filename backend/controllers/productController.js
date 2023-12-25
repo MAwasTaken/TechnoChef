@@ -213,9 +213,9 @@ const getAllProductsController = async (req, res, next) => {
 		let pages;
 		let sortValue = { createdAt: -1 };
 		if (qPriceSort)
-			sortValue: {
-				finalPrice: qPriceSort;
-			}
+			sortValue = {
+				finalPrice: qPriceSort
+			};
 
 		// if there is "new" query
 		if (qNew) {
