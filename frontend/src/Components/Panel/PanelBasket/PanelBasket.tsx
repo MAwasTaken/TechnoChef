@@ -1,24 +1,27 @@
 // react
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // react query
 import useGetBasket from '../../../Hooks/useGetBasket';
 
 // icons
-import { BiArrowBack } from 'react-icons/bi';
 import { BsBasket, BsTrash } from 'react-icons/bs';
+import { HiRss } from 'react-icons/hi';
+import { AiOutlineClear } from 'react-icons/ai';
 
 // axios
-import { putRemoveProduct } from '../../../Services/Axios/Requests/basket';
+import { deleteClearBasket, putRemoveProduct } from '../../../Services/Axios/Requests/basket';
+import { postGetway } from '../../../Services/Axios/Requests/payment';
 
 // react toastify
 import { ToastContainer, toast } from 'react-toastify';
 
 // react spinner
 import { BeatLoader } from 'react-spinners';
+
+// redux
 import { useSelector } from 'react-redux';
-import { HiRss } from 'react-icons/hi';
 
 // panel basket
 const PanelBasket: React.FC = () => {
@@ -34,6 +37,7 @@ const PanelBasket: React.FC = () => {
 	// spinner handler
 	const [isFormFetching, setIsFormFetching] = useState<boolean>(false);
 	const [isFormFetching2, setIsFormFetching2] = useState<boolean>(false);
+	const [isFormFetching3, setIsFormFetching3] = useState<boolean>(false);
 
 	// remove product
 	const removeProductFromBasket = (
@@ -65,8 +69,28 @@ const PanelBasket: React.FC = () => {
 				onClose: () => navigate(`/panel/${user.username}`)
 			});
 		} else {
-      
-    }
+			postGetway(`بابت ${data?.products.map((product: any) => `${product.productId.productName}`)}`)
+				.then((res) => {
+					toast.success('در حال هدایت به درگاه پرداخت ✅', {
+						onOpen: () => location.assign(res.data.data.gatewayURL)
+					});
+				})
+				.catch(() => toast.error('فرایند ارجاع به درگاه پرداخت با مشکل مواجه شد ❌'));
+		}
+	};
+
+	// clear basket
+	const clearBasketHandler = () => {
+		setIsFormFetching3(true);
+
+		deleteClearBasket()
+			.then(() => {
+				toast.success('سبدخرید با موفقیت پاکسازی شد ✅', {
+					onOpen: () => refetch()
+				});
+			})
+			.catch(() => toast.error('اشکالی در پاکسازی سبدخرید رخ داد ❌'))
+			.finally(() => setIsFormFetching3(false));
 	};
 
 	return (
@@ -78,6 +102,20 @@ const PanelBasket: React.FC = () => {
 						<BsBasket className="text-red-500" />
 						سبدخرید
 					</span>
+					<button
+						onClick={clearBasketHandler}
+						className="cursor-pointer md:border-2 border text- duration-500 transition-all border-Info p-1 md:p-1.5 border-dashed rounded-md hover:bg-Info/50 flex tracking-tighter gap-x-2 items-center justify-center"
+						disabled={isFormFetching3}
+					>
+						{isFormFetching3 ? (
+							<BeatLoader size={10} color="#FCA921" />
+						) : (
+							<>
+								<span className="hidden md:block">پاکسازی سبدخرید</span>
+								<AiOutlineClear className="text-red-500 w-5 h-5" />
+							</>
+						)}
+					</button>
 				</h3>
 			</div>
 			<main className="mx-5 gap-y-10">

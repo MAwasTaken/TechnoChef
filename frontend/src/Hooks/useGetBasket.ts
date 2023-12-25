@@ -8,7 +8,6 @@ import { getBasket } from '../Services/Axios/Requests/basket';
 const useGetBasket = () =>
 	useQuery('Basket/Get', () => getBasket().then((res) => res.data), {
 		refetchOnWindowFocus: false,
-		// refetchOnMount: false,
 		retry: false
 	});
 

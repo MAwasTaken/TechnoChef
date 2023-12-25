@@ -7,7 +7,6 @@ import Products from './Pages/Products/products';
 import ProductDetails from './Pages/Product details/ProductDetail';
 import ResetPassword from './Pages/ResetPassword/ResetPassword';
 import ChangePassword from './Pages/ChangePassword/ChangePassword';
-import CheckPayment from './Pages/CheckPayment/CheckPayment';
 
 // private routes
 import PanelPrivate from './Components/Private/PanelPrivate';
@@ -29,6 +28,7 @@ import UserPanel from './Pages/UserPanel/UserPanel';
 import AboutUs from './Pages/AboutUs/AboutUs';
 import PanelEditUser from './Components/Panel/PanelEditUser/PanelEditUser';
 import PanelBasket from './Components/Panel/PanelBasket/PanelBasket';
+import PanelOrders from './Components/Panel/PanelOrders/PanelOrders';
 
 const routes = [
 	{ path: '/', element: <Index /> },
@@ -39,8 +39,6 @@ const routes = [
 	{ path: '/reset-password', element: <ResetPassword /> },
 	{ path: '/reset-password/:jwtToken', element: <ChangePassword /> },
 	{ path: '/about-us', element: <AboutUs /> },
-	{ path: 'check-payment/*', element: <CheckPayment /> },
-
 	{
 		path: '/panel',
 		element: (
@@ -56,6 +54,10 @@ const routes = [
 			{
 				path: 'basket',
 				element: <PanelBasket />
+			},
+			{
+				path: 'orders',
+				element: <PanelOrders />
 			}
 		]
 	},
