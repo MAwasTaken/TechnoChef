@@ -86,7 +86,7 @@ const verifyTransactionController = async (req, res, next) => {
 				products: user.basket.products,
 				totalPrice: user.basket.totalPrice,
 				paymentStatus: true,
-				status: 'pending...'
+				status: 'درحال بررسی'
 			});
 
 			const savedOrder = await confirmedOrder.save();
