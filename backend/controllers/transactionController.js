@@ -23,7 +23,7 @@ const transactionGatewayController = async (req, res, next) => {
 				email: user?.email || 'example@domain.com',
 				mobile: user?.phoneNumber
 			},
-			callback_url: 'http://localhost:3000/api/payment/verify'
+			callback_url: 'http://localhost:5173/check-payment/'
 		};
 
 		const transactionRequestResult = await axios
@@ -67,7 +67,7 @@ const verifyTransactionController = async (req, res, next) => {
 		if (!transaction)
 			return res.status(404).json({ massage: 'Pending payment transaction not found.' });
 		if (transaction.verify)
-			return res.status(400).json({ massage: 'The desired transaction has already been paid' });
+			return res.status(204).json({ massage: 'The desired transaction has already been paid' });
 
 		const verifyBody = {
 			authority,
