@@ -8,12 +8,12 @@ const AboutUs = () => {
 		<>
 			<Header />
 			<div className="container">
-				<main className="flex flex-col justify-center">
-					<section className="flex gap-x-10 flex-row-reverse">
-						<img src="./Images/AboutUs/aboutus.png" alt="" width="900" />
+				<main className="flex flex-col justify-center gap-y-10">
+					<section className="flex gap-x-10 flex-col items-center gap-y-4">
+						<img className='hidden md:block' src="./Images/AboutUs/aboutus.png" alt="" width="1200" />
 						<div className="flex flex-col justify-center gap-y-7 text-center">
-							<h1 className="text-4xl text-center font-bold">شرکت بازرگانی تکنوشف</h1>
-							<p className="text-gray-800 leading-6 text-base">
+							<h1 className="md:text-4xl text-2xl text-center font-bold">شرکت بازرگانی پارسیان سرو نیوساد</h1>
+							<p className="text-gray-800 md:leading-9 text-justify md:text-lg text-base leading-7">
 								شرکت بازرگانی لوازم خانگی پارسیان سرو نیوساد با برند تکنوشف بیش از یک دهه تجربه یکی
 								از شرکت های پیشگام در زمینه توزیع و فروش لوازم خانگی می باشد . این شرکت کوشش دارد با
 								افتخار نیازهای خانواده هارا در زمینه امور خانگی برآورده نماید. هدف ما اراءه محصولات
@@ -29,7 +29,7 @@ const AboutUs = () => {
 							</p>
 						</div>
 					</section>
-					<section className="flex gap-x-10 flex-row">
+					{/* <section className="flex gap-x-10 flex-row">
 						<img
 							src="./../../../public/Images/AboutUs/aboutus.png"
 							alt=""
@@ -53,7 +53,7 @@ const AboutUs = () => {
 								کارگیری آن ها بهترین راه کار هارا در امور لوازم خانگی منزل شما پیشنهاد دهیم .
 							</p>
 						</div>
-					</section>
+					</section> */}
 					<section>
 						<Services />
 					</section>
