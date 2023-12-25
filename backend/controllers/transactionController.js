@@ -23,7 +23,7 @@ const transactionGatewayController = async (req, res, next) => {
 				email: user?.email || 'example@domain.com',
 				mobile: user?.phoneNumber
 			},
-			callback_url: 'http://localhost:5173/orders'
+			callback_url: 'http://localhost:5173/panel/orders'
 		};
 
 		const transactionRequestResult = await axios
@@ -78,7 +78,7 @@ const verifyTransactionController = async (req, res, next) => {
 		const verifyResult = await axios.post(verifyURL, verifyBody).then((res) => res.data);
 
 		if (verifyResult.data.code == 100) {
-			const user = await User.findById(transaction.user_id);
+			const user = await User.findOne({username : transaction.username});
 			const confirmedOrder = new Order({
 				username: user.username,
 				postalCode: user.postalCode,
