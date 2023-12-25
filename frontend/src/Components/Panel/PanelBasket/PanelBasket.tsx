@@ -64,7 +64,9 @@ const PanelBasket: React.FC = () => {
 				onOpen: () => setIsFormFetching(false),
 				onClose: () => navigate(`/panel/${user.username}`)
 			});
-		}
+		} else {
+      
+    }
 	};
 
 	return (

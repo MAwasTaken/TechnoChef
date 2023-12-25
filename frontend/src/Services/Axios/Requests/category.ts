@@ -1,5 +1,4 @@
 // axios
-import { CategoryItemProps } from '../../../Types/CategoryItems.types';
 import axiosInstance from '../Configs/configs';
 
 // GET all categories
@@ -14,8 +13,10 @@ const deleteCategory = async (categoryID: string) =>
 	axiosInstance.delete(`/category/${categoryID}`, { withCredentials: true });
 
 // PUT category
-const putCategory = async (categoryID: string, categoryInfo: FormData) =>
+const putCategory = async (categoryID: string, categoryInfo: FormData) => {
+	console.log(...categoryInfo);
 	axiosInstance.put(`/category/${categoryID}`, categoryInfo, { withCredentials: true });
+};
 
 // exports
 export { getCategories, postCreateCategory, deleteCategory, putCategory };

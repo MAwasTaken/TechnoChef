@@ -170,7 +170,7 @@ const PanelEditUser: React.FC = () => {
 					<div className="flex relative gap-x-2 items-center justify-center">
 						<HiEnvelope className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 						{user.emailVerified ? (
-							<VscWorkspaceTrusted className="text-green-500 absolute left-2 bg-green-400/50 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 cursor-none" />
+							<VscWorkspaceTrusted className="text-green-500 absolute left-2 bg-green-400/50 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500" />
 						) : (
 							<VscWorkspaceUntrusted
 								onClick={() => {
