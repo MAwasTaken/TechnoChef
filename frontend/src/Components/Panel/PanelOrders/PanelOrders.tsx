@@ -73,7 +73,9 @@ const PanelOrders: React.FC = () => {
 									<td className="sm:text-sm font-black text-Dark/70 h-10">کدپیگیری</td>
 									<td className="sm:text-sm font-black text-Dark/70 h-10">مبلغ</td>
 									<td className="sm:text-sm font-black text-Dark/70 h-10">وضعیت</td>
-									<td className="sm:text-sm font-black text-Dark/70 h-10 hidden sm:table-cell">تاریخ</td>
+									<td className="sm:text-sm font-black text-Dark/70 h-10 hidden sm:table-cell">
+										تاریخ
+									</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -81,7 +83,7 @@ const PanelOrders: React.FC = () => {
 									<tr
 										key={order.orderInfo._id}
 										className="border-b h-24 border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer"
-										onClick={() => navigate(`/orders/${String(order._id)}`)}
+										onClick={() => navigate(`${String(order.orderInfo._id)}`)}
 									>
 										<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
 										<td className="text-base lg:text-lg">{order.orderInfo._id}</td>

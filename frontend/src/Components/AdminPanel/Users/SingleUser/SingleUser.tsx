@@ -18,9 +18,6 @@ import { ToastContainer, toast } from 'react-toastify';
 // react spinner
 import { BeatLoader } from 'react-spinners';
 
-// types
-import { newUserInputs } from '../../../../Types/NewUserInputs.types';
-
 // icons
 import { BsBasket, BsBoxSeam } from 'react-icons/bs';
 import { BiArrowBack } from 'react-icons/bi';
