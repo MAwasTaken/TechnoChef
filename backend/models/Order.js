@@ -22,7 +22,9 @@ const orderSchema = mongoose.Schema(
 		],
 		totalPrice: { type: Number, required: true },
 		paymentStatus: { type: Boolean, default: false },
-		status: { type: String, default: 'در حال بررسی' }
+		status: { type: String, default: 'در حال بررسی' },
+		ref_id : {type : String , default: undefined}
+	
 	},
 	{ timestamps: true }
 );

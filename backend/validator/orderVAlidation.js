@@ -16,7 +16,8 @@ const model = joi.object({
 			})
 		),
 	totalPrice: joi.number().positive(),
-	status: joi.string()
+	status: joi.string(),
+	ref_id: joi.string()
 });
 
 // export the models
