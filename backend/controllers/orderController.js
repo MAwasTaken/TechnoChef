@@ -31,7 +31,8 @@ const createOrderController = async (req, res, next) => {
 const updateOrderController = async (req, res, next) => {
 	try {
 		if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
-		if (!req.params.ref_id) return res.status(400).json({ massage: 'the request needs an ref Id params.' });
+		if (!req.params.ref_id)
+			return res.status(400).json({ massage: 'the request needs an ref Id params.' });
 
 		// validate the input
 		await validator.validateAsync(req.body);
@@ -58,7 +59,8 @@ const updateOrderController = async (req, res, next) => {
 // delete Order
 const deleteOrderController = async (req, res, next) => {
 	try {
-		if (!req.params.ref_id) return res.status(400).json({ massage: 'the request needs an ref Id params.' });
+		if (!req.params.ref_id)
+			return res.status(400).json({ massage: 'the request needs an ref Id params.' });
 
 		// find By Id And Delete the Order
 		const deletedOrder = await Order.findOneAndDelete({ ref_id: req.params.ref_id });
@@ -110,10 +112,11 @@ const getOrderByUsernameController = async (req, res, next) => {
 // get Order By ref Id
 const getOrderByIdController = async (req, res, next) => {
 	try {
-		if (!req.params.ref_id) return res.status(400).json({ massage: 'the request needs an ref Id params.' });
+		if (!req.params.ref_id)
+			return res.status(400).json({ massage: 'the request needs an ref Id params.' });
 
 		// find the card By the userID
-		const order = await Order.findByone({ ref_id: req.params.ref_id }).populate({
+		const order = await Order.findOne({ ref_id: req.params.ref_id }).populate({
 			path: 'products.productId',
 			select: { __v: false, updatedAt: false, createdAt: false }
 		});
