@@ -31,14 +31,14 @@ const createOrderController = async (req, res, next) => {
 const updateOrderController = async (req, res, next) => {
 	try {
 		if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
-		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+		if (!req.params.ref_id) return res.status(400).json({ massage: 'the request needs an ref Id params.' });
 
 		// validate the input
 		await validator.validateAsync(req.body);
 
 		// find the Order by ID and update it
-		const updatedOrder = await Order.findByIdAndUpdate(
-			req.params.id,
+		const updatedOrder = await Order.findOneAndUpdate(
+			{ ref_id: req.params.id },
 			{
 				$set: req.body
 			},
@@ -58,10 +58,10 @@ const updateOrderController = async (req, res, next) => {
 // delete Order
 const deleteOrderController = async (req, res, next) => {
 	try {
-		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+		if (!req.params.ref_id) return res.status(400).json({ massage: 'the request needs an ref Id params.' });
 
 		// find By Id And Delete the Order
-		const deletedOrder = await Order.findByIdAndDelete(req.params.id);
+		const deletedOrder = await Order.findOneAndDelete({ ref_id: req.params.ref_id });
 
 		// set the response
 		if (deletedOrder == null) return res.status(200).json('There is No Order with that Id');
@@ -107,13 +107,13 @@ const getOrderByUsernameController = async (req, res, next) => {
 	}
 };
 
-// get Order By Id
+// get Order By ref Id
 const getOrderByIdController = async (req, res, next) => {
 	try {
-		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+		if (!req.params.ref_id) return res.status(400).json({ massage: 'the request needs an ref Id params.' });
 
 		// find the card By the userID
-		const order = await Order.findById(req.params.id).populate({
+		const order = await Order.findByone({ ref_id: req.params.ref_id }).populate({
 			path: 'products.productId',
 			select: { __v: false, updatedAt: false, createdAt: false }
 		});
