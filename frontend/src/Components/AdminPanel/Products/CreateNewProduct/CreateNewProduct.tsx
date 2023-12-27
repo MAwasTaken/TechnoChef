@@ -29,6 +29,10 @@ import { ToastContainer, toast } from 'react-toastify';
 // react spinner
 import { BeatLoader } from 'react-spinners';
 
+// ck editor
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 // create new product
 const CreateNewProduct: React.FC = () => {
 	// navigator
@@ -60,6 +64,9 @@ const CreateNewProduct: React.FC = () => {
 	// product colors list
 	const [productColor, setProductColor] = useState<string[]>([]);
 
+	// product description
+	const [description, setDescription] = useState<string>('توضیحات');
+
 	// create new product handler
 	const newProductHandler: SubmitHandler<NewProductInputs> = (formData) => {
 		setIsFormFetching(true);
@@ -81,7 +88,7 @@ const CreateNewProduct: React.FC = () => {
 		});
 		data.append('QTY', String(formData.QTY));
 		data.append('cover', formData.cover ? formData.cover[0] : '');
-		data.append('description', String(formData.description));
+		data.append('description', String(description));
 		data.append('category', String(formData.category));
 		data.append('best_seller', String(formData.best_seller));
 		formData.images.map((image: File) => data.append('images', image));
@@ -217,14 +224,17 @@ const CreateNewProduct: React.FC = () => {
 							/>
 						</label>
 						{/* description */}
-						<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="QTY">
+						<label
+							title="توضیحات"
+							className="flex flex-col gap-y-1 items-center justify-center"
+							htmlFor="description"
+						>
 							{/* input */}
-							<textarea
-								{...register('description')}
-								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 w-full xl:w-1/2 text-right px-2"
-								placeholder="توضیحات"
-								id="description"
-								autoComplete="description"
+							<CKEditor
+								config={{ language: 'fa', toolbar: { shouldNotGroupWhenFull: true } }}
+								data={description}
+								editor={ClassicEditor}
+								onChange={(event, editor) => setDescription(editor.getData())}
 							/>
 						</label>
 						{/* details */}

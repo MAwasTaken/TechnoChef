@@ -9,8 +9,12 @@ const getByUsername = (username: string) =>
 const getById = (orderID: string) =>
 	axiosInstance.get(`/orders/getById/${orderID}`, { withCredentials: true });
 
-// GET by id
+// GET all orders
 const getAllOrders = () => axiosInstance.get(`/orders`, { withCredentials: true });
 
+// DELETE order
+const deleteOrder = (orderID: string) =>
+	axiosInstance.delete(`/orders/${orderID}`, { withCredentials: true });
+
 // exports
-export { getByUsername, getById, getAllOrders };
+export { getByUsername, getById, getAllOrders, deleteOrder };
