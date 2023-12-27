@@ -27,8 +27,6 @@ const ProductDetails = () => {
 	// GET product details from react query
 	const { data } = useSingleProduct(String(shortName));
 
-	console.log(data);
-
 	// tsx
 	return (
 		<>

@@ -22,7 +22,7 @@ import AdminUsers from './Components/AdminPanel/Users/AdminUsers';
 import SingleUser from './Components/AdminPanel/Users/SingleUser/SingleUser';
 import CreateNewCategory from './Components/AdminPanel/Categories/CreateNewCategory/CreateNewCategory';
 import SingleCategory from './Components/AdminPanel/Categories/SingleCategory/SingleCategory';
-import AllOrders from './Components/AdminPanel/AllOrders/AllOrders';
+import AdminOrders from './Components/AdminPanel/Orders/AdminOrders';
 
 // user panel
 import UserPanel from './Pages/UserPanel/UserPanel';
@@ -30,6 +30,8 @@ import AboutUs from './Pages/AboutUs/AboutUs';
 import PanelEditUser from './Components/Panel/PanelEditUser/PanelEditUser';
 import PanelBasket from './Components/Panel/PanelBasket/PanelBasket';
 import PanelOrders from './Components/Panel/PanelOrders/PanelOrders';
+import OrderDetails from './Components/Panel/PanelOrders/OrderDetails/OrderDetails';
+import SingleOrder from './Components/AdminPanel/Orders/SingleOrder/SingleOrder';
 
 const routes = [
 	{ path: '/', element: <Index /> },
@@ -59,6 +61,10 @@ const routes = [
 			{
 				path: 'orders',
 				element: <PanelOrders />
+			},
+			{
+				path: 'orders/:orderID',
+				element: <OrderDetails />
 			}
 		]
 	},
@@ -83,7 +89,8 @@ const routes = [
 				element: <SingleProduct />
 			},
 			{ path: 'users', element: <AdminUsers /> },
-			{ path: 'all-orders', element: <AllOrders /> },
+			{ path: 'orders', element: <AdminOrders /> },
+			{ path: 'orders/:orderId', element: <SingleOrder /> },
 			{ path: 'users/:userName', element: <SingleUser /> },
 			{ path: 'categories', element: <AdminCategories /> },
 			{ path: 'categories/:href', element: <SingleCategory /> },

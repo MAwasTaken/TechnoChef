@@ -83,16 +83,16 @@ const PanelOrders: React.FC = () => {
 									<tr
 										key={order.orderInfo._id}
 										className="border-b h-24 border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer"
-										onClick={() => navigate(`${String(order.orderInfo._id)}`)}
+										onClick={() => navigate(`${String(order.orderInfo.ref_id)}`)}
 									>
 										<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
-										<td className="text-base lg:text-lg">{order.orderInfo._id}</td>
+										<td className="text-base lg:text-lg">{order.orderInfo.ref_id}</td>
 										<td className="tracking-tighter text-base lg:text-lg">
 											{order.orderInfo.totalPrice.toLocaleString('fa-IR')}{' '}
 											<span className="text-red-500 mr-1">تومان</span>
 										</td>
 										<td className="text-xs lg:text-lg">
-											<span className="bg-teal-500/50 px-2 py-1.5 rounded-lg">
+											<span className="bg-teal-500/50 px-2 py-1.5 rounded-lg tracking-tight text-base font-Lalezar">
 												{order.orderInfo.status}
 											</span>
 										</td>

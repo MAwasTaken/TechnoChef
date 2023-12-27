@@ -161,7 +161,10 @@ export const ProductDetailsBox: React.FC<ProductProps> = ({
 						<div className="flex justify-center gap-y-8 items-center w-full flex-col md:flex-row">
 							{description ? (
 								<div className="flex md:leading-6 text-Dark/60 text-justify mt-4 md:w-1/2 tracking-tight">
-									<span className="line-clamp-6 md:text-base text-xs">{description}</span>
+									<span
+										dangerouslySetInnerHTML={{ __html: description }}
+										className="line-clamp-6 md:text-base text-xs"
+									></span>
 								</div>
 							) : null}
 							<div className="md:flex flex-col w-1/2 gap-y-1 items-end px-10 justify-center hidden">

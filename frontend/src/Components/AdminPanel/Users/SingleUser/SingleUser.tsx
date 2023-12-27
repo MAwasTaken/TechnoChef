@@ -32,6 +32,7 @@ import {
 	HiUserCircle
 } from 'react-icons/hi';
 import { HiCalendarDays, HiEnvelope, HiMapPin, HiPencilSquare } from 'react-icons/hi2';
+import useOrders from '../../../../Hooks/useOrders';
 
 // single user
 const SingleUser: React.FC = () => {
@@ -45,7 +46,7 @@ const SingleUser: React.FC = () => {
 	const [basket, setBasket] = useState<any>();
 
 	// user orders
-	const [orders, setOrders] = useState<any>();
+	const { data: orders } = useOrders(userName!);
 
 	// spinner handlers
 	const [isFormFetching, setIsFormFetching] = useState<boolean>(false);
@@ -59,7 +60,7 @@ const SingleUser: React.FC = () => {
 	useEffect(() => {
 		getSingleUser(String(userName)).then((res) => {
 			setBasket(res.data.userInfo.basket);
-			setOrders(res.data.orders);
+			// setOrders(res.data.orders);
 
 			reset({
 				firstName: res.data.userInfo.firstName,
@@ -150,7 +151,11 @@ const SingleUser: React.FC = () => {
 						className="flex flex-col gap-y-2 md:gap-y-4"
 					>
 						{/* firstName */}
-						<label className="flex gap-x-2 items-center justify-center" htmlFor="firstName">
+						<label
+							title="نام"
+							className="flex gap-x-2 items-center justify-center"
+							htmlFor="firstName"
+						>
 							<HiUserCircle className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 							{/* input */}
 							<input
@@ -163,7 +168,11 @@ const SingleUser: React.FC = () => {
 							/>
 						</label>
 						{/* lastName */}
-						<label className="flex gap-x-2 items-center justify-center" htmlFor="lastName">
+						<label
+							title="نام‌خانوادگی"
+							className="flex gap-x-2 items-center justify-center"
+							htmlFor="lastName"
+						>
 							<HiIdentification className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 							{/* input */}
 							<input
@@ -176,7 +185,11 @@ const SingleUser: React.FC = () => {
 							/>
 						</label>
 						{/* phoneNumber */}
-						<label className="flex gap-x-2 items-center justify-center" htmlFor="phoneNumber">
+						<label
+							title="شماره‌تماس"
+							className="flex gap-x-2 items-center justify-center"
+							htmlFor="phoneNumber"
+						>
 							<HiPhone className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 							{/* input */}
 							<input
@@ -189,7 +202,11 @@ const SingleUser: React.FC = () => {
 							/>
 						</label>
 						{/* username */}
-						<label className="flex gap-x-2 items-center justify-center" htmlFor="username">
+						<label
+							title="نام‌کاربری"
+							className="flex gap-x-2 items-center justify-center"
+							htmlFor="username"
+						>
 							<HiFingerPrint className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 							{/* input */}
 							<input
@@ -202,7 +219,11 @@ const SingleUser: React.FC = () => {
 							/>
 						</label>
 						{/* email */}
-						<label className="flex gap-x-2 items-center justify-center" htmlFor="email">
+						<label
+							title="ایمیل"
+							className="flex gap-x-2 items-center justify-center"
+							htmlFor="email"
+						>
 							<HiEnvelope className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 							{/* input */}
 							<input
@@ -215,8 +236,12 @@ const SingleUser: React.FC = () => {
 								id="email"
 							/>
 						</label>
-						{/* postalCode */}
-						<label className="flex gap-x-2 items-center justify-center" htmlFor="nationalCode">
+						{/* national code */}
+						<label
+							title="کدملی"
+							className="flex gap-x-2 items-center justify-center"
+							htmlFor="nationalCode"
+						>
 							<HiScale className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-Info/50 hover:bg-Info cursor-pointer" />
 							{/* input */}
 							<input
@@ -229,7 +254,11 @@ const SingleUser: React.FC = () => {
 							/>
 						</label>
 						{/* postalCode */}
-						<label className="flex gap-x-2 items-center justify-center" htmlFor="postalCode">
+						<label
+							title="کدپستی"
+							className="flex gap-x-2 items-center justify-center"
+							htmlFor="postalCode"
+						>
 							<HiMap className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-Info/50 hover:bg-Info cursor-pointer" />
 							{/* input */}
 							<input
@@ -242,7 +271,11 @@ const SingleUser: React.FC = () => {
 							/>
 						</label>
 						{/* address */}
-						<label className="flex gap-x-2 items-center justify-center" htmlFor="address">
+						<label
+							title="آدرس"
+							className="flex gap-x-2 items-center justify-center"
+							htmlFor="address"
+						>
 							<HiMapPin className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-Info/50 hover:bg-Info cursor-pointer" />
 							{/* input */}
 							<textarea
@@ -255,6 +288,7 @@ const SingleUser: React.FC = () => {
 						</label>
 						{/* createdAt */}
 						<label
+							title="تاریخ ساخت حساب‌کاربری"
 							className="cursor-not-allowed flex gap-x-2 items-center justify-center"
 							htmlFor="createdAt"
 						>
@@ -271,6 +305,7 @@ const SingleUser: React.FC = () => {
 						</label>
 						{/* updatedAt */}
 						<label
+							title="تاریخ آخرین به‌روزرسانی"
 							className="cursor-not-allowed flex gap-x-2 items-center justify-center"
 							htmlFor="updatedAt"
 						>
@@ -287,6 +322,7 @@ const SingleUser: React.FC = () => {
 						</label>
 						{/* emailVerified */}
 						<label
+							title="آیا ایمیل تایید شده است؟"
 							className="cursor-not-allowed flex gap-x-2 items-center justify-center"
 							htmlFor="emailVerified"
 						>
@@ -303,6 +339,7 @@ const SingleUser: React.FC = () => {
 						</label>
 						{/* isAdmin */}
 						<label
+							title="آیا کاربر ادمین می‌باشد؟"
 							className="cursor-not-allowed flex gap-x-2 items-center justify-center"
 							htmlFor="isAdmin"
 						>
@@ -345,39 +382,50 @@ const SingleUser: React.FC = () => {
 							{orders?.length.toLocaleString('fa-IR')}
 						</span>
 					</h4>
-					<table className="table-auto border md:border-2 border-Info w-full text-center">
-						<thead className="border-b-2 h-10 border-Info">
-							<tr className="">
-								<td className="sm:text-sm font-black text-Dark/70 h-10">ردیف</td>
-								<td className="sm:text-sm font-black text-Dark/70 h-10">تاریخ</td>
-								<td className="sm:text-sm font-black text-Dark/70 h-10">وضعیت</td>
-								<td className="sm:text-sm font-black text-Dark/70 h-10 border-l border-l-Info">
-									قیمت کل
-								</td>
-							</tr>
-						</thead>
-						<tbody>
-							{orders?.map((order: any, index: number) => (
-								<tr
-									key={index}
-									className="border-b border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer h-20"
-									onClick={() => navigate(`/admin/orders/${String(order._id)}`)}
-								>
-									<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
-									<td className="tracking-tighter sm:text-base">{order.updatedAt.slice(0, 16)}</td>
-									<td className="tracking-tighter sm:text-base">
-										{order.status === 'pending' ? (
-											<span className="bg-yellow-400 px-5 font-bold py-1 rounded-full">انتظار</span>
-										) : null}
-									</td>
-									<td className="tracking-tighter sm:text-base">
-										{order.totalPrice.toLocaleString('fa-IR')}{' '}
-										<span className="text-red-500 mr-1">تومان</span>
+					{orders?.length ? (
+						<table className="table-auto mt-3 md:mt-5 border md:border-2 border-Info w-full text-center">
+							<thead className="border-b-2 h-10 border-Info">
+								<tr className="">
+									<td className="sm:text-sm font-black text-Dark/70 h-10">ردیف</td>
+									<td className="sm:text-sm font-black text-Dark/70 h-10">کدپیگیری</td>
+									<td className="sm:text-sm font-black text-Dark/70 h-10">مبلغ</td>
+									<td className="sm:text-sm font-black text-Dark/70 h-10">وضعیت</td>
+									<td className="sm:text-sm font-black text-Dark/70 h-10 hidden sm:table-cell">
+										تاریخ
 									</td>
 								</tr>
-							))}
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								{orders?.map((order: any, index: number) => (
+									<tr
+										key={order.orderInfo._id}
+										className="border-b h-24 border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer"
+										onClick={() => navigate(`/admin/orders/${String(order.orderInfo.ref_id)}`)}
+									>
+										<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
+										<td className="text-base lg:text-lg">{order?.orderInfo.ref_id}</td>
+										<td className="tracking-tighter text-base lg:text-lg">
+											{order.orderInfo.totalPrice.toLocaleString('fa-IR')}{' '}
+											<span className="text-red-500 mr-1">تومان</span>
+										</td>
+										<td className="text-xs lg:text-lg">
+											<span className="bg-teal-500/50 px-2 py-1.5 rounded-lg tracking-tight text-base font-Lalezar">
+												{order.orderInfo.status}
+											</span>
+										</td>
+										<td className="text-base lg:text-lg hidden sm:table-cell">{`${order.orderInfo.createdAt.slice(
+											11,
+											16
+										)} :: ${order.orderInfo.createdAt.slice(0, 10)}`}</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					) : (
+						<span className="text-center w-full font-bold xl:text-lg bg-cyan-500 py-2 md:py-4 text-Light rounded-md flex gap-x-5 items-center justify-center">
+							سفارشی جهت نمایش وجود ندارد !
+						</span>
+					)}
 					{/* header */}
 					<h4 className="flex justify-between items-center py-3 mt-10">
 						<span className="flex select-none transition-colors items-center gap-x-2 text-lg md:text-xl lg:text-2xl font-Lalezar tracking-wider">
@@ -389,42 +437,50 @@ const SingleUser: React.FC = () => {
 							<span className="text-red-600"> تومان </span>
 						</span>
 					</h4>
-					<table className="table-auto border md:border-2 border-Info w-full text-center">
-						<thead className="border-b-2 h-10 border-Info">
-							<tr className="">
-								<td className="sm:text-sm font-black text-Dark/70 h-10">تعداد</td>
-								<td className="sm:text-sm font-black text-Dark/70 h-10">تصویر</td>
-								<td className="sm:text-sm font-black text-Dark/70 h-10">عنوان</td>
-								<td className="sm:text-sm font-black text-Dark/70 h-10 border-l border-l-Info">
-									قیمت
-								</td>
-							</tr>
-						</thead>
-						<tbody>
-							{basket?.products.map((product: any, index: number) => (
-								<tr
-									key={index}
-									className="border-b border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer"
-									onClick={() => navigate(`/products/${String(product.productId.shortName)}`)}
-								>
-									<td className="font-Lalezar text-base lg:text-lg">{product.quantity}</td>
-									<td>
-										<img
-											className="w-32 h-32 object-contain mx-auto"
-											src={`https://45.159.150.221:3000/${product.productId?.cover}`}
-											alt="تصویر محصول"
-											loading="lazy"
-										/>
-									</td>
-									<td className="tracking-tighter sm:text-base">{product.productId.productName}</td>
-									<td className="tracking-tighter sm:text-base">
-										{product.productId.finalPrice.toLocaleString('fa-IR')}{' '}
-										<span className="text-red-500 mr-1">تومان</span>
+					{basket?.length ? (
+						<table className="table-auto border md:border-2 border-Info w-full text-center">
+							<thead className="border-b-2 h-10 border-Info">
+								<tr className="">
+									<td className="sm:text-sm font-black text-Dark/70 h-10">تعداد</td>
+									<td className="sm:text-sm font-black text-Dark/70 h-10">تصویر</td>
+									<td className="sm:text-sm font-black text-Dark/70 h-10">عنوان</td>
+									<td className="sm:text-sm font-black text-Dark/70 h-10 border-l border-l-Info">
+										قیمت
 									</td>
 								</tr>
-							))}
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								{basket?.products.map((product: any, index: number) => (
+									<tr
+										key={index}
+										className="border-b border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer"
+										onClick={() => navigate(`/products/${String(product.productId.shortName)}`)}
+									>
+										<td className="font-Lalezar text-base lg:text-lg">{product.quantity}</td>
+										<td>
+											<img
+												className="w-32 h-32 object-contain mx-auto"
+												src={`https://45.159.150.221:3000/${product.productId?.cover}`}
+												alt="تصویر محصول"
+												loading="lazy"
+											/>
+										</td>
+										<td className="tracking-tighter sm:text-base">
+											{product.productId.productName}
+										</td>
+										<td className="tracking-tighter sm:text-base">
+											{product.productId.finalPrice.toLocaleString('fa-IR')}{' '}
+											<span className="text-red-500 mr-1">تومان</span>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					) : (
+						<span className="text-center w-full font-bold xl:text-lg bg-amber-500 py-2 md:py-4 text-Light rounded-md flex gap-x-5 items-center justify-center">
+							سبدخرید خالی می‌باشد !
+						</span>
+					)}
 				</section>
 			</main>
 			{/* react toastify container */}

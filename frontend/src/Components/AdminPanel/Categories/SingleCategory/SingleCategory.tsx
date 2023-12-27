@@ -145,7 +145,11 @@ const SingleCategory: React.FC = () => {
 						className="flex flex-col gap-y-2 md:gap-y-4"
 					>
 						{/* Name */}
-						<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="Name">
+						<label
+							title="نام"
+							className="flex flex-col gap-y-1 items-center justify-center"
+							htmlFor="Name"
+						>
 							{/* input */}
 							<input
 								required
@@ -157,7 +161,11 @@ const SingleCategory: React.FC = () => {
 							/>
 						</label>
 						{/* href */}
-						<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="href">
+						<label
+							title="پسوند دسته‌بندی"
+							className="flex flex-col gap-y-1 items-center justify-center"
+							htmlFor="href"
+						>
 							{/* input */}
 							<input
 								required
@@ -169,7 +177,10 @@ const SingleCategory: React.FC = () => {
 							/>
 						</label>
 						{/* categoryColor */}
-						<div className="flex relative flex-col w-3/4 gap-y-1 items-center justify-center">
+						<div
+							title="رنگ دسته‌بندی"
+							className="flex relative flex-col w-3/4 gap-y-1 items-center justify-center"
+						>
 							{/* input */}
 							<input
 								className="cursor-pointer shadow-md h-10 w-2/12 rounded-lg border-2 border-DarkYellow p-0.5 my-3"

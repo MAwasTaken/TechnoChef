@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 // icons
 import { BsBag, BsBoxSeam, BsPeople } from 'react-icons/bs';
 import { BiCategory } from 'react-icons/bi';
+import { MdProductionQuantityLimits } from 'react-icons/md';
 
 // admin side
 const AdminSide: React.FC<{
@@ -75,7 +76,7 @@ const AdminSide: React.FC<{
 					</li>
 					<li className="text-center" onClick={() => setIsMenuShown(false)}>
 						<NavLink
-							to="all-orders"
+							to="orders"
 							className={({ isActive }) =>
 								`flex justify-center items-center tracking-tighter gap-x-2 py-1 rounded  ${
 									isActive
@@ -84,7 +85,7 @@ const AdminSide: React.FC<{
 								} `
 							}
 						>
-							<BsBag className="text-red-500" />
+							<MdProductionQuantityLimits className="text-red-500" />
 							سفارشات
 						</NavLink>
 					</li>

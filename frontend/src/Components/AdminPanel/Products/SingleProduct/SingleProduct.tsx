@@ -31,6 +31,10 @@ import {
 // types
 import { NewProductInputs } from '../../../../Types/NewProductInputs.types';
 
+// ck editor
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 // single product
 const SingleProduct = () => {
 	// uel params
@@ -66,6 +70,10 @@ const SingleProduct = () => {
 	// product images
 	const [images, setImages] = useState<any>([]);
 
+	// product description
+	const [description, setDescription] = useState<string>('');
+
+	// mounting side effects
 	useEffect(() => {
 		getSingleProduct(String(params.shortName)).then((res) => {
 			setFormValues(res.data);
@@ -76,7 +84,6 @@ const SingleProduct = () => {
 				price: res.data.price,
 				finalPrice: res.data.finalPrice,
 				QTY: res.data.QTY,
-				description: res.data.description,
 				productColor: res.data.productColor,
 				category: res.data.category,
 				cover: res.data.cover,
@@ -85,6 +92,7 @@ const SingleProduct = () => {
 				best_seller: res.data.best_seller
 			});
 
+			setDescription(res.data.description);
 			setProductColor(res.data.productColor);
 			setCover(`${res.data.cover}`);
 			setDetailsCount(res.data.details.length);
@@ -113,7 +121,7 @@ const SingleProduct = () => {
 			: typeof formData.cover === 'string'
 			? data.append('cover', formData.cover)
 			: data.append('cover', formData.cover[0]);
-		data.append('description', String(formData.description));
+		data.append('description', String(description));
 		data.append('category', String(formData.category));
 		formData.images.length === 0
 			? data.append('images', '')
@@ -201,6 +209,7 @@ const SingleProduct = () => {
 					>
 						{/* productName */}
 						<label
+							title="نام محصول"
 							className="flex flex-col gap-y-1 items-center justify-center"
 							htmlFor="productName"
 						>
@@ -216,6 +225,7 @@ const SingleProduct = () => {
 						</label>
 						{/* shortName */}
 						<label
+							title="نام کوتاه"
 							className="flex flex-col gap-y-1 items-center justify-center"
 							htmlFor="shortName"
 						>
@@ -230,7 +240,11 @@ const SingleProduct = () => {
 							/>
 						</label>
 						{/* price */}
-						<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="price">
+						<label
+							title="قیمت"
+							className="flex flex-col gap-y-1 items-center justify-center"
+							htmlFor="price"
+						>
 							{/* input */}
 							<input
 								required
@@ -245,6 +259,7 @@ const SingleProduct = () => {
 						</label>
 						{/* finalPrice */}
 						<label
+							title="قیمت نهایی"
 							className="flex flex-col gap-y-1 items-center justify-center"
 							htmlFor="finalPrice"
 						>
@@ -261,7 +276,11 @@ const SingleProduct = () => {
 							/>
 						</label>
 						{/* QTY */}
-						<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="QTY">
+						<label
+							title="تعداد"
+							className="flex flex-col gap-y-1 items-center justify-center"
+							htmlFor="QTY"
+						>
 							{/* input */}
 							<input
 								required
@@ -275,15 +294,16 @@ const SingleProduct = () => {
 							/>
 						</label>
 						{/* description */}
-						<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="QTY">
+						<label
+							title="توضیحات"
+							className="flex flex-col gap-y-1 items-center justify-center"
+							htmlFor="description"
+						>
 							{/* input */}
-							<textarea
-								required
-								{...register('description')}
-								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 w-full xl:w-1/2 text-right px-2"
-								placeholder="توضیحات"
-								id="description"
-								autoComplete="description"
+							<CKEditor
+								data={description}
+								editor={ClassicEditor}
+								onChange={(event, editor) => setDescription(editor.getData())}
 							/>
 						</label>
 						{/* details */}

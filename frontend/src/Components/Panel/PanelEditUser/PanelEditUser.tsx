@@ -115,7 +115,11 @@ const PanelEditUser: React.FC = () => {
 					className="flex flex-col gap-y-2 md:gap-y-4 grow"
 				>
 					{/* firstName */}
-					<label className="flex gap-x-2 items-center justify-center" htmlFor="firstName">
+					<label
+						title="نام"
+						className="flex gap-x-2 items-center justify-center"
+						htmlFor="firstName"
+					>
 						<HiUserCircle className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 						{/* input */}
 						<input
@@ -128,7 +132,11 @@ const PanelEditUser: React.FC = () => {
 						/>
 					</label>
 					{/* lastName */}
-					<label className="flex gap-x-2 items-center justify-center" htmlFor="lastName">
+					<label
+						title="نام خانوادگی"
+						className="flex gap-x-2 items-center justify-center"
+						htmlFor="lastName"
+					>
 						<HiIdentification className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 						{/* input */}
 						<input
@@ -141,7 +149,11 @@ const PanelEditUser: React.FC = () => {
 						/>
 					</label>
 					{/* phoneNumber */}
-					<label className="flex gap-x-2 items-center justify-center" htmlFor="phoneNumber">
+					<label
+						title="شماره تماس"
+						className="flex gap-x-2 items-center justify-center"
+						htmlFor="phoneNumber"
+					>
 						<HiPhone className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 						{/* input */}
 						<input
@@ -154,7 +166,11 @@ const PanelEditUser: React.FC = () => {
 						/>
 					</label>
 					{/* username */}
-					<label className="flex gap-x-2 items-center justify-center" htmlFor="username">
+					<label
+						title="نام کاربری"
+						className="flex gap-x-2 items-center justify-center"
+						htmlFor="username"
+					>
 						<HiFingerPrint className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 						{/* input */}
 						<input
@@ -167,7 +183,7 @@ const PanelEditUser: React.FC = () => {
 						/>
 					</label>
 					{/* email */}
-					<div className="flex relative gap-x-2 items-center justify-center">
+					<div title="ایمیل" className="flex relative gap-x-2 items-center justify-center">
 						<HiEnvelope className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
 						{user.emailVerified ? (
 							<VscWorkspaceTrusted className="text-green-500 absolute left-2 bg-green-400/50 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500" />
@@ -205,8 +221,12 @@ const PanelEditUser: React.FC = () => {
 							id="email"
 						/>
 					</div>
-					{/* postalCode */}
-					<label className="flex gap-x-2 items-center justify-center" htmlFor="nationalCode">
+					{/* national code */}
+					<label
+						title="کدملی"
+						className="flex gap-x-2 items-center justify-center"
+						htmlFor="nationalCode"
+					>
 						<HiScale className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-Info/50 hover:bg-Info cursor-pointer" />
 						{/* input */}
 						<input
@@ -219,7 +239,11 @@ const PanelEditUser: React.FC = () => {
 						/>
 					</label>
 					{/* postalCode */}
-					<label className="flex gap-x-2 items-center justify-center" htmlFor="postalCode">
+					<label
+						title="کدپستی"
+						className="flex gap-x-2 items-center justify-center"
+						htmlFor="postalCode"
+					>
 						<HiMap className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-Info/50 hover:bg-Info cursor-pointer" />
 						{/* input */}
 						<input
@@ -232,7 +256,11 @@ const PanelEditUser: React.FC = () => {
 						/>
 					</label>
 					{/* address */}
-					<label className="flex gap-x-2 items-center justify-center" htmlFor="address">
+					<label
+						title="آدرس"
+						className="flex gap-x-2 items-center justify-center"
+						htmlFor="address"
+					>
 						<HiMapPin className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-Info/50 hover:bg-Info cursor-pointer" />
 						{/* input */}
 						<textarea
