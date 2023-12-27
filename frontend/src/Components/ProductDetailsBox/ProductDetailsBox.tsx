@@ -160,10 +160,10 @@ export const ProductDetailsBox: React.FC<ProductProps> = ({
 						</div>
 						<div className="flex justify-center gap-y-8 items-center w-full flex-col md:flex-row">
 							{description ? (
-								<div className="flex md:leading-6 text-Dark/60 text-justify mt-4 md:w-1/2 tracking-tight">
+								<div className="flex md:leading-6 text-Dark/60 text-justify mt-6 xl:mt-8 md:w-1/2 tracking-tight">
 									<span
 										dangerouslySetInnerHTML={{ __html: description }}
-										className="line-clamp-6 md:text-base text-xs"
+										className="line-clamp-6 md:text-lg text-xs"
 									></span>
 								</div>
 							) : null}

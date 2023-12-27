@@ -301,6 +301,7 @@ const SingleProduct = () => {
 						>
 							{/* input */}
 							<CKEditor
+								config={{ language: 'fa', toolbar: { shouldNotGroupWhenFull: true } }}
 								data={description}
 								editor={ClassicEditor}
 								onChange={(event, editor) => setDescription(editor.getData())}
