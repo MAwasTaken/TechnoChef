@@ -34,14 +34,11 @@ const updateOrderController = async (req, res, next) => {
 		if (!req.params.ref_id)
 			return res.status(400).json({ massage: 'the request needs an ref Id params.' });
 
-		// validate the input
-		await validator.validateAsync(req.body);
-
 		// find the Order by ID and update it
 		const updatedOrder = await Order.findOneAndUpdate(
 			{ ref_id: req.params.id },
 			{
-				$set: req.body
+				status: req.body.status
 			},
 			{ new: true }
 		);

@@ -87,6 +87,7 @@ const verifyTransactionController = async (req, res, next) => {
 				totalPrice: user.basket.totalPrice,
 				ref_id: verifyResult.data.ref_id,
 				paymentStatus: true,
+				date: transaction.transactionDate,
 				status: 'درحال بررسی'
 			});
 
