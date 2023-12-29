@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // icons
-import { MdProductionQuantityLimits } from 'react-icons/md';
+import { MdDone, MdProductionQuantityLimits } from 'react-icons/md';
 import { HiCalendarDays, HiEnvelope, HiMapPin, HiPencilSquare } from 'react-icons/hi2';
 import {
 	HiFingerPrint,
@@ -18,7 +18,7 @@ import { SiStatuspal } from 'react-icons/si';
 import { AiOutlineNumber } from 'react-icons/ai';
 
 // axios
-import { deleteOrder, getById } from '../../../../Services/Axios/Requests/orders';
+import { deleteOrder, getById, putOrder } from '../../../../Services/Axios/Requests/orders';
 
 // react toastify
 import { ToastContainer, toast } from 'react-toastify';
@@ -66,6 +66,21 @@ const SingleOrder: React.FC = () => {
 			);
 	};
 
+	// update order status
+	const updateOrderStatusHandler = () => {
+		putOrder(orderId!, status)
+			.then(() =>
+				toast.success(`وضعیت سفارش ${orderId} با موفقیت ویرایش شد ✅`, {
+					onClose: () =>
+						getById(orderId!).then((res) => {
+							setOrder(res.data);
+							setStatus(res.data.orderInfo.status);
+						})
+				})
+			)
+			.catch(() => toast.error('خطایی در فرایند ویرایش سفارش رخ داد ❌'));
+	};
+
 	// tsx
 	return (
 		<>
@@ -92,14 +107,17 @@ const SingleOrder: React.FC = () => {
 						{/* status */}
 						<div className="flex gap-x-2 items-center justify-center" title="وضعیت">
 							{status === order?.orderInfo.status ? (
-								<SiStatuspal className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-LightYellow cursor-pointer" />
+								<SiStatuspal className="text-red-500 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-LightYellow/50 hover:bg-DarkYellow cursor-pointer" />
 							) : (
-								'lol'
+								<MdDone
+									onClick={updateOrderStatusHandler}
+									className="text-emerald-600 md:w-10 md:h-10 w-7 h-7 md:p-2 p-1.5 rounded-full transition-all duration-500 bg-green-500/50 hover:bg-green-500/70 cursor-pointer"
+								/>
 							)}
 							{/* value */}
 							<input
 								value={status}
-								onChange={(e) => setStatus(e.target.value.trim())}
+								onChange={(e) => setStatus(e.target.value)}
 								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
 							/>
 						</div>

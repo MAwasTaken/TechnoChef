@@ -16,5 +16,9 @@ const getAllOrders = () => axiosInstance.get(`/orders`, { withCredentials: true 
 const deleteOrder = (orderID: string) =>
 	axiosInstance.delete(`/orders/${orderID}`, { withCredentials: true });
 
+// PUT order status
+const putOrder = (orderID: string, newOrderStatus: string) =>
+	axiosInstance.put(`/orders/'${orderID}`, { status: newOrderStatus }, { withCredentials: true });
+
 // exports
-export { getByUsername, getById, getAllOrders, deleteOrder };
+export { getByUsername, getById, getAllOrders, deleteOrder, putOrder };

@@ -16,7 +16,7 @@ const AdminSide: React.FC<{
 		<>
 			{/* menu */}
 			<aside
-				className={`fixed z-30 md:right-0 top-0 rounded-l-xl md:rounded-none shadow-lg flex flex-col md:w-3/12 w-5/12 gap-y-2 bg-white/75 md:bg-gray-200 backdrop-blur-sm md:p-8 p-5 h-screen transition-all duration-1000 ${
+				className={`fixed z-50 md:right-0 top-0 rounded-l-xl md:rounded-none shadow-lg flex flex-col md:w-3/12 w-5/12 gap-y-2 bg-white/75 md:bg-gray-200 backdrop-blur-sm md:p-8 p-5 h-screen transition-all duration-1000 ${
 					isMenuShown ? 'right-0' : '-right-full'
 				}`}
 			>
@@ -93,7 +93,7 @@ const AdminSide: React.FC<{
 			</aside>
 			{/* overlay */}
 			<div
-				className={`bg-Dark/40 md:hidden z-20 w-screen absolute top-0 left-0 ${
+				className={`bg-Dark/40 md:hidden z-40 w-screen absolute top-0 left-0 ${
 					isMenuShown ? 'visible' : 'hidden'
 				}`}
 				style={{ height: document.documentElement.scrollHeight }}

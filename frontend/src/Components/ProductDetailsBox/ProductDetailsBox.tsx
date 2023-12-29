@@ -219,7 +219,7 @@ export const ProductDetailsBox: React.FC<ProductProps> = ({
 				</div>
 			</div>
 			{/* mobile add to cart section */}
-			<section className="cursor-pointer md:hidden bg-Info/50 backdrop-blur-sm w-screen h-14 rounded-t-lg shadow-xl z-40 p-2 bottom-0 fixed flex gap-x-16 justify-center px-5 items-center">
+			<section className="cursor-pointer md:hidden bg-Info/50 backdrop-blur-sm w-screen h-14 rounded-t-lg shadow-xl z-10 p-2 bottom-0 fixed flex gap-x-16 justify-center px-5 items-center">
 				{finalPrice !== price ? (
 					<span className="flex justify-center items-center rounded-lg bg-gradient-to-l from-red-500 to-red-600 pt-[3px] text-center text-[10px] font-bold text-white/70 h-6 w-10 text-sm">
 						{Math.trunc(100 - (finalPrice * 100) / price).toLocaleString('fa-IR')}%

@@ -422,7 +422,7 @@ const SingleUser: React.FC = () => {
 							</tbody>
 						</table>
 					) : (
-						<span className="text-center w-full font-bold xl:text-lg bg-cyan-500 py-2 md:py-4 text-Light rounded-md flex gap-x-5 items-center justify-center">
+						<span className="text-center cursor-default w-full font-bold xl:text-lg bg-cyan-500 py-2 md:py-4 text-Light rounded-md flex gap-x-5 items-center justify-center">
 							سفارشی جهت نمایش وجود ندارد !
 						</span>
 					)}
@@ -477,7 +477,7 @@ const SingleUser: React.FC = () => {
 							</tbody>
 						</table>
 					) : (
-						<span className="text-center w-full font-bold xl:text-lg bg-amber-500 py-2 md:py-4 text-Light rounded-md flex gap-x-5 items-center justify-center">
+						<span className="text-center cursor-default w-full font-bold xl:text-lg bg-amber-500 py-2 md:py-4 text-Light rounded-md flex gap-x-5 items-center justify-center">
 							سبدخرید خالی می‌باشد !
 						</span>
 					)}
