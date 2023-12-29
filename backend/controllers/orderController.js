@@ -36,7 +36,7 @@ const updateOrderController = async (req, res, next) => {
 
 		// find the Order by ID and update it
 		const updatedOrder = await Order.findOneAndUpdate(
-			{ ref_id: req.params.id },
+			{ ref_id: req.params.ref_id },
 			{
 				status: req.body.status
 			},
