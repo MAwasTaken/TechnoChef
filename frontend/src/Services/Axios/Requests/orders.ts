@@ -18,7 +18,7 @@ const deleteOrder = (orderID: string) =>
 
 // PUT order status
 const putOrder = (orderID: string, newOrderStatus: string) =>
-	axiosInstance.put(`/orders/'${orderID}`, { status: newOrderStatus }, { withCredentials: true });
+	axiosInstance.put(`/orders/${orderID}`, { status: newOrderStatus }, { withCredentials: true });
 
 // exports
 export { getByUsername, getById, getAllOrders, deleteOrder, putOrder };
