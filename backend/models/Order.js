@@ -8,6 +8,7 @@ const orderSchema = mongoose.Schema(
 		username: { type: String, ref: 'User' },
 		postalCode: { type: String },
 		address: { type: String },
+		date: { type: String },
 		products: [
 			{
 				productId: {
@@ -23,8 +24,7 @@ const orderSchema = mongoose.Schema(
 		totalPrice: { type: Number, required: true },
 		paymentStatus: { type: Boolean, default: false },
 		status: { type: String, default: 'در حال بررسی' },
-		ref_id : {type : String , default: undefined}
-	
+		ref_id: { type: String, default: undefined }
 	},
 	{ timestamps: true }
 );
