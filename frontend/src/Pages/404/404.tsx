@@ -23,7 +23,7 @@ const UnknownPage: React.FC = () => {
 
 	return (
 		<>
-			{/* <Header /> */}
+			<Header />
 			<div className="flex flex-col items-center justify-center h-screen bg-gray-100">
 				<div className="text-5xl font-bold text-gray-800 mb-4">۴۰۴</div>
 				<div className="text-2xl font-semibold text-gray-600 mb-8">صفحه مورد نظر پیدا نشد</div>
@@ -45,13 +45,13 @@ const UnknownPage: React.FC = () => {
 				</div>
 				<div className="text-lg text-gray-500 mt-8">متاسفانه صفحه ای که دنبالش بودید , پیدا نشد :(</div>
 				<div className="mt-8">
-					<button className="px-8 py-3 bg-yellow-400 text-Dark rounded-lg hover:bg-DarkYellow"
+					<button className="px-8 py-3 hover:shadow-product from-LightYellow to-DarkYellow shadow-LightYellow/50 cursor-pointer rounded-xl bg-gradient-to-r transition-shadow"
 						onClick={goBack}>
 						بازگشت
 					</button>
 				</div>
 			</div>
-			{/* <Footer /> */}
+			<Footer />
 		</>
 	);
 };
