@@ -117,7 +117,7 @@ const AdminProducts = () => {
 										<img
                     loading="lazy"
 											className="w-32 h-32 object-contain mx-auto"
-											src={`https://45.159.150.221:3000/${product?.cover}`}
+											src={`https://www.technoshef.com/api/${product?.cover}`}
 											alt="تصویر محصول"
 										/>
 									</td>
@@ -140,7 +140,7 @@ const AdminProducts = () => {
 										<img
                     loading="lazy"
 											className="w-32 h-32 object-contain mx-auto"
-											src={`https://45.159.150.221:3000/${product?.cover}`}
+											src={`https://www.technoshef.com/api/${product?.cover}`}
 											alt="تصویر محصول"
 										/>
 									</td>
@@ -162,7 +162,7 @@ const AdminProducts = () => {
 										<img
                     loading="lazy"
 											className="w-32 h-32 object-contain mx-auto"
-											src={`https://45.159.150.221:3000/${product?.cover}`}
+											src={`https://www.technoshef.com/api/${product?.cover}`}
 											alt="تصویر محصول"
 										/>
 									</td>

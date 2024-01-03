@@ -223,7 +223,7 @@ const SingleCategory: React.FC = () => {
 									onClick={() => setImage('')}
 									className="mx-auto absolute cursor-pointer hidden xl:block left-0 border-2 border-DarkYellow p-1 rounded-lg h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
 									src={
-										image.includes('public') ? `https://45.159.150.221:3000/${image}` : `${image}`
+										image.includes('public') ? `https://www.technoshef.com/api/${image}` : `${image}`
 									}
 									alt="تصویر دسته‌‌بندی"
 									loading="lazy"

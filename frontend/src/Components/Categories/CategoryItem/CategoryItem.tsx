@@ -42,7 +42,7 @@ const CategoryItem: React.FC<CategoryItemProps> = (category) => {
 						className="h-full w-full object-scale-down"
 						src={
 							category.image?.includes('public')
-								? `https://45.159.150.221:3000/${category.image}`
+								? `https://www.technoshef.com/api/${category.image}`
 								: category.image?.includes('http://localhost:5173' || 'https://www.technoshef.com')
 								? `${category.image}`
 								: '/Images/Products/p1.png'

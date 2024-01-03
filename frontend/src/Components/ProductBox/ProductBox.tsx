@@ -42,7 +42,7 @@ const ProductBox: React.FC<ProductProps> = ({
 							className="mx-auto h-[134px] w-[134px] md:h-[170px] md:w-[170px]"
 							src={
 								cover?.includes('public')
-									? `https://45.159.150.221:3000/${cover}`
+									? `https://www.technoshef.com/api/${cover}`
 									: cover?.includes('http://localhost:5173' || 'https://www.technoshef.com')
 									? `${cover}`
 									: '/Images/Products/p1.png'

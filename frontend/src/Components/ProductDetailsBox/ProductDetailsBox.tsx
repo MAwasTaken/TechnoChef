@@ -100,7 +100,7 @@ export const ProductDetailsBox: React.FC<ProductProps> = ({
 								<SwiperSlide>
 									<img
 										className="mx-auto h-[134px] object-contain w-[134px] md:h-[230px] md:w-[230px] xl:w-[300px] xl:h-[300px]"
-										src={`https://45.159.150.221:3000/${cover}`}
+										src={`https://www.technoshef.com/api/${cover}`}
 										alt="تصویر محصول"
 										loading="lazy"
 									/>
@@ -110,7 +110,7 @@ export const ProductDetailsBox: React.FC<ProductProps> = ({
 										<SwiperSlide key={index}>
 											<img
 												className="mx-auto h-[134px] object-contain w-[134px] md:h-[230px] md:w-[230px] xl:w-[300px] xl:h-[300px]"
-												src={`https://45.159.150.221:3000/${image}`}
+												src={`https://www.technoshef.com/api/${image}`}
 												alt="تصویر محصول"
 												loading="lazy"
 											/>

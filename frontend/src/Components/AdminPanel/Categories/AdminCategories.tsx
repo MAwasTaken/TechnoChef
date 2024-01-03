@@ -54,7 +54,7 @@ const AdminCategories: React.FC = () => {
 							<td>
 								<img
 									className="w-32 h-32 object-contain mx-auto"
-									src={`https://45.159.150.221:3000/${category.image}`}
+									src={`https://www.technoshef.com/api/${category.image}`}
 									alt="category image"
 									loading="lazy"
 								/>
