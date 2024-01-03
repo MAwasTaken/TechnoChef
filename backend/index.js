@@ -4,14 +4,6 @@ const express = require('express');
 const app = express();
 const { logEvents } = require('./middlewares/logger');
 
-// Read the SSL certificate and private key files
-const privateKey = fs.readFileSync('./ssl/privatekey.pem', 'utf8');
-const certificate = fs.readFileSync('./ssl/certificate.pem', 'utf8');
-const credentials = { key: privateKey, cert: certificate };
-
-// Create the HTTPS server
-const httpsServer = https.createServer(credentials, app);
-
 // require the mongoose
 const mongoose = require('mongoose');
 
@@ -37,7 +29,7 @@ mongoose
 		console.log('DB connected successfully !!');
 
 		// Start the server
-		httpsServer.listen(process.env.PORT || PORT, () => {
+		app.listen(process.env.PORT || PORT, () => {
 			console.log('Backend server is running on HTTPS');
 		});
 	})

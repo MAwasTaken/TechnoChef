@@ -30,7 +30,7 @@ module.exports = function (app) {
 	app.use(cookieParser());
 
 	// Set the public folder static
-	app.use('/public', express.static('public'));
+	app.use('/api/public', express.static('public'));
 
 	// set the routers
 	app.use('/api/auth', authRouter);
