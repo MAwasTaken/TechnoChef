@@ -2,7 +2,7 @@ const joi = require('joi');
 
 // USER JOI MODEL  (A model for validation)
 const model = joi.object({
-	username: joi.string().pattern(new RegExp('^[a-zَA-Z0-9_-]{3,15}$')).min(3).max(30),
+	username: joi.string().pattern(new RegExp('^[a-zA-Z0-9_\.\-@]{3,15}$')).min(3).max(30),
 	firstName: joi.string().allow(''),
 	lastName: joi.string().allow(''),
 	password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{8,30}$')).min(8),
