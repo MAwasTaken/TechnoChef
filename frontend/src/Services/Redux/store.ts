@@ -6,13 +6,17 @@ import { useDispatch } from 'react-redux';
 import Search from './Slices/Search';
 import Category from './Slices/Category';
 import User from './Slices/User';
+import AdminShownProducts from './Slices/AdminShownProducts';
+import PriceSort from './Slices/PriceSort';
 
 // store
 export const store = configureStore({
 	reducer: {
 		search: Search,
 		category: Category,
-		user: User
+		priceSort: PriceSort,
+		user: User,
+		adminShownProducts: AdminShownProducts
 	}
 });
 

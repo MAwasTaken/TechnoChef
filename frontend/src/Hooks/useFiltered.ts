@@ -5,11 +5,11 @@ import { useQuery } from 'react-query';
 import { getFiltered } from '../Services/Axios/Requests/products';
 
 // use best sellers
-const useFiltered = (category: string[], search: string) =>
+const useFiltered = (category: string, search: string, priceSort: string) =>
 	useQuery(
-		['Products/Filtered', category],
+		['Products/Filtered'],
 		() => {
-			return getFiltered(category, search).then((res) => res.data.products);
+			return getFiltered(category, search, priceSort).then((res) => res.data.products);
 		},
 		{
 			refetchOnWindowFocus: false,

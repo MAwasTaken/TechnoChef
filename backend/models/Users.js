@@ -11,10 +11,25 @@ const userSchema = mongoose.Schema(
 		phoneNumber: { type: String, unique: true },
 		email: { type: String, unique: true, required: true },
 		postalCode: { type: String },
-		nationalCode: { type: String},
+		nationalCode: { type: String },
 		address: { type: String },
 		isAdmin: { type: Boolean, default: false },
-		emailVerified: { type: Boolean, default: false }
+		emailVerified: { type: Boolean, default: false },
+		basket: {
+			products: [
+				{
+					productId: {
+						type: mongoose.Types.ObjectId,
+						ref: 'Products'
+					},
+					quantity: {
+						type: Number,
+						default: 1
+					}
+				}
+			],
+			totalPrice: { type: Number, required: true, default: 0 }
+		}
 	},
 	{ timestamps: true }
 );

@@ -33,7 +33,7 @@ const GlobalSearch: React.FC = () => {
 	// search button handler
 	const closeModalHandler = () => setIsShowSearchModal(false);
 
-  // search value
+	// search value
 	const [search, setSearch] = useState<string>('');
 
 	const searchHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -54,7 +54,7 @@ const GlobalSearch: React.FC = () => {
 	return (
 		<>
 			<button onClick={() => setIsShowSearchModal(true)}>
-				<BiSearch className="text-Dark/50 hover:text-Dark h-5 w-5 transition-all md:h-8 md:w-8" />
+				<BiSearch className="text-Dark/60 hover:text-Dark h-4 w-4 transition-all md:h-8 md:w-8" />
 			</button>
 			<div
 				style={{ height: `${document.body.scrollHeight}px` }}

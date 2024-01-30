@@ -4,7 +4,7 @@ const productValidate = require('../validator/productValidation');
 const fs = require('fs');
 
 // create Product
-const createProductController = async (req, res) => {
+const createProductController = async (req, res, next) => {
 	if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
 
 	// create the Product object
@@ -12,68 +12,106 @@ const createProductController = async (req, res) => {
 
 	try {
 		// set the uploaded images address
-		let images = req.files.map((element) => element.path);
-		newProduct.images = images;
-
-		// validate the input
-		await productValidate.validateAsync(newProduct._doc);
-
-		// save the user in DB
-		const savedProduct = await newProduct.save();
-
-		// set the response
-		res.status(201).json(savedProduct);
-	} catch (err) {
-		// return the err if there is one
-		res.status(400).json(err);
-
-		newProduct.images.forEach((Image) => {
-			fs.unlinkSync(Image);
-		});
-	}
-};
-
-// update Product
-const updateProductController = async (req, res) => {
-	try {
-		if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
-		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
-
-		const oldProduct = await Product.findById(req.params.id);
+		if (req.files.images) newProduct.images = req.files.images.map((element) => element.path);
+		if (req.files.cover) newProduct.cover = req.files.cover[0].path;
 
 		// validate the input
 		await productValidate.validateAsync(req.body);
 
-		// find the Product by ID and update it
-		const updatedProduct = await Product.findByIdAndUpdate(
-			req.params.id,
-			{
-				$set: req.body,
-				images: req.files.map((element) => element.path)
-			},
-			{ new: true }
-		);
+		// save the user in DB
+		const savedProduct = await newProduct.save();
+		const { __v, ...others } = savedProduct._doc;
 
-		oldProduct.images?.forEach((Image) => {
-			fs.unlinkSync(Image);
-		});
-
-		//set the response
-		res.status(200).json(updatedProduct);
+		// set the response
+		res.status(201).json(others);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
 
-		req.files
-			.map((element) => element.path)
-			.forEach((Image) => {
-				fs.unlinkSync(Image);
+		if (newProduct.images)
+			newProduct.images.forEach((Image) => {
+				fs.unlink(Image, (err) => {
+					if (err) console.log(err);
+				});
 			});
+		if (newProduct.cover)
+			fs.unlink(newProduct.cover, (err) => {
+				if (err) console.log(err);
+			});
+
+		req.err = err;
+		next();
+	}
+};
+
+// update Product
+const updateProductController = async (req, res, next) => {
+	try {
+		if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
+		if (!req.params.shortname)
+			return res.status(400).json({ massage: 'the request needs an shortname params.' });
+
+		const oldProduct = await Product.findOne({ shortName: req.params.shortname });
+
+		// validate the input
+		await productValidate.validateAsync(req.body);
+
+		let images = [];
+		let cover;
+
+		if (req.files.images) {
+			req.files.images.map((element) => {
+				images.push(element.path);
+			});
+			if (typeof req.body.images == 'string') {
+				images.push(req.body.images);
+			} else if (req.body.images) {
+				req.body.images.map((image) => {
+					images.push(image);
+				});
+			}
+		}
+
+		if (req.files.cover) {
+			cover = req.files.cover[0].path;
+		} else {
+			cover = req.body.cover;
+		}
+
+		req.body.cover = cover;
+		req.body.images = images;
+
+		// find the Product by ID and update it
+		const updatedProduct = await Product.findOneAndUpdate(
+			{ shortName: req.params.shortname },
+			{
+				$set: req.body
+			},
+			{ new: true }
+		);
+
+		//set the response
+		const { __v, ...others } = updatedProduct._doc;
+		res.status(200).json(others);
+	} catch (err) {
+		// return the err if there is one
+		res.status(400).json(err);
+		if (req.files.images)
+			req.files?.images
+				.map((element) => element.path)
+				.forEach((Image) => {
+					if (Image) fs.unlinkSync(Image);
+				});
+
+		if (req.files.cover) fs.unlinkSync(req.files.cover[0].path);
+		console.log(err);
+		req.err = err;
+		next();
 	}
 };
 
 // delete product by Id
-const deleteProductByIdController = async (req, res) => {
+const deleteProductByIdController = async (req, res, next) => {
 	try {
 		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
 
@@ -91,15 +129,16 @@ const deleteProductByIdController = async (req, res) => {
 		res.status(200).json('Product has been deleted...');
 	} catch (err) {
 		// return the err if there is one
-		console.log(err);
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // delete product by shortName
-const deleteProductByShortNameController = async (req, res) => {
+const deleteProductByShortNameController = async (req, res, next) => {
 	try {
-		if (!req.params.id)
+		if (!req.params.shortname)
 			return res.status(400).json({ massage: 'the request needs an shortname params.' });
 
 		// find By shortname And Delete the Product
@@ -116,50 +155,55 @@ const deleteProductByShortNameController = async (req, res) => {
 		res.status(200).json('Product has been deleted...');
 	} catch (err) {
 		// return the err if there is one
-		console.log(err);
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // get product By Id
-const getProductByIdController = async (req, res) => {
+const getProductByIdController = async (req, res, next) => {
 	try {
 		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
 
 		// find the card By the ID
-		const product = await Product.findById(req.params.id);
+		const product = await Product.findById(req.params.id).select('-__v');
 		//set the response
 		res.status(200).json(product);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // get Product by shortName
-const getProductByShortName = async (req, res) => {
+const getProductByShortName = async (req, res, next) => {
 	try {
-		if (!req.params.id)
+		if (!req.params.shortname)
 			return res.status(400).json({ massage: 'the request needs an shortName params.' });
 
 		// find the card By the shortName.
-		const product = await Product.findOne({ shortName: req.params.shortname });
+		const product = await Product.findOne({ shortName: req.params.shortname }).select('-__v');
 
 		//set the response
 		res.status(200).json(product);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // get all product
-const getAllProductsController = async (req, res) => {
+const getAllProductsController = async (req, res, next) => {
 	// Define queries
 	const qNew = req.query.new;
 	const qSearch = req.query.search;
 	const qBestSeller = req.query.bestseller;
-	const qPage = req.query.page;
+	const qPage = req.query?.page;
 	const qCategory = req.query.category;
 	const qPriceSort = req.query.pricesort;
 
@@ -167,55 +211,69 @@ const getAllProductsController = async (req, res) => {
 		//Define the response objects
 		let products;
 		let pages;
+		let sortValue = { createdAt: -1 };
+		if (qPriceSort)
+			sortValue = {
+				finalPrice: qPriceSort
+			};
 
 		// if there is "new" query
 		if (qNew) {
 			//return the newest Products
-			products = await Product.find().sort({ createdAt: -1 }).limit(qNew);
+			products = await Product.find().select('-__v').sort({ createdAt: -1 }).limit(qNew);
 		} // if there is "Category" query
 		else if (qCategory) {
 			//return the Products in that categories
+
 			products = await Product.find({
 				category: qCategory.trim()
 			})
-				.skip(qPage * 9)
+				.select('-__v')
+				.skip((qPage - 1) * 9)
+				.sort(sortValue)
 				.limit(9);
 
 			const countProductsCategory = await Product.countDocuments({
 				category: qCategory.trim()
 			});
+
 			pages = Math.ceil(countProductsCategory / 9);
 		} // if there is "Search" query
 		else if (qSearch) {
 			// search in Products and return the result
 			products = await Product.find({
 				productName: { $regex: qSearch.trim() }
-			}).sort({ createdAt: -1 });
+			})
+				.select('-__v')
+				.sort(sortValue);
 		} // if there is "BestSeller" query
 		else if (qBestSeller) {
 			// return BestSeller Products
-			products = await Product.find({ best_seller: true });
+			products = await Product.find({ best_seller: true }).sort(sortValue).select('-__v');
 		} // if there is "Page" query
 		else if (qPage) {
 			// return the page of Products
 			products = await Product.find()
+				.select('-__v')
+				.sort(sortValue)
 				.skip((qPage - 1) * 9)
 				.limit(9);
 
 			const countProducts = await Product.countDocuments();
 			pages = Math.ceil(countProducts / 9);
 		} else if (qPriceSort) {
-			products = await Product.find().sort({ finalPrice: qPriceSort });
+			products = await Product.find().select('-__v').sort({ finalPrice: qPriceSort });
 		} else {
 			//return All Products
-			products = await Product.find();
+			products = await Product.find().sort({ createdAt: -1 }).select('-__v');
 		}
 
 		// set the response
-		res.status(200).json({ products, pages });
+		res.status(200).json({ products, pages, currentPage: qPage });
 	} catch (err) {
 		res.status(400).json(err);
-		console.log(err);
+		req.err = err;
+		next();
 	}
 };
 

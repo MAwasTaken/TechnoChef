@@ -5,13 +5,15 @@ const ObjectId = mongoose.Schema.ObjectId;
 // create the mongoose schema
 const orderSchema = mongoose.Schema(
 	{
-		userId: { type: ObjectId },
+		username: { type: String, ref: 'User' },
 		postalCode: { type: String },
-		address: { type: Object },
+		address: { type: String },
+		date: { type: String },
 		products: [
 			{
 				productId: {
-					type: ObjectId
+					type: ObjectId,
+					ref: 'Products'
 				},
 				quantity: {
 					type: Number,
@@ -20,7 +22,9 @@ const orderSchema = mongoose.Schema(
 			}
 		],
 		totalPrice: { type: Number, required: true },
-		status: { type: String, default: 'pending' }
+		paymentStatus: { type: Boolean, default: false },
+		status: { type: String, default: 'در حال بررسی' },
+		ref_id: { type: String, default: undefined }
 	},
 	{ timestamps: true }
 );

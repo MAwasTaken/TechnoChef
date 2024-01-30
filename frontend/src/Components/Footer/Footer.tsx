@@ -12,7 +12,7 @@ import { TbDeviceLandlinePhone } from 'react-icons/tb';
 const Footer: React.FC = () => {
 	// tsx
 	return (
-		<div className="relative">
+		<div className="relative overflow-hidden">
 			<footer className="bg-Info/50 relative mt-4 flex flex-col p-4 backdrop-blur-[2px] md:mt-8 md:p-8">
 				<div className="flex items-start justify-between">
 					<div>
@@ -91,7 +91,7 @@ const Footer: React.FC = () => {
 									to="mailto:hi@technoshef.com"
 								>
 									<span className="hidden sm:block">ایمیل:</span>
-									<span>info@technoshef.com</span>
+									<span>technoshef.parsian@gmail.com</span>
 								</Link>
 							</li>
 							<li className="flex items-center justify-center gap-x-1 md:gap-x-2">
@@ -101,18 +101,12 @@ const Footer: React.FC = () => {
 									to="tel:09122274876"
 								>
 									<span className="hidden sm:block">شماره تماس:</span>
-									<span style={{ direction: 'ltr' }}>09122274876</span>
+									<span style={{ direction: 'ltr' }}>۰۲۱-۸۸۰۷۵۲۲۴</span>
+									<span style={{ direction: 'ltr' }}>۰۲۱-۸۸۰۹۷۱۴۶</span>
 								</Link>
 							</li>
 							<li className="bg-Dark/60 hover:bg-Dark/70 h-10 w-10 cursor-pointer self-end rounded-lg p-2 transition-colors md:h-20 md:w-20">
-								<Link
-									referrerPolicy="origin"
-									target="_blank"
-									to="https://trustseal.enamad.ir/Error/ErrorReferrer"
-									className="flex flex-wrap items-start justify-start gap-x-2 md:gap-x-4"
-								>
-									<img src="./Images/enamad.png" alt="" />
-								</Link>
+								<a referrerPolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=438305&Code=f6wLGwPSIlQjY4T60uQfCMOEER4amSyP'><img referrerPolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=438305&Code=f6wLGwPSIlQjY4T60uQfCMOEER4amSyP' alt='' style={{ cursor: 'pointer' }}/></a>
 							</li>
 						</ul>
 					</div>
@@ -123,7 +117,7 @@ const Footer: React.FC = () => {
 						<span className="hidden sm:block">آدرس:</span>
 						<div className="flex flex-col">
 							<span>
-								تهران٫ شهرک‌غرب٫ بلوار دریا٫ نرسیده به چهار‌راه مسجد٫ خیابان رامشه٫ پلاک٫25 واحد2
+								تهران٫ شهرک‌غرب٫ بلوار دریا٫ نرسیده به چهار‌راه مسجد٫ خیابان رامشه٫ پلاک٫24 واحد2
 							</span>
 						</div>
 					</div>

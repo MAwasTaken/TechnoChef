@@ -15,10 +15,10 @@ router.put('/confirm/:id', verifyTokenAndAdmin, Controller.confirmCommentControl
 router.delete('/:id', verifyTokenAndAuth, Controller.deleteCommentController);
 
 // get All User Comments
-router.get('/userComments/:user_Id', Controller.getAllUserCommentsController);
+router.get('/userComments/:username', Controller.getAllUserCommentsController);
 
 // get Comments Of Product
-router.get('/productComments/:product_Id', Controller.getCommentByProductController);
+router.get('/productComments/:shortName', Controller.getCommentByProductController);
 
 // get One Comment By Id
 router.get('/:id', verifyTokenAndAdmin, Controller.getOneCommentByIdController);

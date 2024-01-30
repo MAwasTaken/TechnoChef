@@ -1,11 +1,20 @@
 // components
 import CategoryItem from './CategoryItem/CategoryItem';
 
-// packages
+// react query
+import useCategories from '../../Hooks/useCategories';
+
+// icons
 import { BiCategoryAlt } from 'react-icons/bi';
+
+// types
+import { CategoryItemProps } from '../../Types/CategoryItems.types';
 
 // categories
 const Categories = () => {
+	// GET all categories from react query
+	const { data } = useCategories();
+
 	// tsx
 	return (
 		<>
@@ -14,37 +23,9 @@ const Categories = () => {
 				دسته‌بندی‌ محصولات
 			</h2>
 			<section className="container flex flex-wrap items-center justify-center gap-x-12 gap-y-5 py-4 md:mt-4 md:gap-x-20 md:gap-y-20 md:py-8 lg:gap-x-32 xl:gap-x-48">
-				<CategoryItem
-					title="یخچال"
-					gradientColor="#fb7185"
-					imageSrc="/Images/Categories/fridge.png"
-				/>
-				<CategoryItem
-					title="ماشین لباس‌شویی"
-					gradientColor="#f472b6"
-					imageSrc="/Images/Categories/washing-machine.png"
-				/>
-				<CategoryItem
-					title="مایکرو ویو"
-					gradientColor="#e879f9"
-					imageSrc="/Images/Categories/microwave.png"
-				/>
-				<CategoryItem
-					title="اجاق گاز"
-					gradientColor="#c084fc"
-					imageSrc="/Images/Categories/oven.png"
-				/>
-				<CategoryItem title="هود" gradientColor="#a78bfa" imageSrc="/Images/Categories/hood.png" />
-				<CategoryItem
-					title="ساید بای ساید"
-					gradientColor="#818cf8"
-					imageSrc="/Images/Categories/side-by-side.png"
-				/>
-				<CategoryItem
-					title="فریزر"
-					gradientColor="#60a5fa"
-					imageSrc="/Images/Categories/refrigerator.png"
-				/>
+				{data?.map((category: CategoryItemProps) => (
+					<CategoryItem key={category._id} {...category} />
+				))}
 			</section>
 		</>
 	);

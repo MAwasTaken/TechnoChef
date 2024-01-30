@@ -10,7 +10,7 @@ const slice = createSlice({
 	initialState,
 	reducers: {
 		setCategory: (state, action: PayloadAction<string>) => action.payload
-	},
+	}
 });
 
 // exports

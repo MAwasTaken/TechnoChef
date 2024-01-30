@@ -1,9 +1,10 @@
 // dependency imports
 const Order = require('../models/Order');
+const Users = require('../models/Users');
 const validator = require('../validator/orderVAlidation');
 
 // create Order
-const createOrderController = async (req, res) => {
+const createOrderController = async (req, res, next) => {
 	if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
 
 	// create the Order object
@@ -21,23 +22,23 @@ const createOrderController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // update Order
-const updateOrderController = async (req, res) => {
+const updateOrderController = async (req, res, next) => {
 	try {
 		if (!req.body) return res.status(400).json({ massage: 'the request needs a body' });
-		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
-
-		// validate the input
-		await validator.validateAsync(req.body);
+		if (!req.params.ref_id)
+			return res.status(400).json({ massage: 'the request needs an ref Id params.' });
 
 		// find the Order by ID and update it
-		const updatedOrder = await Order.findByIdAndUpdate(
-			req.params.id,
+		const updatedOrder = await Order.findOneAndUpdate(
+			{ ref_id: req.params.ref_id },
 			{
-				$set: req.body
+				$set: { status: req.body.status }
 			},
 			{ new: true }
 		);
@@ -47,16 +48,19 @@ const updateOrderController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // delete Order
-const deleteOrderController = async (req, res) => {
+const deleteOrderController = async (req, res, next) => {
 	try {
-		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+		if (!req.params.ref_id)
+			return res.status(400).json({ massage: 'the request needs an ref Id params.' });
 
 		// find By Id And Delete the Order
-		const deletedOrder = await Order.findByIdAndDelete(req.params.id);
+		const deletedOrder = await Order.findOneAndDelete({ ref_id: req.params.ref_id });
 
 		// set the response
 		if (deletedOrder == null) return res.status(200).json('There is No Order with that Id');
@@ -64,53 +68,103 @@ const deleteOrderController = async (req, res) => {
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
-// get Order By User Id
-const getOrderByUserIdController = async (req, res) => {
+// get Order By Username
+const getOrderByUsernameController = async (req, res, next) => {
 	try {
-		if (!req.params.id)
+		if (!req.params.username)
 			return res.status(400).json({ massage: 'the request needs an userId params.' });
 
 		// find the card By the userID
-		const orders = await Order.find({ userId: req.params.userId });
+		const orders = await Order.find({ username: req.params.username }).populate({
+			path: 'products.productId',
+			select: { __v: false, updatedAt: false, createdAt: false }
+		});
+
+		let result = [];
+		for (const order of orders) {
+			const user = await Users.findOne({ username: order.username }).select([
+				'-basket',
+				'-__v',
+				'-password'
+			]);
+			const { username, ...orderInfo } = order._doc;
+			result.push({ orderInfo, user });
+		}
 
 		// set the response
-		res.status(200).json(orders);
+		res.status(200).json(result);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
-// get Order By Id
-const getOrderByIdController = async (req, res) => {
+// get Order By ref Id
+const getOrderByIdController = async (req, res, next) => {
 	try {
-		if (!req.params.id) return res.status(400).json({ massage: 'the request needs an Id params.' });
+		if (!req.params.ref_id)
+			return res.status(400).json({ massage: 'the request needs an ref Id params.' });
 
 		// find the card By the userID
-		const orders = await Order.findById(req.params.id);
+		const order = await Order.findOne({ ref_id: req.params.ref_id }).populate({
+			path: 'products.productId',
+			select: { __v: false, updatedAt: false, createdAt: false }
+		});
+
+		const user = await Users.findOne({ username: order.username }).select([
+			'-basket',
+			'-__v',
+			'-password'
+		]);
+		const { username, ...orderInfo } = order._doc;
+		const result = { orderInfo, user };
 
 		// set the response
-		res.status(200).json(orders);
+		res.status(200).json(result);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
 // get all Orders
-const getAllOrdersController = async (req, res) => {
+const getAllOrdersController = async (req, res, next) => {
 	try {
 		// find all the orders saved in DB
-		const orders = await Order.find();
+		const orders = await Order.find()
+			.sort({ createdAt: -1 })
+			.populate({
+				path: 'products.productId',
+				select: { __v: false, updatedAt: false, createdAt: false }
+			});
+
+		let result = [];
+		for (const order of orders) {
+			const user = await Users.findOne({ username: order.username }).select([
+				'-basket',
+				'-__v',
+				'-password'
+			]);
+			const { username, ...orderInfo } = order._doc;
+			result.push({ orderInfo, user });
+		}
 
 		// set the response
-		res.status(200).json(orders);
+		res.status(200).json(result);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
+		req.err = err;
+		next();
 	}
 };
 
@@ -121,5 +175,5 @@ module.exports = {
 	deleteOrderController,
 	getAllOrdersController,
 	getOrderByIdController,
-	getOrderByUserIdController
+	getOrderByUsernameController
 };

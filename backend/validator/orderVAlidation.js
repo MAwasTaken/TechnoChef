@@ -2,7 +2,7 @@ const joi = require('joi');
 
 // USER JOI MODEL  (A model for validation)
 const model = joi.object({
-	userId: joi.string(),
+	username: joi.string(),
 	postalCode: joi.string().pattern(new RegExp('\\b(?!(\\d)\\1{3})[13-9]{4}[1346-9][013-9]{5}\\b')),
 	address: joi.string(),
 	products: joi
@@ -16,7 +16,8 @@ const model = joi.object({
 			})
 		),
 	totalPrice: joi.number().positive(),
-	status: joi.string()
+	status: joi.string(),
+	ref_id: joi.string()
 });
 
 // export the models

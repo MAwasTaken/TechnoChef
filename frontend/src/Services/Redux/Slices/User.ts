@@ -15,6 +15,7 @@ const initialState: {
 	emailVerified: boolean;
 	createdAt: string;
 	updatedAt: string;
+	isAdmin: boolean;
 } = {
 	_id: '',
 	username: '',
@@ -27,7 +28,8 @@ const initialState: {
 	address: '',
 	emailVerified: false,
 	createdAt: '',
-	updatedAt: ''
+	updatedAt: '',
+	isAdmin: false
 };
 
 // page slice
@@ -50,22 +52,7 @@ const slice = createSlice({
 				updatedAt: string;
 			}>
 		) => action.payload,
-		clearUser: () => {
-			return {
-				_id: '',
-				username: '',
-				firstName: '',
-				lastName: '',
-				phoneNumber: '',
-				email: '',
-				postalCode: '',
-				nationalCode: '',
-				address: '',
-				emailVerified: false,
-				createdAt: '',
-				updatedAt: ''
-			};
-		}
+		clearUser: () => initialState
 	}
 });
 

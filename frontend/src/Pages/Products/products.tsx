@@ -6,7 +6,6 @@ import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
 import ProductBox from '../../Components/ProductBox/ProductBox';
 import ProductCategories from '../../Components/ProductsCategories/ProductCategories';
-import ProductPrice from '../../Components/ProductsPrice/ProductPrice';
 import ProductSort from '../../Components/ProductSort/ProductSort';
 
 // react query
@@ -39,8 +38,11 @@ const Products = () => {
 	// category
 	const categoryValue = useSelector((state: any) => state.category);
 
+	// price sort
+	const priceSort = useSelector((state: any) => state.priceSort);
+
 	// GET products from react query
-	const { data, refetch, isFetching } = useFiltered(categoryValue, searchValue);
+	const { data, refetch, isFetching } = useFiltered(categoryValue, searchValue, priceSort);
 
 	useEffect(() => {
 		// refetch data for search in products page
@@ -48,7 +50,7 @@ const Products = () => {
 
 		// set search value to empty string for next usage
 		dispatch(setSearchValue(''));
-	}, [searchValue]);
+	}, [searchValue, categoryValue, priceSort]);
 
 	// tsx
 	return (
@@ -59,7 +61,6 @@ const Products = () => {
 					{/* right side */}
 					<aside className="flex h-max gap-y-10 md:flex-row md:gap-y-8 xl:sticky xl:top-10 xl:flex-col">
 						<ProductCategories />
-						<ProductPrice />
 					</aside>
 					{/* divider */}
 					<div className="hidden xl:flex">
@@ -69,11 +70,15 @@ const Products = () => {
 					<section className="flex h-max flex-col gap-y-5 w-full">
 						<ProductSort />
 						{/* all products */}
-						<main className="flex flex-wrap items-center justify-end gap-x-7 gap-y-10 xl:w-[780px] 2xl:w-full">
+						<main className="flex flex-wrap items-start justify-center xl:justify-startG gap-x-7 gap-y-10 xl:w-[780px] 2xl:w-full">
 							{isFetching ? (
 								<span className="flex items-center justify-center gap-x-5 text-center w-full font-bold xl:text-lg bg-sky-500 md:py-4 text-Light py-2 rounded-md">
 									در حال دریافت لیست محصولات از سرور صبر کنید !
 								</span>
+							) : priceSort === '' && data?.length ? (
+								data
+									.reverse()
+									.map((product: ProductProps) => <ProductBox {...product} key={product._id} />)
 							) : data?.length ? (
 								data.map((product: ProductProps) => <ProductBox {...product} key={product._id} />)
 							) : (

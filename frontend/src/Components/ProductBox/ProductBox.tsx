@@ -14,10 +14,11 @@ import toFarsiNumber from '../../Utils/toFarsiNumber';
 // product box
 const ProductBox: React.FC<ProductProps> = ({
 	productColor,
-	images,
-	discount,
+	cover,
+	finalPrice,
 	price,
-	productName
+	productName,
+	shortName
 }) => {
 	// product hovering
 	const [isProductHover, setIsProductHover] = useState<boolean>(false);
@@ -25,7 +26,7 @@ const ProductBox: React.FC<ProductProps> = ({
 	// tsx
 	return (
 		<>
-			<div className="bg-Dark/70 hover:shadow-Dark/30 relative h-[245px] w-[150px] select-none rounded-xl shadow-md duration-500 hover:-translate-y-[2px] hover:shadow-lg md:h-[295px] md:w-[215px]">
+			<div className="bg-white hover:shadow-Dark/30 relative h-[245px] w-[150px] select-none rounded-xl shadow-md duration-500 hover:-translate-y-[2px] hover:shadow-lg md:h-[315px] md:w-[239px]">
 				<div className="flex h-auto flex-col p-2 w-full md:p-4">
 					<div className="absolute left-2 flex flex-col gap-y-1">
 						{productColor?.map((color, index) => (
@@ -36,33 +37,37 @@ const ProductBox: React.FC<ProductProps> = ({
 							></span>
 						))}
 					</div>
-					<Link to="/">
-						{images ? (
-							<img
-								className="mx-auto h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
-								src={`http://localhost:3000/${images[0]}`}
-								alt="تصویر محصول"
-								loading="lazy"
-							/>
-						) : null}
-						<span className="text-Light/80 mt-1 line-clamp-2 md:h-14 h-10 text-center text-sm font-bold tracking-tighter md:text-lg">
+					<Link to={`/products/${shortName}`}>
+						<img
+							className="mx-auto h-[134px] w-[134px] md:h-[170px] md:w-[170px]"
+							src={
+								cover?.includes('public')
+									? `https://www.technoshef.com/api/${cover}`
+									: cover?.includes('http://localhost:5173' || 'https://www.technoshef.com')
+									? `${cover}`
+									: '/Images/Products/p1.png'
+							}
+							alt="تصویر محصول"
+							loading="lazy"
+						/>
+						<span className="text-dark mt-2.5 line-clamp-2 h-10 md:h-14 text-center text-sm font-bold tracking-tighter md:text-lg">
 							{productName ? toFarsiNumber(productName) : ''}
 						</span>
 					</Link>
-					<div className="mt-3 flex items-center justify-between">
-						{discount ? (
+					<div className="mt-1 flex items-center justify-between">
+						{finalPrice !== price ? (
 							<span className="h-5 w-7 rounded-lg bg-gradient-to-l from-red-500 to-red-600 pt-[3px] text-center text-[10px] font-bold text-white/70 md:h-6 md:w-9 md:pt-1 md:text-xs">
-								{discount.toLocaleString('fa-IR')}
+								{Math.trunc(100 - (finalPrice * 100) / price).toLocaleString('fa-IR')}%
 							</span>
 						) : null}
-						<span className="line font-Lalezar mt-1 text-left font-bold tracking-tight text-red-500/80 line-through md:text-lg">
-							{price?.toLocaleString('fa-IR')}
+						<span className="font-Lalezar mt-1 text-left font-bold tracking-tight text-red-500/80 line-through md:text-lg">
+							{finalPrice !== price ? price.toLocaleString('fa-IR') : ''}
 						</span>
 					</div>
 				</div>
 				<Link
-					to="/"
-					className="hover:shadow-product from-LightYellow to-DarkYellow shadow-LightYellow/50 absolute -bottom-3 right-5 z-10 flex h-[25px] w-[110px] cursor-pointer items-center justify-center rounded-xl bg-gradient-to-r transition-shadow md:-bottom-[15px] md:right-9 md:h-[34px] md:w-[140px]"
+					to={`/products/${shortName}`}
+					className="hover:shadow-product from-LightYellow to-DarkYellow shadow-LightYellow/50 absolute -bottom-3 right-5 z-10 flex h-[25px] w-[110px] cursor-pointer items-center justify-center rounded-xl bg-gradient-to-r transition-shadow md:-bottom-[23px] md:right-12 md:h-[44px] md:w-[140px]"
 					onMouseEnter={() => setIsProductHover(true)}
 					onMouseLeave={() => setIsProductHover(false)}
 				>
@@ -76,7 +81,7 @@ const ProductBox: React.FC<ProductProps> = ({
 					) : (
 						<>
 							<span className="font-Lalezar text-sm text-black/70 md:mt-1 md:text-xl">
-								{(((100 - discount) * price) / 100).toLocaleString('fa-IR')}
+								{finalPrice?.toLocaleString('fa-IR')}
 							</span>
 							<div className="h-4 w-4 text-red-600">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" fill="currentColor">

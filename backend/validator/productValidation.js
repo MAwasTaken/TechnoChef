@@ -6,13 +6,14 @@ const model = joi.object({
 	productName: joi.string(),
 	price: joi.number().positive(),
 	category: joi.string(),
-	productColor: joi.array(),
+	productColor: joi.array().single(),
+	details: joi.array().sparse().items(joi.object()),
 	QTY: joi.number().positive(),
-	discount: joi.number().min(0).max(100),
-	images: joi.array().max(5),
+	finalPrice: joi.number().positive(),
+	cover: joi.string(),
+	images: joi.array().single().max(5),
 	description: joi.string(),
-	best_seller: joi.boolean(),
-	_id: joi.object()
+	best_seller: joi.boolean()
 });
 
 // export the models

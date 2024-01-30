@@ -36,7 +36,7 @@ const MainSlider = () => {
 					/>
 				</SwiperSlide>
 				<SwiperSlide>
-					<img className="sm:rounded-2xl" src="/Images/MainSlider/slide2.jpg" alt="" />
+					<img className="sm:rounded-2xl" src="/Images/MainSlider/slide2.jpg" alt="" loading="lazy" />
 				</SwiperSlide>
 			</Swiper>
 		</section>
