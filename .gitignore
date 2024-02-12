@@ -2,6 +2,6 @@
 .DS_Store
 .gitignore
 .vscode/settings.json
-
+.env
 backend/public/*
 backend/logs/*
