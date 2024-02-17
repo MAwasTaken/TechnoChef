@@ -9,8 +9,8 @@ const productsSchema = new mongoose.Schema(
 		productName: { type: String, require: true },
 		category: { type: String },
 		pricePerColor:
-			[
-				{
+			[{
+				product: {
 					price: { type: Number, required: true },
 					finalPrice: { type: Number, required: true },
 					QTY: {
@@ -24,9 +24,9 @@ const productsSchema = new mongoose.Schema(
 						}
 					},
 					productColor: { type: String, required: true },
-					productID: { type: String, required: true, unique: true }
+					shortCode: { type: String, required: true, unique: true }
 				}
-			],
+			}],
 		details: { type: Array },
 		cover: { type: String },
 		images: { type: Array },

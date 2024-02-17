@@ -14,7 +14,7 @@ const model = joi.object({
 			finalPrice: joi.number().positive(),
 			QTY: joi.number().positive(),
 			productColor: joi.array().single(),
-			productID : joi.string()
+			shortCode : joi.string()
 		})
 		),
 	productColor: joi.array().single(),
