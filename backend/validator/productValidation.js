@@ -6,10 +6,20 @@ const model = joi.object({
 	productName: joi.string(),
 	price: joi.number().positive(),
 	category: joi.string(),
+	pricePerColor: joi
+		.array()
+		.sparse()
+		.items(joi.object({
+			price: joi.number().positive(),
+			finalPrice: joi.number().positive(),
+			QTY: joi.number().positive(),
+			productColor: joi.array().single(),
+			productID : joi.string()
+		})
+		),
 	productColor: joi.array().single(),
 	details: joi.array().sparse().items(joi.object()),
 	QTY: joi.number().positive(),
-	finalPrice: joi.number().positive(),
 	cover: joi.string(),
 	images: joi.array().single().max(5),
 	description: joi.string(),
