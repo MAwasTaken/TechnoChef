@@ -22,6 +22,10 @@ const userSchema = mongoose.Schema(
 						type: mongoose.Types.ObjectId,
 						ref: 'Products'
 					},
+					shortCode: {
+						type: String,
+						ref: 'Products'
+					},
 					quantity: {
 						type: Number,
 						default: 1

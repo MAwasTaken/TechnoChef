@@ -26,10 +26,24 @@ const addToBasketController = async (req, res, next) => {
 		});
 		newProducts = products.filter((element) => !repeatedProducts.includes(element));
 		const newBasket = basket.concat(newProducts);
-
 		for (const product of newBasket) {
 			const foundProduct = await Product.findById(product.productId);
-			totalPrice += foundProduct.finalPrice * product.quantity;
+			console.log(foundProduct.pricePerColor, "pricePerColor");
+			const priceOfProduct = foundProduct.pricePerColor.map(productPrices => {
+				// console.log(productPrices , "ProductPrices");
+				console.log(productPrices.shortCode, "priceShortCode");
+				console.log(product.shortCode, "priceShortCode2");
+
+				if (productPrices.shortCode === product.shortCode) {
+					return productPrices.finalPrice
+				} else return 0;
+				// const priceShortCode = Object.keys(productPrices).find(price => {price.shortCode === product.shortCode})
+				// console.log(priceShortCode , "priceShortCode");
+				// return priceShortCode
+			})
+			console.log(priceOfProduct, "aaaaa");
+			const finalPriceOfBasket = priceOfProduct.reduce((a, b) => a + b, 0)
+			totalPrice += finalPriceOfBasket * product.quantity;
 		}
 
 		const updatedUser = await User.findByIdAndUpdate(
@@ -55,7 +69,6 @@ const removeFromBasketController = async (req, res, next) => {
 		totalPrice -= foundProduct.finalPrice * req.body.quantity;
 
 		const basket = user.basket.products;
-
 		basket.forEach((product) => {
 			if (product.productId == req.body.productId)
 				if (product.quantity == req.body.quantity) {
