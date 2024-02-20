@@ -1,6 +1,5 @@
 const User = require('../models/Users');
 const Product = require('../models/Products');
-const { object } = require('joi');
 
 const addToBasketController = async (req, res, next) => {
 	try {
@@ -17,33 +16,30 @@ const addToBasketController = async (req, res, next) => {
 			} else {
 				for (let i = 0; i < basket.length; i++) {
 					const element = basket[i];
-					if (product?.productId == element?.productId) {
+					if (
+						product?.productId == element?.productId &&
+						product?.shortCode == element?.shortCode
+					) {
 						element.quantity += product.quantity;
 						repeatedProducts.push(product);
 					}
 				}
 			}
 		});
+
 		newProducts = products.filter((element) => !repeatedProducts.includes(element));
 		const newBasket = basket.concat(newProducts);
 		for (const product of newBasket) {
 			const foundProduct = await Product.findById(product.productId);
-			console.log(foundProduct.pricePerColor, "pricePerColor");
-			const priceOfProduct = foundProduct.pricePerColor.map(productPrices => {
-				// console.log(productPrices , "ProductPrices");
-				console.log(productPrices.shortCode, "priceShortCode");
-				console.log(product.shortCode, "priceShortCode2");
 
+			const priceOfProduct = foundProduct.pricePerColor.map((productPrices) => {
 				if (productPrices.shortCode === product.shortCode) {
-					return productPrices.finalPrice
+					return productPrices.finalPrice;
 				} else return 0;
-				// const priceShortCode = Object.keys(productPrices).find(price => {price.shortCode === product.shortCode})
-				// console.log(priceShortCode , "priceShortCode");
-				// return priceShortCode
-			})
-			console.log(priceOfProduct, "aaaaa");
-			const finalPriceOfBasket = priceOfProduct.reduce((a, b) => a + b, 0)
-			totalPrice += finalPriceOfBasket * product.quantity;
+			});
+
+			const finalPriceOfProduct = priceOfProduct.reduce((a, b) => a + b, 0);
+			totalPrice += finalPriceOfProduct * product.quantity;
 		}
 
 		const updatedUser = await User.findByIdAndUpdate(
