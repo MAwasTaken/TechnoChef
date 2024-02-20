@@ -15,6 +15,7 @@ const orderSchema = mongoose.Schema(
 					type: ObjectId,
 					ref: 'Products'
 				},
+				shortCode: { type: String },
 				quantity: {
 					type: Number,
 					default: 1

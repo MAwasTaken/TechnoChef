@@ -1,6 +1,7 @@
 const Transaction = require('../models/Transaction');
 const Order = require('../models/Order');
 const User = require('../models/Users');
+const Product = require('../models/Products');
 const axios = require('axios');
 const moment = require('moment-jalali');
 
@@ -92,6 +93,21 @@ const verifyTransactionController = async (req, res, next) => {
 			});
 
 			const savedOrder = await confirmedOrder.save();
+
+			const products = savedOrder.products;
+
+			for (const product of products) {
+				const dbProduct = await Product.findById(product.productId);
+
+				dbProduct.pricePerColor.array.forEach((productQty) => {
+					if (productQty.shortCode === product.shortCode) {
+						productQty.quantity = productQty.quantity - product.quantity;
+					}
+				});
+
+				await Product.findByIdAndUpdate(product.productId, dbProduct, { new: true });
+			}
+
 			await Transaction.findOneAndUpdate(
 				{ authority },
 				{
