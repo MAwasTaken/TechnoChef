@@ -62,11 +62,19 @@ const removeFromBasketController = async (req, res, next) => {
 		let totalPrice = user.basket.totalPrice;
 
 		const foundProduct = await Product.findById(req.body.productId);
-		totalPrice -= foundProduct.finalPrice * req.body.quantity;
+
+		const priceOfProduct = foundProduct.pricePerColor.map((productPrices) => {
+			if (productPrices.shortCode === req.body.shortCode) {
+				return productPrices.finalPrice;
+			} else return 0;
+		});
+
+		const finalPriceOfProduct = priceOfProduct.reduce((a, b) => a + b, 0);
+		totalPrice -= finalPriceOfProduct.finalPrice * req.body.quantity;
 
 		const basket = user.basket.products;
 		basket.forEach((product) => {
-			if (product.productId == req.body.productId)
+			if (product.productId == req.body.productId && product.shortCode == req.body.shortCode)
 				if (product.quantity == req.body.quantity) {
 					const index = basket.indexOf(product);
 					basket.splice(index, 1);
