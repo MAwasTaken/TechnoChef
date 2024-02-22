@@ -52,6 +52,9 @@ const CreateNewProduct: React.FC = () => {
 	// details count
 	const [detailsCount, setDetailsCount] = useState<number>(1);
 
+	// details count
+	const [pricingCount, setPricingCount] = useState<number>(1);
+
 	// product cover
 	const [cover, setCover] = useState<string>();
 
@@ -61,9 +64,6 @@ const CreateNewProduct: React.FC = () => {
 	// form values
 	const [formValue, setFormValues] = useState<FieldValues>();
 
-	// product colors list
-	const [productColor, setProductColor] = useState<string[]>([]);
-
 	// product description
 	const [description, setDescription] = useState<string>('توضیحات');
 
@@ -72,26 +72,42 @@ const CreateNewProduct: React.FC = () => {
 		setIsFormFetching(true);
 
 		formData.details = formData.details?.slice(0, detailsCount);
-		formData.productColor = productColor;
+		formData.pricing = formData.pricing?.slice(0, pricingCount);
 		formData.images = images;
 
 		const data = new FormData();
 
 		data.append('productName', String(formData.productName));
 		data.append('shortName', String(formData.shortName));
-		data.append('price', String(formData.price));
-		data.append('finalPrice', String(formData.finalPrice));
-		formData.productColor.map((color) => data.append('productColor', color));
 		formData.details?.map((item: { title: string; value: string }, index) => {
 			data.append(`details[${index}][title]`, item.title);
 			data.append(`details[${index}][value]`, item.value);
 		});
-		data.append('QTY', String(formData.QTY));
+		formData.pricing?.map(
+			(
+				item: {
+					shortCode: string;
+					price: number;
+					finalPrice: number;
+					QTY: number;
+					productColor: string;
+				},
+				index
+			) => {
+				data.append(`pricePerColor[${index}][shortCode]`, String(item.shortCode));
+				data.append(`pricePerColor[${index}][price]`, String(item.price));
+				data.append(`pricePerColor[${index}][finalPrice]`, String(item.finalPrice));
+				data.append(`pricePerColor[${index}][QTY]`, String(item.QTY));
+				data.append(`pricePerColor[${index}][productColor]`, String(item.productColor));
+			}
+		);
 		data.append('cover', formData.cover ? formData.cover[0] : '');
 		data.append('description', String(description));
 		data.append('category', String(formData.category));
 		data.append('best_seller', String(formData.best_seller));
 		formData.images.map((image: File) => data.append('images', image));
+
+		console.log(...data);
 
 		postCreateProduct(data)
 			.then((res) => {
@@ -129,9 +145,8 @@ const CreateNewProduct: React.FC = () => {
 						<ProductBox
 							productName={getValues('productName')}
 							shortName={getValues('shortName')}
-							price={Number(getValues('price'))}
-							finalPrice={Number(getValues('finalPrice'))}
-							productColor={productColor}
+							price={Number(getValues('pricePerColor[0][price]'))}
+							finalPrice={Number(getValues('pricePerColor[0][finalPrice]'))}
 							cover={cover}
 						/>
 					) : (
@@ -181,48 +196,6 @@ const CreateNewProduct: React.FC = () => {
 								id="shortName"
 							/>
 						</label>
-						{/* price */}
-						<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="price">
-							{/* input */}
-							<input
-								{...register('price')}
-								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
-								type="text"
-								inputMode="decimal"
-								placeholder="قیمت"
-								id="price"
-								autoComplete="price"
-							/>
-						</label>
-						{/* finalPrice */}
-						<label
-							className="flex flex-col gap-y-1 items-center justify-center"
-							htmlFor="finalPrice"
-						>
-							{/* input */}
-							<input
-								{...register('finalPrice')}
-								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
-								type="text"
-								inputMode="decimal"
-								placeholder="قیمت پس از تخفیف"
-								id="finalPrice"
-								autoComplete="finalPrice"
-							/>
-						</label>
-						{/* QTY */}
-						<label className="flex flex-col gap-y-1 items-center justify-center" htmlFor="QTY">
-							{/* input */}
-							<input
-								{...register('QTY')}
-								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 md:w-3/4 xl:w-1/2 w-full text-right px-2"
-								type="number"
-								inputMode="decimal"
-								placeholder="تعداد"
-								id="QTY"
-								autoComplete="QTY"
-							/>
-						</label>
 						{/* description */}
 						<label
 							title="توضیحات"
@@ -237,6 +210,106 @@ const CreateNewProduct: React.FC = () => {
 								onChange={(event, editor) => setDescription(editor.getData())}
 							/>
 						</label>
+						{/* pricing */}
+						<section className="flex flex-col gap-y-5 my-5 md:my-0">
+							<span className="sm:text-base font-Lalezar text-sm text-Dark/80">قیمت‌گذاری:</span>
+							{Array.from({ length: pricingCount }).map((item, index) => (
+								<label
+									key={index}
+									htmlFor="details"
+									className="flex items-center relative justify-between"
+								>
+									<span className="block absolute font-Lalezar text-xl -right-6">
+										{Number(index + 1).toLocaleString('fa-IR')}
+									</span>
+									<span className="h-full w-0.5 rounded-full block absolute bg-red-500 -right-1"></span>
+									{/* input */}
+									<div className="flex flex-col w-full relative gap-y-1 items-center justify-center">
+										{/* shortCode */}
+										<input
+											{...register(`pricePerColor[${index}][shortCode]`)}
+											className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
+											type="text"
+											inputMode="decimal"
+											placeholder="شماره مدل"
+											id="shortCode"
+											autoComplete="shortCode"
+										/>
+										{/* price */}
+										<input
+											{...register(`pricePerColor[${index}][price]`)}
+											className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
+											type="number"
+											inputMode="decimal"
+											placeholder="قیمت"
+											id="price"
+											autoComplete="price"
+										/>
+										{/* final price */}
+										<input
+											{...register(`pricePerColor[${index}][finalPrice]`)}
+											className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
+											type="number"
+											inputMode="decimal"
+											placeholder="قیمت پس از تخفیف"
+											id="finalPrice"
+											autoComplete="finalPrice"
+										/>
+										{/* qty */}
+										<input
+											{...register(`pricePerColor[${index}][QTY]`)}
+											className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 md:w-3/4 xl:w-1/2 w-full text-right px-2"
+											type="number"
+											inputMode="decimal"
+											placeholder="تعداد"
+											id="QTY"
+											autoComplete="QTY"
+										/>
+										<div className="flex gap-y-1 relative items-center justify-center w-full">
+											<div className="absolute sm:text-base right-10 -translate-y-1/2 top-1/2 font-Lalezar text-sm text-Dark/80">
+												<p className="sm:text-base flex justify-center items-center font-Lalezar text-sm text-Dark/60">
+													رنگ:
+													{getValues(`pricePerColor[${index}][productColor]`) ? (
+														<span
+															key={index}
+															style={{ color: getValues(`pricePerColor[${index}][productColor]`) }}
+															className="bg-LightYellow rounded-md shadow-lg border border-DarkYellow py-1 px-1.5 mr-2"
+														>
+															{getValues(`pricePerColor[${index}][productColor]`)}
+														</span>
+													) : null}
+												</p>
+											</div>
+											{/* productColor */}
+											<input
+												{...register(`pricePerColor[${index}][productColor]`)}
+												className="cursor-pointer shadow-md h-10 w-2/12 rounded-lg border-2 border-DarkYellow p-0.5 my-3"
+												type="color"
+												id="productColor"
+												autoComplete="productColor"
+											/>
+										</div>
+									</div>
+								</label>
+							))}
+							<div className="flex self-end gap-x-2">
+								<button
+									type="button"
+									className="bg-red-500 shadow-md p-1 md:p-1.5 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-red-600 transition-colors mr-1.5"
+									onClick={() => setPricingCount(pricingCount - 1)}
+									disabled={pricingCount === 1}
+								>
+									<BsTrash className="md:w-6 md:h-6 h-4 w-4 text-white" />
+								</button>
+								<button
+									type="button"
+									className="bg-sky-500 shadow-md p-1 md:p-1.5 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-sky-600 transition-colors mr-1.5"
+									onClick={() => setPricingCount(pricingCount + 1)}
+								>
+									<BsPlus className="md:w-6 md:h-6 h-5 w-5 text-white" />
+								</button>
+							</div>
+						</section>
 						{/* details */}
 						<section className="flex flex-col gap-y-2">
 							<span className="sm:text-base font-Lalezar text-sm text-Dark/80">مشخصات:</span>
@@ -285,34 +358,10 @@ const CreateNewProduct: React.FC = () => {
 								</button>
 							</div>
 						</section>
-						<section className="flex justify-between items-start">
-							{/* productColor */}
-							<div className="flex relative flex-col w-3/4 gap-y-1 items-center justify-center">
-								{/* input */}
-								<input
-									className="cursor-pointer shadow-md h-10 w-2/12 rounded-lg border-2 border-DarkYellow p-0.5 my-3"
-									onBlur={(e) => setProductColor([...productColor, e.target.value])}
-									type="color"
-									id="productColor"
-									autoComplete="productColor"
-								/>
-								<div className="flex gap-x-2.5 justify-center items-center w-full flex-wrap gap-y-2.5">
-									{productColor?.map((color, index) => (
-										<span
-											className="px-2.5 select-none py-1.5 bg-gradient-to-r cursor-pointer from-LightYellow to-DarkYellow rounded-lg shadow"
-											key={index}
-											style={{ color: color }}
-											onClick={(e) =>
-												setProductColor(
-													productColor.filter((item, itemIndex) => itemIndex !== index)
-												)
-											}
-										>
-											{color}
-										</span>
-									))}
-								</div>
-							</div>
+						<section className="flex justify-center relative items-center">
+							<span className="absolute sm:text-base right-0 -translate-y-1/2 top-1/2 font-Lalezar text-sm text-Dark/80">
+								دسته‌بندی:
+							</span>
 							{/* category */}
 							<div className="flex gap-y-1 w-1/4 relative items-center justify-center">
 								{/* input */}
