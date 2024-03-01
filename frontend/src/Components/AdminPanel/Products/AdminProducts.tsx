@@ -115,7 +115,7 @@ const AdminProducts = () => {
 									<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
 									<td>
 										<img
-                    loading="lazy"
+											loading="lazy"
 											className="w-32 h-32 object-contain mx-auto"
 											src={`https://www.technoshef.com/api/${product?.cover}`}
 											alt="تصویر محصول"
@@ -124,55 +124,58 @@ const AdminProducts = () => {
 									<td className="tracking-tighter sm:text-base">{product.productName}</td>
 									<td>{product.category}</td>
 									<td className="tracking-tighter sm:text-base">
-										{product.finalPrice.toLocaleString('fa-IR')} <span className="text-red-500 mr-1">تومان</span>
+										{product.pricePerColor![0].finalPrice!.toLocaleString('fa-IR')}{' '}
+										<span className="text-red-500 mr-1">تومان</span>
 									</td>
 								</tr>
-						  ))
+							))
 						: filter === 'latest'
-						? latest?.reverse().map((product: ProductProps, index: number) => (
-								<tr
-									key={product._id}
-									className="border-b border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer"
-									onClick={() => navigate(String(product.shortName))}
-								>
-									<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
-									<td>
-										<img
-                    loading="lazy"
-											className="w-32 h-32 object-contain mx-auto"
-											src={`https://www.technoshef.com/api/${product?.cover}`}
-											alt="تصویر محصول"
-										/>
-									</td>
-									<td className="tracking-tighter sm:text-base">{product.productName}</td>
-									<td>{product.category}</td>
-									<td className="tracking-tighter">
-										{product.finalPrice.toLocaleString('fa-IR')} <span className="text-red-500 mr-1">تومان</span>
-									</td>
-								</tr>
-						  ))
-						: all?.reverse().map((product: ProductProps, index: number) => (
-								<tr
-									key={product._id}
-									className="border-b border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer"
-									onClick={() => navigate(String(product.shortName))}
-								>
-									<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
-									<td>
-										<img
-                    loading="lazy"
-											className="w-32 h-32 object-contain mx-auto"
-											src={`https://www.technoshef.com/api/${product?.cover}`}
-											alt="تصویر محصول"
-										/>
-									</td>
-									<td className="tracking-tighter sm:text-base">{product.productName}</td>
-									<td>{product.category}</td>
-									<td className="tracking-tighter">
-										{product.finalPrice.toLocaleString('fa-IR')} <span className="text-red-500 mr-1">تومان</span>
-									</td>
-								</tr>
-						  ))}
+							? latest?.reverse().map((product: ProductProps, index: number) => (
+									<tr
+										key={product._id}
+										className="border-b border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer"
+										onClick={() => navigate(String(product.shortName))}
+									>
+										<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
+										<td>
+											<img
+												loading="lazy"
+												className="w-32 h-32 object-contain mx-auto"
+												src={`https://www.technoshef.com/api/${product?.cover}`}
+												alt="تصویر محصول"
+											/>
+										</td>
+										<td className="tracking-tighter sm:text-base">{product.productName}</td>
+										<td>{product.category}</td>
+										<td className="tracking-tighter">
+											{product.pricePerColor![0].finalPrice!.toLocaleString('fa-IR')}{' '}
+											<span className="text-red-500 mr-1">تومان</span>
+										</td>
+									</tr>
+								))
+							: all?.reverse().map((product: ProductProps, index: number) => (
+									<tr
+										key={product._id}
+										className="border-b border-DarkYellow hover:bg-Info/20 transition-all duration-500 cursor-pointer"
+										onClick={() => navigate(String(product.shortName))}
+									>
+										<td className="font-Lalezar text-base lg:text-lg">{index + 1}</td>
+										<td>
+											<img
+												loading="lazy"
+												className="w-32 h-32 object-contain mx-auto"
+												src={`https://www.technoshef.com/api/${product?.cover}`}
+												alt="تصویر محصول"
+											/>
+										</td>
+										<td className="tracking-tighter sm:text-base">{product.productName}</td>
+										<td>{product.category}</td>
+										<td className="tracking-tighter">
+											{product?.pricePerColor![0].finalPrice?.toLocaleString('fa-IR')}{' '}
+											<span className="text-red-500 mr-1">تومان</span>
+										</td>
+									</tr>
+								))}
 				</tbody>
 			</table>
 		</section>

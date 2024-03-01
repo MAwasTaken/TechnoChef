@@ -9,7 +9,7 @@ export type NewProductInputs = {
 		title: string;
 		value: string;
 	}[];
-	pricing?: {
+	pricePerColor?: {
 		shortCode: string;
 		price: number;
 		finalPrice: number;

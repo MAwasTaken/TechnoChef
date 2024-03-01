@@ -2,8 +2,9 @@
 import axiosInstance from '../Configs/configs';
 
 // PUT add product
-const putAddProduct = async (productDetail: { productId: string; quantity: number }[]) =>
-	axiosInstance.put('/basket/add', productDetail, { withCredentials: true });
+const putAddProduct = async (
+	productDetail: { productId: string; shortCode: string; quantity: number }[]
+) => axiosInstance.put('/basket/add', productDetail, { withCredentials: true });
 
 // GET basket
 const getBasket = async () => axiosInstance.get('/basket', { withCredentials: true });

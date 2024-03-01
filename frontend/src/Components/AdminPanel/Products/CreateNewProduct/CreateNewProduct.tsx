@@ -72,7 +72,7 @@ const CreateNewProduct: React.FC = () => {
 		setIsFormFetching(true);
 
 		formData.details = formData.details?.slice(0, detailsCount);
-		formData.pricing = formData.pricing?.slice(0, pricingCount);
+		formData.pricePerColor = formData.pricePerColor?.slice(0, pricingCount);
 		formData.images = images;
 
 		const data = new FormData();
@@ -83,7 +83,7 @@ const CreateNewProduct: React.FC = () => {
 			data.append(`details[${index}][title]`, item.title);
 			data.append(`details[${index}][value]`, item.value);
 		});
-		formData.pricing?.map(
+		formData.pricePerColor?.map(
 			(
 				item: {
 					shortCode: string;
@@ -106,8 +106,6 @@ const CreateNewProduct: React.FC = () => {
 		data.append('category', String(formData.category));
 		data.append('best_seller', String(formData.best_seller));
 		formData.images.map((image: File) => data.append('images', image));
-
-		console.log(...data);
 
 		postCreateProduct(data)
 			.then((res) => {
@@ -145,16 +143,18 @@ const CreateNewProduct: React.FC = () => {
 						<ProductBox
 							productName={getValues('productName')}
 							shortName={getValues('shortName')}
-							price={Number(getValues('pricePerColor[0][price]'))}
-							finalPrice={Number(getValues('pricePerColor[0][finalPrice]'))}
+							pricePerColor={[getValues('pricePerColor[0]')]}
 							cover={cover}
 						/>
 					) : (
 						<ProductBox
 							productName="نام محصول"
-							price={999999999}
-							finalPrice={111111111}
-							productColor={['#ffffff', '#999999', '#121212']}
+							pricePerColor={[
+								{
+									finalPrice: 111111111,
+									price: 999999999
+								}
+							]}
 						/>
 					)}
 				</section>

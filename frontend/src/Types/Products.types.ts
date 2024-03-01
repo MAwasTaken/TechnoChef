@@ -1,11 +1,7 @@
 export type ProductProps = {
 	shortName?: string;
 	productName?: string;
-	price: number;
-	finalPrice: number;
 	category?: string;
-	productColor?: string[];
-	QTY?: number;
 	images?: any;
 	cover?: any;
 	description?: string;
@@ -14,4 +10,12 @@ export type ProductProps = {
 	createdAt?: string;
 	updatedAt?: string;
 	details?: { title: string; value: string }[];
+	pricePerColor?: {
+		QTY?: number;
+		finalPrice?: number;
+		price?: number;
+		productColor?: string;
+		shortCode?: string;
+		_id?: string;
+	}[];
 };

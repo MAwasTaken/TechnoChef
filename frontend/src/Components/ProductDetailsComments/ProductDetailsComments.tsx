@@ -27,7 +27,6 @@ const ProductDetailsComments: React.FC = () => {
 
 	// create new comment
 	const createNewCommentHandler = () => {
-    console.log(user._id);
 		user._id
 			? setIsAddingComment(true)
 			: toast.error('برای افزودن نظر ابتدا باید وارد شوید ❌', {

@@ -51,6 +51,9 @@ const SingleProduct = () => {
 	// details count
 	const [detailsCount, setDetailsCount] = useState<number>(1);
 
+	// details count
+	const [pricingCount, setPricingCount] = useState<number>(1);
+
 	// spinner handlers
 	const [isFormFetching, setIsFormFetching] = useState<boolean>(false);
 	const [isFormFetching2, setIsFormFetching2] = useState<boolean>(false);
@@ -81,12 +84,9 @@ const SingleProduct = () => {
 			reset({
 				productName: res.data.productName,
 				shortName: res.data.shortName,
-				price: res.data.price,
-				finalPrice: res.data.finalPrice,
-				QTY: res.data.QTY,
-				productColor: res.data.productColor,
 				category: res.data.category,
 				cover: res.data.cover,
+				pricePerColor: res.data.pricePerColor,
 				details: res.data.details,
 				images: res.data.images,
 				best_seller: res.data.best_seller
@@ -95,6 +95,7 @@ const SingleProduct = () => {
 			setDescription(res.data.description);
 			setProductColor(res.data.productColor);
 			setCover(`${res.data.cover}`);
+			setPricingCount(res.data.pricePerColor.length);
 			setDetailsCount(res.data.details.length);
 			setImages(res.data.images);
 		});
@@ -105,27 +106,41 @@ const SingleProduct = () => {
 		setIsFormFetching(true);
 
 		formData.details = formData.details?.slice(0, detailsCount);
-		formData.productColor = productColor;
+		formData.pricePerColor = formData.pricePerColor?.slice(0, pricingCount);
 		formData.images = images;
 
 		const data = new FormData();
 
 		data.append('productName', String(formData.productName));
 		data.append('shortName', String(formData.shortName));
-		data.append('price', String(formData.price));
-		data.append('finalPrice', String(formData.finalPrice));
-		formData.productColor.map((color) => data.append('productColor', color));
-		data.append('QTY', String(formData.QTY));
 		cover === ''
 			? data.append('cover', '')
 			: typeof formData.cover === 'string'
-			? data.append('cover', formData.cover)
-			: data.append('cover', formData.cover[0]);
+				? data.append('cover', formData.cover)
+				: data.append('cover', formData.cover[0]);
 		data.append('description', String(description));
 		data.append('category', String(formData.category));
 		formData.images.length === 0
 			? data.append('images', '')
 			: formData.images.map((image: File) => data.append('images', image));
+		formData.pricePerColor?.map(
+			(
+				item: {
+					shortCode: string;
+					price: number;
+					finalPrice: number;
+					QTY: number;
+					productColor: string;
+				},
+				index
+			) => {
+				data.append(`pricePerColor[${index}][shortCode]`, String(item.shortCode));
+				data.append(`pricePerColor[${index}][price]`, String(item.price));
+				data.append(`pricePerColor[${index}][finalPrice]`, String(item.finalPrice));
+				data.append(`pricePerColor[${index}][QTY]`, String(item.QTY));
+				data.append(`pricePerColor[${index}][productColor]`, String(item.productColor));
+			}
+		);
 		formData.details?.map((item: { title: string; value: string }, index) => {
 			data.append(`details[${index}][title]`, item.title);
 			data.append(`details[${index}][value]`, item.value);
@@ -186,17 +201,18 @@ const SingleProduct = () => {
 						<ProductBox
 							productName={formValue.productName}
 							shortName={formValue.shortName}
-							price={Number(formValue.price)}
-							finalPrice={Number(formValue.finalPrice)}
-							productColor={productColor}
 							cover={cover}
+							pricePerColor={formValue.pricePerColor}
 						/>
 					) : (
 						<ProductBox
 							productName="نام محصول"
-							price={999999999}
-							finalPrice={111111111}
-							productColor={['#ffffff', '#999999', '#121212']}
+							pricePerColor={[
+								{
+									finalPrice: 111111111,
+									price: 999999999
+								}
+							]}
 						/>
 					)}
 				</section>
@@ -239,60 +255,6 @@ const SingleProduct = () => {
 								id="shortName"
 							/>
 						</label>
-						{/* price */}
-						<label
-							title="قیمت"
-							className="flex flex-col gap-y-1 items-center justify-center"
-							htmlFor="price"
-						>
-							{/* input */}
-							<input
-								required
-								{...register('price')}
-								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
-								type="text"
-								inputMode="decimal"
-								placeholder="قیمت"
-								id="price"
-								autoComplete="price"
-							/>
-						</label>
-						{/* finalPrice */}
-						<label
-							title="قیمت نهایی"
-							className="flex flex-col gap-y-1 items-center justify-center"
-							htmlFor="finalPrice"
-						>
-							{/* input */}
-							<input
-								required
-								{...register('finalPrice')}
-								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
-								type="text"
-								inputMode="decimal"
-								placeholder="قیمت پس از تخفیف"
-								id="finalPrice"
-								autoComplete="finalPrice"
-							/>
-						</label>
-						{/* QTY */}
-						<label
-							title="تعداد"
-							className="flex flex-col gap-y-1 items-center justify-center"
-							htmlFor="QTY"
-						>
-							{/* input */}
-							<input
-								required
-								{...register('QTY')}
-								className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 md:w-3/4 xl:w-1/2 w-full text-right px-2"
-								type="number"
-								inputMode="decimal"
-								placeholder="تعداد"
-								id="QTY"
-								autoComplete="QTY"
-							/>
-						</label>
 						{/* description */}
 						<label
 							title="توضیحات"
@@ -307,6 +269,106 @@ const SingleProduct = () => {
 								onChange={(event, editor) => setDescription(editor.getData())}
 							/>
 						</label>
+						{/* pricing */}
+						<section className="flex flex-col gap-y-5 my-5 md:my-0">
+							<span className="sm:text-base font-Lalezar text-sm text-Dark/80">قیمت‌گذاری:</span>
+							{Array.from({ length: pricingCount }).map((item, index) => (
+								<label
+									key={index}
+									htmlFor="details"
+									className="flex items-center relative justify-between"
+								>
+									<span className="block absolute font-Lalezar text-xl -right-6">
+										{Number(index + 1).toLocaleString('fa-IR')}
+									</span>
+									<span className="h-full w-0.5 rounded-full block absolute bg-red-500 -right-1"></span>
+									{/* input */}
+									<div className="flex flex-col w-full relative gap-y-1 items-center justify-center">
+										{/* shortCode */}
+										<input
+											{...register(`pricePerColor[${index}][shortCode]`)}
+											className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
+											type="text"
+											inputMode="decimal"
+											placeholder="شماره مدل"
+											id="shortCode"
+											autoComplete="shortCode"
+										/>
+										{/* price */}
+										<input
+											{...register(`pricePerColor[${index}][price]`)}
+											className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
+											type="number"
+											inputMode="decimal"
+											placeholder="قیمت"
+											id="price"
+											autoComplete="price"
+										/>
+										{/* final price */}
+										<input
+											{...register(`pricePerColor[${index}][finalPrice]`)}
+											className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 px md:w-3/4 xl:w-1/2 w-full text-right px-2"
+											type="number"
+											inputMode="decimal"
+											placeholder="قیمت پس از تخفیف"
+											id="finalPrice"
+											autoComplete="finalPrice"
+										/>
+										{/* qty */}
+										<input
+											{...register(`pricePerColor[${index}][QTY]`)}
+											className="border-2 border-gray-300 text-base focus:outline-none focus:border-DarkYellow rounded-lg py-2 md:w-3/4 xl:w-1/2 w-full text-right px-2"
+											type="number"
+											inputMode="decimal"
+											placeholder="تعداد"
+											id="QTY"
+											autoComplete="QTY"
+										/>
+										<div className="flex gap-y-1 relative items-center justify-center w-full">
+											<div className="absolute sm:text-base right-10 -translate-y-1/2 top-1/2 font-Lalezar text-sm text-Dark/80">
+												<p className="sm:text-base flex justify-center items-center font-Lalezar text-sm text-Dark/60">
+													رنگ:
+													{getValues(`pricePerColor[${index}][productColor]`) ? (
+														<span
+															key={index}
+															style={{ color: getValues(`pricePerColor[${index}][productColor]`) }}
+															className="bg-LightYellow rounded-md shadow-lg border border-DarkYellow py-1 px-1.5 mr-2"
+														>
+															{getValues(`pricePerColor[${index}][productColor]`)}
+														</span>
+													) : null}
+												</p>
+											</div>
+											{/* productColor */}
+											<input
+												{...register(`pricePerColor[${index}][productColor]`)}
+												className="cursor-pointer shadow-md h-10 w-2/12 rounded-lg border-2 border-DarkYellow p-0.5 my-3"
+												type="color"
+												id="productColor"
+												autoComplete="productColor"
+											/>
+										</div>
+									</div>
+								</label>
+							))}
+							<div className="flex self-end gap-x-2">
+								<button
+									type="button"
+									className="bg-red-500 shadow-md p-1 md:p-1.5 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-red-600 transition-colors mr-1.5"
+									onClick={() => setPricingCount(pricingCount - 1)}
+									disabled={pricingCount === 1}
+								>
+									<BsTrash className="md:w-6 md:h-6 h-4 w-4 text-white" />
+								</button>
+								<button
+									type="button"
+									className="bg-sky-500 shadow-md p-1 md:p-1.5 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-sky-600 transition-colors mr-1.5"
+									onClick={() => setPricingCount(pricingCount + 1)}
+								>
+									<BsPlus className="md:w-6 md:h-6 h-5 w-5 text-white" />
+								</button>
+							</div>
+						</section>
 						{/* details */}
 						<section className="flex flex-col gap-y-2">
 							<span className="sm:text-base font-Lalezar text-sm text-Dark/80">مشخصات:</span>
@@ -355,35 +417,6 @@ const SingleProduct = () => {
 								</button>
 							</div>
 						</section>
-						{/* productColor */}
-						<div className="flex relative flex-col gap-y-1 items-center justify-center">
-							<span className="absolute sm:text-base right-0 top-1/4 font-Lalezar text-sm text-Dark/80">
-								رنگ:
-							</span>
-							{/* input */}
-							<input
-								required
-								className="md:w-2/12 cursor-pointer w-1/2 h-10 rounded-lg border-2 border-DarkYellow p-0.5 my-3"
-								onBlur={(e) => setProductColor([...productColor, e.target.value])}
-								type="color"
-								id="productColor"
-								autoComplete="productColor"
-							/>
-							<div className="flex gap-x-2.5 justify-center items-center w-full flex-wrap gap-y-2.5">
-								{productColor?.map((color, index) => (
-									<span
-										className="px-2.5 select-none py-1.5 bg-gradient-to-r cursor-pointer from-LightYellow to-DarkYellow rounded-lg shadow"
-										key={index}
-										style={{ color: color }}
-										onClick={(e) =>
-											setProductColor(productColor.filter((item, itemIndex) => itemIndex !== index))
-										}
-									>
-										{color}
-									</span>
-								))}
-							</div>
-						</div>
 						{/* category */}
 						<div className="flex gap-y-1 relative items-center justify-center">
 							<span className="absolute sm:text-base right-0 top-1/2 -translate-y-1/2 font-Lalezar text-sm text-Dark/80">
@@ -431,7 +464,9 @@ const SingleProduct = () => {
 									onClick={() => setCover('')}
 									className="mx-auto absolute cursor-pointer hidden xl:block left-0 border-2 border-DarkYellow p-1 rounded-lg h-[134px] w-[134px] md:h-[150px] md:w-[150px]"
 									src={
-										cover.includes('public') ? `https://www.technoshef.com/api/${cover}` : `${cover}`
+										cover.includes('public')
+											? `https://www.technoshef.com/api/${cover}`
+											: `${cover}`
 									}
 									alt="تصویر محصول"
 									loading="lazy"

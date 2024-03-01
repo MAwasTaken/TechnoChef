@@ -65,7 +65,7 @@ const Login: React.FC = () => {
 	});
 
 	// google recaptch handler
-	const [isRecaptcha, setIsRecaptcha] = useState<boolean>(true);
+	const [isRecaptcha, setIsRecaptcha] = useState<boolean>(false);
 
 	// form xss prevent handler
 	const [isFormReady, setIsFormReady] = useState<boolean>(true);
