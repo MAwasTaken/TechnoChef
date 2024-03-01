@@ -17,7 +17,7 @@ const createProductController = async (req, res, next) => {
 
 		// validate the input
 		await productValidate.validateAsync(req.body);
-
+		
 		// save the user in DB
 		const savedProduct = await newProduct.save();
 		const { __v, ...others } = savedProduct._doc;
