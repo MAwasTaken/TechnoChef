@@ -3,7 +3,6 @@ const express = require('express');
 const { default: mongoose } = require('mongoose');
 
 // import products model
-
 const Products = require('./../models/products.old');
 const newProducts = require('./../models/products.new');
 
@@ -14,7 +13,7 @@ const productsUpdater = async (req, res) => {
 
         for (const data of products) {
             await newProducts.updateOne(
-                { shortName: data.shortName },
+                { shortName: data.shortName, _id: data._id },
                 {
                     $set: {
                         productName: data.productName,
@@ -39,11 +38,13 @@ const productsUpdater = async (req, res) => {
 
             console.log(`Updated product: ${data.shortName}`);
         }
-
-        res.status(200).json('Database updated successfully');
+        
+        res
+            .status(200)
+            .json({ message: "Products database updated successfully" })
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error', message: err.message });
     }
 };
 
@@ -53,7 +54,7 @@ const getAllProducts = async (req, res) => {
         const AllProducts = await newProducts.find();
         res
             .status(200)
-            .json({Products : AllProducts })
+            .json({ Products: AllProducts })
     } catch (err) {
         res
             .status(500)
