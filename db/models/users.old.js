@@ -1,8 +1,9 @@
 // mongoose set up
 const mongoose = require('mongoose');
+const { array, string } = require('joi');
 
 // create the mongoose schema
-const userSchema = mongoose.Schema(
+const userSchema = new mongoose.Schema(
 	{
 		username: { type: String, required: true, unique: true },
 		password: { type: String, required: true },

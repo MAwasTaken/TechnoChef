@@ -17,6 +17,7 @@ const morgan = require('morgan');
 
 // routers imports
 const productsUpdate = require('../routes/Product');
+const usersUpdate = require('./../routes/User')
 
 module.exports = function (app) {
     // use middleware : morgan
@@ -32,5 +33,6 @@ module.exports = function (app) {
     app.use(bodyParser.urlencoded({ extended: true }));
 
     // set the reoutes
-    app.use('/api/products',productsUpdate) //products router
+    app.use('/api/products', productsUpdate) //products router
+    app.use('/api/users', usersUpdate) //users router
 }

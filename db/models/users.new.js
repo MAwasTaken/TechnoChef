@@ -1,8 +1,9 @@
 // mongoose set up
+const { array, string } = require('joi');
 const mongoose = require('mongoose');
 
 // create the mongoose schema
-const userSchema = mongoose.Schema(
+const userSchema = new mongoose.Schema(
 	{
 		username: { type: String, required: true, unique: true },
 		password: { type: String, required: true },
@@ -39,4 +40,4 @@ const userSchema = mongoose.Schema(
 );
 
 // export
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('UsersNew', userSchema);
