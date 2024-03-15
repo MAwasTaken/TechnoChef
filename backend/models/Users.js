@@ -30,6 +30,10 @@ const userSchema = mongoose.Schema(
 						type: String,
 						ref: 'Products'
 					},
+					finalPrice: {
+						type: Number,
+						ref: 'Products'
+					},
 					quantity: {
 						type: Number,
 						default: 1
