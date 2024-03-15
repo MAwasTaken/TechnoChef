@@ -18,7 +18,8 @@ const addToBasketController = async (req, res, next) => {
 					const element = basket[i];
 					if (
 						product?.productId == element?.productId &&
-						product?.shortCode == element?.shortCode
+						product?.shortCode == element?.shortCode &&
+						product?.productColor == element?.productColor
 					) {
 						element.quantity += product.quantity;
 						repeatedProducts.push(product);
@@ -64,6 +65,7 @@ const removeFromBasketController = async (req, res, next) => {
 		const foundProduct = await Product.findById(req.body.productId);
 
 		const priceOfProduct = foundProduct.pricePerColor.map((productPrices) => {
+			console.log(productPrices);
 			if (productPrices.shortCode === req.body.shortCode) {
 				return productPrices.finalPrice;
 			} else return 0;
@@ -99,9 +101,9 @@ const removeFromBasketController = async (req, res, next) => {
 
 const getBasketController = async (req, res, next) => {
 	try {
-		const user = await User.findById(req.user.id).exec({
+		const user = await User.findById(req.user.id).populate({
 			path: 'basket.products.productId',
-			select: { __v: false, updatedAt: false, createdAt: false }
+			select: { __v: false, updatedAt: false, createdAt: false ,pricePerColor: false, details: false, best_seller:false, images:false }
 		});
 		const basket = user.basket;
 		res.status(200).json(basket);

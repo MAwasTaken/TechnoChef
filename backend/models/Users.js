@@ -26,6 +26,10 @@ const userSchema = mongoose.Schema(
 						type: String,
 						ref: 'Products'
 					},
+					productColor: {
+						type: String,
+						ref: 'Products'
+					},
 					quantity: {
 						type: Number,
 						default: 1
