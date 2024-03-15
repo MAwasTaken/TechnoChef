@@ -99,7 +99,7 @@ const removeFromBasketController = async (req, res, next) => {
 
 const getBasketController = async (req, res, next) => {
 	try {
-		const user = await User.findById(req.user.id).populate({
+		const user = await User.findById(req.user.id).exec({
 			path: 'basket.products.productId',
 			select: { __v: false, updatedAt: false, createdAt: false }
 		});
