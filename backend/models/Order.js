@@ -16,6 +16,8 @@ const orderSchema = mongoose.Schema(
 					ref: 'Products'
 				},
 				shortCode: { type: String },
+				productColor: {type: String},
+				finalPrice: {type: Number},
 				quantity: {
 					type: Number,
 					default: 1
