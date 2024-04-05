@@ -42,13 +42,14 @@ const PanelBasket: React.FC = () => {
 	// remove product
 	const removeProductFromBasket = (
 		event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-		productID: string
+		productID: string,
+    productShortCode: string
 	) => {
 		setIsFormFetching2(true);
 
 		event.stopPropagation();
 
-		putRemoveProduct({ productId: productID, quantity: 1 })
+		putRemoveProduct({ productId: productID, shortCode: productShortCode, quantity: 1 })
 			.then(() =>
 				toast.success('محصول با موفقیت از سبدخرید حذف شد !', {
 					onOpen: () => refetch()
@@ -171,7 +172,7 @@ const PanelBasket: React.FC = () => {
 										</td>
 										<td className="tracking-tighter sm:text-base">
 											<button
-												onClick={(event) => removeProductFromBasket(event, product.productId._id)}
+												onClick={(event) => removeProductFromBasket(event, product.productId._id, product.shortCode)}
 												type="button"
 												className="bg-red-500 shadow-md p-1 md:p-1.5 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-red-600 transition-colors mr-1.5"
 											>

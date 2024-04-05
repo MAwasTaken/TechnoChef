@@ -16,7 +16,7 @@ const putAddProduct = async (
 const getBasket = async () => axiosInstance.get('/basket', { withCredentials: true });
 
 // PUT remove product from basket
-const putRemoveProduct = async (productDetail: { productId: string; quantity: number }) =>
+const putRemoveProduct = async (productDetail: { productId: string; shortCode: string; quantity: number }) =>
 	axiosInstance.put('/basket/remove', productDetail, { withCredentials: true });
 
 // DELETE clear basket
