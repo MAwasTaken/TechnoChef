@@ -48,7 +48,7 @@ const addToBasketController = async (req, res, next) => {
 			{ 'basket.products': newBasket, 'basket.totalPrice': totalPrice },
 			{ new: true }
 		);
-		res.status(200).json(updatedUser);
+		res.status(200).json(updatedUser.basket);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
@@ -65,14 +65,15 @@ const removeFromBasketController = async (req, res, next) => {
 		const foundProduct = await Product.findById(req.body.productId);
 
 		const priceOfProduct = foundProduct.pricePerColor.map((productPrices) => {
-			console.log(productPrices);
 			if (productPrices.shortCode === req.body.shortCode) {
 				return productPrices.finalPrice;
 			} else return 0;
 		});
 
+
 		const finalPriceOfProduct = priceOfProduct.reduce((a, b) => a + b, 0);
-		totalPrice -= finalPriceOfProduct.finalPrice * req.body.quantity;
+		totalPrice -= finalPriceOfProduct * req.body.quantity;
+		if(totalPrice <= 0) totalPrice = 0
 
 		const basket = user.basket.products;
 		basket.forEach((product) => {
@@ -90,7 +91,7 @@ const removeFromBasketController = async (req, res, next) => {
 			{ 'basket.products': basket, 'basket.totalPrice': totalPrice },
 			{ new: true }
 		);
-		res.status(200).json(updatedUser);
+		res.status(200).json(updatedUser.basket);
 	} catch (err) {
 		// return the err if there is one
 		res.status(400).json(err);
