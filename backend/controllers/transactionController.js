@@ -122,6 +122,12 @@ const verifyTransactionController = async (req, res, next) => {
 				{ new: true }
 			);
 
+			user.basket = {
+				products: [],
+				totalPrice: 0
+			};
+			await user.save();
+
 			return res.status(200).json({
 				statusCode: 200,
 				data: {
