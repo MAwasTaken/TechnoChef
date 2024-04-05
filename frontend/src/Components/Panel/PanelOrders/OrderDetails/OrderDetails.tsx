@@ -148,7 +148,7 @@ const OrderDetails: React.FC = () => {
 									<td>
 										<img
 											className="w-32 h-32 object-contain mx-auto"
-											src={`https://45.159.150.221:3000/${product.productId?.cover}`}
+											src={`https://www.technoshef.com/${product.productId?.cover}`}
 											alt="تصویر محصول"
 											loading="lazy"
 										/>
