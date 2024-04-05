@@ -99,7 +99,7 @@ const verifyTransactionController = async (req, res, next) => {
 			for (const product of products) {
 				const dbProduct = await Product.findById(product.productId);
 
-				dbProduct.pricePerColor.array.forEach((productQty) => {
+				dbProduct.pricePerColor.forEach((productQty) => {
 					if (productQty.shortCode === product.shortCode) {
 						productQty.quantity = productQty.quantity - product.quantity;
 					}
@@ -139,6 +139,7 @@ const verifyTransactionController = async (req, res, next) => {
 			});
 		}
 	} catch (err) {
+		console.log(err);
 		res.status(400).json(err);
 		req.err = err;
 		next();
