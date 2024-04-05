@@ -44,8 +44,8 @@ const CategoryItem: React.FC<CategoryItemProps> = (category) => {
 							category.image?.includes('public')
 								? `https://www.technoshef.com/api/${category.image}`
 								: category.image?.includes('http://localhost:5173' || 'https://www.technoshef.com')
-								? `${category.image}`
-								: '/Images/Products/p1.png'
+									? `${category.image}`
+									: '/Images/Products/p1.png'
 						}
 						alt="category image"
 						loading="lazy"

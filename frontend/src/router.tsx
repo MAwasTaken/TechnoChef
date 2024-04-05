@@ -45,7 +45,7 @@ const routes = [
 	{
 		path: '/panel',
 		element: (
-			<PanelPrivate>
+			<PanelPrivate>x
 				<UserPanel />
 			</PanelPrivate>
 		),

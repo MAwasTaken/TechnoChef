@@ -106,7 +106,18 @@ const Footer: React.FC = () => {
 								</Link>
 							</li>
 							<li className="bg-Dark/60 hover:bg-Dark/70 h-10 w-10 cursor-pointer self-end rounded-lg p-2 transition-colors md:h-20 md:w-20">
-								<a referrerPolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=438305&Code=f6wLGwPSIlQjY4T60uQfCMOEER4amSyP'><img referrerPolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=438305&Code=f6wLGwPSIlQjY4T60uQfCMOEER4amSyP' alt='' style={{ cursor: 'pointer' }}/></a>
+								<a
+									referrerPolicy="origin"
+									target="_blank"
+									href="https://trustseal.enamad.ir/?id=438305&Code=f6wLGwPSIlQjY4T60uQfCMOEER4amSyP"
+								>
+									<img
+										referrerPolicy="origin"
+										src="https://trustseal.enamad.ir/logo.aspx?id=438305&Code=f6wLGwPSIlQjY4T60uQfCMOEER4amSyP"
+										alt=""
+										style={{ cursor: 'pointer' }}
+									/>
+								</a>
 							</li>
 						</ul>
 					</div>

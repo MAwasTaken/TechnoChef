@@ -3,7 +3,13 @@ import axiosInstance from '../Configs/configs';
 
 // PUT add product
 const putAddProduct = async (
-	productDetail: { productId: string; shortCode: string; quantity: number }[]
+	productDetail: {
+		productId: string;
+		shortCode: string;
+		quantity: number;
+		productColor: string;
+		finalPrice: number;
+	}[]
 ) => axiosInstance.put('/basket/add', productDetail, { withCredentials: true });
 
 // GET basket

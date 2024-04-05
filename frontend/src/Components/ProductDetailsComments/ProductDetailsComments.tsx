@@ -34,7 +34,7 @@ const ProductDetailsComments: React.FC = () => {
 						// navigate to login page
 						navigate('/login');
 					}
-			  });
+				});
 	};
 
 	// tsx
@@ -59,9 +59,7 @@ const ProductDetailsComments: React.FC = () => {
 				<div className="border-t border-red-500 w-full"></div>
 				{/* comment box */}
 				{isAddingComment ? (
-					<section>
-
-          </section>
+					<section></section>
 				) : (
 					<span className="text-center w-full sm:w-1/2 font-bold xl:text-lg bg-slate-500 py-1 md:py-2.5 text-slate-100 rounded-md my-2 flex gap-x-5 items-center justify-center">
 						هنوز نظری برای این محصول ثبت نشده است‌ !

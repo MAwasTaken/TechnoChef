@@ -16,7 +16,6 @@ const UnknownPage: React.FC = () => {
 		// change document title
 		document.title = 'تکنو | Technoshef - 404';
 
-
 		// scroll to top when mounting
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 	}, []);
@@ -43,10 +42,14 @@ const UnknownPage: React.FC = () => {
 						<line x1="9" y1="9" x2="15" y2="15" />
 					</svg>
 				</div>
-				<div className="text-lg text-gray-500 mt-8">متاسفانه صفحه ای که دنبالش بودید , پیدا نشد :(</div>
+				<div className="text-lg text-gray-500 mt-8">
+					متاسفانه صفحه ای که دنبالش بودید , پیدا نشد :(
+				</div>
 				<div className="mt-8">
-					<button className="px-8 py-3 hover:shadow-product from-LightYellow to-DarkYellow shadow-LightYellow/50 cursor-pointer rounded-xl bg-gradient-to-r transition-shadow"
-						onClick={goBack}>
+					<button
+						className="px-8 py-3 hover:shadow-product from-LightYellow to-DarkYellow shadow-LightYellow/50 cursor-pointer rounded-xl bg-gradient-to-r transition-shadow"
+						onClick={goBack}
+					>
 						بازگشت
 					</button>
 				</div>

@@ -15,6 +15,6 @@ const deleteCategory = async (categoryID: string) =>
 // PUT category
 const putCategory = async (categoryID: string, categoryInfo: FormData) =>
 	axiosInstance.put(`/category/${categoryID}`, categoryInfo, { withCredentials: true });
-  
+
 // exports
 export { getCategories, postCreateCategory, deleteCategory, putCategory };

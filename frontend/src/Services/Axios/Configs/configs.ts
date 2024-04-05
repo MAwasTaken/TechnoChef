@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // create instance
 const axiosInstance = axios.create({
-	baseURL: 'http://localhost:3000/api'
+  baseURL: 'https://www.technoshef.com/api'
 });
 
 // request interceptors
