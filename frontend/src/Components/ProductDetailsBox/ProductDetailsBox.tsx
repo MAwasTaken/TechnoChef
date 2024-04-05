@@ -55,6 +55,8 @@ export const ProductDetailsBox: React.FC<ProductProps> = ({
 					{
 						productId: _id!,
 						shortCode: pricePerColor![selectedColor].shortCode!,
+						productColor: pricePerColor![selectedColor].productColor!,
+						finalPrice: pricePerColor![selectedColor].finalPrice!,
 						quantity: 1
 					}
 				])

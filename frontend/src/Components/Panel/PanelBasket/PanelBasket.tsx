@@ -130,6 +130,7 @@ const PanelBasket: React.FC = () => {
 								<tr className="">
 									<td className="sm:text-sm font-black text-Dark/70 h-10">تعداد</td>
 									<td className="sm:text-sm font-black text-Dark/70 h-10">تصویر</td>
+									<td className="sm:text-sm font-black text-Dark/70 h-10">رنگ</td>
 									<td className="sm:text-sm font-black text-Dark/70 h-10">عنوان</td>
 									<td className="sm:text-sm font-black text-Dark/70 h-10 border-l border-l-Info">
 										قیمت
@@ -155,11 +156,17 @@ const PanelBasket: React.FC = () => {
 												loading="lazy"
 											/>
 										</td>
+										<td>
+											<span
+												className="border-Dark/80 border md:h-6 md:w-6 h-5 w-5 duration-500 rounded-full inline-block"
+												style={{ backgroundColor: product.productColor }}
+											></span>
+										</td>
 										<td className="tracking-tighter sm:text-base">
 											{product.productId.productName}
 										</td>
 										<td className="tracking-tighter sm:text-base">
-											{product.productId.finalPrice.toLocaleString('fa-IR')}{' '}
+											{product.finalPrice.toLocaleString('fa-IR')}{' '}
 											<span className="text-red-500 mr-1">تومان</span>
 										</td>
 										<td className="tracking-tighter sm:text-base">

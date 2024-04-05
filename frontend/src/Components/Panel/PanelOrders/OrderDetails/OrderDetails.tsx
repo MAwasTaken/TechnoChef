@@ -81,7 +81,7 @@ const OrderDetails: React.FC = () => {
 									? `${order.orderInfo.createdAt.slice(
 											11,
 											16
-									  )} :: ${order.orderInfo.createdAt.slice(0, 10)}`
+										)} :: ${order.orderInfo.createdAt.slice(0, 10)}`
 									: ''}
 							</span>
 						</div>
@@ -94,7 +94,7 @@ const OrderDetails: React.FC = () => {
 									? `${order?.orderInfo.updatedAt.slice(
 											11,
 											16
-									  )} :: ${order?.orderInfo.createdAt.slice(0, 10)}`
+										)} :: ${order?.orderInfo.createdAt.slice(0, 10)}`
 									: ''}
 							</span>
 						</div>
