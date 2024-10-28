@@ -9,7 +9,7 @@ const getLatest = async () => axiosInstance.get('/products?new=10');
 
 // GET filtered
 const getFiltered = async (category: string, search: string, priceSort: string) =>
-	axiosInstance.get(`/products/?category=${category}&search=${search}&pricesort=${priceSort}`);
+	axiosInstance.get(`/products?category=${category}&search=${search}&pricesort=${priceSort}`);
 
 // POST create
 const postCreateProduct = async (newProductInfos: FormData) =>
