@@ -152,7 +152,7 @@ const PanelBasket: React.FC = () => {
 										<td>
 											<img
 												className="w-32 h-32 object-contain mx-auto"
-												src={`https://www.technoshef.com/${product.productId?.cover}`}
+												src={`https://www.technoshef.com/api/${product.productId?.cover}`}
 												alt="تصویر محصول"
 												loading="lazy"
 											/>
