@@ -12,7 +12,7 @@ const model = joi.object({
 		.items(joi.object({
 			price: joi.number().positive(),
 			finalPrice: joi.number().positive(),
-			QTY: joi.number().positive(),
+			QTY: joi.number().min(0),
 			productColor: joi.array().single(),
 			shortCode : joi.string()
 		})
